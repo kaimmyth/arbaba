@@ -76,6 +76,14 @@
       <li><a href="{{url('tax/payment-history')}}">Payment History</a></li>
     </ul>
   </li>
+  <li class="has_sub">
+    <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Expenses</span><span class="pull-right"><i class="md md-add"></i></span></a>
+    <ul class="list-unstyled">
+      <li><a href="{{url('Expenses')}}">Expenses</a></li>
+      <li><a href="{{url('customer')}}">Customer</a></li>
+      <li><a href="{{url('employee')}}">Employee</a></li>
+    </ul>
+  </li>
 
   <li class="has_sub">
    <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Accountant</span><span class="pull-right"><i class="md md-add"></i></span></a>
