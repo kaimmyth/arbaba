@@ -1,0 +1,77 @@
+    <style type="text/css">
+      #loading-wrapper
+      {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5000;
+      background: #e6ecf3f2;
+      }
+    .modal-danger .modal-content, .modal-danger .modal-header
+    {
+      background: #f75851;
+      border: 0;
+    }
+    #loading-wrapper #loader
+    {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -30px;
+      margin-top: -30px;
+      width: 60px;
+      height: 60px
+    }
+    #loading-wrapper #loader:before
+    {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 48px;
+      height: 48px;
+      margin-left: -24px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      border: 2px solid #d0d6e9;
+      border-top-color: #118cf1;
+      -moz-animation: spinner .6s linear infinite;
+      -webkit-animation: spinner .6s linear infinite;
+      animation: spinner .6s linear infinite
+    }
+
+    @-moz-keyframes spinner {
+    from
+    {
+    transform:rotate(0);
+    }
+    to{
+    transform:rotate(360deg);
+    }}
+    @-webkit-keyframes spinner {
+    from {
+    transform:rotate(0)
+    }to{
+    transform:rotate(360deg)
+    }}
+    @keyframes        spinner {
+    from{
+    transform:rotate(0)
+    }to{
+
+    transform:rotate(360deg)
+
+    }
+		
+    </style>
+
+
+
+
+    <div id="loading-wrapper">
+  <div id="loader"></div>
+</div>
