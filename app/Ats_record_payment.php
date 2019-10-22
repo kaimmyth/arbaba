@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Record_Payment extends Model
+class Ats_record_payment extends Model
 {
     
 

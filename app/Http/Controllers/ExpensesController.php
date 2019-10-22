@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Its_expenses_customer;
-use App\Expenses;
+use App\Ats_expenses_customer;
+use App\Ats_expenses;
 
 class ExpensesController extends Controller
 {
     public function index()
     {
         $toReturn=array();
-        $toReturn=Expenses::get()->toArray();
+        $toReturn=Ats_expenses::get()->toArray();
 
         $data['content'] = 'expenses.expenses';
         return view('layouts.content', compact('data'))->with('return', $toReturn);
@@ -19,7 +19,7 @@ class ExpensesController extends Controller
 
     public function add_expenses(Request $Request)
     {
-        $expenses = new Expenses();
+        $expenses = new Ats_expenses();
         // $record_payment->purpose=$Request->rec_cst_pay_purpose;
         $expenses->payee_id = $Request->expenses_payee_id;
         $expenses->payment_account = $Request->expenses_payment_account;
@@ -50,13 +50,13 @@ class ExpensesController extends Controller
 
     public function view_customer()
     {
-            $data['content'] ='Expenses.customer';
-	return view('layouts.content',compact('data'));
+        $data['content'] ='Expenses.customer';
+	    return view('layouts.content',compact('data'));
     }
     public function expenses_customer_insert(Request $request)
     {
     
-        $customer= new Its_expenses_customer();
+        $customer= new Ats_expenses_customer();
         $customer->title=$request->title;
         $customer->last_name=$request->last_name;
         $customer->company=$request->company;
