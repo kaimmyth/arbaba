@@ -58,7 +58,7 @@ return [
 
             'collation' => 'utf8mb4_unicode_ci',
 
-            'prefix' => 'its_',
+            'prefix' => 'ats_',
 
             'prefix_indexes' => true,
 

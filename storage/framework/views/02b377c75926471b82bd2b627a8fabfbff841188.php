@@ -42,18 +42,18 @@
                                               </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($return as $items)
+                                                <?php $__currentLoopData = $return; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $items): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr>
-                                                        <td>{{date("d-m-Y",strtotime($items['payment_date']))}}</td>
-                                                        <td>{{$items['ref_no']}}</td>
-                                                        <td>{{$items['payee_id']}}</td>
+                                                        <td><?php echo e(date("d-m-Y",strtotime($items['payment_date']))); ?></td>
+                                                        <td><?php echo e($items['ref_no']); ?></td>
+                                                        <td><?php echo e($items['payee_id']); ?></td>
                                                         <td>Category</td>
                                                         <td>Payment Amount</td>
                                                         <td>Tax</td>
                                                         <td>Payment Amount</td>
                                                         <td><i class="fas fa-eye"></i> &nbsp; <i class="fas fa-trash"></i></td>
                                                     </tr>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </tbody>
                                         </table>
                                     </div><!--card body--> 
@@ -67,8 +67,8 @@
 
 
 
-<form action="{{url('expenses/add')}}" method="POST" enctype="multipart/form-data">
-    @csrf
+<form action="<?php echo e(url('expenses/add')); ?>" method="POST" enctype="multipart/form-data">
+    <?php echo csrf_field(); ?>
     <!---------------------------------------modal start-------------------------------------------->                   
     <div class="modal expense" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
         <div class="modal-dialog modal-lg">
@@ -86,7 +86,7 @@
                                     <div class="form-group">
                                         <label for="">Payee</label>
                                         <div class="input-group">
-                                            {{-- <button type="button" class="btn btn-outline-secondary waves-effect m-b-5" data-toggle="modal" data-target="#payee" style="width: 100%;">Add New User &nbsp;&nbsp;<i class="fa fa-plus"></i></button> --}}
+                                            
                                             <input type="text" name="expenses_payee_id" id="expenses_payee_id" class="form-control" placeholder="Who do you pay?">
                                         </div>
                                     </div>
@@ -161,7 +161,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                {{-- <td><input type="text" name="expenses_details_tax_category" class="form-control input-sm" placeholder="Tax Category?"></td> --}}
+                                                
                                                 <td>
                                                     <select class="form-control input-sm" name="expenses_details_tax_category" id="expenses_details_tax_category">
                                                         <option value="" disabled selected>-Select-</option>
@@ -183,29 +183,7 @@
                                                 </td>                                          
                                                 <td><i class="fas fa-trash-alt"></i></td>
                                             </tr>
-                                        {{-- <tr>
-                                            <td>2</td>
-                                            <td><input type="text" class="form-control input-sm" placeholder="Tax Category ?"></td>
-                                            <td><input type="text" class="form-control input-sm" placeholder="What did you pay for ?"></td>
-                                            <td><input type="text" class="form-control input-sm" placeholder="Enter Amount"></td>
-                                            <td style="cursor: pointer;width: 14%;">
-                                            Select Tax <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-                                            <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">0.25% GST</a>
-                                                <a class="dropdown-item" href="#">0.25% GST</a>
-                                                <a class="dropdown-item" href="#">0.25% GST</a>
-                                                <a class="dropdown-item" href="#">0.25% GST</a>
-                                                <a class="dropdown-item" href="#">0.25% GST</a>
-                                                <a class="dropdown-item" href="#">0.25% GSTt</a>
-                                                <a class="dropdown-item" href="#">0.25% GST</a>
-                                                <a class="dropdown-item" href="#">0.25% GST</a>
-                                            </div>
-                                        </td>                                           
-                                            <td>
-                                                <i class="fas fa-trash-alt"></i>
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </td>
-                                        </tr> --}}
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -291,4 +269,4 @@
 </form>
   
 
-                       
+                       <?php /**PATH D:\xampp\htdocs\arbaba\resources\views/expenses/expenses.blade.php ENDPATH**/ ?>

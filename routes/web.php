@@ -67,8 +67,10 @@ Route::prefix('company')->group(function () {
 	Route::any('edit/{id}', 'CompanyController@edit');
 });
 
+
+Route::get('expenses','ExpensesController@index');
+Route::post('expenses/add','ExpensesController@add_expenses');
 Route::post('customer/add','ExpensesController@expenses_customer_insert');
-Route::get('Expenses','ExpensesController@index');
 
 Route::get('supplier',function(){
 	$data['content'] ='Expenses.supplier';
@@ -84,12 +86,12 @@ Route::get('employee',function(){
 });
 
 //Taxes
-Route::post('tax/return/add','CompanyController@insert_tax_return');
-Route::get('tax/return/calender','CompanyController@calender');
-Route::post('tax/payment-history/add','CompanyController@record_cst_payment');
-Route::get('tax/payment-history','CompanyController@tax_payment_history_view');
-Route::get('tax/return','CompanyController@tax_return_view');
-Route::get('tax/payment-history/delete/{id}','CompanyController@payment_history_del');
+Route::post('tax/return/add','TaxesController@insert_tax_return');
+Route::get('tax/return/calender','TaxesController@calender');
+Route::post('tax/payment-history/add','TaxesController@record_cst_payment');
+Route::get('tax/payment-history','TaxesController@tax_payment_history_view');
+Route::get('tax/return','TaxesController@tax_return_view');
+Route::get('tax/payment-history/delete/{id}','TaxesController@payment_history_del');
 
 
 
