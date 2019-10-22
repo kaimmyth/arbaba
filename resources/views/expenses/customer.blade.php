@@ -450,8 +450,9 @@
                                                     <input type="text" id="opening_balance" name="opening_balance"
                                                         class="form-control" placeholder="" required>
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"  id=""><i class="fa fa-clock-o"
+                                                        <span class="input-group-text"  ><i class="fa fa-clock-o"
                                                                 aria-hidden="true"></i></span>
+                                                                <span id="opening_balance_check"></span>
                                                     </div>
                                                 </div>
                                                 <!--input group-->
@@ -539,10 +540,12 @@ $(document).ready(function()
  {
    $("#billing_pin_check").hide();
    $("#shipping_pin_check").hide();
+   $("#opening_balance_check").hide();
   
 
  var err_billing_pin=true;
  var err_shipping_pin=true;
+ var err_opening_balance=true;
 
  $("#billing_pin").blur(function()
 		{
@@ -597,11 +600,41 @@ err_shipping_pin=true;
 $("#shipping_pin_check").hide();
 }
 }
+
+$("#opening_balance").blur(function()
+		{
+			check_opening_balance();
+		});
+        function check_opening_balance()
+{
+  
+var bal_val=$("#opening_balance").val();
+
+var regexOnlyNumbers=/^[0-9]+$/;
+if (bal_val==""||regexOnlyNumbers.test(bal_val) != true)
+{
+$("#opening_balance_check").show();
+$("#opening_balance_check").html("Please enter a valid amount");
+
+$("#opening_balance_check").focus();
+$("#opening_balance_check").css("color","red");
+
+err_opening_balance=false;
+}
+else
+{
+err_opening_balance=true;
+$("#opening_balance_check").hide();
+}
+}
+
+
 $("#btnSubmit").click(function()
  {
     check_bill_pin();
   check_ship_pin();
-if((err_billing_pin==true) && (err_shipping_pin==true))
+  check_opening_balance();
+if((err_billing_pin==true) && (err_shipping_pin==true) && (err_opening_balance==true) )
    {
      return true;
    }  
