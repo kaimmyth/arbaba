@@ -54,15 +54,20 @@
             </thead>
             <tbody>
 
+             
+              <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              
+             
               <tr>
-                <td>15/10/19</td>
+                <td><?php echo e($value['payment_date']); ?></td> 
                 <td>Payment</td>
                 <td>01/01/2019 - 31/01/2019</td>
-                <td>2000 Rs.</td>
-                <td>ABC</td>
-                <td><i class="fas fa-eye"></i> &nbsp; <i class="fas fa-trash"></i></td>
+                <td><?php echo e($value['payment_amount']); ?>&nbsp;Rs.</td>
+                <td><?php echo e($value['pay_memo']); ?></td>
+                <td><i class="fas fa-eye"></i> &nbsp; <a href="<?php echo e(url('tax/payment-history/delete/'.$value['id'])); ?>"><i class="fas fa-trash" title="delete"></i></a></td>
               </tr>
             </tbody>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           </table>
         </div>
       </div>
@@ -434,81 +439,86 @@
 
 
 <!-- Custom Modals -->
-<div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none">
-  <div class="modal-dialog" style="width:55%">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title mt-0" id="custom-width-modalLabel">Record CST payment</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-5">
-            <div class="form-group">
-              <label for="exampleInputEmail1"></label>
-              <select class="form-control">
-                <option>Cash on hand</option>
-                <option style="color: green;">Add New +</option>                
-              </select>
-            </div>
-          </div> 
+<form action="<?php echo e(url('tax/payment-history/add')); ?>" method="POST">
+	<?php echo csrf_field(); ?>
+	<div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none">
+	<div class="modal-dialog" style="width:55%">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title mt-0" id="custom-width-modalLabel">Record CST payment</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+				<label for="rec_cst_pay_purpose"></label>
+				<select class="form-control" name="rec_cst_pay_purpose" id="rec_cst_pay_purpose">
+					<option>Cash on hand</option>
+					<option style="color: green;">Add New +</option>                
+				</select>
+				</div>
+			</div> 
 
-          <div class="col-md-6" style="text-align: right;">
-            <div class="form-group">
-              <label>Payment Amount</label>
-              <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h3>
-            </div>
-          </div>
+			<div class="col-md-6" style="text-align: right;">
+				<div class="form-group">
+				<label>Payment Amount</label>
+				<h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="rec_cst_pay_payment_amount_span">0.00</span></h3>
+				</div>
+			</div>
 
-          <h5 style="margin-left: 12px; margin-top: 0px;">Balance &nbsp;<i class="fa fa-rupee-sign" aria-hidden="true"></i>-1,20,189.00</h5>
-          <hr>
-        </div>
+			<h5 style="margin-left: 12px; margin-top: 0px;">Balance &nbsp;<i class="fa fa-rupee-sign" aria-hidden="true"></i>-1,20,189.00</h5>
+			<hr>
+			</div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="exampleInputEmail1">CST period</label>
-              <input type="text" class="form-control" placeholder="Upcoming filing" readonly>
-            </div>
-          </div>
+			<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="rec_cst_pay_cst_period">CST period</label>
+				<input type="text" class="form-control" name="rec_cst_pay_cst_period" id="rec_cst_pay_cst_period" placeholder="Upcoming filing" value="Upcoming filling" readonly>
+				</div>
+			</div>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Payment date</label>
-              <div class="input-group">
-                <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy">
-                <div class="input-group-append">
-                  <span class="input-group-text"><i class="md md-event"></i></span>
-                </div>
-              </div>
-            </div>
-          </div>
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="rec_cst_pay_payment_date">Payment date</label>
+				<div class="input-group">
+					<input type="text" class="form-control autodate" name="rec_cst_pay_payment_date" id="rec_cst_pay_payment_date" placeholder="mm/dd/yyyy">
+					<div class="input-group-append">
+					<span class="input-group-text"><i class="md md-event"></i></span>
+					</div>
+				</div>
+				</div>
+			</div>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Payment amount</label>
-              <input type="text" class="form-control" placeholder="">
-            </div>
-          </div>
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="rec_cst_pay_payment_amount">Payment amount</label>
+				<input type="text" class="form-control" name="rec_cst_pay_payment_amount" id="rec_cst_pay_payment_amount" placeholder="">
+				<span id="rec_cst_pay_payment_amount_check">Please enter payment amount</span>
+				</div>
+			</div>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Memo</label>
-              <input type="text" class="form-control" placeholder="">
-            </div>
-          </div>
-        </div>
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="rec_cst_pay_memo">Memo</label>
+				<input type="text" class="form-control" name="rec_cst_pay_memo" id="rec_cst_pay_memo" placeholder="">
+				<span id="rec_cst_pay_memo_check">Please enter memo</span>
+				</div>
+			</div>
+			</div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+			<button type="submit" class="btn btn-primary waves-effect waves-light" id="rec_cst_pay_submit">Save changes</button>
+		</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</form>
 
 
 
@@ -552,4 +562,68 @@
       $("." + inputValue).toggle();
     });
   });
+</script>
+
+<script>
+	$(document).ready(function(){
+		$("#rec_cst_pay_payment_amount").keyup(function(){
+			var tmp = $("#rec_cst_pay_payment_amount").val();
+			//$("#rec_cst_pay_payment_amount").val(tmp.replace(/[^\d]/g, ""));
+			$("#rec_cst_pay_payment_amount").val(tmp.replace(/[^0-9]/g, ''));
+			$("#rec_cst_pay_payment_amount_span").html($("#rec_cst_pay_payment_amount").val());
+		});
+
+		$("#rec_cst_pay_payment_amount_check").hide();
+		$("#rec_cst_pay_memo_check").hide();
+
+		var err_rec_cst_pay_payment_amount=true;
+		var err_rec_cst_pay_memo=true;
+
+		// cst amount validation
+		$("#rec_cst_pay_payment_amount").blur(function(){
+			check_rec_cst_pay_payment_amount();
+		});
+		function check_rec_cst_pay_payment_amount(){
+			var tmp = $("#rec_cst_pay_payment_amount").val();
+			if(tmp==""){
+				$("#rec_cst_pay_payment_amount_check").show();
+				$("#rec_cst_pay_payment_amount_check").css("color","red");
+				err_rec_cst_pay_payment_amount=false;
+			}
+			else{
+				err_rec_cst_pay_payment_amount=true;
+				$("#rec_cst_pay_payment_amount_check").hide();
+			}
+		}
+
+		// cst memo validation
+		$("#rec_cst_pay_memo").blur(function(){
+			check_rec_cst_pay_memo();
+		});
+		function check_rec_cst_pay_memo(){
+			var tmp = $("#rec_cst_pay_memo").val();
+			if(tmp==""){
+				$("#rec_cst_pay_memo_check").show();
+				$("#rec_cst_pay_memo_check").css("color","red");
+				err_rec_cst_pay_memo=false;
+			}
+			else{
+				err_rec_cst_pay_memo=true;
+				$("#rec_cst_pay_memo_check").hide();
+			}
+		}
+
+		$("#rec_cst_pay_submit").click(function(){
+			check_rec_cst_pay_payment_amount();
+			check_rec_cst_pay_memo();
+
+			if((err_rec_cst_pay_payment_amount==true)&&(err_rec_cst_pay_memo==true)){
+				return true;
+			}
+			else{
+				return false;
+			}
+		});
+
+	});
 </script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/taxes/payment_history.blade.php ENDPATH**/ ?>

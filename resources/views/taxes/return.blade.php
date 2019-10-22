@@ -44,10 +44,22 @@
                 <td>20/10/19</td>
                 <td>2000 Rs.</td>
                 <td>Open</td>
-                <td><a href="">Tax adjustment</a></td>
+                <td><a href="{{URL::to('tax/return/calender')}}">Tax adjustment</a></td>
               </tr>
-            </tbody>
+              
+              @foreach($toReturn as $key=>$value)
+               {{-- $assigning_variable = date("Y-m-t", strtotime($payment_date));  --}}
+              <tr>
+                <td>{{$toReturn[$key]->payment_date}}</td>
+                <td></td>
+                <td>{{$toReturn[$key]->payment_amount}}</td>
+                <td>Open</td>
+                <td><a href="{{URL::to('tax/return/calender')}}">Tax adjustment</a></td>
+              </tr>
+              @endforeach
+           </tbody>
           </table>
+
         </div>
       </div>
     </div>
@@ -60,7 +72,7 @@
 
 
 <!--  Modal content for the above example -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  style="display: none">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -69,6 +81,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
+    <form action="{{url('tax/return/add')}}" method="post">
+      {{ csrf_field() }}
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
@@ -92,6 +107,8 @@
                 </a>
               </li>
             </ul>
+
+            
             <div class="tab-content" style="border: 1px solid;">
               <div class="tab-pane  show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row">
@@ -99,22 +116,22 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tax Name</label>
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="text"  name="tax_name"class="form-control" placeholder="" required>
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Description</label>
-                        <textarea class="form-control" rows="2" style="height: 38px;"></textarea>
+                        <textarea class="form-control" name="tax_description" rows="2" style="height: 38px;" required></textarea>
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tax agency</label>
-                        <select class="form-control">
-                          <option>Choose a tax agency</option>
+                        <select class="form-control" name="tax_agency" required>
+                          <option value="">Choose a tax agency</option>
                           <option>GST</option>
                           <option>VAT</option>
                           <option>SERVICE TAX</option>
@@ -150,15 +167,16 @@
                      <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Sales rate</label>
-                        <input type="text" class="form-control" placeholder="%" style="width: 70px;">
+                        <input type="text" class="form-control" name="sales_rate" id="sales_rate" placeholder="%" style="width: 70px;">
+                        <span id="sale_check"></span>
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Account</label>
-                        <select class="form-control">
-                          <option>Select</option>
+                        <select class="form-control" name="sales_account" required>
+                          <option value="">Select</option>
                           <option>Liability</option>
                           <option>Expense</option>
                         </select>
@@ -168,7 +186,8 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Show tax amount on return line</label>
-                        <select class="form-control">
+                        <select class="form-control" name="sales_tax_amount" required>
+                            <option value="">Select</option>
                           <option>Output - CGST</option>
                           <option>Output - SGST</option>
                           <option>Output - IGST</option>
@@ -192,15 +211,16 @@
                    <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Purchase rate</label>
-                      <input type="text" class="form-control" placeholder="%" style="width: 70px;">
+                      <input type="text" class="form-control" name="purchase_rate" id="purchase_rate" placeholder="%" style="width: 70px;">
+                      <span id="purchase_check"><span>
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Account</label>
-                      <select class="form-control">
-                        <option>Select</option>
+                      <select class="form-control" name="purchase_account" required>
+                        <option value="">Select</option>
                         <option>Liability</option>
                         <option>Expense</option>
                       </select>
@@ -210,7 +230,8 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Show tax amount on return line</label>
-                      <select class="form-control">
+                      <select class="form-control" name="purchase_tax_amount" required>
+                          <option value="">Select</option>
                         <option>Output - CGST</option>
                         <option>Output - SGST</option>
                         <option>Output - IGST</option>
@@ -236,21 +257,22 @@
              <div class="col-md-6">
               <div class="form-group">
                 <label for="exampleInputEmail1">Group name</label>
-                <input type="text" class="form-control" placeholder="">
+                <input type="text" class="form-control" name="group_name" placeholder="" required>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="exampleInputEmail1">Description</label>
-                <textarea class="form-control" rows="2" style="height: 38px;"></textarea>
+                <textarea class="form-control" name="group_description" rows="2" style="height: 38px;" required></textarea>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Tax rate</label>
-                <select class="form-control">
+                <select class="form-control" name="tax_rate" required>
+                    <option value="">Select</option>
                   <option>Purchase CGST 0.125%</option>
                   <option>Sales IGST Exempt</option>
                   <option>Purchase IGST 3%</option>
@@ -265,7 +287,8 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Applicable on</label>
-                <select class="form-control">
+                <select class="form-control" name="applicable_on" required>
+                    <option value="">Select</option>
                   <option>Net amount</option>
                   <option>Tax amount</option>
                   <option>Net + Tax amount</option>
@@ -280,36 +303,37 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Tax name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+                <input type="text" class="form-control" id="exampleInputEmail1" name="custom_tax_name" placeholder="" required>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Description</label>
-                <textarea class="form-control" rows="2" style="height: 38px;"></textarea>
+                <textarea class="form-control"  name="custom_description" rows="2" style="height: 38px;" required></textarea>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Tax agency name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+                <input type="text" class="form-control" name="tax_agency_name" id="exampleInputEmail1" placeholder="" required>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Registration number</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+                <input type="text" class="form-control" name="registration_number" id="registration_number" placeholder="">
+                <span id="reg_no_check"><span>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Start of current tax period</label>
-                <select class="form-control">
-                  <option>Start of current tax period</option>
+                <select class="form-control" name="tax_period" required>
+                  <option value="">Start of current tax period</option>
                   <option>January</option>
                   <option>February</option>
                   <option>March</option>
@@ -330,7 +354,8 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Filing frequency</label>
-                <select class="form-control">
+                <select class="form-control" name="filling_frequency" required>
+                    <option value="">Select</option>
                   <option>Monthly</option>
                   <option>Quarterly</option>
                   <option>Half-yearly</option>
@@ -342,7 +367,8 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Reporting method</label>
-                <select class="form-control">
+                <select class="form-control" name="reporting_method" required>
+                    <option value="">Select</option>
                   <option>Accural</option>
                   <option>Cash</option>
                 </select>
@@ -372,7 +398,8 @@
                 <div class="col-md-4">
                  <div class="form-group">
                   <label for="exampleInputEmail1">Sales rate</label>
-                  <input type="text" class="form-control" placeholder="%" style="width: 70px;">
+                  <input type="text" class="form-control"  name="tax_collected_on_sales"  id="tax_collected_on_sales" placeholder="%" style="width: 70px;">
+                <span id="tax_sales"></span>
                 </div>
               </div>
             </div>
@@ -383,7 +410,8 @@
               <div class="col-md-2">
                <div class="form-group">
                 <label for="exampleInputEmail1">Purchase rate</label>
-                <input type="text" class="form-control" placeholder="%" style="width: 70px;">
+                <input type="text" class="form-control" name="tax_collected_on_purchase" id="tax_collected_on_purchase" placeholder="%" style="width: 70px;">
+                <span id="tax_purchase"></span>
               </div>
             </div>
 
@@ -406,10 +434,12 @@
 
 </div>
 </div>
+
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-  <button type="button" class="btn btn-primary waves-effect waves-light">Save</button>
+  <button type="submit" class="btn btn-primary waves-effect waves-light" id="validateform">Save</button>
 </div>
+    </form>    
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -455,3 +485,176 @@
     });
   });
 </script>
+
+<script>
+ $(document).ready(function()
+ {
+   $("#sale_check").hide();
+   $("#purchase_check").hide();
+   $("#reg_no_check").hide();
+   $("#tax_sales").hide();
+   $("#tax_purchase").hide();
+
+ var err_sale=true;
+ var err_purchase=true;
+ var err_reg_no=true;
+ var err_tax_sale=true;
+ var err_tax_purchase=true;
+
+
+ $("#sales_rate").blur(function()
+		{
+			check_sales();
+		});
+
+    function check_sales()
+{
+  
+var sale_val=$("#sales_rate").val();
+
+var regexOnlyNumbers=/^[0-9]+$/;
+if (sale_val==""||regexOnlyNumbers.test(sale_val) != true){
+$("#sale_check").show();
+$("#sale_check").html("Please enter values between 1-9");
+
+$("#sale_check").focus();
+$("#sale_check").css("color","red");
+
+err_sale=false;
+}
+else
+{
+err_sale=true;
+$("#sale_check").hide();
+}
+}
+
+$("#purchase_rate").blur(function()
+		{
+			check_purchase();
+		});
+
+    function check_purchase()
+{
+  
+var purchase_val=$("#purchase_rate").val();
+
+var regexOnlyNumbers=/^[0-9]+$/;
+
+if (purchase_val==""||regexOnlyNumbers.test(purchase_val) != true){
+$("#purchase_check").show();
+$("#purchase_check").html("Please enter values between 1-9");
+
+$("#purchase_check").focus();
+$("#purchase_check").css("color","red");
+err_purchase=false;
+}
+else
+{
+err_purchase=true;
+$("#purchase_check").hide();
+}
+}
+
+$("#registration_number").blur(function()
+		{
+			check_reg_no();
+		});
+
+    function check_reg_no()
+{
+var reg_no_val=$("#registration_number").val();
+
+var regexOnlyNumbers=/^[0-9]+$/;
+
+if (reg_no_val==""||regexOnlyNumbers.test(reg_no_val) != true){
+$("#reg_no_check").show();
+$("#reg_no_check").html("Please enter values between 1-9");
+
+$("#reg_no_check").focus();
+$("#reg_no_check").css("color","red");
+err_reg_no=false;
+}
+else
+{
+err_reg_no=true;
+$("#reg_no_check").hide();
+}
+}
+
+$("#tax_collected_on_sales").blur(function()
+		{
+			check_tax_sales();
+		});
+
+    function check_tax_sales()
+{
+  
+var tax_sale_val=$("#tax_collected_on_sales").val();
+
+var regexOnlyNumbers=/^[0-9]+$/;
+if (tax_sale_val==""||regexOnlyNumbers.test(tax_sale_val) != true){
+$("#tax_sales").show();
+$("#tax_sales").html("Please enter values between 1-9");
+
+$("#tax_sales").focus();
+$("#tax_sales").css("color","red");
+
+err_tax_sale=false;
+}
+else
+{
+  err_tax_sale=true;
+$("#tax_sales").hide();
+}
+}
+
+
+$("#tax_collected_on_purchase").blur(function()
+		{
+			check_tax_purchase();
+		});
+
+    function check_tax_purchase()
+{
+  
+var tax_purchase_val=$("#tax_collected_on_purchase").val();
+
+var regexOnlyNumbers=/^[0-9]+$/;
+if (tax_purchase_val==""||regexOnlyNumbers.test(tax_purchase_val) != true){
+$("#tax_purchase").show();
+$("#tax_purchase").html("Please enter values between 1-9");
+
+$("#tax_purchase").focus();
+$("#tax_purchase").css("color","red");
+
+err_tax_purchase=false;
+}
+else
+{
+  err_tax_purchase=true;
+$("#tax_purchase").hide();
+}
+}
+ 
+ $("#validatefrm").click(function()
+ {
+  check_sales();
+	check_purchase();
+	check_reg_no();
+  check_tax_sales();
+  check_tax_purchase();
+
+   if((err_sale==true) && (err_purchase==true) && (err_reg_no==true) && (err_tax_sale==true) && (err_tax_purchase==true))
+   {
+     return true;
+   }  
+   else
+   {
+        return false;
+   }
+ });
+
+ });
+</script>
+

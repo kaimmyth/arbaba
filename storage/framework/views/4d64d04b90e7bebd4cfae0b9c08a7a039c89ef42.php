@@ -24,8 +24,9 @@
             <div class="card card-border card-primary">
                 <div class="card-header"> </div>
                 <div class="card-body">
-                    <form method="post" action="{{url('customer/add')}}" enctype="multipart/form-data">
-                        {{csrf_field()}}
+                    <form method="post" action="<?php echo e(url('customer/add')); ?>">
+                        <?php echo e(csrf_field()); ?>
+
                         <div class="row">
                             <div class="col-md-3" style="float:left;">
                                 <div class="form-group">
@@ -93,7 +94,7 @@
                                 <div class="form-group">
                                     <label for="">Display Name as</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="display_name_as" id="display_name_as" disabled>
+                                        <input type="text" class="form-control" name="display_name_as" id="display_name_as">
                                           
                                     </div>
                                     <!--input group-->
@@ -450,7 +451,7 @@
                                                     <input type="text" id="opening_balance" name="opening_balance"
                                                         class="form-control" placeholder="" required>
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"  id=""><i class="fa fa-clock-o"
+                                                        <span class="input-group-text"><i class="fa fa-clock-o"
                                                                 aria-hidden="true"></i></span>
                                                     </div>
                                                 </div>
@@ -479,12 +480,12 @@
                                         <div class="form-group">
                                             <label for="">Attachments</label>
                                             <div class="m-b-30">
-                                                <div action="#" class="dropzone" id="dropzone"
+                                                <form action="#" class="dropzone" id="dropzone"
                                                     style="min-height: 80px;">
                                                     <div class="fallback">
-                                                        <input type="file" name="attachment" id="attachment">
+                                                        <input name="file" type="file" multiple="multiple"
+                                                            name="attachment" id="attachment">
                                                     </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -612,3 +613,4 @@ if((err_billing_pin==true) && (err_shipping_pin==true))
  });
  });
 </script>
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/expenses/customer.blade.php ENDPATH**/ ?>

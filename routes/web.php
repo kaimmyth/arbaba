@@ -47,17 +47,17 @@ Route::prefix('sale')->group(function ()
 });
 
 /* Taxes */
-Route::prefix('tax')->group(function () {
-	Route::any('return', function(){
-		$data['content'] = 'taxes.return';
-		return view('layouts.content',compact('data'));
-	});
-	Route::any('payment-history', function(){
-		$data['content'] = 'taxes.payment_history';
-		return view('layouts.content',compact('data'));
-	});
+// Route::prefix('tax')->group(function () {
+// 	Route::any('return', function(){
+// 		$data['content'] = 'taxes.return';
+// 		return view('layouts.content',compact('data'));
+// 	});
+	//  Route::any('payment-history', function(){
+	//  	$data['content'] = 'taxes.payment_history';
+	//  	return view('layouts.content',compact('data'));
+	//  });
 
-});
+// });
 
 /* Setting */
 Route::prefix('company')->group(function () {
@@ -66,17 +66,30 @@ Route::prefix('company')->group(function () {
 	Route::get('destroy/{id}', 'CompanyController@destroy');
 	Route::any('edit/{id}', 'CompanyController@edit');
 });
+
+Route::post('customer/add','ExpensesController@expenses_customer_insert');
 Route::get('Expenses','ExpensesController@index');
+
 Route::get('supplier',function(){
 	$data['content'] ='Expenses.supplier';
 	return view('layouts.content',compact('data'));
 });
-Route::get('customer',function(){
-	$data['content'] ='Expenses.customer';
-	return view('layouts.content',compact('data'));
-});
+
+
+Route::get('customer','ExpensesController@view_customer');
+
 Route::get('employee',function(){
 	$data['content'] ='Expenses.employee';
 	return view('layouts.content',compact('data'));
 });
+
+//Taxes
+Route::post('tax/return/add','CompanyController@insert_tax_return');
+Route::get('tax/return/calender','CompanyController@calender');
+Route::post('tax/payment-history/add','CompanyController@record_cst_payment');
+Route::get('tax/payment-history','CompanyController@tax_payment_history_view');
+Route::get('tax/return','CompanyController@tax_return_view');
+Route::get('tax/payment-history/delete/{id}','CompanyController@payment_history_del');
+
+
 
