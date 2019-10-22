@@ -79,7 +79,7 @@
   <li class="has_sub">
     <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Expenses</span><span class="pull-right"><i class="md md-add"></i></span></a>
     <ul class="list-unstyled">
-      <li><a href="<?php echo e(url('Expenses')); ?>">Expenses</a></li>
+      <li><a href="<?php echo e(url('expenses')); ?>">Expenses</a></li>
       <li><a href="<?php echo e(url('customer')); ?>">Customer</a></li>
       <li><a href="<?php echo e(url('employee')); ?>">Employee</a></li>
     </ul>

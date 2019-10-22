@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ats_expenses_customer;
 use App\Ats_expenses;
+use App\Ats_expenses_employee;
 
 class ExpensesController extends Controller
 {
@@ -115,6 +116,44 @@ class ExpensesController extends Controller
         
     //  return $request;
         return redirect('customer');
+    }
+
+    public function view_employee()
+    {
+        $data['content'] ='Expenses.employee';
+	return view('layouts.content',compact('data'));
+    }
+
+    public function insert_employee(Request $request)
+    {
+        
+
+        $employee = new Ats_expenses_employee();
+        $employee->title = $request->title;
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->display_name_as = $request->title.$request->first_name;
+        $employee->email_id = $request->email_id;
+        $employee->phone_no = $request->phone_no;
+        $employee->mobile_no = $request->mobile_no;
+        $employee->address = $request->address;
+        $employee->city = $request->city;
+        $employee->state = $request->state;
+        $employee->pin_code = $request->pin_code;
+        $employee->country = $request->country;
+        $employee->billing_rate = $request->billing_rate;
+        $employee->employee_id_no = $request->employee_id_no;
+        $employee->employee_id = $request->employee_id;
+        $employee->gender = $request->gender;
+        $employee->hire_date = date("Y-m-d",strtotime($request->hire_date));
+        $employee->release_date = date("Y-m-d",strtotime($request->release_date));
+        $employee->dob =date("Y-m-d",strtotime( $request->dob));
+         
+        //return $request;
+         $employee->save();
+        return redirect('employee#');
+        
+
     }
 }
   

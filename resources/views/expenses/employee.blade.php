@@ -63,92 +63,95 @@
                     </button>
                 </div>
                 <div class="modal-body" style="padding: 0px 0;">
+                    <form action={{url('employee/add')}} method="post">
+                    @csrf
                     <div class="row">
                         <div class="col-md-12"><br>
                             <div class="form-group emp-detail">
                                 <label for="">Title</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="">
+                                        <input type="" class="form-control" id="title" name="title" placeholder="" required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                 <label for="">First Name</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="First Name">
+                                        <input type="" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                 <label for="">Last Name</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="Last Name">
+                                        <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name" >
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
                                 <label for="">Display Name as</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="">
+                                        <input type="" class="form-control" id="display_name_as" name="display_name_as" placeholder="" disabled>
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
                                 <label for="">Email Id.</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="eg.example@gmail.com">
+                                        <input type="email" class="form-control" id="email_id" name="email_id" placeholder="eg.example@gmail.com" required>
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
                                 <label for="">Phone No.</label>
                                     <div class="input-group">
-                                    <input type="text" placeholder="" data-mask="(999) 999-9999" class="form-control">
+                                    <input type="text" placeholder="" data-mask="(999) 999-9999" name="phone_no" id="phone_no" class="form-control" required>
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
                                 <label for="">Mobile No.</label>
                                     <div class="input-group">
-                                    <input type="text" placeholder="" data-mask="(999) 999-9999" class="form-control">
+                                    <input type="text" placeholder="" data-mask="(999) 999-9999" name="mobile_no" id="mobile_no" class="form-control">
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group">
                                 <label for="">Address</label>
                                     <div class="input-group">
-                                        <textarea class="form-control" rows="5" id="example-textarea-input"></textarea>
+                                        <textarea class="form-control" rows="5" id="address" name="address" required></textarea>
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="City/Town">
+                                        <input type="text" class="form-control" id="" placeholder="City/Town" name="city" id="address" required>
                                     </div>
                                 </div><!--form-group-->  
 
                                 <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="State">
+                                        <input type="" class="form-control"  placeholder="State" name="state" id="state" required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="PIN Code">
+                                        <input style="display: block;width: 100;" type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code" required>
+                                        <span id="pin_code_check"></span>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="Country">
+                                        <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
                                 <label for="">Billing Rate</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="">
+                                        <input type="" class="form-control" id="billing_rate" name="billing_rate" placeholder="" required>
                                     </div>
                                 </div><!--form-group--> 
 
@@ -164,25 +167,24 @@
                             <div class="form-group emp-detail">
                                 <label for="">Employee ID No.</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="Employee ID No.">
+                                        <input type="" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                 <label for="">Employee ID</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="" placeholder="First Name">
+                                        <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID" required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                 <label for="">Gender</label>
-                                    <select class="form-control" placeholder="gjkghjh">
+                                    <select class="form-control" placeholder="Gender" name="gender" id="gender" required>
                                             <option>--select--</option>
-                                            <option></option>
-                                            <option></option>
-                                            <option></option>
-                                            <option></option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                           
                                         </select>
                                     </div>
                                 </div><!--form-group--> 
@@ -191,20 +193,20 @@
                                 <div class="form-group emp-detail">
                                 <label for="">Hire Date</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" id="hire_date" name="hire_date" required>
                                            
                                         </div>
                                 </div><!--form-group-->
 
                             <div class="form-group emp-detail">
                                 <label for="">Release Date</label>
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="release_date" id="release_date" required>
                                        
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                     <label for="">Date of Birth</label>
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3" name="dob" id="dob" required>
                                             
                                 </div><!--form-group--> 
                             </div>
@@ -213,14 +215,91 @@
             <div style="width:100%; padding: 0.5px;background: #6f6f6f;"></div><br>
                 <div class="d-print-none">
                     <div class="pull-left">
-                        <a href="#" class="btn btn-primary waves-effect waves-light">Save & Close</a>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit">Save</a>
                     </div>
                     <div class="pull-right">
-                        <a href="#" class="btn btn-secondary waves-effect waves-light">Cancel</a>
+                        <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 <!-----------------------------------------------------------end of modal-------------------------------------------->
-       
+<script>
+        $(document).ready(function () {
+            $('#first_name').keyup(function () {
+                display_name();                
+            });
+            $('#title').keyup(function () {
+                display_name();                
+            });
+           
+            function display_name() {
+    
+                var t_1 = $("#title").val();
+                var t_2 = $("#first_name").val();
+              
+                document.getElementById("display_name_as").value=t_1+" "+t_2;
+                
+            }
+    
+        });
+
+
+
+    
+    </script>  
+
+    <script>
+$(document).ready(function()
+ {
+   $("#pin_code_check").hide();
+  
+  
+
+ var err_pin_code=true;
+ 
+ $("#pin_code").blur(function()
+		{
+			check_bill_pin();
+		});
+        function check_bill_pin()
+{
+  
+var pin_val=$("#pin_code").val();
+
+var regexOnlyNumbers=/^[0-9]+$/;
+if (pin_val==""||regexOnlyNumbers.test(pin_val) != true)
+{
+$("#pin_code_check").show();
+$("#pin_code_check").html("Please enter a valid pin");
+
+$("#pin_code_check").focus();
+$("#pin_code_check").css("color","red");
+
+err_pin_code=false;
+}
+else
+{
+err_pin_code=true;
+$("#billing_pin_check").hide();
+}
+}
+
+
+$("#btnSubmit").click(function()
+ {
+    check_bill_pin();
+  
+if((err_pin_code==true) )
+   {
+     return true;
+   }  
+   else
+   {
+        return false;
+   }
+ });
+ });
+    </script>

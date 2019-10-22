@@ -80,10 +80,11 @@ Route::get('supplier',function(){
 
 Route::get('customer','ExpensesController@view_customer');
 
-Route::get('employee',function(){
-	$data['content'] ='Expenses.employee';
-	return view('layouts.content',compact('data'));
-});
+Route::get('employee','ExpensesController@view_employee');
+Route::post('employee/add','ExpensesController@insert_employee');
+
+	
+
 
 //Taxes
 Route::post('tax/return/add','TaxesController@insert_tax_return');
