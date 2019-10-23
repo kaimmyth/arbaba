@@ -24,7 +24,7 @@ Route::any('edit-userprofile', 'HomeController@UpdateProfile');
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('dashboard', 'HomeController@Dashboard');
 
-/* Sale */
+
 // Route::prefix('sale')->group(function () 
 // {
 
@@ -46,8 +46,15 @@ Route::get('dashboard', 'HomeController@Dashboard');
 // 	});
 // });
 
+/* Sale */
+
+// All Sales
 Route::get('sale/all-sale','SalesController@view_all_sales');
+
+// Invoices
 Route::get('sale/invoice','SalesController@view_invoices');
+Route::post('sale/invoice/add','SalesController@insert_invoice');
+
 Route::get('sale/customers','SalesController@view_customers');
 Route::get('sale/products&services','SalesController@view_products_and_services');
 

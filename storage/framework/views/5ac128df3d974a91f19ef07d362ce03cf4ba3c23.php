@@ -141,14 +141,18 @@
     </button>
 </div>
 <div class="modal-body">
+<form action="<?php echo e(url('sale/invoice/add')); ?>" method="post" enctype="multipart/form-data">
+    <?php echo csrf_field(); ?>
     <div class="row">
         <div class="col-md-3">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Customer</label>
-                        <select class="form-control">
-                            <option>-Select Customer-</option>
+                        
+
+                        <select class="form-control" id="customer" name="customer" required>
+                            <option value="">-Select Customer-</option>
                             <option style="color: green;">Add New +</option>
                         </select>
                     </div>
@@ -157,7 +161,7 @@
                 <div class="col-md-6">
                  <div class="form-group">
                     <label for="exampleInputEmail1">Customer Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Enter email" required>
                 </div>
             </div>
         </div>
@@ -176,15 +180,15 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Billing address</label>
-                    <textarea class="form-control" rows="2" id="example-textarea-input" style="margin-top: 0px; margin-bottom: 0px; height: 87px;"></textarea>
+                    <textarea class="form-control" rows="2" id="billing_address" name="billing_address" style="margin-top: 0px; margin-bottom: 0px; height: 87px;" required></textarea>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Terms</label>
-                    <select class="form-control">
-                        <option>-Select Customer-</option>
+                    <select class="form-control" name="terms" id="terms" required>
+                        <option value="">-Select Customer-</option>
                         <option style="color: green;">Add New +</option>
                         <option>Due on receipt</option>
                         <option>Net 15</option>
@@ -198,7 +202,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Invoice date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy">
+                        <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy" id="invoice_date" name="invoice_date" required>
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -211,7 +215,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Due date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy">
+                        <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy" id="due_date" name="due_date" required>
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -226,7 +230,7 @@
         <div class="col-md-3"  style="float: right;">
             <div class="form-group">
                 <label for="exampleInputEmail1">Invoice no.</label>
-                <input type="text" class="form-control" value="1001" id="example-text-input">
+                <input type="text" class="form-control" value="" id="invoice_no" name="invoice_no" required>
             </div>
         </div>
 
@@ -237,8 +241,8 @@
 <div class="col-md-2">
   <div class="form-group">
     <label for="exampleInputEmail1">Place of Supply</label>
-    <select class="form-control">
-        <option>-Please Select a Location-</option>
+    <select class="form-control" name="place_of_supply" id="place_of_supply" required>
+        <option value="">-Please Select a Location-</option>
         <option>Andhra Pradesh</option>
         <option>Arunachal Pradesh</option>
         <option>Chandigarh</option>
@@ -292,14 +296,14 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="exampleInputEmail1">Message on invoice</label>
-                <textarea class="form-control" rows="2" id="example-textarea-input"></textarea>
+                <textarea class="form-control" rows="2" id="msg_on_invoice" name="msg_on_invoice" required></textarea>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="form-group">
                 <label for="exampleInputEmail1">Message on statement</label>
-                <textarea class="form-control" rows="2" id="example-textarea-input"></textarea>
+                <textarea class="form-control" rows="2" id="msg_on_statement" name="msg_on_statement" required></textarea>
             </div>
         </div>
     </div>
@@ -316,7 +320,7 @@
     <label for="exampleInputEmail1">Attachments</label>
     <div class="dropzone" id="dropzone" style="min-height: 55px">
         <div class="fallback">
-          <input name="file" type="file" multiple="multiple">
+          <input  type="file"  name="attachment" id="attachment" required>
       </div>
   </div>
 </div>
@@ -327,8 +331,9 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
 </div>
+</form>
 </div>
 <!-- /.modal-content -->
 </div>
