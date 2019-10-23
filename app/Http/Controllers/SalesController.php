@@ -51,9 +51,37 @@ class SalesController extends Controller
             $invoice->attachment = "";
         } 
 
-  $invoice->save();
-       // return $request;
-  return redirect('sale/invoice');
+
+        $count = count($request->product_service);
+        $tmp=""; 
+        if($count>1){
+            for($i=0;$i<$count;$i++){
+                
+                $tmp.=$request->product_service[$i].",";
+                $tmp.=$request->hsn_sac[$i].",";
+                $tmp.=$request->description[$i].",";
+                $tmp.=$request->qty[$i].",";
+                $tmp.=$request->rate[$i].",";
+                $tmp.=$request->amt[$i].",";
+                $tmp.=$request->tax[$i].":";
+            }
+        }
+        else{
+               
+                $tmp.=$request->product_service[0].",";
+                $tmp.=$request->hsn_sac[0].",";
+                $tmp.=$request->description[0].",";
+                $tmp.=$request->qty[0].",";
+                $tmp.=$request->rate[0].",";
+                $tmp.=$request->amt[0].",";
+                $tmp.=$request->tax[0];
+        }
+        $invoice->invoice_details =rtrim($tmp, ':');
+
+
+//   $invoice->save();
+       return $invoice->invoice_details;
+  //return redirect('sale/invoice');
     }
 
 

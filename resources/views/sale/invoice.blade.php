@@ -262,7 +262,7 @@
          <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
          <th>Product/Service</th>
          <th>HSN/SAC</th>
-         <th>Descrip[tion</th>
+         <th>Description</th>
          <th>Qty</th>
          <th>Rate</th>
          <th>Amount</th>
@@ -270,20 +270,46 @@
          <th>Action</th>
      </tr>
  </thead>
- <tbody>
+ <tbody id="mytable">
     <tr>
-     <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
+     <td>&nbsp;<input  type="checkbox" name="ids[]" value="" /></td>
+     <td>
+            <select class="form-control input-sm" name="product_service[]" >
+                    <option value="" disabled selected>-Select-</option>
+                    <option value="add_new" style="color: green;">Add New +</option>
+                    <option value="hours">Hours</option>
+                    <option value="services">Services</option>
+                   
+                </select>  
+     </td>
+     <td><input type="text" class="form-control" name="hsn_sac[]" ></td>
+     <td><input type="text" class="form-control" name="description[]"></td>
+     <td><input type="text" class="form-control" name="qty[]"></td>
+     <td><input type="text" class="form-control"  name="rate[]"></td>
+     <td><input class="form-control" type="text" name="amt[]"></td>
+     
+            <td >
+                    <select class="form-control input-sm" name="tax[]" >
+                        <option value="" disabled selected>-Select-</option>
+                        <option value="0.25">0.25% IGST</option>
+                        <option value="5">5% IGST</option>
+                        <option value="10">10% IGST</option>
+                        <option value="2">18% IGST</option>
+                    </select>
+                </td>     
+     
+     <td>
+     <a href="#" ><i class="fas fa-trash"></i></a>
+     </td>
  </tr>
 
 
+</tbody>
+<tbody>
+    <tr>
+        <td colspan="8"></td>
+        <td><a href="#" onclick="myFunction()"><i class="fa fa-plus-circle" aria-hidden="true" style="color:green" id="insert_more" ></i></td>
+    </tr>
 </tbody>
 </table>
 </div>
@@ -340,3 +366,45 @@
 <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<script>
+
+ function myFunction()
+     {
+
+     var data='<tr>'+
+     '<td>&nbsp;<input  type="checkbox" name="ids[]" value="" /></td>'+
+     '<td>'+
+           ' <select class="form-control input-sm" name="product_service[]" >'+
+                    '<option value="" disabled selected>-Select-</option>'+
+                    '<option value="add_new" style="color: green;">Add New +</option>'+
+                   ' <option value="hours">Hours</option>'+
+                   ' <option value="services">Services</option>'+
+                   
+               ' </select>'+
+     '</td>'+
+     '<td><input type="text" class="form-control" id="hsn_sac[]"></td>'+
+     '<td><input type="text" class="form-control" id="description[]"></td>'+
+     '<td><input type="text" class="form-control" id="qty[]"></td>'+
+     '<td><input type="text" class="form-control"  name="rate[]"></td>'+
+     '<td><input class="form-control" type="text" name="amt[]"></td>'+
+     
+            '<td>'+
+                   ' <select class="form-control input-sm" name="tax[]">'+
+                        '<option value="" disabled selected>-Select-</option>'+
+                        '<option value="0.25">0.25% IGST</option>'+
+                        '<option value="5">5% IGST</option>'+
+                        '<option value="10">10% IGST</option>'+
+                        '<option value="2">18% IGST</option>'+
+                    '</select>'+
+                '</td>'+     
+     
+     '<td>'+
+     '<i class="fas fa-trash"></i>'+
+     '</td>'+
+ '</tr>';
+ $("#mytable").append(data);
+     }
+  
+
+</script>
