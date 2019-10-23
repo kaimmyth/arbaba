@@ -79,9 +79,9 @@ class SalesController extends Controller
         $invoice->invoice_details =rtrim($tmp, ':');
 
 
-//   $invoice->save();
-       return $invoice->invoice_details;
-  //return redirect('sale/invoice');
+   $invoice->save();
+     
+  return redirect('sale/invoice');
     }
 
 

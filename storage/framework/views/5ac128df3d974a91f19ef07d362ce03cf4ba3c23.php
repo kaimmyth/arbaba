@@ -135,7 +135,7 @@
  <div class="modal-dialog modal-full">
   <div class="modal-content">
    <div class="modal-header">
-    <h4 class="modal-title mt-0" id="full-width-modalLabel">Invoice no.1001</h4>
+    <h4 class="modal-title mt-0" id="full-width-modalLabel">Invoice no.<span id="check_invoice_no"></span></h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -231,6 +231,7 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">Invoice no.</label>
                 <input type="text" class="form-control" value="" id="invoice_no" name="invoice_no" required>
+                <span id="invoice_check"></span>
             </div>
         </div>
 
@@ -262,7 +263,7 @@
          <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
          <th>Product/Service</th>
          <th>HSN/SAC</th>
-         <th>Descrip[tion</th>
+         <th>Description</th>
          <th>Qty</th>
          <th>Rate</th>
          <th>Amount</th>
@@ -270,20 +271,47 @@
          <th>Action</th>
      </tr>
  </thead>
- <tbody>
+ <tbody id="mytable">
     <tr>
-     <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
+     <td>&nbsp;<input  type="checkbox" name="ids[]" value="" /></td>
+     <td>
+            <select class="form-control input-sm" name="product_service[]" required>
+                    <option value="" disabled selected>-Select-</option>
+                    <option value="add_new" style="color: green;">Add New +</option>
+                    <option value="hours">Hours</option>
+                    <option value="services">Services</option>
+                   
+                </select>  
+     </td>
+     <td><input type="text" class="form-control" name="hsn_sac[]" required></td>
+     <td><input type="text" class="form-control" name="description[]" required></td>
+     <td><input type="text" class="form-control" name="qty[]" required></td>
+     <td><input type="text" class="form-control"  name="rate[]" required></td>
+     <td><input class="form-control" type="text" name="amt[]" required></td>
+     
+            <td >
+                    <select class="form-control input-sm" name="tax[]" required>
+                        <option value="" disabled selected>-Select-</option>
+                        <option value="0.25">0.25% IGST</option>
+                        <option value="5">5% IGST</option>
+                        <option value="10">10% IGST</option>
+                        <option value="2">18% IGST</option>
+                    </select>
+                </td>     
+     
+     <td>
+            <button class="btn" id="del"><i class="fa fa-trash" style="color: blue;"></i></button>
+    
+     </td>
  </tr>
 
 
+</tbody>
+<tbody>
+    <tr>
+        <td colspan="8"></td>
+        <td><a href="#" onclick="myFunction()"><i class="fa fa-plus-circle" aria-hidden="true" style="color:green" id="insert_more" ></i></td>
+    </tr>
 </tbody>
 </table>
 </div>
@@ -331,7 +359,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+    <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit">Save changes</button>
 </div>
 </form>
 </div>
@@ -339,4 +367,128 @@
 </div>
 <!-- /.modal-dialog -->
 </div>
-<!-- /.modal --><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/invoice.blade.php ENDPATH**/ ?>
+<!-- /.modal -->
+
+<script>
+
+ function myFunction()
+     {
+
+     var data='<tr>'+
+     '<td>&nbsp;<input  type="checkbox" name="ids[]" value="" /></td>'+
+     '<td>'+
+           ' <select class="form-control input-sm" name="product_service[]" >'+
+                    '<option value="" disabled selected>-Select-</option>'+
+                    '<option value="add_new" style="color: green;">Add New +</option>'+
+                   ' <option value="hours">Hours</option>'+
+                   ' <option value="services">Services</option>'+
+                   
+               ' </select>'+
+     '</td>'+
+     '<td><input type="text" class="form-control" id="hsn_sac[]"></td>'+
+     '<td><input type="text" class="form-control" id="description[]"></td>'+
+     '<td><input type="text" class="form-control" id="qty[]"></td>'+
+     '<td><input type="text" class="form-control"  name="rate[]"></td>'+
+     '<td><input class="form-control" type="text" name="amt[]"></td>'+
+     
+            '<td>'+
+                   ' <select class="form-control input-sm" name="tax[]">'+
+                        '<option value="" disabled selected>-Select-</option>'+
+                        '<option value="0.25">0.25% IGST</option>'+
+                        '<option value="5">5% IGST</option>'+
+                        '<option value="10">10% IGST</option>'+
+                        '<option value="2">18% IGST</option>'+
+                    '</select>'+
+                '</td>'+     
+     
+     '<td>'+
+          
+            '<button class="btn" id="del"><i class="fa fa-trash" style="color: blue;"></i></button>'+
+
+    
+     '</td>'+
+ '</tr>';
+ $("#mytable").append(data);
+     }
+  
+
+</script>
+<script>
+     $(document).ready(function () {
+
+$("#check_invoice_no").hide();
+
+
+$('#invoice_no').keyup(function () {
+
+    invoice_no_check();                     
+            });
+
+            function invoice_no_check()
+            {
+                var invoice_val=$('#invoice_no').val();
+                 
+                 
+                $("#check_invoice_no").html(invoice_val);
+                $("#check_invoice_no").show();
+               
+                
+            }
+
+     });
+</script>
+
+<script>
+     $(document).ready(function () {
+
+    $("#invoice_check").hide();
+
+    var err_invoice=false;
+    $('#invoice_no').blur(function () {
+    check_invoice();
+});
+
+function check_invoice()
+{
+    
+    var invoice_no_val=$("#invoice_no").val();
+    var regexOnlyNumbers=/^[0-9]+$/;
+    if(invoice_no_val=="" || regexOnlyNumbers.test(invoice_no_val) != true)
+    {
+        
+$("#invoice_check").show();
+$("#invoice_check").html("Please enter a valid number");
+$("#invoice_check").focus();
+$("#invoice_check").css("color","red");
+err_invoice=false;
+}
+else
+{
+ err_invoice=true;
+$("#invoice_check").hide();
+}
+    
+}
+$("#btnSubmit").click(function()
+ {
+    check_invoice();
+  
+if(( err_invoice==true) )
+   {
+     return true;
+   }  
+   else
+   {
+        return false;
+   }
+ });
+});
+</script>
+
+
+<script>
+$("#mytable").delegate("#del", "click", function (){
+$(this).closest("tr").remove();
+
+});
+</script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/invoice.blade.php ENDPATH**/ ?>
