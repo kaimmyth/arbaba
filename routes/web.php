@@ -25,26 +25,32 @@ Route::get('home', 'HomeController@index')->name('home');
 Route::get('dashboard', 'HomeController@Dashboard');
 
 /* Sale */
-Route::prefix('sale')->group(function () 
-{
+// Route::prefix('sale')->group(function () 
+// {
 
-	Route::get('all-sale',function(){
-		$data['content'] ='sale.allsale';
-		return view('layouts.content',compact('data'));
-	});
-	Route::get('invoice',function(){
-		$data['content'] ='sale.invoice';
-		return view('layouts.content',compact('data'));
-	});
-	Route::get('customers',function(){
-		$data['content'] ='sale.customer';
-		return view('layouts.content',compact('data'));
-	});
-	Route::get('products&services',function(){
-		$data['content'] ='sale.products-services';
-		return view('layouts.content',compact('data'));
-	});
-});
+// 	// Route::get('all-sale',function(){
+// 	// 	$data['content'] ='sale.allsale';
+// 	// 	return view('layouts.content',compact('data'));
+// 	// });
+// 	Route::get('invoice',function(){
+// 		$data['content'] ='sale.invoice';
+// 		return view('layouts.content',compact('data'));
+// 	});
+// 	Route::get('customers',function(){
+// 		$data['content'] ='sale.customer';
+// 		return view('layouts.content',compact('data'));
+// 	});
+// 	Route::get('products&services',function(){
+// 		$data['content'] ='sale.products-services';
+// 		return view('layouts.content',compact('data'));
+// 	});
+// });
+
+Route::get('sale/all-sale','SalesController@view_all_sales');
+Route::get('sale/invoice','SalesController@view_invoices');
+Route::get('sale/customers','SalesController@view_customers');
+Route::get('sale/products&services','SalesController@view_products_and_services');
+
 
 /* Taxes */
 // Route::prefix('tax')->group(function () {
