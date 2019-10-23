@@ -120,8 +120,12 @@ class ExpensesController extends Controller
 
     public function view_employee()
     {
+
+        $toReturn=array();
+        $toReturn=Ats_expenses_employee::get()->toArray();
+
         $data['content'] ='Expenses.employee';
-	return view('layouts.content',compact('data'));
+	return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
 
     public function insert_employee(Request $request)
@@ -155,5 +159,15 @@ class ExpensesController extends Controller
         
 
     }
+
+    public function employee_del($id="")
+   {
+    //   return ("hi");
+      $del=Ats_expenses_employee::where('id',$id)->delete();
+      
+     return redirect('employee');
+
+   }
+   
 }
   

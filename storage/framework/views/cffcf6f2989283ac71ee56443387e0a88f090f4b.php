@@ -40,7 +40,32 @@
                                         <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" data-target=".employee" style="float:right;">Add an Employee</button>
                                     </div> 
                                     <div class="card-body"> 
-                                       
+                                            <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>NAME</th>
+                                                       
+                                                        <th>PHONE NO.</th>
+                                                        <th>EMAIL ADDRESS</th>
+                                                        <th>ACTION</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                            <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <tr>
+                                                                <td><?php echo e($value['first_name']); ?></td>
+                                                                <td><?php echo e($value['phone_no']); ?></td>
+
+                                                                <td><?php echo e($value['email_id']); ?></td>
+                                                               
+                                                                
+                                                                <td><i class='far fa-edit'></i> &nbsp; <i class="fas fa-eye"></i> &nbsp; <a href="<?php echo e(url('customer/delete/'.$value['id'])); ?>"><i class="fas fa-trash"></i></a></td>
+                                                            </tr>
+                                                       
+                                                    </tbody>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                                </table>
                                     </div><!--card body--> 
                                 </div><!--card border-->
                             </div><!--col-->
@@ -70,21 +95,21 @@
                             <div class="form-group emp-detail">
                                 <label for="">Title</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="title" name="title" placeholder="">
+                                        <input type="" class="form-control" id="title" name="title" placeholder="" required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                 <label for="">First Name</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                                        <input type="" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                 <label for="">Last Name</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                                        <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name" >
                                     </div>
                                 </div><!--form-group-->
 
@@ -98,14 +123,14 @@
                             <div class="form-group display-detail">
                                 <label for="">Email Id.</label>
                                     <div class="input-group">
-                                        <input type="email" class="form-control" id="email_id" name="email_id" placeholder="eg.example@gmail.com">
+                                        <input type="email" class="form-control" id="email_id" name="email_id" placeholder="eg.example@gmail.com" required>
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
                                 <label for="">Phone No.</label>
                                     <div class="input-group">
-                                    <input type="text" placeholder="" data-mask="(999) 999-9999" name="phone_no" id="phone_no" class="form-control">
+                                    <input type="text" placeholder="" data-mask="(999) 999-9999" name="phone_no" id="phone_no" class="form-control" required>
                                     </div>
                                 </div><!--form-group-->
 
@@ -119,39 +144,39 @@
                             <div class="form-group">
                                 <label for="">Address</label>
                                     <div class="input-group">
-                                        <textarea class="form-control" rows="5" id="address" name="address"></textarea>
+                                        <textarea class="form-control" rows="5" id="address" name="address" required></textarea>
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="" placeholder="City/Town" name="city" id="address">
+                                        <input type="text" class="form-control" id="" placeholder="City/Town" name="city" id="address" required>
                                     </div>
                                 </div><!--form-group-->  
 
                                 <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input type="" class="form-control"  placeholder="State" name="state" id="state">
+                                        <input type="" class="form-control"  placeholder="State" name="state" id="state" required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input style="display: block;width: 100;" type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code">
+                                        <input style="display: block;width: 100;" type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code" required>
                                         <span id="pin_code_check"></span>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                                        <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
                                     </div>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
                                 <label for="">Billing Rate</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="billing_rate" name="billing_rate" placeholder="">
+                                        <input type="" class="form-control" id="billing_rate" name="billing_rate" placeholder="" required>
                                     </div>
                                 </div><!--form-group--> 
 
@@ -167,20 +192,20 @@
                             <div class="form-group emp-detail">
                                 <label for="">Employee ID No.</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No.">
+                                        <input type="" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                 <label for="">Employee ID</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID">
+                                        <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID" required>
                                     </div>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                 <label for="">Gender</label>
-                                    <select class="form-control" placeholder="Gender" name="gender" id="gender">
+                                    <select class="form-control" placeholder="Gender" name="gender" id="gender" required>
                                             <option>--select--</option>
                                             <option>Male</option>
                                             <option>Female</option>
@@ -193,20 +218,20 @@
                                 <div class="form-group emp-detail">
                                 <label for="">Hire Date</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" id="hire_date" name="hire_date">
+                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" id="hire_date" name="hire_date" required>
                                            
                                         </div>
                                 </div><!--form-group-->
 
                             <div class="form-group emp-detail">
                                 <label for="">Release Date</label>
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="release_date" id="release_date">
+                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="release_date" id="release_date" required>
                                        
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                     <label for="">Date of Birth</label>
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3" name="dob" id="dob">
+                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3" name="dob" id="dob" required>
                                             
                                 </div><!--form-group--> 
                             </div>
@@ -226,6 +251,10 @@
         </div>
     </div>
 <!-----------------------------------------------------------end of modal-------------------------------------------->
+
+
+
+
 <script>
         $(document).ready(function () {
             $('#first_name').keyup(function () {

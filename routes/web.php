@@ -67,10 +67,11 @@ Route::prefix('company')->group(function () {
 	Route::any('edit/{id}', 'CompanyController@edit');
 });
 
-
+//Expenses
 Route::get('expenses','ExpensesController@index');
 Route::post('expenses/add','ExpensesController@add_expenses');
 Route::post('customer/add','ExpensesController@expenses_customer_insert');
+Route::get('customer/delete/{id}','ExpensesController@employee_del');
 
 Route::get('supplier',function(){
 	$data['content'] ='Expenses.supplier';

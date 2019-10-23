@@ -40,7 +40,32 @@
                                         <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" data-target=".employee" style="float:right;">Add an Employee</button>
                                     </div> 
                                     <div class="card-body"> 
-                                       
+                                            <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>NAME</th>
+                                                       
+                                                        <th>PHONE NO.</th>
+                                                        <th>EMAIL ADDRESS</th>
+                                                        <th>ACTION</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                            @foreach ($toReturn as $value)
+                                                            <tr>
+                                                                <td>{{$value['first_name']}}</td>
+                                                                <td>{{$value['phone_no']}}</td>
+
+                                                                <td>{{$value['email_id']}}</td>
+                                                               
+                                                                
+                                                                <td><i class='far fa-edit'></i> &nbsp; <i class="fas fa-eye"></i> &nbsp; <a href="{{url('customer/delete/'.$value['id'])}}"><i class="fas fa-trash"></i></a></td>
+                                                            </tr>
+                                                       
+                                                    </tbody>
+                                                    @endforeach
+
+                                                </table>
                                     </div><!--card body--> 
                                 </div><!--card border-->
                             </div><!--col-->
@@ -226,6 +251,10 @@
         </div>
     </div>
 <!-----------------------------------------------------------end of modal-------------------------------------------->
+
+
+
+
 <script>
         $(document).ready(function () {
             $('#first_name').keyup(function () {
