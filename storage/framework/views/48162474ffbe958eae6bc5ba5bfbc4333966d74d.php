@@ -33,8 +33,9 @@
                                     <label for="">Title</label>
                                     <div class="input-group">
                                         <input type="text" id="title" name="title" class="form-control"
-                                            placeholder="Title" required>
+                                            placeholder="Title" required id="name">
                                         <div class="input-group-prepend">
+                                            <h6 id="name_val"></h6>
                                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         </div>
                                     </div>
@@ -45,9 +46,11 @@
                                     <label for="">Last Name</label>
                                     <div class="input-group">
                                         <input type="text" id="last_name" name="last_name" class="form-control"
-                                            placeholder="Last Name" required>
+                                            placeholder="Last Name" required >
                                         <div class="input-group-prepend">
+                                             <h6 id="last_name_val"></h6>
                                             <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            <h6 id="last_name_val"></h6>
                                         </div>
                                     </div>
                                     <!--input group-->
@@ -58,7 +61,9 @@
                                     <div class="input-group">
                                         <input type="text" id="company" name="company" class="form-control"
                                             placeholder="Company" required>
+                                             
                                     </div>
+                                    <h6 id="company_val"></h6>
                                     <!--input group-->
                                 </div>
                                 <!--end of from group-->
@@ -71,11 +76,15 @@
                                     <div class="input-group">
                                         <input type="text" id="first_name" name="first_name" class="form-control"
                                             placeholder="First Name" required>
+                                            
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         </div>
+
                                     </div>
+                                    <h6 id="first_name_val"></h6>
                                     <!--input group-->
+
                                 </div>
                                 <!--end of from group-->
                                 <div class="form-group">
@@ -83,10 +92,12 @@
                                     <div class="input-group">
                                         <input type="text" id="middle_name" name="middle_name" class="form-control"
                                             placeholder="Middle Name" >
+                                             
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         </div>
                                     </div>
+                                    <h6 id="middle_name_val"></h6>
                                     <!--input group-->
                                 </div>
                                 <!--end of from group-->
@@ -111,10 +122,11 @@
                                         <input type="email" id="email_id" name="email_id" class="form-control"
                                             placeholder="eg.company@gmail.com" required>
                                         <div class="input-group-prepend">
+                                            
                                             <span class="input-group-text"><i class="fa fa-envelope"
                                                     aria-hidden="true"></i></span>
-                                        </div>
-                                    </div>
+                                        </div> </div>
+                                     <h6 id="email_id_val"></h6>                                   
                                     <!--input group-->
                                 </div>
                                 <!--end of from group-->
@@ -124,10 +136,12 @@
                                     <div class="input-group">
                                         <input type="text" id="company_name" name="company_name" class="form-control"
                                             placeholder="Company Name" required>
+                                             
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-building-o"></i></span>
                                         </div>
                                     </div>
+                                    <h6 id="company_name_val"></h6>
                                     <!--input group-->
                                 </div>
                                 <!--end of from group-->
@@ -138,10 +152,12 @@
                                         <input type="text" id="website" name="website" class="form-control"
                                             placeholder="eg.www.example.com" required>
                                         <div class="input-group-prepend">
+                                             
                                             <span class="input-group-text"><i class="fa fa-globe"
                                                     aria-hidden="true"></i></span>
                                         </div>
                                     </div>
+                                    <h6 id="website_val"></h6>
                                     <!--input group-->
                                 </div>
                                 <!--end of from group-->
@@ -151,9 +167,11 @@
                                 <div class="form-group" style="width:49%;float:left;">
                                     <label for="">Mobile No.</label>
                                     <div class="input-group">
-                                        <input type="text" id="mobile_no" name="mobile_no" placeholder=""
-                                            data-mask="(999) 999-9999" class="form-control" required>
+                                        <input type="numbers" id="mobile_no" name="mobile_no" placeholder=""
+                                            class="form-control" required>
+                                             
                                     </div>
+                                    <h6 id="mobile_no_val"></h6>.
                                     <!--input group-->
                                 </div>
                                 <!--end of from group-->
@@ -549,9 +567,9 @@ $(document).ready(function()
  var err_opening_balance=true;
 
  $("#billing_pin").blur(function()
-		{
-			check_bill_pin();
-		});
+        {
+            check_bill_pin();
+        });
         function check_bill_pin()
 {
   
@@ -576,9 +594,9 @@ $("#billing_pin_check").hide();
 }
 
 $("#shipping_pin").blur(function()
-		{
-			check_ship_pin();
-		});
+        {
+            check_ship_pin();
+        });
         function check_ship_pin()
 {
   
@@ -603,9 +621,9 @@ $("#shipping_pin_check").hide();
 }
 
 $("#opening_balance").blur(function()
-		{
-			check_opening_balance();
-		});
+        {
+            check_opening_balance();
+        });
         function check_opening_balance()
 {
   
@@ -644,6 +662,300 @@ if((err_billing_pin==true) && (err_shipping_pin==true) && (err_opening_balance==
         return false;
    }
  });
+
+
  });
+
+//customerblade.php
+
+
+  
+      $("document").ready(function(){
+
+        $("#company_val").hide();
+        $("#name_val").hide();
+        $("#middle_name_val").hide();
+        $("#email_id_val").hide();
+        $("#company_name_val").hide();
+        $("#website_val").hide();
+        $("#mobile_no_val").hide();
+        
+ 
+        var err_company =true;
+        var err_first_name =true;
+        var err_middle_name =true;
+        var err_email_id = true;
+        var err_company_name=true;
+        var err_website=true;
+        var err_mobile_no=true;
+      
+
+        $("#company").blur(function(){
+
+            company_f();
+
+        });
+        function company_f(){
+
+          var c = $("#company").val();
+
+          if(c.length==""){
+
+            $("#company_val").show();
+            $("#company_val").html("**please input the company name name");
+            $("#company_val").focus();
+            $("#company_val").css("color","red");
+
+              err_company=false;
+              return false;
+          }else{
+
+            $("#company_val").hide();
+          }
+
+            if((k.length<3)||(k.length>10)){
+
+            $("#name_val").show();
+            $("#name_val").html("**user name must be between 3 to 10");
+            $("#name_val").focus();
+            $("#name_val").css("color","red");
+
+              err_name=false;
+              return false;
+          }else{
+            name_val_r=true;
+            $("#name_val").hide();
+          } 
+        }
+       
+
+        $("#first_name").blur(function(){
+
+            first_name_f();
+        });
+        function first_name_f(){
+
+          var f = $("#first_name").val();
+
+          if(f.length==""){
+
+            $("#first_name_val").show();
+            $("#first_name_val").html("**this field is required");
+            $("#first_name_val").focus();
+            $("#first_name_val").css("color","red");
+
+              err_first_name=false;
+              return false;
+          }else{
+            err_first_name=true;
+            $("#first_name_val").hide();
+          }
+        }
+
+
+             $("#middle_name").blur(function(){
+
+            middle_name_f();
+        });
+        function middle_name_f(){
+
+          var m = $("#middle_name").val();
+
+          if(m.length==""){
+
+            $("#middle_name_val").show();
+            $("#middle_name_val").html("**please input middle name ");
+            $("#middle_name_val").focus();
+            $("#middle_name_val").css("color","red");
+
+              err_middle_name=false;
+              return false;
+          }else{
+            err_middle_name=true;
+            $("#middle_name_val").hide();
+          }
+        }
+
+
+
+             $("#email_id").blur(function(){
+
+            email_id_f();
+        });
+        function email_id_f(){
+
+          var e = $("#email_id").val();
+
+          if(e.length==""){
+
+            $("#email_id_val").show();
+            $("#email_id_val").html("**please input email id");
+            $("#email_id_val").focus();
+            $("#email_id_val").css("color","red");
+
+              err_email_id=false;
+              return false;
+          }else{
+            err_email_id=true;
+            $("#email_id_val").hide();
+          }
+        }
+
+
+         $("#company_name").blur(function(){
+
+            company_name_f();
+        });
+        function company_name_f(){
+
+          var c = $("#company_name").val();
+
+          if(c.length==""){
+
+            $("#company_name_val").show();
+            $("#company_name_val").html("**please input company name  ");
+            $("#company_name_val").focus();
+            $("#company_name_val").css("color","red");
+
+              err_company_name=false;
+              return false;
+          }else{
+            err_company_name=true;
+            $("#company_name_val").hide();
+          }
+        }
+       
+
+           $("#website").blur(function(){
+
+            website_f();
+        });
+        function website_f(){
+
+          var w = $("#website").val();
+
+          if(w.length==""){
+
+            $("#website_val").show();
+            $("#website_val").html("**please input website ");
+            $("#website_val").focus();
+            $("#website_val").css("color","red");
+
+              err_website=false;
+              return false;
+          }else{
+            err_website=true;
+            $("#website_val").hide();
+          }
+        }
+
+         $("#mobile_no").blur(function(){
+
+            mobile_no_f();
+        });
+        function mobile_no_f(){
+
+          var q = $("#mobile_no").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+            $("#mobile_no_val").show();
+            $("#mobile_no_val").html("**please input numbers between 0-9 ");
+            $("#mobile_no_val").focus();
+            $("#mobile_no_val").css("color","red");
+
+              err_mobile_no=false;
+              return false;
+          }else{
+            err_mobile_no=true;
+            $("#mobile_no_val").hide();
+          }
+        }
+
+
+
+        //  $("#sale_price").blur(function(){
+
+        //     username8();
+        // });
+        // function username8(){
+        //   var z = $("#sale_price").val();
+
+        //   var regexOnlyNumbers=/^[0-9]+$/;
+        //   if((z=="")|| regexOnlyNumbers.test(z)!=true){
+
+        //     $("#sale_price_val").show();
+        //     $("#sale_price_val").html("**please input numbers between 0-9 ");
+        //     $("#sale_price_val").focus();
+        //     $("#sale_price_val").css("color","red");
+
+        //       err_sale_price=false;
+        //       return false;
+        //   }else{
+        //     err_sale_price=true;
+        //     $("#sale_price_val").hide();
+        //   }
+        // }
+                
+
+        //  $("#inclusive_tax").change(function(){
+        //      username9();
+        // });
+        // function username9(){
+          
+        //   if($("#inclusive_tax").prop("checked") == false){
+
+        //     $("#inclusive_tax_val").show();
+        //     $("#inclusive_tax_val").html("**plesee check the button ");
+        //     $("#inclusive_tax_val").focus();
+        //     $("#inclusive_tax_val").css("color","red");
+
+        //       err_sale_price=false;
+        //       return false;
+        //   }
+        //    else if($("#inclusive_tax").prop("checked") == true){
+        //     $("#inclusive_tax_val").hide();
+
+        //   }
+        // }
+
+
+     $("#btnSubmit").click(function(){
+
+      err_company=true;
+      err_first_name=true;
+      err_middle_name=true;
+      err_email_id=true;
+      err_company_name=true;
+      err_website=true;
+      err_mobile_no=true;
+     
+
+
+      company_f();
+      first_name_f();
+      middle_name_f();
+      email_id_f();
+      company_name_f();
+      website_f();
+      mobile_no_f();
+      
+
+     if((err_company==true)&&(err_first_name==true)&&(err_middle_name==true)&&(err_email_id==true)&&(err_company_name==true)&&(err_website==true)&&(err_mobile_no==true))
+     {
+        return true;
+     }else{
+        return false;
+
+     }
+
+     });
+         
+
+
+
+
+  });
 </script>
 <?php /**PATH C:\xampp\htdocs\arbaba\resources\views/Expenses/customer.blade.php ENDPATH**/ ?>
