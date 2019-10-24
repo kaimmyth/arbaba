@@ -157,7 +157,7 @@
                         </div><!--col-->
                             <div class="col-md-4">
                                 <br>
-                                <h2>Amount&nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span-h">0.00</span></h2>
+                                <div style="text-align: right;"><strong>Amount</strong><h2><i class="fa fa-rupee-sign" aria-hidden="true"></i><span id="total-span-h">0.00</span></h2></div>
                                 <div class="form-group row">
                                     <label for="" class="control-label">Ref No.</label><br>
                                     <input type="text" class="form-control" name="expenses_ref_no" id="expenses_ref_no" placeholder="">
