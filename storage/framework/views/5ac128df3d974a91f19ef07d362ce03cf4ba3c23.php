@@ -287,7 +287,7 @@
      <td><input type="text" class="form-control" name="description[]" required></td>
      <td><input type="text" class="form-control" name="qty[]" required></td>
      <td><input type="text" class="form-control"  name="rate[]" required></td>
-     <td><input class="form-control" type="text" name="amt[]" required></td>
+     <td><input class="form-control" type="text" name="amt[]" disabled></td>
      
             <td >
                     <select class="form-control input-sm" name="tax[]" required>
@@ -338,7 +338,7 @@
 
     <div class="col-md-6" style="text-align: right;">
         <h4>Subtotal  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
-        <h4>Total  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
+        <h4>Taxes  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
         <h4>Balance Due  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
     </div>
 </div>
@@ -385,9 +385,9 @@
                    
                ' </select>'+
      '</td>'+
-     '<td><input type="text" class="form-control" id="hsn_sac[]"></td>'+
-     '<td><input type="text" class="form-control" id="description[]"></td>'+
-     '<td><input type="text" class="form-control" id="qty[]"></td>'+
+     '<td><input type="text" class="form-control" name="hsn_sac[]"></td>'+
+     '<td><input type="text" class="form-control" name="description[]"></td>'+
+     '<td><input type="text" class="form-control" name="qty[]"></td>'+
      '<td><input type="text" class="form-control"  name="rate[]"></td>'+
      '<td><input class="form-control" type="text" name="amt[]"></td>'+
      

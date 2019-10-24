@@ -332,3 +332,48 @@ if((err_pin_code==true) )
  });
  });
     </script>
+
+<script>
+// calculate amounts
+$("#expenses-details-expand").delegate("input[name='expenses_details_amount[]']", "change", function (){
+    getExpensesDetailsValues();
+});
+$("#expenses-details-expand").delegate("select[name='expenses_details_tax[]']", "change", function (){
+    getExpensesDetailsValues();
+});
+function getExpensesDetailsValues(){
+    var amountValues = [];
+    var fields = document.getElementsByName("expenses_details_amount[]");
+    for(var i = 0; i < fields.length; i++) {
+        if(fields[i].value)
+        { amountValues.push(parseFloat(fields[i].value)); }
+    }
+
+    var amountTaxes = [];
+    var fields = document.getElementsByName("expenses_details_tax[]");
+    for(var i = 0; i < fields.length; i++) {
+        if(fields[i].value)
+        { amountTaxes.push(parseFloat(fields[i].value)); }
+    }
+
+    // changing html contents
+    if(amountValues.length==amountTaxes.length)
+    {
+        var subtotal=0.0;
+        var taxes=0;
+        var total=0;
+
+        for(var i=0;i<amountValues.length;i++)
+        {
+            subtotal+=amountValues[i];
+            taxes+=(amountValues[i]*amountTaxes[i])/100;
+        }
+
+        total+=parseFloat(subtotal)+parseFloat(taxes);
+        $("#subtotal-span").html(subtotal);
+        $("#taxes-span").html(taxes);
+        $("#total-span").html(total);
+        $("#total-span-h").html(total); // large text
+    }
+}
+</script>

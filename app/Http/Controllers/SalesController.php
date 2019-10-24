@@ -25,6 +25,7 @@ class SalesController extends Controller
 
     public function insert_invoice(Request $request)
     {
+       
         $invoice = new Ats_sales_invoice();
         $invoice->invoice_no=$request->invoice_no;
         $invoice->customer =$request->customer ; 
@@ -62,7 +63,7 @@ class SalesController extends Controller
                 $tmp.=$request->description[$i].",";
                 $tmp.=$request->qty[$i].",";
                 $tmp.=$request->rate[$i].",";
-                $tmp.=$request->amt[$i].",";
+                $tmp.=$request->qty[$i]*$request->rate[$i].",";
                 $tmp.=$request->tax[$i].":";
             }
         }
@@ -73,17 +74,17 @@ class SalesController extends Controller
                 $tmp.=$request->description[0].",";
                 $tmp.=$request->qty[0].",";
                 $tmp.=$request->rate[0].",";
-                $tmp.=$request->amt[0].",";
+                $tmp.=$request->qty[0]*$request->rate[0].",";
                 $tmp.=$request->tax[0];
         }
         $invoice->invoice_details =rtrim($tmp, ':');
 
-
-   $invoice->save();
+return $tmp;
+  // $invoice->save();
      
   return redirect('sale/invoice');
     }
-
+   
 
     public function view_customers()
     {

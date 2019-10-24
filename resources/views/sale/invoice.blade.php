@@ -170,7 +170,7 @@
 
     <div class="col-md-9" style="text-align: right;">
         <h4>BALANCE DUE</h4>
-        <h2><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h2>
+        <h2><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span-h"></span></h2>
     </div>
 </div>
 
@@ -287,7 +287,7 @@
      <td><input type="text" class="form-control" name="description[]" required></td>
      <td><input type="text" class="form-control" name="qty[]" required></td>
      <td><input type="text" class="form-control"  name="rate[]" required></td>
-     <td><input class="form-control" type="text" name="amt[]" required></td>
+     <td><input class="form-control" type="text" name="amt[]" disabled></td>
      
             <td >
                     <select class="form-control input-sm" name="tax[]" required>
@@ -337,9 +337,9 @@
     </div>
 
     <div class="col-md-6" style="text-align: right;">
-        <h4>Subtotal  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
-        <h4>Total  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
-        <h4>Balance Due  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
+        <h4>Subtotal  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="subtotal-span"></span></h4>
+        <h4>Taxes  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="taxes-span"><span></h4>
+        <h4>Balance Due  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span"></span></h4>
     </div>
 </div>
 
@@ -385,9 +385,9 @@
                    
                ' </select>'+
      '</td>'+
-     '<td><input type="text" class="form-control" id="hsn_sac[]"></td>'+
-     '<td><input type="text" class="form-control" id="description[]"></td>'+
-     '<td><input type="text" class="form-control" id="qty[]"></td>'+
+     '<td><input type="text" class="form-control" name="hsn_sac[]"></td>'+
+     '<td><input type="text" class="form-control" name="description[]"></td>'+
+     '<td><input type="text" class="form-control" name="qty[]"></td>'+
      '<td><input type="text" class="form-control"  name="rate[]"></td>'+
      '<td><input class="form-control" type="text" name="amt[]"></td>'+
      
@@ -492,3 +492,65 @@ $(this).closest("tr").remove();
 
 });
 </script>
+
+<script>
+    // calculate amounts
+    $("#expenses-details-expand").delegate("input[name='expenses_details_amount[]']", "change", function (){
+        getSalesDetailsValues();
+    });
+    $("#expenses-details-expand").delegate("select[name='expenses_details_tax[]']", "change", function (){
+        getSalesDetailsValues();
+    });
+    $("#expenses-details-expand").delegate("select[name='expenses_details_tax[]']", "change", function (){
+        getSalesDetailsValues();
+    });
+    function getSalesDetailsValues(){
+        var qtyValues = [];
+        var fields = document.getElementsByName("qty[]");
+        for(var i = 0; i < fields.length; i++) {
+            if(fields[i].value)
+            { qtyValues.push(parseFloat(fields[i].value)); }
+        }
+
+        var rateValues = [];
+        var fields = document.getElementsByName("rate[]");
+        for(var i = 0; i < fields.length; i++) {
+            if(fields[i].value)
+            { rateValues.push(parseFloat(fields[i].value)); }
+        }
+
+        var taxValues = [];
+        var fields = document.getElementsByName("tax[]");
+        for(var i = 0; i < fields.length; i++) {
+            if(fields[i].value)
+            { taxValues.push(parseFloat(fields[i].value)); }
+        }
+    
+        var amountTaxes = [];
+        var fields = document.getElementsByName("amount[]");
+        for(var i = 0; i < fields.length; i++) {
+            if(fields[i].value)
+            { amountTaxes.push(parseFloat(fields[i].value)); }
+        }
+    
+        // changing html contents
+        if(amountValues.length==amountTaxes.length)
+        {
+            var subtotal=0.0;
+            var taxes=0;
+            var total=0;
+    
+            for(var i=0;i<amountValues.length;i++)
+            {
+                subtotal+=amountValues[i];
+                taxes+=(amountValues[i]*amountTaxes[i])/100;
+            }
+    
+            total+=parseFloat(subtotal)+parseFloat(taxes);
+            $("#subtotal-span").html(subtotal);
+            $("#taxes-span").html(taxes);
+            $("#total-span").html(total);
+            $("#total-span-h").html(total); // large text
+        }
+    }
+    </script>
