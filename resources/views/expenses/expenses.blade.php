@@ -361,6 +361,8 @@
                                         <tbody>
                                         </tbody>
                                     </table>
+                                    <div id="v_expenses_details_amounts">
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -476,7 +478,6 @@ function viewEditExpenses(purpose, id){
         dataType: "json",
         beforeSend: function(data){
             $("#loader1").css("display","block");
-            $("#e_expenses_details tbody").html("");
         },
         error: function(xhr){
             alert("error"+xhr.status+", "+xhr.statusText);
@@ -484,7 +485,8 @@ function viewEditExpenses(purpose, id){
         success: function (data) {
             console.log(data);
             if(purpose=="view")
-            {
+            {  
+                $("#v_expenses_details tbody").html("");
                 document.getElementById("v_id").innerHTML = data.id;
                 document.getElementById("v_ref_no").innerHTML = data.ref_no;
                 document.getElementById("v_payee_id").innerHTML = data.payee_id;
@@ -497,7 +499,7 @@ function viewEditExpenses(purpose, id){
                     var e_expenses_details='<tr style="border: none; background:white !important;"><td>1</td><td>'+data.expenses_details_tax_category[i]+'</td><td>'+data.expenses_details_description[i]+'</td><td>'+data.expenses_details_amount[i]+'</td><td>'+data.expenses_details_tax[i]+' ('+data.expenses_details_tax_percent[i]+'%)'+'</td><td>'+parseFloat(parseFloat(data.expenses_details_amount[i])+parseFloat(data.expenses_details_tax[i]))+'</td></tr>';
                     $("#v_expenses_details tbody").append(e_expenses_details);
                 }
-                $("#v_expenses_details").append('<div style="text-align:right;padding:5px;"><p><b>Subtotal: ₹</b>'+data.subtotal+'</p><p><b>Taxes: ₹</b>'+data.total_tax+'</p><p><b>Total: ₹</b>'+data.total+'</p></div>');
+                $("#v_expenses_details_amounts").html('<div style="text-align:right;padding:5px;"><p><b>Subtotal: ₹</b>'+data.subtotal+'</p><p><b>Taxes: ₹</b>'+data.total_tax+'</p><p><b>Total: ₹</b>'+data.total+'</p></div>');
 
                 document.getElementById("v_memo").innerHTML = data.memo;
                 document.getElementById("v_attachment").innerHTML = "<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Attachment</a>";
@@ -534,7 +536,8 @@ function viewEditExpenses(purpose, id){
                 $("input[name='hidden_input_id'").val(data.id);
                 $("input[name='hidden_input_purpose'").val("edit");
                 $("input[name='hidden_input_attachment'").val(data.attachment);
-
+                
+                getExpensesDetailsValues(); // calculating all values
                 $('.expense').modal('show'); // expense insert form model
             }
             $("#loader1").css("display","none");

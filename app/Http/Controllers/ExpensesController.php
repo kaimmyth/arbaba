@@ -247,7 +247,7 @@ class ExpensesController extends Controller
         $employee->dob =date("Y-m-d",strtotime( $request->dob));
          
         //return $request;
-         $employee->save();
+        $employee->save();
         return redirect('employee#');
         
 
