@@ -92,29 +92,33 @@
      </tr>
    </thead>
    <tbody>
-    <tr>
-     <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-     <td>101</td>
-     <td>abc</td>
-     <td>10/10/2019</td>
-     <td>09/11/2019</td>
-     <td>8000</td>
-     <td>8000</td>
-     <td><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Due in 30 days (Undelivered)</td>
-     <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
-      Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-      <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-       <a class="dropdown-item" href="#">Print</a>
-       <a class="dropdown-item" href="#">Send</a>
-       <a class="dropdown-item" href="#">Send remainder</a>
-       <a class="dropdown-item" href="#">Share Invoice Link</a>
-       <a class="dropdown-item" href="#">Print Delivery Challan</a>
-       <a class="dropdown-item" href="#">View/Edit</a>
-       <a class="dropdown-item" href="#">Copy</a>
-       <a class="dropdown-item" href="#">Delete</a>
-     </div>
-   </td>
- </tr>
+      
+          @foreach ($toReturn as $value)
+ 
+        <tr>
+        <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
+        <td>{{$value['invoice_no']}}</td>
+        <td>{{$value['customer']}}</td>
+        <td>{{$value['invoice_date']}}</td>
+        <td>{{$value['due_date']}}</td>
+        <td></td>
+        <td></td>
+        <td><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Due in 30 days (Undelivered)</td>
+        <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
+         Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Print</a>
+          <a class="dropdown-item" href="#">Send</a>
+          <a class="dropdown-item" href="#">Send remainder</a>
+          <a class="dropdown-item" href="#">Share Invoice Link</a>
+          <a class="dropdown-item" href="#">Print Delivery Challan</a>
+          <a class="dropdown-item" href="#">View/Edit</a>
+          <a class="dropdown-item" href="#">Copy</a>
+          <a class="dropdown-item" href="#">Delete</a>
+        </div>
+      </td> 
+      </tr>
+      @endforeach
 </tbody>
 </table>
 </div>

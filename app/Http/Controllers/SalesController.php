@@ -20,8 +20,12 @@ class SalesController extends Controller
    
     public function view_invoices()
     {
+
+        $toReturn=array();
+        $toReturn=Ats_sales_invoice::orderBy('id','asc')->get()->toArray();
+
         $data['content'] ='sale.invoice';
-        return view('layouts.content',compact('data'));
+        return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
     }
 
     public function insert_invoice(Request $request)

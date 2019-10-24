@@ -92,29 +92,33 @@
      </tr>
    </thead>
    <tbody>
-    <tr>
-     <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-     <td>101</td>
-     <td>abc</td>
-     <td>10/10/2019</td>
-     <td>09/11/2019</td>
-     <td>8000</td>
-     <td>8000</td>
-     <td><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Due in 30 days (Undelivered)</td>
-     <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
-      Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-      <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-       <a class="dropdown-item" href="#">Print</a>
-       <a class="dropdown-item" href="#">Send</a>
-       <a class="dropdown-item" href="#">Send remainder</a>
-       <a class="dropdown-item" href="#">Share Invoice Link</a>
-       <a class="dropdown-item" href="#">Print Delivery Challan</a>
-       <a class="dropdown-item" href="#">View/Edit</a>
-       <a class="dropdown-item" href="#">Copy</a>
-       <a class="dropdown-item" href="#">Delete</a>
-     </div>
-   </td>
- </tr>
+      
+          <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+ 
+        <tr>
+        <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
+        <td><?php echo e($value['invoice_no']); ?></td>
+        <td><?php echo e($value['customer']); ?></td>
+        <td><?php echo e($value['invoice_date']); ?></td>
+        <td><?php echo e($value['due_date']); ?></td>
+        <td></td>
+        <td></td>
+        <td><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Due in 30 days (Undelivered)</td>
+        <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
+         Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Print</a>
+          <a class="dropdown-item" href="#">Send</a>
+          <a class="dropdown-item" href="#">Send remainder</a>
+          <a class="dropdown-item" href="#">Share Invoice Link</a>
+          <a class="dropdown-item" href="#">Print Delivery Challan</a>
+          <a class="dropdown-item" href="#">View/Edit</a>
+          <a class="dropdown-item" href="#">Copy</a>
+          <a class="dropdown-item" href="#">Delete</a>
+        </div>
+      </td> 
+      </tr>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </tbody>
 </table>
 </div>
@@ -387,9 +391,9 @@
      '</td>'+
      '<td><input type="text" class="form-control" name="hsn_sac[]"></td>'+
      '<td><input type="text" class="form-control" name="description[]"></td>'+
-     '<td><input type="text" class="form-control" name="qty[]"></td>'+
-     '<td><input type="text" class="form-control"  name="rate[]"></td>'+
-     '<td><input class="form-control" type="text" name="amt[]"></td>'+
+     '<td><input type="text" class="form-control" name="qty[]" required></td>'+
+     '<td><input type="text" class="form-control"  name="rate[]" required></td>'+
+     '<td><input class="form-control" type="text" name="amt[]" ></td>'+
      
             '<td>'+
                    ' <select class="form-control input-sm" name="tax[]">'+
@@ -510,9 +514,7 @@ getSalesDetailsValues();
         var fieldsTax = document.getElementsByName("tax[]");
         var fieldsAmount = document.getElementsByName("amt[]");
 
-         // changing html contents
-        // if(qtyValues.length==rateValues.length)
-        // {
+        
             var amount=0;
             var subtotal=0;
             var taxes=0;
@@ -533,7 +535,7 @@ getSalesDetailsValues();
             $("#taxes-span").html(taxes);
             $("#total-span").html(total);
             $("#total-span-h").html(total); // large text
-        // }
+        
     }
     </script>
 
