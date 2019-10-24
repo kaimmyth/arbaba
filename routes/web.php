@@ -57,6 +57,8 @@ Route::post('sale/invoice/add','SalesController@insert_invoice');
 
 Route::get('sale/customers','SalesController@view_customers');
 Route::get('sale/products&services','SalesController@view_products_and_services');
+Route::POST('sale/products-and-services/add','SalesController@add_products_and_services');
+Route::get('sale/products-and-services/delete/{id}','SalesController@delete_products_and_services');
 
 
 /* Taxes */
