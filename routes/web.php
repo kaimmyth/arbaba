@@ -82,9 +82,10 @@ Route::prefix('company')->group(function () {
 
 //Expenses
 Route::get('expenses','ExpensesController@index');
-Route::post('expenses/add','ExpensesController@add_expenses');
+Route::post('expenses/add-edit','ExpensesController@add_edit_expenses');
+Route::get('expenses/delete/{id}','ExpensesController@delete_expenses');
+Route::get('expenses/get-expanses-details/{id}','ExpensesController@get_expenses_details');
 Route::post('customer/add','ExpensesController@expenses_customer_insert');
-Route::get('customer/delete/{id}','ExpensesController@employee_del');
 
 Route::get('supplier',function(){
 	$data['content'] ='Expenses.supplier';

@@ -12,16 +12,17 @@ class ExpensesController extends Controller
     public function index()
     {
         $toReturn=array();
-        $toReturn=Ats_expenses::get()->toArray();
+        $toReturn=Ats_expenses::orderBy('id', 'desc')->get()->toArray();
 
         $data['content'] = 'expenses.expenses';
         return view('layouts.content', compact('data'))->with('return', $toReturn);
     }
 
-    public function add_expenses(Request $Request)
-    {
+    // add edit expenses
+    public function add_edit_expenses(Request $Request)
+    { 
+        
         $expenses = new Ats_expenses();
-        // $record_payment->purpose=$Request->rec_cst_pay_purpose;
         $expenses->payee_id = $Request->expenses_payee_id;
         $expenses->payment_account = $Request->expenses_payment_account;
         $expenses->payment_date = date("Y-m-d", strtotime($Request->expenses_payment_date));
@@ -29,6 +30,8 @@ class ExpensesController extends Controller
         $expenses->ref_no = $Request->expenses_ref_no;
         $expenses->memo = $Request->expenses_memo;
 
+        // for attachment
+        $expenses->attachment = "";
         if($Request->hasFile('expenses_attachment'))
         {
             //
@@ -39,14 +42,104 @@ class ExpensesController extends Controller
             $file->move($destinationPath, $file->getClientOriginalName()); 
         }
         else{
-            $expenses->attachment = "";
+            if($Request->hidden_input_purpose=="edit")
+            {
+                $expenses->attachment = $Request->hidden_input_attachment;
+            }
+            else if($Request->hidden_input_purpose=="add")
+            {
+                // error has to return
+            }
         }
 
-        $expenses_details=$Request->expenses_details_tax_category.", ".$Request->expenses_details_description.", ".$Request->expenses_details_amount.", ".$Request->expenses_details_tax;
-        $expenses->expenses_details = $expenses_details;
-        $expenses->save();
-
+        $count = count($Request->expenses_details_tax_category);
+        $tmp=""; //$expenses->expenses_details;
+        if($count>1){
+            for($i=0;$i<$count;$i++){
+                $tmp.=$Request->expenses_details_tax_category[$i].",";
+                $tmp.=$Request->expenses_details_description[$i].",";
+                $tmp.=$Request->expenses_details_amount[$i].",";
+                $tmp.=$Request->expenses_details_tax[$i].":";
+            }
+        }
+        else{
+            $tmp.=$Request->expenses_details_tax_category[0].",";
+            $tmp.=$Request->expenses_details_description[0].",";
+            $tmp.=$Request->expenses_details_amount[0].",";
+            $tmp.=$Request->expenses_details_tax[0];
+        }
+        $expenses->expenses_details=rtrim($tmp, ':');
+        
+        // finall query create, edit
+        if($Request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($expenses), true);
+            $update_query = Ats_expenses::where('id', $Request->hidden_input_id)->update($update_values_array);
+        }
+        else if($Request->hidden_input_purpose=="add")
+        {
+            $expenses->save();
+        }
+        //return $expenses;
+        
         return redirect('expenses');
+    }
+
+    // delete expenses
+    public function delete_expenses($id="")
+    {
+        $del=Ats_expenses::where('id',$id)->delete();
+        return redirect('expenses');
+    }
+
+    // get expenses details in json format (i.e ajax)
+    public function get_expenses_details($id=""){
+        // $toReturn = Ats_expenses::select( 'id', 'payee_id')->where('id', $id)->get();
+        // return Response::json($toReturn);
+        $data = Ats_expenses::where('id', $id)->first();
+
+        // for expenses_details
+        $no_of_rows=0;
+        $tax_category=[];
+        $description=[];
+        $amount=[];
+        $tax_percent=[];
+        $tax=[];
+        $subtotal=0;
+        $total_tax=0;
+        $total=0;
+
+        if($data->expenses_details!="")
+        {
+            $tmp = $data->expenses_details;
+            $tmp = explode(":",$tmp);
+            for($i=0;$i<count($tmp);$i++){
+                $tmp_2 = explode(",",$tmp[$i]);
+                $tax_category[$i]=$tmp_2[0];
+                $description[$i]=$tmp_2[1];
+                $amount[$i]=$tmp_2[2];
+                $tax_percent[$i]=$tmp_2[3];
+                $tax[$i]=($tmp_2[2]*$tmp_2[3])/100;
+                $subtotal+=$amount[$i];
+                $total_tax+=$tax[$i];
+                $total+=($amount[$i]+$tax[$i]);
+            }
+            $no_of_rows=count($tmp);
+        }
+        $data->no_of_rows=$no_of_rows;
+        $data->expenses_details_tax_category=$tax_category;
+        $data->expenses_details_description=$description;
+        $data->expenses_details_amount=$amount;
+        $data->expenses_details_tax_percent=$tax_percent;
+        $data->expenses_details_tax=$tax;
+        $data->subtotal=$subtotal;
+        $data->total_tax=$total_tax;
+        $data->total=$total;
+
+        // change date format for font end
+        $data->payment_date = date("d-m-Y", strtotime($data->payment_date));
+
+        return $data;
     }
 
     public function view_customer()
