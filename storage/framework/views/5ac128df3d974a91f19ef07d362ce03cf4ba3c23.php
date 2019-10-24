@@ -73,7 +73,7 @@
 <div class="row">
  <div class="col-md-12">
   <div class="col-md-12" style="text-align: right; margin-bottom: 4px; margin-top: 4px;">
-   <button class="btn btn-primary" data-toggle="modal" data-target="#full-width-modal">New transaction</button>
+   <button class="btn btn-primary" data-toggle="modal" data-target="#full-width-modal"  >New transaction</button>
  </div>
  <div class="tab-content colm">
    <div class="tab-pane show active" id="home-2" role="tabpanel" aria-labelledby="home-tab-2" style="">
@@ -170,7 +170,7 @@
 
     <div class="col-md-9" style="text-align: right;">
         <h4>BALANCE DUE</h4>
-        <h2><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h2>
+        <h2><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span-h">0.00</span></h2>
     </div>
 </div>
 
@@ -287,11 +287,11 @@
      <td><input type="text" class="form-control" name="description[]" required></td>
      <td><input type="text" class="form-control" name="qty[]" required></td>
      <td><input type="text" class="form-control"  name="rate[]" required></td>
-     <td><input class="form-control" type="text" name="amt[]" disabled></td>
+     <td><input class="form-control" type="text" name="amt[]"></td>
      
             <td >
                     <select class="form-control input-sm" name="tax[]" required>
-                        <option value="" disabled selected>-Select-</option>
+                        <option value="0" disabled selected>-Select-</option>
                         <option value="0.25">0.25% IGST</option>
                         <option value="5">5% IGST</option>
                         <option value="10">10% IGST</option>
@@ -337,9 +337,9 @@
     </div>
 
     <div class="col-md-6" style="text-align: right;">
-        <h4>Subtotal  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
-        <h4>Taxes  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
-        <h4>Balance Due  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h4>
+        <h4>Subtotal  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="subtotal-span">0.00</span></h4>
+        <h4>Taxes  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="taxes-span"><span>0.00</h4>
+        <h4>Balance Due  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span">0.00</span></h4>
     </div>
 </div>
 
@@ -393,7 +393,7 @@
      
             '<td>'+
                    ' <select class="form-control input-sm" name="tax[]">'+
-                        '<option value="" disabled selected>-Select-</option>'+
+                        '<option value="0" disabled selected>-Select-</option>'+
                         '<option value="0.25">0.25% IGST</option>'+
                         '<option value="5">5% IGST</option>'+
                         '<option value="10">10% IGST</option>'+
@@ -489,6 +489,52 @@ if(( err_invoice==true) )
 <script>
 $("#mytable").delegate("#del", "click", function (){
 $(this).closest("tr").remove();
-
+getSalesDetailsValues();
 });
-</script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/invoice.blade.php ENDPATH**/ ?>
+</script>
+
+<script>
+    // calculate amounts
+    $("#mytable").delegate("input[name='qty[]']", "change", function (){
+        getSalesDetailsValues();
+    });
+    $("#mytable").delegate("input[name='rate[]']", "change", function (){
+        getSalesDetailsValues();
+    });
+    $("#mytable").delegate("select[name='tax[]']", "change", function (){
+        getSalesDetailsValues();
+    });
+    function getSalesDetailsValues(){
+        var fieldsQty = document.getElementsByName("qty[]");
+        var fieldsRate = document.getElementsByName("rate[]");
+        var fieldsTax = document.getElementsByName("tax[]");
+        var fieldsAmount = document.getElementsByName("amt[]");
+
+         // changing html contents
+        // if(qtyValues.length==rateValues.length)
+        // {
+            var amount=0;
+            var subtotal=0;
+            var taxes=0;
+            var total=0;
+    
+            for(var i=0;i<fieldsAmount.length;i++)
+            {
+                if(fieldsQty[i].value&&fieldsRate[i].value){
+                    amount=fieldsQty[i].value*fieldsRate[i].value;
+                    taxes+=(amount*fieldsTax[i].value)/100;
+                    subtotal+=amount;
+                    fieldsAmount[i].value = amount;
+                }
+            }
+    
+            total+=parseFloat(subtotal)+parseFloat(taxes);
+            $("#subtotal-span").html(subtotal);
+            $("#taxes-span").html(taxes);
+            $("#total-span").html(total);
+            $("#total-span-h").html(total); // large text
+        // }
+    }
+    </script>
+
+   <?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/invoice.blade.php ENDPATH**/ ?>

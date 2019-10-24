@@ -157,7 +157,7 @@
                         </div><!--col-->
                             <div class="col-md-4">
                                 <br>
-                                <p><strong>Amount</strong><h2>₹<span id="total-span-h">0.00</span></h2></p>
+                                <h2>Amount&nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span-h">0.00</span></h2>
                                 <div class="form-group row">
                                     <label for="" class="control-label">Ref No.</label><br>
                                     <input type="text" class="form-control" name="expenses_ref_no" id="expenses_ref_no" placeholder="">
@@ -241,9 +241,9 @@
                 </div>
                 <div class="row" style="border-radius: 0px">
                     <div class="col-md-3 offset-md-9">
-                        <p class="text-right"><b>Sub-total: ₹</b> <span id="subtotal-span">0</span></p>
-                        <p class="text-right"><b>Taxes: ₹</b> <span id="taxes-span">0</span></p>
-                        <p class="text-right"><b>Total: ₹</b> <span id="total-span">0</span></p>
+                        <p class="text-right"><b>Sub-total: &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i></b> <span id="subtotal-span">0</span></p>
+                        <p class="text-right"><b>Taxes: &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i></b> <span id="taxes-span">0</span></p>
+                        <p class="text-right"><b>Total: &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i></b> <span id="total-span">0</span></p>
                     </div>
                 </div>
             <div style="width:100%; padding: 0.5px;background: #6f6f6f;"></div><br>

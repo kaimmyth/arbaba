@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Ats_sales_invoice;
-use App\Ats_products_and_services;
 
 class SalesController extends Controller
 {
@@ -27,6 +26,7 @@ class SalesController extends Controller
     public function insert_invoice(Request $request)
     {
        
+        return $request;
         $invoice = new Ats_sales_invoice();
         $invoice->invoice_no=$request->invoice_no;
         $invoice->customer =$request->customer ; 
@@ -95,79 +95,7 @@ return $tmp;
 
     public function view_products_and_services()
     {
-        $toReturn=array();
-        $toReturn=Ats_products_and_services::get()->toArray();
-
-        //return $toReturn;
-        $data['content'] = 'sale.products-services';
-        return view('layouts.content', compact('data'))->with('toReturn', $toReturn);
+        $data['content'] ='sale.products-services';
+        return view('layouts.content',compact('data'));
     }
-
-    public function add_products_and_services(Request $request)
-    {
-        $products = new Ats_products_and_services();
-        $products->name=$request->name;
-        $products->sku=$request->sku;
-        $products->hsn_code=$request->hsn_code;
-        $products->sac_code=$request->sac_code;
-        $products->unit=$request->unit;
-        $products->category=$request->category;
-        $products->sale_price=$request->sale_price;
-        $products->income_acount=$request->income_acount;
-        $products->inclusive_tax =$request->inclusive_tax;
-        $products->tax=$request->tax;
-        $products->description=$request->description;
-        $products->purchasing_information =$request->purchasing_information;
-        $products->cost=$request->cost;
-        $products->expense_account=$request->expense_account;
-        $products->purchase_tax=$request->purchase_tax;
-        $products->reverse_change=$request->reverse_change;
-        $products->preferred_supplier=$request->preferred_supplier;
-
-        $products->save();
-        
-        return redirect('sale/products&services');
-
-
-
-
-   
-    }
-
-    public function delete_products_and_services($id=""){
-
-
-        $del=Ats_products_and_services::where('id',$id)->delete();
-        return redirect('sale/products&services');
-    }
-
-
-
-      
-    // public function edit($id){
-    //     //get post data by id
-    //     $post = Post::find($id);
-        
-    //     //load form view
-    //     return view('posts.edit', ['post' => $post]);
-    // }
-    
-    // public function update($id, Request $request){
-    //     //validate post data
-    //     $this->validate($request, [
-    //         'title' => 'required',
-    //         'content' => 'required'
-    //     ]);
-        
-    //     //get post data
-    //     $postData = $request->all();
-        
-    //     //update post data
-    //     Post::find($id)->update($postData);
-        
-    //     //store status message
-    //     Session::flash('success_msg', 'Post updated successfully!');
-
-    //     return redirect()->route('posts.index');
-    // }
 }
