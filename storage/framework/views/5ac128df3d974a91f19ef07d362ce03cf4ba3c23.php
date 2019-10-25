@@ -108,7 +108,7 @@
          Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
          <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#">Print</a>
-          <a class="dropdown-item" href="#">Send</a>
+         <a class="dropdown-item" href="<?php echo e(url('sale/invoice/email/'.$value['id'])); ?>">Send</a>
           <a class="dropdown-item" href="#">Send remainder</a>
           <a class="dropdown-item" href="#">Share Invoice Link</a>
           <a class="dropdown-item" href="#">Print Delivery Challan</a>

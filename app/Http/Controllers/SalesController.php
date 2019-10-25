@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Ats_sales_invoice;
 use App\Ats_products_and_services;
+use Mail;
 
 class SalesController extends Controller
 {
@@ -31,7 +32,7 @@ class SalesController extends Controller
     public function insert_invoice(Request $request)
     {
        
-        return $request;
+        //return $request;
         $invoice = new Ats_sales_invoice();
         $invoice->invoice_no=$request->invoice_no;
         $invoice->customer =$request->customer ; 
@@ -85,8 +86,10 @@ class SalesController extends Controller
         }
         $invoice->invoice_details =rtrim($tmp, ':');
 
-        return $tmp;
-  // $invoice->save();
+      
+
+      //  return $tmp;
+   $invoice->save();
      
          return redirect('sale/invoice');
     }
@@ -133,16 +136,29 @@ class SalesController extends Controller
         
         return redirect('sale/products&services');
 
-
-
-
-   
-    }
+ }
 
     public function delete_products_and_services($id=""){
 
 
         $del=Ats_products_and_services::where('id',$id)->delete();
         return redirect('sale/products&services');
+    }
+
+    public function invoice_mail($id="")
+    {
+        $toReturn=array();
+        $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
+    //  return $toReturn;
+        // Mail::send('emails.sales_invoice_mail',['toReturn'=>$toReturn[0]],function($message)use($toReturn){
+        //     $message->to($toReturn[0]['customer_email'])
+        //             ->subject('Tax Invoice');
+        //     $message->from('tax_invoice@arbaba.com','AR BABA');
+        // });
+        
+        return view('emails.sales_invoice_mail')->with('toReturn',$toReturn);
+        
+       
+        //return view('emails.sales_invoice_mail')->with('toReturn',$toReturn);
     }
 }
