@@ -90,7 +90,7 @@
 <form action="{{url('expenses/add-edit')}}" method="POST" enctype="multipart/form-data" id="form-expenses">
     @csrf
     <!---------------------------------------modal start-------------------------------------------->                   
-    <div class="modal expense" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal expense fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -268,7 +268,7 @@
         
     
     <!-- Modal -->
-        <div class="modal" id="payee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+        <div class="modal fade" id="payee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
             <div class="modal-dialog" style="margin-top: 16em;">
                 <div class="modal-content" style="padding: 18px;">
                     <h4 style="color: #000;">New Name</h4><div style="width:100%; padding: 0.5px;background: #6f6f6f;"></div>
@@ -307,7 +307,7 @@
 
 
 <!-- view model start -->
-<div class="modal expenses-details-model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+<div class="modal expenses-details-model fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -510,7 +510,7 @@ function viewEditExpenses(purpose, id){
                 resetExpensesForms(); // reseting forms
                 $("#expenses_payee_id").val(data.payee_id);
                 $("#expenses_payment_account").val(data.payment_account);
-                $("input[name='expenses_payment_date']").val(data.payment_date);
+                $("input[name='expenses_payment_date']").datepicker('setDate', data.payment_date);
                 $("#expenses_payment_method").val(data.payment_method);
                 $("#expenses_ref_no").val(data.ref_no);
                 $("#expenses_memo").val(data.memo);

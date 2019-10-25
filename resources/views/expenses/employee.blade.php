@@ -37,35 +37,32 @@
                             <div class="col-lg-12">
                                 <div class="card card-border card-primary">
                                     <div class="card-header"> 
-                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" data-target=".employee" style="float:right;">Add an Employee</button>
+                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addExpenses();" data-toggle="modal" data-target=".employee" style="float:right;">Add an Employee</button>
                                     </div> 
                                     <div class="card-body"> 
-                                            <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                    <thead>
-                                                      <tr>
-                                                        <th>NAME</th>
-                                                       
-                                                        <th>PHONE NO.</th>
-                                                        <th>EMAIL ADDRESS</th>
-                                                        <th>ACTION</th>
-                                                      </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                            @foreach ($toReturn as $value)
-                                                            <tr>
-                                                                <td>{{$value['first_name']}}</td>
-                                                                <td>{{$value['phone_no']}}</td>
-
-                                                                <td>{{$value['email_id']}}</td>
-                                                               
-                                                                
-                                                                <td><i class='far fa-edit'></i> &nbsp; <i class="fas fa-eye"></i> &nbsp; <a href="{{url('customer/delete/'.$value['id'])}}"><i class="fas fa-trash"></i></a></td>
-                                                            </tr>
-                                                       
-                                                    </tbody>
-                                                    @endforeach
-
-                                                </table>
+                                        <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                <th>#</th>
+                                                <th>NAME</th>
+                                                <th>PHONE NO.</th>
+                                                <th>EMAIL ADDRESS</th>
+                                                <th>ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $sl_no=1; ?>
+                                                @foreach ($toReturn as $value)
+                                                    <tr>
+                                                        <td>{{$sl_no++}}</td>
+                                                        <td>{{$value['first_name']}}</td>
+                                                        <td>{{$value['phone_no']}}</td>
+                                                        <td>{{$value['email_id']}}</td>
+                                                        <td><a href="javascript:void();" onclick="viewEditEmployee('view', {{$value['id']}});"><i class="fas fa-eye"></i></a> &nbsp; <a href="javascript:void();" onclick="viewEditEmployee('edit', {{$value['id']}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; <a href="{{url('employee/delete/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div><!--card body--> 
                                 </div><!--card border-->
                             </div><!--col-->
@@ -78,7 +75,7 @@
 
 
 <!---------------------------------------modal start-------------------------------------------->                   
-<div class="modal employee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+<div class="modal employee fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -88,7 +85,7 @@
                     </button>
                 </div>
                 <div class="modal-body" style="padding: 0px 0;">
-                    <form action={{url('employee/add')}} method="post">
+                    <form action={{url('employee/add-edit-employee')}} method="post" id="form-employee">
                     @csrf
                     <div class="row">
                         <div class="col-md-12"><br>
@@ -150,7 +147,7 @@
 
                             <div class="form-group add-detail">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="" placeholder="City/Town" name="city" id="address" required>
+                                        <input type="text" class="form-control" placeholder="City/Town" name="city" id="city" required>
                                     </div>
                                 </div><!--form-group-->  
 
@@ -218,20 +215,20 @@
                                 <div class="form-group emp-detail">
                                 <label for="">Hire Date</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" id="hire_date" name="hire_date" required>
+                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="hire_date" required>
                                            
                                         </div>
                                 </div><!--form-group-->
 
                             <div class="form-group emp-detail">
                                 <label for="">Release Date</label>
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="release_date" id="release_date" required>
+                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="release_date" required>
                                        
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
                                     <label for="">Date of Birth</label>
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3" name="dob" id="dob" required>
+                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3" name="dob" required>
                                             
                                 </div><!--form-group--> 
                             </div>
@@ -240,6 +237,10 @@
             <div style="width:100%; padding: 0.5px;background: #6f6f6f;"></div><br>
                 <div class="d-print-none">
                     <div class="pull-left">
+                        <!-- hidden inputs -->
+                        <input type="text" name="hidden_input_id" value="NA" hidden>
+                        <input type="text" name="hidden_input_purpose" value="add" hidden>
+                        <!-- hidden inputs -->
                         <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit">Save</a>
                     </div>
                     <div class="pull-right">
@@ -253,6 +254,87 @@
 <!-----------------------------------------------------------end of modal-------------------------------------------->
 
 
+
+<!-- view model start -->
+<div class="modal employee-details-model fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myLargeModalLabel">Employee Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0px 0;">
+                <table class="table table-bordered table-striped" border="0">
+                    <tbody>
+                        <tr style="border: none;">
+                            <td><p><strong>ID</strong></p></td>
+                            <td><p id="v_id"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Full Name</strong></p></td>
+                            <td><p id="v_full_name"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Display Name</strong></p></td>
+                            <td><p id="v_display_name"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Email ID</strong></p></td>
+                            <td><p id="v_email_id"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>phone_no</strong></p></td>
+                            <td><p id="v_phone_no"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Mobile No</strong></p></td>
+                            <td><p id="v_mobile_no"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Address</strong></p></td>
+                            <td><p id="v_address"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Billing Rate</strong></p></td>
+                            <td><p id="v_billing_rate"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Employee ID No</strong></p></td>
+                            <td><p id="v_employee_id_no"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Employee ID</strong></p></td>
+                            <td><p id="v_employee_id"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>gender</strong></p></td>
+                            <td><p id="v_gender"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Hire Date</strong></p></td>
+                            <td><p id="v_hire_date"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Release Date</strong></p></td>
+                            <td><p id="v_release_date"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>DOB</strong></p></td>
+                            <td><p id="v_dob"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Created At</strong></p></td>
+                            <td><p id="v_created_at"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end model -->
 
 
 <script>
@@ -333,47 +415,90 @@ if((err_pin_code==true) )
  });
     </script>
 
+
 <script>
-// calculate amounts
-$("#expenses-details-expand").delegate("input[name='expenses_details_amount[]']", "change", function (){
-    getExpensesDetailsValues();
-});
-$("#expenses-details-expand").delegate("select[name='expenses_details_tax[]']", "change", function (){
-    getExpensesDetailsValues();
-});
-function getExpensesDetailsValues(){
-    var amountValues = [];
-    var fields = document.getElementsByName("expenses_details_amount[]");
-    for(var i = 0; i < fields.length; i++) {
-        if(fields[i].value)
-        { amountValues.push(parseFloat(fields[i].value)); }
-    }
-
-    var amountTaxes = [];
-    var fields = document.getElementsByName("expenses_details_tax[]");
-    for(var i = 0; i < fields.length; i++) {
-        if(fields[i].value)
-        { amountTaxes.push(parseFloat(fields[i].value)); }
-    }
-
-    // changing html contents
-    if(amountValues.length==amountTaxes.length)
-    {
-        var subtotal=0.0;
-        var taxes=0;
-        var total=0;
-
-        for(var i=0;i<amountValues.length;i++)
-        {
-            subtotal+=amountValues[i];
-            taxes+=(amountValues[i]*amountTaxes[i])/100;
+// to get employee details from controller through ajax, purpose = edit & view
+//add expanses
+function addExpenses(){
+    resetExpensesForms();
+    $(".employee").modal('show');
+}
+// reset expensess form fields
+function resetExpensesForms(){
+    // reset all fileds in expenses form model
+    document.getElementById("form-employee").reset();
+    // assigning hidden inputs
+    $("input[name='hidden_input_id'").val("NA");
+    $("input[name='hidden_input_purpose'").val("add");
+}
+function viewEditEmployee(purpose, id){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+    $.ajax({
+        url: "{{url('employee/get-employee-details')}}" + "/" + id,
+        method: "GET",
+        contentType: 'application/json',
+        dataType: "json",
+        beforeSend: function(data){
+            $("#loader1").css("display","block");
+        },
+        error: function(xhr){
+            alert("error"+xhr.status+", "+xhr.statusText);
+        },
+        success: function (data) {
+            console.log(data);
+            if(purpose=="view")
+            { 
+                document.getElementById("v_id").innerHTML = data.id;
+                document.getElementById("v_full_name").innerHTML = data.title+" "+data.first_name+" "+data.last_name;
+                document.getElementById("v_display_name").innerHTML = data.display_name_as;
+                document.getElementById("v_email_id").innerHTML = data.email_id;
+                document.getElementById("v_phone_no").innerHTML = data.phone_no;
+                document.getElementById("v_mobile_no").innerHTML = data.mobile_no;
+                document.getElementById("v_address").innerHTML = data.address+"<br/>"+data.city+", "+data.state+" "+data.country+"<br/>Pin: "+data.pin_code;
+                document.getElementById("v_billing_rate").innerHTML = data.billing_rate;
+                document.getElementById("v_employee_id_no").innerHTML = data.employee_id_no;
+                document.getElementById("v_employee_id").innerHTML = data.employee_id;
+                document.getElementById("v_gender").innerHTML = data.gender;
+                document.getElementById("v_hire_date").innerHTML = data.hire_date;
+                document.getElementById("v_release_date").innerHTML = data.release_date;
+                document.getElementById("v_dob").innerHTML = data.dob;
+                document.getElementById("v_created_at").innerHTML = data.created_at;
+                $('.employee-details-model').modal('show');
+            }
+            else if(purpose=="edit"){
+                resetExpensesForms(); // reseting forms
+                $("#title").val(data.title);
+                $("#first_name").val(data.first_name);
+                $("#last_name").val(data.last_name);
+                $("#display_name_as").val(data.display_name_as);
+                $("#email_id").val(data.email_id);
+                $("#phone_no").val(data.phone_no);
+                $("#mobile_no").val(data.mobile_no);
+                $("#address").val(data.address);
+                $("#city").val(data.city);
+                $("#state").val(data.state);
+                $("#country").val(data.country);
+                $("#pin_code").val(data.pin_code);
+                $("#billing_rate").val(data.billing_rate);
+                $("#employee_id_no").val(data.employee_id_no);
+                $("#employee_id").val(data.employee_id);
+                $("#gender").val(data.gender);
+                $("input[name='hire_date']").datepicker('setDate', data.hire_date);
+                $("input[name='release_date']").datepicker('setDate', data.release_date);
+                $("input[name='dob']").datepicker('setDate', data.dob);
 
-        total+=parseFloat(subtotal)+parseFloat(taxes);
-        $("#subtotal-span").html(subtotal);
-        $("#taxes-span").html(taxes);
-        $("#total-span").html(total);
-        $("#total-span-h").html(total); // large text
-    }
+                // assigning hidden inputs
+                $("input[name='hidden_input_id'").val(data.id);
+                $("input[name='hidden_input_purpose'").val("edit");
+
+                $('.employee').modal('show'); // expense insert form model
+            }
+            $("#loader1").css("display","none");
+        }
+    });
 }
 </script>

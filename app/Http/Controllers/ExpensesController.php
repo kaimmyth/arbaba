@@ -95,7 +95,6 @@ class ExpensesController extends Controller
     // get expenses details in json format (i.e ajax)
     public function get_expenses_details($id=""){
         // $toReturn = Ats_expenses::select( 'id', 'payee_id')->where('id', $id)->get();
-        // return Response::json($toReturn);
         $data = Ats_expenses::where('id', $id)->first();
 
         // for expenses_details
@@ -215,13 +214,13 @@ class ExpensesController extends Controller
     {
 
         $toReturn=array();
-        $toReturn=Ats_expenses_employee::get()->toArray();
+        $toReturn=Ats_expenses_employee::orderBy('id', 'desc')->get()->toArray();
 
         $data['content'] ='Expenses.employee';
-	return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
 
-    public function insert_employee(Request $request)
+    public function add_edit_employee(Request $request)
     {
         
 
@@ -247,20 +246,40 @@ class ExpensesController extends Controller
         $employee->dob =date("Y-m-d",strtotime( $request->dob));
          
         //return $request;
-        $employee->save();
-        return redirect('employee#');
+        // finall query create, edit
+        if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($employee), true);
+            $update_query = Ats_expenses_employee::where('id', $request->hidden_input_id)->update($update_values_array);
+        }
+        else if($request->hidden_input_purpose=="add")
+        {
+            $employee->save();
+        }
+        
+        return redirect('employee');
         
 
     }
 
-    public function employee_del($id="")
-   {
-    //   return ("hi");
-      $del=Ats_expenses_employee::where('id',$id)->delete();
-      
-     return redirect('employee');
+    public function delete_employee($id="")
+    {
+        //   return ("hi");
+        $del=Ats_expenses_employee::where('id',$id)->delete();
+        return redirect('employee');
 
-   }
+    }
+
+    public function get_employee_details($id=""){
+        $data = Ats_expenses_employee::where('id', $id)->first();
+
+        // change date format for font end
+        $data->hire_date = date("d-m-Y", strtotime($data->hire_date));
+        $data->release_date = date("d-m-Y", strtotime($data->release_date));
+        $data->dob = date("d-m-Y", strtotime($data->dob));
+
+        return $data;
+    }
    
 }
   
