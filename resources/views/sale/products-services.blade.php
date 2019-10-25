@@ -60,7 +60,7 @@
                       <td>{{$items['sac_code']}}</td>
                       <td>{{$items['category']}}</td>
                       <td>{{$items['description']}}</td>
-                      <td>p{{$items['cost']}}</td>
+                      <td>{{$items['cost']}}</td>
                        
                       <td style="color: #0077C5; font-weight: 600; cursor: pointer;">Edit <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
 
