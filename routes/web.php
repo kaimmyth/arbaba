@@ -100,7 +100,9 @@ Route::get('supplier',function(){
 Route::get('customer','ExpensesController@view_customer');
 
 Route::get('employee','ExpensesController@view_employee');
-Route::post('employee/add','ExpensesController@insert_employee');
+Route::post('employee/add-edit-employee','ExpensesController@add_edit_employee');
+Route::get('employee/delete/{id}','ExpensesController@delete_employee');
+Route::get('employee/get-employee-details/{id}','ExpensesController@get_employee_details');
 
 	
 
