@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Ats_sales_invoice;
 use App\Ats_products_and_services;
+use App\Ats_sales_customers;
 use Mail;
 
 class SalesController extends Controller
@@ -93,12 +94,62 @@ class SalesController extends Controller
      
          return redirect('sale/invoice');
     }
+
+    public function add_customers(Request $request)
+    {
+        $product = new Ats_sales_customers();
+        $product->title=$request->title;
+        $product->first_name=$request->first_name;
+        $product->last_name=$request->last_name;
+        $product->email_id=$request->email_id;
+        $product->company=$request->company;
+        $product->phone_no=$request->phone_no;
+        $product->mobile_no=$request->mobile_no;
+        $product->fax=$request->fax;
+        $product->display_name_as =$request->display_name_as;
+        $product->other=$request->other;
+        $product->website=$request->website;
+        $product->gst_reg_type =$request->gst_reg_type;
+        $product->gst_in=$request->gst_in;
+        // $product->enter_parent_customer=$request->enter_parent_customer;
+        $product->bill_with_partner=$request->bill_with_partner;
+        $product->billing_address=$request->billing_address;
+        $product->city_town=$request->city_town;
+        $product->state=$request->state;
+        $product->pin_code=$request->pin_code;
+        $product->country=$request->country;
+        $product->shipping_address=$request->shipping_address;
+        $product->city_town_shipping=$request->city_town_shipping;
+        $product->state_shipping=$request->state_shipping;
+        $product->pin_code_shipping=$request->pin_code_shipping;
+        $product->country_shipping=$request->country_shipping;
+        $product->notes=$request->notes;
+        $product->tax_reg_no=$request->tax_reg_no;
+        $product->cst_reg_no=$request->cst_reg_no;
+        $product->pan_no=$request->pan_no;
+        $product->preferred_payment_method=$request->preferred_payment_method;
+        $product->preferred_delivery_method=$request->preferred_delivery_method;
+        $product->terms=$request->terms;
+        $product->opening_balance=$request->opening_balance;
+        $product->as_of=$request->as_of;
+        $product->attachment="NA";
+        
+
+        $product->save();
+
+         // return $product;
+        
+        return redirect('sale/customers');
+    }
    
 
     public function view_customers()
     {
+        $toReturn=array();
+        $toReturn=Ats_sales_customers::get()->toArray();
+
         $data['content'] ='sale.customer';
-		return view('layouts.content',compact('data'));
+        return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
     }
 
     public function view_products_and_services()
