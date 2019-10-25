@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2019 at 09:32 AM
+-- Generation Time: Oct 25, 2019 at 06:45 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -2561,10 +2561,10 @@ INSERT INTO `ats_country` (`id`, `org_id`, `country_code`, `coutry_phone_code`, 
 
 CREATE TABLE `ats_expenses` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `payee_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payment_account` int(11) NOT NULL,
+  `payee_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_account` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `payment_date` date NOT NULL,
-  `payment_method` int(11) NOT NULL,
+  `payment_method` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ref_no` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `memo` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `attachment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2578,13 +2578,8 @@ CREATE TABLE `ats_expenses` (
 --
 
 INSERT INTO `ats_expenses` (`id`, `payee_id`, `payment_account`, `payment_date`, `payment_method`, `ref_no`, `memo`, `attachment`, `expenses_details`, `created_at`, `updated_at`) VALUES
-(1, 'Sachin', 1, '2019-10-20', 2, '12120', 'dfrbdfbdfb', 'logo.png', '1, PC, 1500, 2', '2019-10-20 11:07:37', '2019-10-20 11:07:37'),
-(2, 'Sachin', 1, '2019-10-20', 2, '12120', 'dfrbdfbdfb', 'logo.png', '1, PC, 1500, 2', '2019-10-20 11:20:29', '2019-10-20 11:20:29'),
-(3, 'Sachin', 1, '2019-10-20', 2, '12120', 'Memo', 'NA', '2, PC, 1500, 2', '2019-10-20 11:21:19', '2019-10-20 11:21:19'),
-(4, 'Sachin', 1, '2019-10-20', 2, '12120', 'Memo', '', '2, PC, 1500, 2', '2019-10-20 11:21:33', '2019-10-20 11:21:33'),
-(5, 'Abhinav', 2, '2019-10-20', 2, '12120', 'My Memo', 'logo.png', '2, PC, 2000, 10', '2019-10-22 07:07:12', '2019-10-22 07:07:12'),
-(6, 'Abhinav', 2, '2019-10-20', 2, '12120', 'My Memo', 'logo.png', '2, PC, 2000, 10', '2019-10-22 07:09:13', '2019-10-22 07:09:13'),
-(7, 'Abhinav', 2, '2019-10-20', 2, '12120', 'My Memo', 'logo.png', '2, PC, 2000, 10', '2019-10-22 07:10:38', '2019-10-22 07:10:38');
+(19, 'Sachin', 'Balance-2', '2019-10-24', 'Cheque', '12120', 'My Memo', 'logo.png', 'Advertisement,newspaper,25000,0:Office Supplies,A4 pages,1200,10:Bank Deposit,deposited in bank,1000000,18', '2019-10-23 09:20:51', '2019-10-23 09:20:51'),
+(20, 'akhil', 'Balance-3', '2019-10-24', 'Cheque', '2510', 'memo', 'work-2.PNG', 'Office Supplies,A4 pages,1200,10:Bank Deposit,A4 pages,1200,18', '2019-10-24 04:48:00', '2019-10-24 04:48:00');
 
 -- --------------------------------------------------------
 
@@ -2646,6 +2641,45 @@ INSERT INTO `ats_expenses_customer` (`id`, `title`, `first_name`, `email_id`, `m
 (7, 'dada', 'Tulsi', 'sumit.m@itscient.com', '(234) 444-4444', '(142) 222-2222', 'Patel', 'KUMAR', 'IT - SCIENT LLC', 'gfhgf', 'gfdgf', 'dadaTulsi', 'gfhgfh', 'Enter parent customer', 'Bill with Parents', 'dfbfdb', 'bdfbfd', 'bfdbfdbfdb', 4323423, 'bdfbdfbd', 'dfbdfbd', 'dfbdbd', 'dfbfdbfd', 2352352, 'dfbfdbfd', 'dfbfdbdf', 'sgfg', 'sgsfdgs', 'sgsgsfg', 'Cash', 'Print Later', 'Net 15', 45353, '2019-10-17', 'else called', '2019-10-22 05:50:23.000000', '2019-10-22 05:50:23.000000'),
 (8, 'adaf', 'Tulsi', 'sumit.m@itscient.com', '(444) 444-4444', '(444) 444-4444', 'jhsdgdsgfdghjg', 'hgfsgf', 'hjggjh', 'jhgggjhgfgsjhg', 'fghgghjgfgg', 'adafTulsi', 'gdghfghgghjg', 'Enter parent customer', 'Bill with Parents', 'ufgdse', 'uhgdfjhgs', 'rjhdsfg', 123456, 'dfhgrdsfg', 'rfgfg', 'rfgfgfg', 'hgdfhgdg', 123456, 'hdfgjhdsf', 'jhgdfhjgfvdghfd', 'hgdrhgh', 'hjgdfg', 'jhfdgfd', 'credit card', 'Print Later', 'Net 15', 123456, '2019-10-30', 'If called', '2019-10-22 05:54:56.000000', '2019-10-22 05:54:56.000000'),
 (9, 'adaf', 'Tulsi', 'sumit.m@itscient.com', '(444) 444-4444', '(444) 444-4444', 'jhsdgdsgfdghjg', 'hgfsgf', 'hjggjh', 'jhgggjhgfgsjhg', 'fghgghjgfgg', 'adafTulsi', 'gdghfghgghjg', 'Enter parent customer', 'Bill with Parents', 'ufgdse', 'uhgdfjhgs', 'rjhdsfg', 123456, 'dfhgrdsfg', 'rfgfg', 'rfgfgfg', 'hgdfhgdg', 123456, 'hdfgjhdsf', 'jhgdfhjgfvdghfd', 'hgdrhgh', 'hjgdfg', 'jhfdgfd', 'credit card', 'Print Later', 'Net 15', 123456, '2019-10-30', 'New DOC Document.doc', '2019-10-22 05:55:40.000000', '2019-10-22 05:55:40.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ats_expenses_employee`
+--
+
+CREATE TABLE `ats_expenses_employee` (
+  `id` int(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `display_name_as` varchar(50) NOT NULL,
+  `email_id` varchar(50) NOT NULL,
+  `phone_no` varchar(50) NOT NULL,
+  `mobile_no` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `pin_code` int(50) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `billing_rate` varchar(50) NOT NULL,
+  `employee_id_no` varchar(50) NOT NULL,
+  `employee_id` varchar(50) NOT NULL,
+  `gender` varchar(50) NOT NULL,
+  `hire_date` date NOT NULL,
+  `release_date` date NOT NULL,
+  `dob` date NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ats_expenses_employee`
+--
+
+INSERT INTO `ats_expenses_employee` (`id`, `title`, `first_name`, `last_name`, `display_name_as`, `email_id`, `phone_no`, `mobile_no`, `address`, `city`, `state`, `pin_code`, `country`, `billing_rate`, `employee_id_no`, `employee_id`, `gender`, `hire_date`, `release_date`, `dob`, `created_at`, `updated_at`) VALUES
+(1, 'hgfh', 'gfgd', 'gdfgfd', 'hgfhgfgd', 'sumit.m@itscient.com', '(656) 456-5465', '(546) 456-4564', 'ghfg', 'fgff', 'fgf', 5433, 'India', 'hgnhgn', 'jhgjhg', 'sdff', 'Female', '2019-10-30', '2019-10-19', '2019-10-09', '2019-10-22 16:20:47.000000', '2019-10-22 16:20:47.000000'),
+(3, 'Mr', 'Sachin', 'Pramanik', 'MrSachin', 'sumit.m@itscient.com', '(111) 111-1111', '(111) 111-1111', 'My Addresss', 'Jamshedpur', 'Wabash', 12412, 'dsgsdgs', '455', 'sdgwegw', 'rger', 'Male', '2019-10-08', '2019-10-14', '2019-10-16', '2019-10-24 17:14:47.000000', '2019-10-24 17:14:47.000000');
 
 -- --------------------------------------------------------
 
@@ -2713,6 +2747,13 @@ CREATE TABLE `ats_org` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `ats_org`
+--
+
+INSERT INTO `ats_org` (`id`, `org_id`, `users_id`, `parent_id`, `org_code`, `org_name`, `contact_no`, `contact_person`, `email`, `address`, `website`, `city_id`, `state_id`, `country_id`, `zipcode`, `photo`, `org_type`, `pf_no`, `esic_no`, `tax_no`, `policy_no`, `gratuity_no`, `start_date`, `end_date`, `is_deleted`, `deleted_by`, `deleted_date`, `login_status`, `status`, `ip_address`, `created_by`, `modified_by`, `modified_date`, `created_at`, `deleted_at`, `updated_at`) VALUES
+(1, NULL, 6, NULL, 'ITS2132', 'ITSCIENT', '463643634634', NULL, 'saraswati@gmail.com', 'fvsdfgsdg', 'dfgdfg.vcb', 117, 11, 1, 123456, '1571807643.png', 1, 23535235235, 5325235235, 4662, 32523523523, 46262, NULL, NULL, 0, NULL, NULL, 1, 1, '::1', NULL, NULL, '2019-10-23 05:14:03', '2019-10-23 05:14:03', NULL, '2019-10-23 05:14:03');
+
 -- --------------------------------------------------------
 
 --
@@ -2724,6 +2765,42 @@ CREATE TABLE `ats_password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ats_products_and_services`
+--
+
+CREATE TABLE `ats_products_and_services` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sku` varchar(50) NOT NULL,
+  `hsn_code` varchar(50) NOT NULL,
+  `sac_code` varchar(50) NOT NULL,
+  `unit` varchar(50) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `sale_price` varchar(50) NOT NULL,
+  `income_acount` varchar(50) NOT NULL,
+  `inclusive_tax` varchar(50) NOT NULL,
+  `tax` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `purchasing_information` text NOT NULL,
+  `cost` varchar(50) NOT NULL,
+  `expense_account` varchar(50) NOT NULL,
+  `purchase_tax` varchar(50) NOT NULL,
+  `reverse_change` varchar(50) NOT NULL,
+  `preferred_supplier` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ats_products_and_services`
+--
+
+INSERT INTO `ats_products_and_services` (`id`, `name`, `sku`, `hsn_code`, `sac_code`, `unit`, `category`, `sale_price`, `income_acount`, `inclusive_tax`, `tax`, `description`, `purchasing_information`, `cost`, `expense_account`, `purchase_tax`, `reverse_change`, `preferred_supplier`, `created_at`, `updated_at`) VALUES
+(6, 'Abhinav', 'zdgd', 'fhgb', 'gfhb', 'qefde', 'hfybjn', 'bfhynyj', 'fgjnfgn', 'on', '28.0% GST', 'wtfgedfgewg', 'sadfvwdgdg', 'dsgv', 'Rent Expense', '28.0% GST', 'thfyjn', '-Select-', '2019-10-24 05:13:08', '2019-10-24 05:13:08');
 
 -- --------------------------------------------------------
 
@@ -2751,8 +2828,40 @@ INSERT INTO `ats_record_payment` (`id`, `purpose`, `period`, `payment_date`, `pa
 (6, 'Cash on hand', 'Upcoming filling', '2019-10-19', '4164', 'fthfdtghr', '2019-10-19 13:07:37', '2019-10-19 13:07:37'),
 (7, 'Add New +', 'Upcoming filling', '2019-10-31', '35000', 'To send', '2019-10-20 05:12:24', '2019-10-20 05:12:24'),
 (8, 'Cash on hand', 'Upcoming filling', '2019-10-02', '128000', 'XYZ', '2019-10-20 05:12:43', '2019-10-20 05:12:43'),
-(9, 'Add New +', 'Upcoming filling', '2019-10-10', '154856', 'dgbfgdnhbdnh', '2019-10-20 05:12:54', '2019-10-20 05:12:54'),
-(10, 'Cash on hand', 'Upcoming filling', '2019-10-23', '231', 'dfbfd', '2019-10-20 06:17:50', '2019-10-20 06:17:50');
+(9, 'Add New +', 'Upcoming filling', '2019-10-10', '154856', 'dgbfgdnhbdnh', '2019-10-20 05:12:54', '2019-10-20 05:12:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ats_sales_invoice`
+--
+
+CREATE TABLE `ats_sales_invoice` (
+  `id` int(50) NOT NULL,
+  `invoice_no` int(50) NOT NULL,
+  `customer` varchar(50) NOT NULL,
+  `customer_email` varchar(50) NOT NULL,
+  `billing_address` varchar(50) NOT NULL,
+  `terms` varchar(50) NOT NULL,
+  `invoice_date` date NOT NULL,
+  `due_date` date NOT NULL,
+  `place_of_supply` varchar(50) NOT NULL,
+  `msg_on_invoice` varchar(50) NOT NULL,
+  `msg_on_statement` varchar(50) NOT NULL,
+  `attachment` varchar(50) NOT NULL,
+  `invoice_details` varchar(100) NOT NULL,
+  `created_at` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  `updated_at` timestamp(6) NOT NULL DEFAULT current_timestamp(6)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ats_sales_invoice`
+--
+
+INSERT INTO `ats_sales_invoice` (`id`, `invoice_no`, `customer`, `customer_email`, `billing_address`, `terms`, `invoice_date`, `due_date`, `place_of_supply`, `msg_on_invoice`, `msg_on_statement`, `attachment`, `invoice_details`, `created_at`, `updated_at`) VALUES
+(1, 1001, 'Add New +', 'hfgh@df.cvb', 'yuygu', 'Net 15', '2019-11-08', '2019-11-08', 'Chandigarh', 'gyug', 'ugygy', 'New DOC Document.doc', '', '2019-10-23 06:50:54.000000', '2019-10-23 06:50:54.000000'),
+(2, 1001, 'Add New +', 'hfgh@df.cvb', 'dsdsa', 'Net 15', '2019-11-07', '2019-11-09', 'Chandigarh', 'sada', 'dsad', 'New DOC Document.doc', '', '2019-10-23 06:52:13.000000', '2019-10-23 06:52:13.000000'),
+(3, 1001, 'Add New +', 'hfgh@df.cvb', 'hfhfd', 'Net 30', '2019-10-31', '2019-11-08', 'Delhi', 'gdgd', 'gdg', 'New DOC Document.doc', 'hours,gddf,gfdg,9,787,5634564,10', '2019-10-23 11:27:42.000000', '2019-10-23 11:27:42.000000');
 
 -- --------------------------------------------------------
 
@@ -2904,7 +3013,8 @@ CREATE TABLE `ats_users` (
 --
 
 INSERT INTO `ats_users` (`id`, `users_role`, `users_type`, `parent_id`, `emp_id`, `username`, `name`, `password`, `email`, `phone`, `address`, `email_verified_at`, `remember_token`, `token_expire`, `status`, `is_deleted`, `deleted_by`, `deleted_date`, `ip_address`, `modified_date`, `created_at`, `updated_at`, `created_date`, `last_login`) VALUES
-(1, 1, 0, 0, 0, 'admin', 'Amit Rajput', '$2a$08$TnLUue010iZQcUVL.b0bPeCaFvVqa221s0MmNopcnzeIg4q4jjxQa', 'amitrajput270@gmail.com', 7409969352, 'Noida 63', '0000-00-00 00:00:00', 'B6W01WtujQ9SXjoCMBpjd4CMSFEg6Yjnr8ZcEN2zGUphw8SoKjbzQoBZQKze', '0000-00-00 00:00:00', 0, 0, 0, '0000-00-00 00:00:00', '', '2019-09-27 05:39:49', '2019-06-28 09:27:00', '2019-06-28 09:27:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 1, 0, 0, 0, 'admin', 'Amit Rajput', '$2a$08$TnLUue010iZQcUVL.b0bPeCaFvVqa221s0MmNopcnzeIg4q4jjxQa', 'amitrajput270@gmail.com', 7409969352, 'Noida 63', '0000-00-00 00:00:00', 'B6W01WtujQ9SXjoCMBpjd4CMSFEg6Yjnr8ZcEN2zGUphw8SoKjbzQoBZQKze', '0000-00-00 00:00:00', 0, 0, 0, '0000-00-00 00:00:00', '', '2019-09-27 05:39:49', '2019-06-28 09:27:00', '2019-06-28 09:27:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 2, NULL, NULL, NULL, 'sachin', 'ITSCIENT', '$2y$10$J3WOOhSrpx2unpPYKzGF6uCEjJvHGFrD9oE1WElkmZbaEBtTHuTym', 'saraswati@gmail.com', NULL, 'fvsdfgsdg', NULL, NULL, NULL, NULL, 0, NULL, NULL, '::1', '2019-10-23 05:13:45', '2019-10-23 05:13:45', '2019-10-23 05:13:45', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -2941,6 +3051,12 @@ ALTER TABLE `ats_expenses_customer`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ats_expenses_employee`
+--
+ALTER TABLE `ats_expenses_employee`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ats_migrations`
 --
 ALTER TABLE `ats_migrations`
@@ -2959,9 +3075,21 @@ ALTER TABLE `ats_password_resets`
   ADD KEY `its_password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `ats_products_and_services`
+--
+ALTER TABLE `ats_products_and_services`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ats_record_payment`
 --
 ALTER TABLE `ats_record_payment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ats_sales_invoice`
+--
+ALTER TABLE `ats_sales_invoice`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3008,13 +3136,19 @@ ALTER TABLE `ats_countries`
 -- AUTO_INCREMENT for table `ats_expenses`
 --
 ALTER TABLE `ats_expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `ats_expenses_customer`
 --
 ALTER TABLE `ats_expenses_customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `ats_expenses_employee`
+--
+ALTER TABLE `ats_expenses_employee`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ats_migrations`
@@ -3026,13 +3160,25 @@ ALTER TABLE `ats_migrations`
 -- AUTO_INCREMENT for table `ats_org`
 --
 ALTER TABLE `ats_org`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `ats_products_and_services`
+--
+ALTER TABLE `ats_products_and_services`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `ats_record_payment`
 --
 ALTER TABLE `ats_record_payment`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `ats_sales_invoice`
+--
+ALTER TABLE `ats_sales_invoice`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ats_state`
@@ -3050,7 +3196,7 @@ ALTER TABLE `ats_taxes_return`
 -- AUTO_INCREMENT for table `ats_users`
 --
 ALTER TABLE `ats_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
