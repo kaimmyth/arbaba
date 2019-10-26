@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ats_expenses_customer;
 use App\Ats_expenses;
-use App\Ats_expenses_employee;
 
 class ExpensesController extends Controller
 {
+    // expenses home
     public function index()
     {
         $toReturn=array();
@@ -141,6 +141,7 @@ class ExpensesController extends Controller
         return $data;
     }
 
+    /* expenses/ customers -> it is deprecated/ has to remove
     public function view_customer()
     {
         $data['content'] ='Expenses.customer';
@@ -208,78 +209,27 @@ class ExpensesController extends Controller
         
     //  return $request;
         return redirect('customer');
+    }*/
+
+    // expenses/ suppliers home
+    public function suppliers_index(){
+        $data['content'] ='expenses.suppliers';
+	    return view('layouts.content',compact('data'));
     }
 
-    public function view_employee()
-    {
+    // suppliers insert
+    public function add_edit_suppliers(Request $request){
 
-        $toReturn=array();
-        $toReturn=Ats_expenses_employee::orderBy('id', 'desc')->get()->toArray();
-
-        $data['content'] ='Expenses.employee';
-	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
 
-    public function add_edit_employee(Request $request)
-    {
+    // suppliers delete
+    public function delete_suppliers($id=""){
+
+    }
+
+    // get suplliers details
+    public function get_suppliers_details($id=""){
         
-
-        $employee = new Ats_expenses_employee();
-        $employee->title = $request->title;
-        $employee->first_name = $request->first_name;
-        $employee->last_name = $request->last_name;
-        $employee->display_name_as = $request->title.$request->first_name;
-        $employee->email_id = $request->email_id;
-        $employee->phone_no = $request->phone_no;
-        $employee->mobile_no = $request->mobile_no;
-        $employee->address = $request->address;
-        $employee->city = $request->city;
-        $employee->state = $request->state;
-        $employee->pin_code = $request->pin_code;
-        $employee->country = $request->country;
-        $employee->billing_rate = $request->billing_rate;
-        $employee->employee_id_no = $request->employee_id_no;
-        $employee->employee_id = $request->employee_id;
-        $employee->gender = $request->gender;
-        $employee->hire_date = date("Y-m-d",strtotime($request->hire_date));
-        $employee->release_date = date("Y-m-d",strtotime($request->release_date));
-        $employee->dob =date("Y-m-d",strtotime( $request->dob));
-         
-        //return $request;
-        // finall query create, edit
-        if($request->hidden_input_purpose=="edit")
-        {
-            $update_values_array = json_decode(json_encode($employee), true);
-            $update_query = Ats_expenses_employee::where('id', $request->hidden_input_id)->update($update_values_array);
-        }
-        else if($request->hidden_input_purpose=="add")
-        {
-            $employee->save();
-        }
-        
-        return redirect('employee');
-        
-
     }
-
-    public function delete_employee($id="")
-    {
-        //   return ("hi");
-        $del=Ats_expenses_employee::where('id',$id)->delete();
-        return redirect('employee');
-
-    }
-
-    public function get_employee_details($id=""){
-        $data = Ats_expenses_employee::where('id', $id)->first();
-
-        // change date format for font end
-        $data->hire_date = date("d-m-Y", strtotime($data->hire_date));
-        $data->release_date = date("d-m-Y", strtotime($data->release_date));
-        $data->dob = date("d-m-Y", strtotime($data->dob));
-
-        return $data;
-    }
-   
 }
   

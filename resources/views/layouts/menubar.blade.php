@@ -80,11 +80,12 @@
     <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Expenses</span><span class="pull-right"><i class="md md-add"></i></span></a>
     <ul class="list-unstyled">
       <li><a href="{{url('expenses')}}">Expenses</a></li>
-      <li><a href="{{url('customer')}}">Customer</a></li>
-      <li><a href="{{url('employee')}}">Employee</a></li>
+      <li><a href="{{url('expenses/suppliers')}}">Suppliers</a></li>
     </ul>
   </li>
-
+  <li>
+    <a href="{{url('employee')}}" class="waves-effect"><i class="fa fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Employee</span></a>
+  </li>
   <li class="has_sub">
    <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Accountant</span><span class="pull-right"><i class="md md-add"></i></span></a>
    <ul class="list-unstyled">

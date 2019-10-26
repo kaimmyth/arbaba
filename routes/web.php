@@ -84,30 +84,30 @@ Route::prefix('company')->group(function () {
 	Route::any('edit/{id}', 'CompanyController@edit');
 });
 
-//Expenses
+// Expenses
 Route::get('expenses','ExpensesController@index');
 Route::post('expenses/add-edit','ExpensesController@add_edit_expenses');
 Route::get('expenses/delete/{id}','ExpensesController@delete_expenses');
 Route::get('expenses/get-expanses-details/{id}','ExpensesController@get_expenses_details');
-Route::post('customer/add','ExpensesController@expenses_customer_insert');
+Route::post('customer/add','ExpensesController@expenses_customer_insert'); // has to remove, it is deprecated
+Route::get('customer','ExpensesController@view_customer'); // has to remove, it is deprecated
 
-Route::get('supplier',function(){
-	$data['content'] ='Expenses.supplier';
-	return view('layouts.content',compact('data'));
-});
+Route::get('expenses/suppliers','ExpensesController@suppliers_index');
+Route::post('expenses/suppliers/add-edit','ExpensesController@add_edit_suppliers');
+Route::get('expenses/suppliers/delete/{id}','ExpensesController@delete_suppliers');
+Route::get('expenses/suppliers/get-suppliers-details/{id}','ExpensesController@get_suppliers_details');
 
 
-Route::get('customer','ExpensesController@view_customer');
-
-Route::get('employee','ExpensesController@view_employee');
-Route::post('employee/add-edit-employee','ExpensesController@add_edit_employee');
-Route::get('employee/delete/{id}','ExpensesController@delete_employee');
-Route::get('employee/get-employee-details/{id}','ExpensesController@get_employee_details');
+/* employee */
+Route::get('employee','EmployeesController@index');
+Route::post('employee/add-edit-employee','EmployeesController@add_edit_employee');
+Route::get('employee/delete/{id}','EmployeesController@delete_employee');
+Route::get('employee/get-employee-details/{id}','EmployeesController@get_employee_details');
 
 	
 
 
-//Taxes
+/* taxes */
 Route::post('tax/return/add','TaxesController@insert_tax_return');
 Route::get('tax/return/calender','TaxesController@calender');
 Route::post('tax/payment-history/add','TaxesController@record_cst_payment');
