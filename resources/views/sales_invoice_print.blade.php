@@ -67,7 +67,6 @@
 
                                 $subtotal+=$to_show[5];
                                 $taxes+=(($to_show[6]*$to_show[5])/100);
-                              
                                 $total+=$subtotal+$taxes;
                             ?></tr><?php
                         }
@@ -79,11 +78,10 @@
                 <br>
                 <div style="margin-left:90%;">
                     <?php  echo "<b>Subtotal:</b>".$subtotal."<br/><b>Taxes:</b>".$taxes."<br/><b>Total:</b>".$total; ?>
-                </div>
 
-               
               @endforeach
-        
+              <br><br><br><br>
+        <input name="" id="" class="btn btn-primary"  type="button" onclick="window.print();" value="Print">
     
     </body>
 </html>

@@ -16,7 +16,7 @@
                <div style="margin-top:30px;"><h4><b>Billing Address</b></h4><br>{{$value['billing_address']}}</div>
                 <br>
                 
-                <h1 style="color:cornflowerblue">Tax Invoice</h1>
+                <h1 style="color:cornflowerblue">Delivery Challan</h1>
                 <br>
                 
                 <div class="row">
@@ -39,12 +39,10 @@
                 <table class="table table-striped">
                     <tr>
                     <th>Product/Service</th>
-                    <th>HSN/SAC</th>
+                   
                     <th>Description</th>
                     <th>Qty</th>
-                    <th>Rate</th>
-                    <th>Amount</th>
-                    <th>Tax</th>
+                   
                     </tr>
                     <?php
                     $subtotal=0;
@@ -58,32 +56,23 @@
                             ?><tr><?php
                                 $to_show = explode(",",$tmp[$i]);
                                 echo "<td>".$to_show[0]."</td>"; // product service
-                                echo "<td>".$to_show[1]."</td>"; // hsc sac
+                               
                                 echo "<td>".$to_show[2]."</td>"; // description
                                 echo "<td>".$to_show[3]."</td>"; // qty
-                                echo "<td>".$to_show[4]."</td>"; // rate
-                                echo "<td>".$to_show[5]."</td>"; // amount
-                                echo "<td>".$to_show[6]."% IGST</td>"; // tax
+                              
 
                                 $subtotal+=$to_show[5];
-                                $taxes+=(($to_show[6]*$to_show[5])/100);
-                              
+                                $taxes+=$to_show[6];
                                 $total+=$subtotal+$taxes;
                             ?></tr><?php
                         }
                     }
                     ?>
                 </table>
-                <br>
-                <br>
-                <br>
-                <div style="margin-left:90%;">
-                    <?php  echo "<b>Subtotal:</b>".$subtotal."<br/><b>Taxes:</b>".$taxes."<br/><b>Total:</b>".$total; ?>
-                </div>
-
                
+              
+
               @endforeach
-        
-    
+              
     </body>
 </html>

@@ -55,6 +55,9 @@ Route::get('sale/all-sale','SalesController@view_all_sales');
 Route::get('sale/invoice','SalesController@view_invoices');
 Route::post('sale/invoice/add','SalesController@insert_invoice');
 Route::get('sale/invoice/email/{id}','SalesController@invoice_mail');
+Route::get('sale/invoice/print/{id}','SalesController@print_invoice');
+Route::get('sale/invoice/delivery_challan/{id}','SalesController@invoice_delivery_challan');
+Route::get('sale/invoice/delete/{id}','SalesController@invoice_delete');
 
 Route::get('sale/customers','SalesController@view_customers');
 Route::post('sale/customers/add','SalesController@add_customers');

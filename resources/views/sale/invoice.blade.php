@@ -101,20 +101,33 @@
         <td>{{$value['customer']}}</td>
         <td>{{$value['invoice_date']}}</td>
         <td>{{$value['due_date']}}</td>
-        <td></td>
-        <td></td>
+        <?php
+        $total=0;
+        if($value["invoice_details"]!="")
+        {
+            $tmp = $value["invoice_details"];
+            $tmp = explode(":",$tmp);
+            for($i=0;$i<count($tmp);$i++){
+                $to_show = explode(",",$tmp[$i]);
+                $taxes=(($to_show[5]*$to_show[6])/100);
+                $total+=$to_show[5]+$taxes;
+            }
+        }
+        ?>
+        <td>{{$total}}</td>
+        <td>{{$total}}</td>
         <td><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Due in 30 days (Undelivered)</td>
         <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
          Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
          <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Print</a>
+         <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
          <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
-          <a class="dropdown-item" href="#">Send remainder</a>
-          <a class="dropdown-item" href="#">Share Invoice Link</a>
-          <a class="dropdown-item" href="#">Print Delivery Challan</a>
+         <a class="dropdown-item" href="javascript:void();" data-toggle="modal" data-target="#reminderModal">Send remainder</a>
+          <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a>
+         <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
           <a class="dropdown-item" href="#">View/Edit</a>
           <a class="dropdown-item" href="#">Copy</a>
-          <a class="dropdown-item" href="#">Delete</a>
+         <a class="dropdown-item" href="{{url('sale/invoice/delete/'.$value['id'])}}">Delete</a>
         </div>
       </td> 
       </tr>
@@ -372,6 +385,65 @@
 <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
+{{-- --------------------------------------------------Model for Sending Reminder-------------------------------------------------------- --}}
+<div class="modal fade" id="reminderModal" tabindex="-1" role="dialog" aria-labelledby="reminderModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Send reminder email for&nbsp;</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">To:</label>
+            <input type="text" class="form-control" id="recipient-name" value="">
+          </div>
+          <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Subject:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- ----------------------------------------Model for Share Invoice Link----------------------------------------------}}
+<div class="modal fade" id="shareinvoiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Send your customer link to their invoice</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group">
+                           
+                            <input type="text" class="form-control" id="">
+                          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
 <script>
 

@@ -200,7 +200,7 @@ class SalesController extends Controller
     {
         $toReturn=array();
         $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
-    //  return $toReturn;
+   
         // Mail::send('emails.sales_invoice_mail',['toReturn'=>$toReturn[0]],function($message)use($toReturn){
         //     $message->to($toReturn[0]['customer_email'])
         //             ->subject('Tax Invoice');
@@ -210,6 +210,35 @@ class SalesController extends Controller
         return view('emails.sales_invoice_mail')->with('toReturn',$toReturn);
         
        
-        //return view('emails.sales_invoice_mail')->with('toReturn',$toReturn);
+        
+    }
+    public function print_invoice($id="")
+    {
+        $toReturn=array();
+        $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
+               
+        return view('sales_invoice_print')->with('toReturn',$toReturn);
+    }
+    public function invoice_delivery_challan($id="")
+    {
+        $toReturn=array();
+        $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
+            
+        return view('sales_invoice_delivery_challan')->with('toReturn',$toReturn);
+    }
+
+    public function invoice_delete($id="")
+    {
+        $toReturn=array();
+        $toReturn=Ats_sales_invoice::where('id',$id)->delete();
+            
+        return redirect('sale/invoice')->with('toReturn',$toReturn);
+    }
+
+    public function invoice_remainder_email($id="")
+    {
+        $toReturn=array();
+        $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
+        return $toReturn; 
     }
 }
