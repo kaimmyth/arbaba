@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Ats_taxes_return;
-use App\Ats_record_payment;
+use App\taxes_return;
+use App\record_payment;
 use DB;
 
 class TaxesController extends Controller
@@ -14,7 +14,7 @@ class TaxesController extends Controller
     //taxes:tax return
    public function insert_tax_return(Request $request)
    {
-        $taxes_return = new Ats_taxes_return(); 
+        $taxes_return = new taxes_return(); 
         $taxes_return->tax_name  =  $request->tax_name;
         $taxes_return->tax_description  =  $request->tax_description;
         $taxes_return->tax_agency =  $request->tax_agency;
@@ -55,7 +55,7 @@ class TaxesController extends Controller
    // taxes: record cst payment
    function record_cst_payment(Request $Request)
    {
-      $record_payment=new Ats_record_payment();
+      $record_payment=new record_payment();
       $record_payment->purpose=$Request->rec_cst_pay_purpose;
       $record_payment->period=$Request->rec_cst_pay_cst_period;
       $record_payment->payment_date=date("Y-m-d", strtotime($Request->rec_cst_pay_payment_date));
@@ -85,7 +85,7 @@ class TaxesController extends Controller
    function tax_payment_history_view()
    {
       $toReturn=array();
-      $toReturn=Ats_record_payment::get()->toArray();
+      $toReturn=record_payment::get()->toArray();
       
        $data['content'] = 'taxes.payment_history';
 	 	return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
@@ -95,7 +95,7 @@ class TaxesController extends Controller
    function payment_history_del($id="")
    {
      
-      $del=Ats_record_payment::where('id',$id)->delete();
+      $del=record_payment::where('id',$id)->delete();
       
       return redirect('tax/payment-history');
 

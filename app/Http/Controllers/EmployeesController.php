@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Ats_employees;
+use App\employees;
 
 class EmployeesController extends Controller
 {
@@ -12,7 +12,7 @@ class EmployeesController extends Controller
     public function index()
     {
         $toReturn=array();
-        $toReturn=Ats_employees::orderBy('id', 'desc')->get()->toArray();
+        $toReturn=employees::orderBy('id', 'desc')->get()->toArray();
         $data['content'] ='Expenses.employee';
 	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
@@ -20,7 +20,7 @@ class EmployeesController extends Controller
     // employee add/edit employee
     public function add_edit_employee(Request $request)
     {
-        $employee = new Ats_employees();
+        $employee = new employees();
         $employee->title = $request->title;
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
@@ -45,7 +45,7 @@ class EmployeesController extends Controller
         if($request->hidden_input_purpose=="edit")
         {
             $update_values_array = json_decode(json_encode($employee), true);
-            $update_query = Ats_employees::where('id', $request->hidden_input_id)->update($update_values_array);
+            $update_query = employees::where('id', $request->hidden_input_id)->update($update_values_array);
         }
         else if($request->hidden_input_purpose=="add")
         {
@@ -57,13 +57,13 @@ class EmployeesController extends Controller
     // delete employee
     public function delete_employee($id="")
     {
-        $del=Ats_employees::where('id',$id)->delete();
+        $del=employees::where('id',$id)->delete();
         return redirect('employee');
     }
 
     // get employee details -> for -> view and edit -> in jquery ajax
     public function get_employee_details($id=""){
-        $data = Ats_employees::where('id', $id)->first();
+        $data = employees::where('id', $id)->first();
         $data->hire_date = date("d-m-Y", strtotime($data->hire_date));
         $data->release_date = date("d-m-Y", strtotime($data->release_date));
         $data->dob = date("d-m-Y", strtotime($data->dob));

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2019 at 06:45 AM
+-- Generation Time: Oct 26, 2019 at 09:55 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_cities`
+-- Table structure for table `ar_cities`
 --
 
-CREATE TABLE `ats_cities` (
+CREATE TABLE `ar_cities` (
   `id` int(10) UNSIGNED NOT NULL,
   `org_id` int(11) DEFAULT NULL,
   `country_id` int(11) NOT NULL,
@@ -43,10 +43,10 @@ CREATE TABLE `ats_cities` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ats_cities`
+-- Dumping data for table `ar_cities`
 --
 
-INSERT INTO `ats_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `state`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
+INSERT INTO `ar_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `state`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
 (1, NULL, 0, 0, 'Mumbai', 'Maharashtra', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (2, NULL, 0, 0, 'Delhi', 'Delhi', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (3, NULL, 0, 0, 'Bengaluru', 'Karnataka', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
@@ -552,7 +552,7 @@ INSERT INTO `ats_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `sta
 (503, NULL, 0, 0, 'Sangamner', 'Maharashtra', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (504, NULL, 0, 0, 'Nimbahera', 'Rajasthan', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (505, NULL, 0, 0, 'Siddipet', 'Telangana', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00');
-INSERT INTO `ats_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `state`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
+INSERT INTO `ar_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `state`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
 (506, NULL, 0, 0, 'Suri', 'West Bengal', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (507, NULL, 0, 0, 'Diphu', 'Assam', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (508, NULL, 0, 0, 'Jhargram', 'West Bengal', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
@@ -1054,7 +1054,7 @@ INSERT INTO `ats_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `sta
 (1004, NULL, 0, 0, 'Mukhed', 'Maharashtra', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (1005, NULL, 0, 0, 'Manachanallur', 'Tamil Nadu', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (1006, NULL, 0, 0, 'Rehli', 'Madhya Pradesh', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00');
-INSERT INTO `ats_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `state`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
+INSERT INTO `ar_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `state`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
 (1007, NULL, 0, 0, 'Sanchore', 'Rajasthan', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (1008, NULL, 0, 0, 'Rajura', 'Maharashtra', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
 (1009, NULL, 0, 0, 'Piro', 'Bihar', 0, 0, '', '2019-08-27 07:37:26', '0000-00-00 00:00:00'),
@@ -1268,10 +1268,10 @@ INSERT INTO `ats_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `sta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_city`
+-- Table structure for table `ar_city`
 --
 
-CREATE TABLE `ats_city` (
+CREATE TABLE `ar_city` (
   `id` int(11) NOT NULL,
   `org_id` int(11) DEFAULT NULL,
   `city_name` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
@@ -1281,10 +1281,10 @@ CREATE TABLE `ats_city` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ats_city`
+-- Dumping data for table `ar_city`
 --
 
-INSERT INTO `ats_city` (`id`, `org_id`, `city_name`, `state_id`, `state_name`, `is_deleted`) VALUES
+INSERT INTO `ar_city` (`id`, `org_id`, `city_name`, `state_id`, `state_name`, `is_deleted`) VALUES
 (1, NULL, 'Mumbai', 0, 'Maharashtra', 0),
 (2, NULL, 'Delhi', 0, 'Delhi', 0),
 (3, NULL, 'Bengaluru', 0, 'Karnataka', 0),
@@ -2439,7 +2439,7 @@ INSERT INTO `ats_city` (`id`, `org_id`, `city_name`, `state_id`, `state_name`, `
 (1152, NULL, 'Lalganj', 0, 'Uttar Pradesh', 0),
 (1153, NULL, 'Narkhed', 0, 'Maharashtra', 0),
 (1154, NULL, 'Mathabhanga', 0, 'West Bengal', 0);
-INSERT INTO `ats_city` (`id`, `org_id`, `city_name`, `state_id`, `state_name`, `is_deleted`) VALUES
+INSERT INTO `ar_city` (`id`, `org_id`, `city_name`, `state_id`, `state_name`, `is_deleted`) VALUES
 (1155, NULL, 'Shendurjana', 0, 'Maharashtra', 0),
 (1156, NULL, 'Peravurani', 0, 'Tamil Nadu', 0),
 (1157, NULL, 'Mariani', 0, 'Assam', 0),
@@ -2505,10 +2505,10 @@ INSERT INTO `ats_city` (`id`, `org_id`, `city_name`, `state_id`, `state_name`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_countries`
+-- Table structure for table `ar_countries`
 --
 
-CREATE TABLE `ats_countries` (
+CREATE TABLE `ar_countries` (
   `id` int(11) NOT NULL,
   `org_id` int(11) DEFAULT NULL,
   `code` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
@@ -2522,19 +2522,19 @@ CREATE TABLE `ats_countries` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ats_countries`
+-- Dumping data for table `ar_countries`
 --
 
-INSERT INTO `ats_countries` (`id`, `org_id`, `code`, `country`, `phone_code`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
+INSERT INTO `ar_countries` (`id`, `org_id`, `code`, `country`, `phone_code`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
 (1, NULL, '1', 'India', 91, 1, 0, '', '2019-07-01 04:33:14', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_country`
+-- Table structure for table `ar_country`
 --
 
-CREATE TABLE `ats_country` (
+CREATE TABLE `ar_country` (
   `id` int(11) DEFAULT NULL,
   `org_id` int(11) DEFAULT NULL,
   `country_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -2544,10 +2544,10 @@ CREATE TABLE `ats_country` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ats_country`
+-- Dumping data for table `ar_country`
 --
 
-INSERT INTO `ats_country` (`id`, `org_id`, `country_code`, `coutry_phone_code`, `country_name`, `status`) VALUES
+INSERT INTO `ar_country` (`id`, `org_id`, `country_code`, `coutry_phone_code`, `country_name`, `status`) VALUES
 (NULL, NULL, 'IN', 91, 'India', 1),
 (NULL, NULL, 'IN', 91, 'India', 1),
 (NULL, NULL, 'IN', 91, 'India', 1),
@@ -2556,10 +2556,49 @@ INSERT INTO `ats_country` (`id`, `org_id`, `country_code`, `coutry_phone_code`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_expenses`
+-- Table structure for table `ar_employees`
 --
 
-CREATE TABLE `ats_expenses` (
+CREATE TABLE `ar_employees` (
+  `id` int(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `display_name_as` varchar(50) NOT NULL,
+  `email_id` varchar(50) NOT NULL,
+  `phone_no` varchar(50) NOT NULL,
+  `mobile_no` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `pin_code` int(50) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `billing_rate` varchar(50) NOT NULL,
+  `employee_id_no` varchar(50) NOT NULL,
+  `employee_id` varchar(50) NOT NULL,
+  `gender` varchar(50) NOT NULL,
+  `hire_date` date NOT NULL,
+  `release_date` date NOT NULL,
+  `dob` date NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ar_employees`
+--
+
+INSERT INTO `ar_employees` (`id`, `title`, `first_name`, `last_name`, `display_name_as`, `email_id`, `phone_no`, `mobile_no`, `address`, `city`, `state`, `pin_code`, `country`, `billing_rate`, `employee_id_no`, `employee_id`, `gender`, `hire_date`, `release_date`, `dob`, `created_at`, `updated_at`) VALUES
+(4, 'Mr', 'Sachin', 'Pramanik', 'MrSachin', 'sumit.m@itscient.com', '(111) 111-1111', '(111) 111-1111', 'My Addresss', 'Jamshedpur', 'Wabash', 12412, 'dsgsdgs', '455', 'sdgwegw', 'rger', 'Male', '2019-10-08', '2019-10-14', '2019-10-16', '2019-10-25 15:57:09.000000', '2019-10-25 15:57:09.000000'),
+(5, 'ANew Details updates', 'Update Yo', 'New Details updated', 'ANew Details updatesUpdate Yo', 'sumit.m@itscient.comupdated', '(999) 999-9999', '(999) 999-9999', 'My Address Updated', 'jamshedpur updated', 'jharlhand updates', 1111111, 'India Updated', '1111', 'sdgwegw updated', 'updated', 'Female', '2019-10-15', '2019-10-15', '2019-10-15', '2019-10-25 17:43:06.000000', '2019-10-26 10:55:15.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ar_expenses`
+--
+
+CREATE TABLE `ar_expenses` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `payee_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `payment_account` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2574,20 +2613,20 @@ CREATE TABLE `ats_expenses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `ats_expenses`
+-- Dumping data for table `ar_expenses`
 --
 
-INSERT INTO `ats_expenses` (`id`, `payee_id`, `payment_account`, `payment_date`, `payment_method`, `ref_no`, `memo`, `attachment`, `expenses_details`, `created_at`, `updated_at`) VALUES
+INSERT INTO `ar_expenses` (`id`, `payee_id`, `payment_account`, `payment_date`, `payment_method`, `ref_no`, `memo`, `attachment`, `expenses_details`, `created_at`, `updated_at`) VALUES
 (19, 'Sachin', 'Balance-2', '2019-10-24', 'Cheque', '12120', 'My Memo', 'logo.png', 'Advertisement,newspaper,25000,0:Office Supplies,A4 pages,1200,10:Bank Deposit,deposited in bank,1000000,18', '2019-10-23 09:20:51', '2019-10-23 09:20:51'),
 (20, 'akhil', 'Balance-3', '2019-10-24', 'Cheque', '2510', 'memo', 'work-2.PNG', 'Office Supplies,A4 pages,1200,10:Bank Deposit,A4 pages,1200,18', '2019-10-24 04:48:00', '2019-10-24 04:48:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_expenses_customer`
+-- Table structure for table `ar_expenses_customer`
 --
 
-CREATE TABLE `ats_expenses_customer` (
+CREATE TABLE `ar_expenses_customer` (
   `id` int(11) NOT NULL,
   `title` varchar(20) NOT NULL,
   `first_name` varchar(20) NOT NULL,
@@ -2628,10 +2667,10 @@ CREATE TABLE `ats_expenses_customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ats_expenses_customer`
+-- Dumping data for table `ar_expenses_customer`
 --
 
-INSERT INTO `ats_expenses_customer` (`id`, `title`, `first_name`, `email_id`, `mobile_no`, `phone_no`, `last_name`, `middle_name`, `company_name`, `other`, `company`, `display_name_as`, `website`, `parent_customer`, `bill_with`, `billing_address`, `billing_city`, `billing_state`, `billing_pin`, `billing_country`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_pin`, `shipping_country`, `notes`, `tax_reg_no`, `cst_reg_no`, `pan_no`, `payment_method`, `delivery_method`, `terms`, `opening_balance`, `as_of`, `attachment`, `created_at`, `updated_at`) VALUES
+INSERT INTO `ar_expenses_customer` (`id`, `title`, `first_name`, `email_id`, `mobile_no`, `phone_no`, `last_name`, `middle_name`, `company_name`, `other`, `company`, `display_name_as`, `website`, `parent_customer`, `bill_with`, `billing_address`, `billing_city`, `billing_state`, `billing_pin`, `billing_country`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_pin`, `shipping_country`, `notes`, `tax_reg_no`, `cst_reg_no`, `pan_no`, `payment_method`, `delivery_method`, `terms`, `opening_balance`, `as_of`, `attachment`, `created_at`, `updated_at`) VALUES
 (1, 'dada', 'Tulsi', 'sumit.m@itscient.com', '(111) 111-1111', '(111) 111-1111', 'Dutta', 'KUMAR', 'ITSCIENT-LLC', 'fhnvchmjhmk', 'ghgfghf', 'dadaTulsi', 'gfhgfh', 'Enter parent customer', 'Bill with Parents', 'rxvrtbhctyn', 'ucnynyj', 'ncytmnyitmitu', 1111111, 'gfbcfg', 'gjfnhvn jhgm', 'hg nghjnf', 'gnvjgmjg', 11111111, 'gbhvn hgmhm', 'tgchytjhx45', 'hcytvhytn', 'ychry', 'ytncytehtycn', 'Cheque', 'Print Later', 'Net 15', 59151, '2019-10-24', '', '2019-10-22 05:30:19.000000', '2019-10-22 05:30:19.000000'),
 (2, 'adaf', 'Nisha', 'rakesh.s@gmail.com', '(625) 353-5132', '(312) 321-3232', 'Dutta', 'ghfhfgh', 'IT - SCIENT LLC', 'gfhgf', 'gfdgf', 'adafNisha', 'gfhgfh', 'Enter parent customer', 'Bill with Customer', 'lklkljkll', 'jljljl', 'jlljljl', 56556353, 'ojolkl', 'jljlj', 'jljljj', 'ljjjlj', 63563535, 'jnkjk', 'jk', 'kjkj', 'kjkkj', 'kjkjkjk', 'Cheque', 'Send Later', 'Nwt 30', 23512, '2019-10-16', '', '2019-10-22 05:35:31.000000', '2019-10-22 05:35:31.000000'),
 (3, 'dara', 'Nisha', 'rakesh.s@gmail.com', '(435) 435-4354', '(435) 435-4354', 'Kumari', 'rgre', 'IT SCIENT', 'ggdfg', 'It SCienhtmn', 'daraNisha', 'rgregre', 'Enter parent customer', 'Bill with Customer', 'fdgdf', 'fdgfdgfd', 'gfd', 435354, 'gdfgfd545', 'fdgfg', 'gfgfdg', 'gfdgfdg', 4354543, 'fgdgfdg', 'dfd', 'fd', 'f', 'refre', 'credit card', 'Send Later', 'Nwt 30', 435435, '2019-10-29', '', '2019-10-22 05:39:03.000000', '2019-10-22 05:39:03.000000'),
@@ -2645,59 +2684,20 @@ INSERT INTO `ats_expenses_customer` (`id`, `title`, `first_name`, `email_id`, `m
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_expenses_employee`
+-- Table structure for table `ar_migrations`
 --
 
-CREATE TABLE `ats_expenses_employee` (
-  `id` int(50) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `display_name_as` varchar(50) NOT NULL,
-  `email_id` varchar(50) NOT NULL,
-  `phone_no` varchar(50) NOT NULL,
-  `mobile_no` varchar(50) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `state` varchar(50) NOT NULL,
-  `pin_code` int(50) NOT NULL,
-  `country` varchar(50) NOT NULL,
-  `billing_rate` varchar(50) NOT NULL,
-  `employee_id_no` varchar(50) NOT NULL,
-  `employee_id` varchar(50) NOT NULL,
-  `gender` varchar(50) NOT NULL,
-  `hire_date` date NOT NULL,
-  `release_date` date NOT NULL,
-  `dob` date NOT NULL,
-  `created_at` datetime(6) NOT NULL,
-  `updated_at` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ats_expenses_employee`
---
-
-INSERT INTO `ats_expenses_employee` (`id`, `title`, `first_name`, `last_name`, `display_name_as`, `email_id`, `phone_no`, `mobile_no`, `address`, `city`, `state`, `pin_code`, `country`, `billing_rate`, `employee_id_no`, `employee_id`, `gender`, `hire_date`, `release_date`, `dob`, `created_at`, `updated_at`) VALUES
-(1, 'hgfh', 'gfgd', 'gdfgfd', 'hgfhgfgd', 'sumit.m@itscient.com', '(656) 456-5465', '(546) 456-4564', 'ghfg', 'fgff', 'fgf', 5433, 'India', 'hgnhgn', 'jhgjhg', 'sdff', 'Female', '2019-10-30', '2019-10-19', '2019-10-09', '2019-10-22 16:20:47.000000', '2019-10-22 16:20:47.000000'),
-(3, 'Mr', 'Sachin', 'Pramanik', 'MrSachin', 'sumit.m@itscient.com', '(111) 111-1111', '(111) 111-1111', 'My Addresss', 'Jamshedpur', 'Wabash', 12412, 'dsgsdgs', '455', 'sdgwegw', 'rger', 'Male', '2019-10-08', '2019-10-14', '2019-10-16', '2019-10-24 17:14:47.000000', '2019-10-24 17:14:47.000000');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ats_migrations`
---
-
-CREATE TABLE `ats_migrations` (
+CREATE TABLE `ar_migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `ats_migrations`
+-- Dumping data for table `ar_migrations`
 --
 
-INSERT INTO `ats_migrations` (`id`, `migration`, `batch`) VALUES
+INSERT INTO `ar_migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_100000_create_password_resets_table', 1),
 (2, '2019_10_19_162823_its_record_payment', 2),
 (3, '2019_10_20_143621_create_expenses_table', 3);
@@ -2705,10 +2705,10 @@ INSERT INTO `ats_migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_org`
+-- Table structure for table `ar_org`
 --
 
-CREATE TABLE `ats_org` (
+CREATE TABLE `ar_org` (
   `id` int(11) NOT NULL,
   `org_id` int(11) DEFAULT NULL,
   `users_id` int(11) DEFAULT NULL,
@@ -2748,19 +2748,19 @@ CREATE TABLE `ats_org` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ats_org`
+-- Dumping data for table `ar_org`
 --
 
-INSERT INTO `ats_org` (`id`, `org_id`, `users_id`, `parent_id`, `org_code`, `org_name`, `contact_no`, `contact_person`, `email`, `address`, `website`, `city_id`, `state_id`, `country_id`, `zipcode`, `photo`, `org_type`, `pf_no`, `esic_no`, `tax_no`, `policy_no`, `gratuity_no`, `start_date`, `end_date`, `is_deleted`, `deleted_by`, `deleted_date`, `login_status`, `status`, `ip_address`, `created_by`, `modified_by`, `modified_date`, `created_at`, `deleted_at`, `updated_at`) VALUES
+INSERT INTO `ar_org` (`id`, `org_id`, `users_id`, `parent_id`, `org_code`, `org_name`, `contact_no`, `contact_person`, `email`, `address`, `website`, `city_id`, `state_id`, `country_id`, `zipcode`, `photo`, `org_type`, `pf_no`, `esic_no`, `tax_no`, `policy_no`, `gratuity_no`, `start_date`, `end_date`, `is_deleted`, `deleted_by`, `deleted_date`, `login_status`, `status`, `ip_address`, `created_by`, `modified_by`, `modified_date`, `created_at`, `deleted_at`, `updated_at`) VALUES
 (1, NULL, 6, NULL, 'ITS2132', 'ITSCIENT', '463643634634', NULL, 'saraswati@gmail.com', 'fvsdfgsdg', 'dfgdfg.vcb', 117, 11, 1, 123456, '1571807643.png', 1, 23535235235, 5325235235, 4662, 32523523523, 46262, NULL, NULL, 0, NULL, NULL, 1, 1, '::1', NULL, NULL, '2019-10-23 05:14:03', '2019-10-23 05:14:03', NULL, '2019-10-23 05:14:03');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_password_resets`
+-- Table structure for table `ar_password_resets`
 --
 
-CREATE TABLE `ats_password_resets` (
+CREATE TABLE `ar_password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
@@ -2769,10 +2769,10 @@ CREATE TABLE `ats_password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_products_and_services`
+-- Table structure for table `ar_products_and_services`
 --
 
-CREATE TABLE `ats_products_and_services` (
+CREATE TABLE `ar_products_and_services` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `sku` varchar(50) NOT NULL,
@@ -2796,19 +2796,19 @@ CREATE TABLE `ats_products_and_services` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ats_products_and_services`
+-- Dumping data for table `ar_products_and_services`
 --
 
-INSERT INTO `ats_products_and_services` (`id`, `name`, `sku`, `hsn_code`, `sac_code`, `unit`, `category`, `sale_price`, `income_acount`, `inclusive_tax`, `tax`, `description`, `purchasing_information`, `cost`, `expense_account`, `purchase_tax`, `reverse_change`, `preferred_supplier`, `created_at`, `updated_at`) VALUES
+INSERT INTO `ar_products_and_services` (`id`, `name`, `sku`, `hsn_code`, `sac_code`, `unit`, `category`, `sale_price`, `income_acount`, `inclusive_tax`, `tax`, `description`, `purchasing_information`, `cost`, `expense_account`, `purchase_tax`, `reverse_change`, `preferred_supplier`, `created_at`, `updated_at`) VALUES
 (6, 'Abhinav', 'zdgd', 'fhgb', 'gfhb', 'qefde', 'hfybjn', 'bfhynyj', 'fgjnfgn', 'on', '28.0% GST', 'wtfgedfgewg', 'sadfvwdgdg', 'dsgv', 'Rent Expense', '28.0% GST', 'thfyjn', '-Select-', '2019-10-24 05:13:08', '2019-10-24 05:13:08');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_record_payment`
+-- Table structure for table `ar_record_payment`
 --
 
-CREATE TABLE `ats_record_payment` (
+CREATE TABLE `ar_record_payment` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `purpose` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `period` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2820,10 +2820,10 @@ CREATE TABLE `ats_record_payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `ats_record_payment`
+-- Dumping data for table `ar_record_payment`
 --
 
-INSERT INTO `ats_record_payment` (`id`, `purpose`, `period`, `payment_date`, `payment_amount`, `pay_memo`, `created_at`, `updated_at`) VALUES
+INSERT INTO `ar_record_payment` (`id`, `purpose`, `period`, `payment_date`, `payment_amount`, `pay_memo`, `created_at`, `updated_at`) VALUES
 (5, 'Cash on hand', 'Upcoming filling', '2019-10-24', '15000', 'ABC', '2019-10-19 12:02:41', '2019-10-19 12:02:41'),
 (6, 'Cash on hand', 'Upcoming filling', '2019-10-19', '4164', 'fthfdtghr', '2019-10-19 13:07:37', '2019-10-19 13:07:37'),
 (7, 'Add New +', 'Upcoming filling', '2019-10-31', '35000', 'To send', '2019-10-20 05:12:24', '2019-10-20 05:12:24'),
@@ -2833,10 +2833,69 @@ INSERT INTO `ats_record_payment` (`id`, `purpose`, `period`, `payment_date`, `pa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_sales_invoice`
+-- Table structure for table `ar_sales_customers`
 --
 
-CREATE TABLE `ats_sales_invoice` (
+CREATE TABLE `ar_sales_customers` (
+  `id` int(11) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email_id` varchar(50) NOT NULL,
+  `company` varchar(50) NOT NULL,
+  `mobile_no` int(11) NOT NULL,
+  `phone_no` varchar(500) NOT NULL,
+  `fax` varchar(100) NOT NULL,
+  `display_name_as` varchar(50) NOT NULL,
+  `other` varchar(50) NOT NULL,
+  `website` varchar(50) NOT NULL,
+  `gst_reg_type` varchar(50) DEFAULT NULL,
+  `gst_in` varchar(50) NOT NULL,
+  `bill_with_partner` varchar(50) NOT NULL,
+  `billing_address` varchar(50) NOT NULL,
+  `city_town` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `pin_code` varchar(100) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `shipping_address` varchar(50) NOT NULL,
+  `city_town_shipping` text NOT NULL,
+  `state_shipping` text NOT NULL,
+  `pin_code_shipping` varchar(50) NOT NULL,
+  `country_shipping` varchar(50) NOT NULL,
+  `notes` varchar(50) NOT NULL,
+  `tax_reg_no` varchar(50) NOT NULL,
+  `cst_reg_no` varchar(50) NOT NULL,
+  `pan_no` varchar(50) NOT NULL,
+  `preferred_payment_method` varchar(50) NOT NULL,
+  `preferred_delivery_method` varchar(50) NOT NULL,
+  `terms` text NOT NULL,
+  `opening_balance` varchar(50) NOT NULL,
+  `as_of` varchar(50) NOT NULL,
+  `attachment` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_by` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ar_sales_customers`
+--
+
+INSERT INTO `ar_sales_customers` (`id`, `title`, `first_name`, `last_name`, `email_id`, `company`, `mobile_no`, `phone_no`, `fax`, `display_name_as`, `other`, `website`, `gst_reg_type`, `gst_in`, `bill_with_partner`, `billing_address`, `city_town`, `state`, `pin_code`, `country`, `shipping_address`, `city_town_shipping`, `state_shipping`, `pin_code_shipping`, `country_shipping`, `notes`, `tax_reg_no`, `cst_reg_no`, `pan_no`, `preferred_payment_method`, `preferred_delivery_method`, `terms`, `opening_balance`, `as_of`, `attachment`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+(1, 'rudyktd', 'rf7yf', 'fuy', 'cahahgmhgmg@GMAIL.COM', '1982', 45345353, '4535335453', '453543dfv', 'dsdgv', 'mn,j', 'jhbh', NULL, '35AABCS1429B1ZX', 'Bill With Customer', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'cvnfx', 'v bv', 'vxnvxb', 'vxv', 'Cash', 'Print Later', 'Add New +', '52202h', '22-10-2019', 'NA', '2019-10-25 09:08:34', '2019-10-25 09:08:34', '2019-10-25 09:08:34', '2019-10-25 09:08:34'),
+(2, 'rudyktd', 'rf7yf', 'fuy', 'cahahgmhgmg@GMAIL.COM', '1982', 45345353, '4535335453', '453543dfv', 'dsdgv', 'mn,j', 'jhbh', NULL, '35AABCS1429B1ZX', 'Bill With Customer', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'cvnfx', 'v bv', 'vxnvxb', 'vxv', 'Cash', 'Print Later', 'Add New +', '52202h', '22-10-2019', 'NA', '2019-10-25 09:10:01', '2019-10-25 09:10:01', '2019-10-25 09:10:01', '2019-10-25 09:10:01'),
+(3, 'svsd', 'Abhinav', 'roy', 'cahahgmhgmg@GMAIL.COM', '1982', 45345353, '4535335453', '453543dfv', 'dsdgv', 'sg', 'jhbh', NULL, '35AABCS1429B1ZX', 'Bill With Customer', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'xcc', '\\xb\\fxb', 'cbvb', 'cbnvb', 'Cheque', 'Send Later', 'Due on receipt', 'vxnvn', '16-10-2019', 'NA', '2019-10-25 09:10:41', '2019-10-25 09:10:41', '2019-10-25 09:10:41', '2019-10-25 09:10:41'),
+(4, 'erhgf', 'Abhinav', 'dsvsd', 'cahahgmhgmg@GMAIL.COM', '1982', 45345353, '4535335453', '453543dfv', 'dfgdf', 'dfgdfg', 'zxz€zx', 'GST unregistered', '35AABCS1429B1ZX', 'Bill With Customer', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'xvzvzxv', 'xcvcxv', 'cvxcv', 'xcvxcv', 'Cheque', 'Send Later', 'Net 15', '873573', '16-10-2019', 'NA', '2019-10-25 09:21:46', '2019-10-25 09:21:46', '2019-10-25 09:21:46', '2019-10-25 09:21:46'),
+(5, 'nik', 'Abhinav', 'roy', 'cahahgmhgmg@GMAIL.COM', '1982', 45345353, '4535335453', '453543dfv', 'Abhinav roy', 'VSSDV', 'zv cv', 'GST registered- Regular', '35AABCS1429B1ZX', 'Bill With Customer', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 'sddgsdg', 'United Arab Emirates', 'BCDSFC  SDBVDSFB', 'FBDBFD', 'FDBDFB', 'FBDFB', 'Cash', 'Print Later', 'Net 30', '873573', '23-10-2019', 'NA', '2019-10-25 12:30:59', '2019-10-25 12:30:59', '2019-10-25 12:30:59', '2019-10-25 12:30:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ar_sales_invoice`
+--
+
+CREATE TABLE `ar_sales_invoice` (
   `id` int(50) NOT NULL,
   `invoice_no` int(50) NOT NULL,
   `customer` varchar(50) NOT NULL,
@@ -2855,21 +2914,22 @@ CREATE TABLE `ats_sales_invoice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ats_sales_invoice`
+-- Dumping data for table `ar_sales_invoice`
 --
 
-INSERT INTO `ats_sales_invoice` (`id`, `invoice_no`, `customer`, `customer_email`, `billing_address`, `terms`, `invoice_date`, `due_date`, `place_of_supply`, `msg_on_invoice`, `msg_on_statement`, `attachment`, `invoice_details`, `created_at`, `updated_at`) VALUES
+INSERT INTO `ar_sales_invoice` (`id`, `invoice_no`, `customer`, `customer_email`, `billing_address`, `terms`, `invoice_date`, `due_date`, `place_of_supply`, `msg_on_invoice`, `msg_on_statement`, `attachment`, `invoice_details`, `created_at`, `updated_at`) VALUES
 (1, 1001, 'Add New +', 'hfgh@df.cvb', 'yuygu', 'Net 15', '2019-11-08', '2019-11-08', 'Chandigarh', 'gyug', 'ugygy', 'New DOC Document.doc', '', '2019-10-23 06:50:54.000000', '2019-10-23 06:50:54.000000'),
 (2, 1001, 'Add New +', 'hfgh@df.cvb', 'dsdsa', 'Net 15', '2019-11-07', '2019-11-09', 'Chandigarh', 'sada', 'dsad', 'New DOC Document.doc', '', '2019-10-23 06:52:13.000000', '2019-10-23 06:52:13.000000'),
-(3, 1001, 'Add New +', 'hfgh@df.cvb', 'hfhfd', 'Net 30', '2019-10-31', '2019-11-08', 'Delhi', 'gdgd', 'gdg', 'New DOC Document.doc', 'hours,gddf,gfdg,9,787,5634564,10', '2019-10-23 11:27:42.000000', '2019-10-23 11:27:42.000000');
+(3, 1001, 'Add New +', 'hfgh@df.cvb', 'hfhfd', 'Net 30', '2019-10-31', '2019-11-08', 'Delhi', 'gdgd', 'gdg', 'New DOC Document.doc', 'hours,gddf,gfdg,9,787,5634564,10', '2019-10-23 11:27:42.000000', '2019-10-23 11:27:42.000000'),
+(4, 3252352, 'Add New +', 'a@d.com', 'My Billing Address', 'Net 15', '2019-10-23', '2019-10-29', 'Arunachal Pradesh', 'My Invoice', 'My Statement', 'simon-migaj-Utvwp12891U-unsplash.jpg', 'hours,rfwefwef,wefwef,1,1000,1000,10:services,rfwefwef,wefwef,2,2000,4000,2', '2019-10-25 09:16:57.000000', '2019-10-25 09:16:57.000000');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_state`
+-- Table structure for table `ar_state`
 --
 
-CREATE TABLE `ats_state` (
+CREATE TABLE `ar_state` (
   `id` int(10) UNSIGNED NOT NULL,
   `org_id` int(11) DEFAULT NULL,
   `state` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -2881,10 +2941,10 @@ CREATE TABLE `ats_state` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ats_state`
+-- Dumping data for table `ar_state`
 --
 
-INSERT INTO `ats_state` (`id`, `org_id`, `state`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
+INSERT INTO `ar_state` (`id`, `org_id`, `state`, `status`, `is_deleted`, `ip_address`, `modified_date`, `created_date`) VALUES
 (1, NULL, 'Andhra Pradesh', 0, 0, '', '2019-08-27 07:25:22', '0000-00-00 00:00:00'),
 (2, NULL, 'Arunachal Pradesh', 0, 0, '', '2019-08-27 07:25:22', '0000-00-00 00:00:00'),
 (3, NULL, 'Assam', 0, 0, '', '2019-08-27 07:25:22', '0000-00-00 00:00:00'),
@@ -2925,10 +2985,10 @@ INSERT INTO `ats_state` (`id`, `org_id`, `state`, `status`, `is_deleted`, `ip_ad
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_taxes_return`
+-- Table structure for table `ar_taxes_return`
 --
 
-CREATE TABLE `ats_taxes_return` (
+CREATE TABLE `ar_taxes_return` (
   `ID` int(20) NOT NULL,
   `tax_name` varchar(20) NOT NULL,
   `tax_description` varchar(20) NOT NULL,
@@ -2958,10 +3018,10 @@ CREATE TABLE `ats_taxes_return` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ats_taxes_return`
+-- Dumping data for table `ar_taxes_return`
 --
 
-INSERT INTO `ats_taxes_return` (`ID`, `tax_name`, `tax_description`, `tax_agency`, `sales_rate`, `sales_account`, `sales_tax_amount`, `purchase_rate`, `purchase_account`, `purchase_tax_amount`, `group_name`, `group_description`, `tax_rate`, `applicable_on`, `custom_tax_name`, `custom_description`, `tax_agency_name`, `registration_number`, `tax_period`, `filling_frequency`, `reporting_method`, `tax_collected_on_sales`, `tax_collected_on_purchase`, `status`, `created_at`, `updated_at`) VALUES
+INSERT INTO `ar_taxes_return` (`ID`, `tax_name`, `tax_description`, `tax_agency`, `sales_rate`, `sales_account`, `sales_tax_amount`, `purchase_rate`, `purchase_account`, `purchase_tax_amount`, `group_name`, `group_description`, `tax_rate`, `applicable_on`, `custom_tax_name`, `custom_description`, `tax_agency_name`, `registration_number`, `tax_period`, `filling_frequency`, `reporting_method`, `tax_collected_on_sales`, `tax_collected_on_purchase`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'test', 'test', 'SERVICE TAX', '50', 'Liability', 'Output - SGST', '50', 'Expense', 'Output - IGST', 'test', 'test', 'Purchase CGST Exempt', 'Tax amount', 'test', 'test', 'test', '123445', 'April', 'Quarterly', 'Cash', '50', '50', '1', '2019-10-17 12:58:34', '2019-10-17 12:58:34'),
 (2, 'test', 'test', 'SERVICE TAX', '50', 'Liability', 'Output - SGST', '50', 'Expense', 'Output - IGST', 'test', 'test', 'Purchase CGST Exempt', 'Tax amount', 'test', 'test', 'test', '123445', 'April', 'Quarterly', 'Cash', '50', '50', '1', '2019-10-17 12:59:25', '2019-10-17 12:59:25'),
 (3, 'test', 'test', 'VAT', 'test', 'Liability', 'Output - IGST', 'test', 'Liability', 'Output - SGST', 'test', 'test', 'Purchase SGST 0.125%', 'Tax amount', 'test', 'test', 'test', 'test', 'February', 'Quarterly', 'Accural', 'test', 'test', '1', '2019-10-19 05:57:40', '2019-10-19 05:57:40'),
@@ -2978,10 +3038,10 @@ INSERT INTO `ats_taxes_return` (`ID`, `tax_name`, `tax_description`, `tax_agency
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ats_users`
+-- Table structure for table `ar_users`
 --
 
-CREATE TABLE `ats_users` (
+CREATE TABLE `ar_users` (
   `id` int(11) NOT NULL,
   `users_role` int(11) DEFAULT NULL,
   `users_type` int(11) DEFAULT NULL COMMENT '''1'' Employee',
@@ -3009,11 +3069,11 @@ CREATE TABLE `ats_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `ats_users`
+-- Dumping data for table `ar_users`
 --
 
-INSERT INTO `ats_users` (`id`, `users_role`, `users_type`, `parent_id`, `emp_id`, `username`, `name`, `password`, `email`, `phone`, `address`, `email_verified_at`, `remember_token`, `token_expire`, `status`, `is_deleted`, `deleted_by`, `deleted_date`, `ip_address`, `modified_date`, `created_at`, `updated_at`, `created_date`, `last_login`) VALUES
-(1, 1, 0, 0, 0, 'admin', 'Amit Rajput', '$2a$08$TnLUue010iZQcUVL.b0bPeCaFvVqa221s0MmNopcnzeIg4q4jjxQa', 'amitrajput270@gmail.com', 7409969352, 'Noida 63', '0000-00-00 00:00:00', 'B6W01WtujQ9SXjoCMBpjd4CMSFEg6Yjnr8ZcEN2zGUphw8SoKjbzQoBZQKze', '0000-00-00 00:00:00', 0, 0, 0, '0000-00-00 00:00:00', '', '2019-09-27 05:39:49', '2019-06-28 09:27:00', '2019-06-28 09:27:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+INSERT INTO `ar_users` (`id`, `users_role`, `users_type`, `parent_id`, `emp_id`, `username`, `name`, `password`, `email`, `phone`, `address`, `email_verified_at`, `remember_token`, `token_expire`, `status`, `is_deleted`, `deleted_by`, `deleted_date`, `ip_address`, `modified_date`, `created_at`, `updated_at`, `created_date`, `last_login`) VALUES
+(1, 1, 0, 0, 0, 'admin', 'Amit Rajput', '$2a$08$TnLUue010iZQcUVL.b0bPeCaFvVqa221s0MmNopcnzeIg4q4jjxQa', 'amitrajput270@gmail.com', 7409969352, 'Noida 63', '0000-00-00 00:00:00', 'UFb1SmIn08szI0ivzqjZI6VGTyaqNDrgutq5bBTAuUpU8ey8rJG84FkTYYqQ', '0000-00-00 00:00:00', 0, 0, 0, '0000-00-00 00:00:00', '', '2019-10-26 04:27:25', '2019-06-28 09:27:00', '2019-06-28 09:27:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (6, 2, NULL, NULL, NULL, 'sachin', 'ITSCIENT', '$2y$10$J3WOOhSrpx2unpPYKzGF6uCEjJvHGFrD9oE1WElkmZbaEBtTHuTym', 'saraswati@gmail.com', NULL, 'fvsdfgsdg', NULL, NULL, NULL, NULL, 0, NULL, NULL, '::1', '2019-10-23 05:13:45', '2019-10-23 05:13:45', '2019-10-23 05:13:45', NULL, NULL);
 
 --
@@ -3021,93 +3081,99 @@ INSERT INTO `ats_users` (`id`, `users_role`, `users_type`, `parent_id`, `emp_id`
 --
 
 --
--- Indexes for table `ats_cities`
+-- Indexes for table `ar_cities`
 --
-ALTER TABLE `ats_cities`
+ALTER TABLE `ar_cities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_city`
+-- Indexes for table `ar_city`
 --
-ALTER TABLE `ats_city`
+ALTER TABLE `ar_city`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_countries`
+-- Indexes for table `ar_countries`
 --
-ALTER TABLE `ats_countries`
+ALTER TABLE `ar_countries`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_expenses`
+-- Indexes for table `ar_employees`
 --
-ALTER TABLE `ats_expenses`
+ALTER TABLE `ar_employees`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_expenses_customer`
+-- Indexes for table `ar_expenses`
 --
-ALTER TABLE `ats_expenses_customer`
+ALTER TABLE `ar_expenses`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_expenses_employee`
+-- Indexes for table `ar_expenses_customer`
 --
-ALTER TABLE `ats_expenses_employee`
+ALTER TABLE `ar_expenses_customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_migrations`
+-- Indexes for table `ar_migrations`
 --
-ALTER TABLE `ats_migrations`
+ALTER TABLE `ar_migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_org`
+-- Indexes for table `ar_org`
 --
-ALTER TABLE `ats_org`
+ALTER TABLE `ar_org`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_password_resets`
+-- Indexes for table `ar_password_resets`
 --
-ALTER TABLE `ats_password_resets`
+ALTER TABLE `ar_password_resets`
   ADD KEY `its_password_resets_email_index` (`email`);
 
 --
--- Indexes for table `ats_products_and_services`
+-- Indexes for table `ar_products_and_services`
 --
-ALTER TABLE `ats_products_and_services`
+ALTER TABLE `ar_products_and_services`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_record_payment`
+-- Indexes for table `ar_record_payment`
 --
-ALTER TABLE `ats_record_payment`
+ALTER TABLE `ar_record_payment`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_sales_invoice`
+-- Indexes for table `ar_sales_customers`
 --
-ALTER TABLE `ats_sales_invoice`
+ALTER TABLE `ar_sales_customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_state`
+-- Indexes for table `ar_sales_invoice`
 --
-ALTER TABLE `ats_state`
+ALTER TABLE `ar_sales_invoice`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ats_taxes_return`
+-- Indexes for table `ar_state`
 --
-ALTER TABLE `ats_taxes_return`
+ALTER TABLE `ar_state`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ar_taxes_return`
+--
+ALTER TABLE `ar_taxes_return`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `ats_users`
+-- Indexes for table `ar_users`
 --
-ALTER TABLE `ats_users`
+ALTER TABLE `ar_users`
   ADD UNIQUE KEY `id` (`id`);
 
 --
@@ -3115,87 +3181,93 @@ ALTER TABLE `ats_users`
 --
 
 --
--- AUTO_INCREMENT for table `ats_cities`
+-- AUTO_INCREMENT for table `ar_cities`
 --
-ALTER TABLE `ats_cities`
+ALTER TABLE `ar_cities`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1216;
 
 --
--- AUTO_INCREMENT for table `ats_city`
+-- AUTO_INCREMENT for table `ar_city`
 --
-ALTER TABLE `ats_city`
+ALTER TABLE `ar_city`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1216;
 
 --
--- AUTO_INCREMENT for table `ats_countries`
+-- AUTO_INCREMENT for table `ar_countries`
 --
-ALTER TABLE `ats_countries`
+ALTER TABLE `ar_countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `ats_expenses`
+-- AUTO_INCREMENT for table `ar_employees`
 --
-ALTER TABLE `ats_expenses`
+ALTER TABLE `ar_employees`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `ar_expenses`
+--
+ALTER TABLE `ar_expenses`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `ats_expenses_customer`
+-- AUTO_INCREMENT for table `ar_expenses_customer`
 --
-ALTER TABLE `ats_expenses_customer`
+ALTER TABLE `ar_expenses_customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `ats_expenses_employee`
+-- AUTO_INCREMENT for table `ar_migrations`
 --
-ALTER TABLE `ats_expenses_employee`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `ats_migrations`
---
-ALTER TABLE `ats_migrations`
+ALTER TABLE `ar_migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `ats_org`
+-- AUTO_INCREMENT for table `ar_org`
 --
-ALTER TABLE `ats_org`
+ALTER TABLE `ar_org`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `ats_products_and_services`
+-- AUTO_INCREMENT for table `ar_products_and_services`
 --
-ALTER TABLE `ats_products_and_services`
+ALTER TABLE `ar_products_and_services`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `ats_record_payment`
+-- AUTO_INCREMENT for table `ar_record_payment`
 --
-ALTER TABLE `ats_record_payment`
+ALTER TABLE `ar_record_payment`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `ats_sales_invoice`
+-- AUTO_INCREMENT for table `ar_sales_customers`
 --
-ALTER TABLE `ats_sales_invoice`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `ar_sales_customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `ats_state`
+-- AUTO_INCREMENT for table `ar_sales_invoice`
 --
-ALTER TABLE `ats_state`
+ALTER TABLE `ar_sales_invoice`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ar_state`
+--
+ALTER TABLE `ar_state`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `ats_taxes_return`
+-- AUTO_INCREMENT for table `ar_taxes_return`
 --
-ALTER TABLE `ats_taxes_return`
+ALTER TABLE `ar_taxes_return`
   MODIFY `ID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `ats_users`
+-- AUTO_INCREMENT for table `ar_users`
 --
-ALTER TABLE `ats_users`
+ALTER TABLE `ar_users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 

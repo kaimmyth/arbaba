@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Ats_sales_invoice;
-use App\Ats_products_and_services;
-use App\Ats_sales_customers;
+use App\sales_invoice;
+use App\products_and_services;
+use App\sales_customers;
 use Mail;
 
 class SalesController extends Controller
@@ -24,7 +24,7 @@ class SalesController extends Controller
     {
 
         $toReturn=array();
-        $toReturn=Ats_sales_invoice::orderBy('id','asc')->get()->toArray();
+        $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
 
         $data['content'] ='sale.invoice';
         return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
@@ -34,7 +34,7 @@ class SalesController extends Controller
     {
        
         //return $request;
-        $invoice = new Ats_sales_invoice();
+        $invoice = new sales_invoice();
         $invoice->invoice_no=$request->invoice_no;
         $invoice->customer =$request->customer ; 
         $invoice->customer_email=$request->customer_email; 
@@ -97,7 +97,7 @@ class SalesController extends Controller
 
     public function add_customers(Request $request)
     {
-        $product = new Ats_sales_customers();
+        $product = new sales_customers();
         $product->title=$request->title;
         $product->first_name=$request->first_name;
         $product->last_name=$request->last_name;
@@ -146,7 +146,7 @@ class SalesController extends Controller
     public function view_customers()
     {
         $toReturn=array();
-        $toReturn=Ats_sales_customers::get()->toArray();
+        $toReturn=sales_customers::get()->toArray();
 
         $data['content'] ='sale.customer';
         return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
@@ -155,7 +155,7 @@ class SalesController extends Controller
     public function view_products_and_services()
     {
         $toReturn=array();
-        $toReturn=Ats_products_and_services::get()->toArray();
+        $toReturn=products_and_services::get()->toArray();
 
         //return $toReturn;
         $data['content'] = 'sale.products-services';
@@ -164,7 +164,7 @@ class SalesController extends Controller
 
     public function add_products_and_services(Request $request)
     {
-        $products = new Ats_products_and_services();
+        $products = new products_and_services();
         $products->name=$request->name;
         $products->sku=$request->sku;
         $products->hsn_code=$request->hsn_code;
@@ -192,14 +192,14 @@ class SalesController extends Controller
     public function delete_products_and_services($id=""){
 
 
-        $del=Ats_products_and_services::where('id',$id)->delete();
+        $del=products_and_services::where('id',$id)->delete();
         return redirect('sale/products&services');
     }
 
     public function invoice_mail($id="")
     {
         $toReturn=array();
-        $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
+        $toReturn=sales_invoice::where('id',$id)->get()->toArray();
    
         // Mail::send('emails.sales_invoice_mail',['toReturn'=>$toReturn[0]],function($message)use($toReturn){
         //     $message->to($toReturn[0]['customer_email'])
@@ -215,14 +215,14 @@ class SalesController extends Controller
     public function print_invoice($id="")
     {
         $toReturn=array();
-        $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
+        $toReturn=sales_invoice::where('id',$id)->get()->toArray();
                
         return view('sales_invoice_print')->with('toReturn',$toReturn);
     }
     public function invoice_delivery_challan($id="")
     {
         $toReturn=array();
-        $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
+        $toReturn=sales_invoice::where('id',$id)->get()->toArray();
             
         return view('sales_invoice_delivery_challan')->with('toReturn',$toReturn);
     }
@@ -230,7 +230,7 @@ class SalesController extends Controller
     public function invoice_delete($id="")
     {
         $toReturn=array();
-        $toReturn=Ats_sales_invoice::where('id',$id)->delete();
+        $toReturn=sales_invoice::where('id',$id)->delete();
             
         return redirect('sale/invoice')->with('toReturn',$toReturn);
     }
@@ -238,7 +238,7 @@ class SalesController extends Controller
     public function invoice_remainder_email($id="")
     {
         $toReturn=array();
-        $toReturn=Ats_sales_invoice::where('id',$id)->get()->toArray();
+        $toReturn=sales_invoice::where('id',$id)->get()->toArray();
         return $toReturn; 
     }
 }

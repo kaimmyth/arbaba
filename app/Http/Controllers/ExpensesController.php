@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Ats_expenses_customer;
-use App\Ats_expenses;
+use App\expenses_customer;
+use App\expenses;
 
 class ExpensesController extends Controller
 {
@@ -12,7 +12,7 @@ class ExpensesController extends Controller
     public function index()
     {
         $toReturn=array();
-        $toReturn=Ats_expenses::orderBy('id', 'desc')->get()->toArray();
+        $toReturn=expenses::orderBy('id', 'desc')->get()->toArray();
 
         $data['content'] = 'expenses.expenses';
         return view('layouts.content', compact('data'))->with('return', $toReturn);
@@ -22,7 +22,7 @@ class ExpensesController extends Controller
     public function add_edit_expenses(Request $Request)
     { 
         
-        $expenses = new Ats_expenses();
+        $expenses = new expenses();
         $expenses->payee_id = $Request->expenses_payee_id;
         $expenses->payment_account = $Request->expenses_payment_account;
         $expenses->payment_date = date("Y-m-d", strtotime($Request->expenses_payment_date));
@@ -74,7 +74,7 @@ class ExpensesController extends Controller
         if($Request->hidden_input_purpose=="edit")
         {
             $update_values_array = json_decode(json_encode($expenses), true);
-            $update_query = Ats_expenses::where('id', $Request->hidden_input_id)->update($update_values_array);
+            $update_query = expenses::where('id', $Request->hidden_input_id)->update($update_values_array);
         }
         else if($Request->hidden_input_purpose=="add")
         {
@@ -88,14 +88,14 @@ class ExpensesController extends Controller
     // delete expenses
     public function delete_expenses($id="")
     {
-        $del=Ats_expenses::where('id',$id)->delete();
+        $del=expenses::where('id',$id)->delete();
         return redirect('expenses');
     }
 
     // get expenses details in json format (i.e ajax)
     public function get_expenses_details($id=""){
-        // $toReturn = Ats_expenses::select( 'id', 'payee_id')->where('id', $id)->get();
-        $data = Ats_expenses::where('id', $id)->first();
+        // $toReturn = expenses::select( 'id', 'payee_id')->where('id', $id)->get();
+        $data = expenses::where('id', $id)->first();
 
         // for expenses_details
         $no_of_rows=0;
@@ -150,7 +150,7 @@ class ExpensesController extends Controller
     public function expenses_customer_insert(Request $request)
     {
     
-        $customer= new Ats_expenses_customer();
+        $customer= new expenses_customer();
         $customer->title=$request->title;
         $customer->last_name=$request->last_name;
         $customer->company=$request->company;
