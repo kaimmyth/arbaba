@@ -7,97 +7,84 @@
 </style>
 <!-- Start content -->
 <div class="content-page" >
-  <div class="content">
-    <div class="container-fluid">
+    <div class="content">
+        <div class="container-fluid">
 
-      <!-- Page-Title -->
-      <div class="row">
-        <div class="col-sm-12">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
 
-          <ol class="breadcrumb pull-right">
-            <li><a href="#">Home </a></li>
-            <li><a href="#">Sales </a></li>
-            <li class="active">Products</li>
-          </ol>
-        </div>
-      </div>
-
-
-
-      <div class="row">
-        <div class="col-lg-12">
-         <div class="card">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-12" style="text-align: right; margin-bottom: 4px;">
-                <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">New</button>
-              </div>
-
-              <div class="tab-content colm">
-                <div class="tab-pane show active" id="home-2" role="tabpanel" aria-labelledby="home-tab-2" style="">
-                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                  <thead>
-                    <tr>
-                      <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
-                      <th>Name</th>
-                      <th>SKU</th>
-                      <th>HSN/SAC</th>
-                      <th>Type</th>
-                      <th>Sales Description</th>
-                      <th>Sales Price</th>
-                      <th>Cost</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  @foreach ($toReturn as $items)
-                     <tr>
-                      <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-                      <td>{{$items['name']}}</td>
-                      <td>{{$items['sku']}}</td>
-                      <td>{{$items['hsn_code']}}</td>
-                      <td>{{$items['sac_code']}}</td>
-                      <td>{{$items['category']}}</td>
-                      <td>{{$items['description']}}</td>
-                      <td>{{$items['cost']}}</td>
-                       
-                      <td style="color: #0077C5; font-weight: 600; cursor: pointer;">Edit <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Make Inactive</a>
-                          <a class="dropdown-item" href="#">Run Report</a>
-                          <a class="dropdown-item" href="#">Duplicate</a>
-                        </div>
-                        <a href="{{url('sale/products-and-services/delete/'.$items['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');">Delete <i class="fas fa-trash"></i></a>
-                      </td>
-
-                      </tr>
-                    @endforeach
-
-
-                  </tbody>
-                </table>
-              </div>
+                <ol class="breadcrumb pull-right">
+                    <li><a href="#">Home </a></li>
+                    <li><a href="#">Sales </a></li>
+                    <li class="active">Products & Services</li>
+                </ol>
+                </div>
             </div>
 
 
 
-          </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-border card-primary">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" onclick="addProductsAndServices();" style="float:right;">Add New Products & Services</button>
+                        </div> 
+                        <div class="card-body"> 
+                            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                    <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>SKU</th>
+                                    <th>HSN/SAC</th>
+                                    <th>Type</th>
+                                    <th>Sales Price</th>
+                                    <th>Cost</th>
+                                    <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach ($toReturn as $items)
+                                    <tr>
+                                    <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
+                                    <td>{{$items['name']}}</td>
+                                    <td>{{$items['product_type']}}</td>
+                                    <td>{{$items['sku']}}</td>
+                                    <td>{{$items['hsn_code']}}</td>
+                                    <td>{{$items['sac_code']}}</td>
+                                    <td>{{$items['category']}}</td>
+                                    <td>{{$items['cost']}}</td>
+                                    <td>
+                                        <a href="javascript:void();" onclick="viewEditProductsAndServices('view', {{$items['id']}});"><i class="fas fa-eye"></i></a> &nbsp; 
+                                        <a href="javascript:void();" onclick="viewEditProductsAndServices('edit', {{$items['id']}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
+                                        <a href="{{url('sale/products-and-services/delete/'.$items['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                    </td>
+
+                                    </tr>
+                                    @endforeach
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-      </div>
     </div>
-  </div>
-</div>
-</div>
 </div>
 
 
 
-<form action="{{url('sale/products-and-services/add')}}" method="POST">
+<form action="{{url('sale/products-and-services/add-edit')}}" method="POST" id="products-and-services-forms">
   @csrf
   <!--  Modal content for the above example -->
-  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+  <div class="modal fade bs-example-modal-lg products-and-services" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -111,7 +98,7 @@
             <div class="form-group row">
               <label class="col-sm-3 control-label">Type</label>
               <div class="col-sm-9">
-                <select class="form-control">
+                <select class="form-control" name="product_type" id="product_type">
                   <option>-Select-</option>
                   <option>Non-inventory</option>
                   <option>Service</option>
@@ -185,7 +172,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Income Account</label>
-                <select name="income_acount" class="form-control" id="income_acount">
+                <select name="income_account" class="form-control" id="income_account">
 
                   <option>-Select-</option>
                    <option>fgjnfgn</option>
@@ -308,13 +295,123 @@
 
         </div>
         <div class="col-md-12" style="text-align: right;">
-          <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
-          <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+            <!-- hidden inputs -->
+            <input type="text" name="hidden_input_id" value="NA" hidden>
+            <input type="text" name="hidden_input_purpose" value="add" hidden>
+            <!-- hidden inputs -->
+            <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
         </div>
       </div><!-- /.modal-content -->
 
     </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+
+<!-- view model start -->
+<div class="modal products-and-services-details-model fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myLargeModalLabel">Supplier Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0px 0;">
+                <table class="table table-bordered table-striped" border="0">
+                    <tbody>
+                        <tr style="border: none;">
+                            <td><p><strong>ID</strong></p></td>
+                            <td><p id="v_id"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Product Type</strong></p></td>
+                            <td><p id="v_product_type"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>SKU</strong></p></td>
+                            <td><p id="v_sku"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Name</strong></p></td>
+                            <td><p id="v_name"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>HSN Code</strong></p></td>
+                            <td><p id="v_hsn_code"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>SAC Code</strong></p></td>
+                            <td><p id="v_sac_code"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Unit</strong></p></td>
+                            <td><p id="v_unit"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Category</strong></p></td>
+                            <td><p id="v_category"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Sale Price</strong></p></td>
+                            <td><p id="v_sale_price"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Income Account</strong></p></td>
+                            <td><p id="v_income_account"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Inclusive Taxes</strong></p></td>
+                            <td><p id="v_inclusive_tax"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Tax</strong></p></td>
+                            <td><p id="v_tax"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Description</strong></p></td>
+                            <td><p id="v_description"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Purchasing Information</strong></p></td>
+                            <td><p id="v_purchasing_information"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Cost</strong></p></td>
+                            <td><p id="v_cost"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Expense Account</strong></p></td>
+                            <td><p id="v_expense_account"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Purchase Tax</strong></p></td>
+                            <td><p id="v_purchase_tax"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Reverse Change</strong></p></td>
+                            <td><p id="v_reverse_change"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Preferred Supplier</strong></p></td>
+                            <td><p id="v_preferred_supplier"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Created At</strong></p></td>
+                            <td><p id="v_created_at"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end model -->
+
+
+
+
     <script>
       
       $("document").ready(function(){
@@ -608,23 +705,97 @@
 
 
   });
-// $(document).ready(function(){
-     
-
-//      $("#btn").click(function(){
-
-//      if((err_name==true)&&(err_sku==true)&&(err_hsn==true)&&(err_sac==true)&&(err_unit==true)&&(err_category==true)&&(err_cost==true)&&(err_sale_price==true))
-//      {
-//       return true;
-//      }else{
-//       return false;
-
-//      }
-
-//      });
-      
-// });
-
 
      
     </script>
+
+<script>
+    // to get suppliers details from controller through ajax, purpose = edit & view
+    //add supplier
+    function addProductsAndServices(){
+        resetProductsAndServicesForms();
+        $(".products-and-services").modal('show');
+    }
+    // reset supplier form fields
+    function resetProductsAndServicesForms(){
+        // reset all fileds in expenses form model
+        document.getElementById("products-and-services-forms").reset();
+        // // assigning hidden inputs
+        $("input[name='hidden_input_id'").val("NA");
+        $("input[name='hidden_input_purpose'").val("add");
+    }
+    function viewEditProductsAndServices(purpose, id){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{url('sale/products-and-services/get_products_and_services_details')}}" + "/" + id,
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            beforeSend: function(data){
+                $("#loader1").css("display","block");
+            },
+            error: function(xhr){
+                alert("error"+xhr.status+", "+xhr.statusText);
+            },
+            success: function (data) {
+                console.log(data);
+                if(purpose=="view")
+                {
+                    document.getElementById("v_id").innerHTML = data.id;
+                    document.getElementById("v_product_type").innerHTML = data.product_type;
+                    document.getElementById("v_name").innerHTML = data.name;
+                    document.getElementById("v_sku").innerHTML = data.sku;
+                    document.getElementById("v_hsn_code").innerHTML = data.hsn_code;
+                    document.getElementById("v_sac_code").innerHTML = data.sac_code;
+                    document.getElementById("v_unit").innerHTML = data.unit;
+                    document.getElementById("v_category").innerHTML = data.category;
+                    document.getElementById("v_sale_price").innerHTML = data.sale_price;
+                    document.getElementById("v_income_account").innerHTML = data.income_account;
+                    document.getElementById("v_inclusive_tax").innerHTML = data.inclusive_tax;
+                    document.getElementById("v_tax").innerHTML = data.tax;
+                    document.getElementById("v_description").innerHTML = data.description;
+                    document.getElementById("v_purchasing_information").innerHTML = data.purchasing_information;
+                    document.getElementById("v_cost").innerHTML = data.cost;
+                    document.getElementById("v_expense_account").innerHTML = data.expense_account;
+                    document.getElementById("v_purchase_tax").innerHTML = data.purchase_tax;
+                    document.getElementById("v_reverse_change").innerHTML = data.reverse_change;
+                    document.getElementById("v_preferred_supplier").innerHTML = data.preferred_supplier;
+                    document.getElementById("v_created_at").innerHTML = data.created_at;
+                    $('.products-and-services-details-model').modal('show');
+                }
+                else if(purpose=="edit"){
+                    resetProductsAndServicesForms(); // reseting forms
+                    $("#title").val(data.title);
+                    $("#name").val(data.name);
+                    $("#sku").val(data.sku);
+                    $("#hsn_code").val(data.hsn_code);
+                    $("#sac_code").val(data.sac_code);
+                    $("#unit").val(data.unit);
+                    $("#category").val(data.category);
+                    $("#sale_price").val(data.sale_price);
+                    $("#income_account").val(data.income_account);
+                    $("#inclusive_tax").val(data.inclusive_tax);
+                    $("#tax").val(data.tax);
+                    $("#description").val(data.description);
+                    $("#purchasing_information").val(data.purchasing_information);
+                    $("#cost").val(data.cost);
+                    $("#expense_account").val(data.expense_account);
+                    $("#purchase_tax").val(data.purchase_tax);
+                    $("#reverse_change").val(data.reverse_change);
+                    $("#preferred_supplier").val(data.preferred_supplier);
+                    
+                    // assigning hidden inputs
+                    $("input[name='hidden_input_id'").val(data.id);
+                    $("input[name='hidden_input_purpose'").val("edit");
+    
+                    $('.products-and-services').modal('show'); // expense insert form model
+                }
+                $("#loader1").css("display","none");
+            }
+        });
+    }
+</script>

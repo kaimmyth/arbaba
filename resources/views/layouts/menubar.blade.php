@@ -60,7 +60,7 @@
         <li><a href="{{url('sale/all-sale')}}">All Sales</a></li>
         <li><a href="{{url('sale/invoice')}}">Invoices</a></li>
         <li><a href="{{url('sale/customers')}}">Customers</a></li>
-        <li><a href="{{url('sale/products&services')}}">Products & Services</a></li>
+        <li><a href="{{url('sale/products-and-services')}}">Products & Services</a></li>
       </ul>
     </li>
     <li class="has_sub">

@@ -8,6 +8,7 @@ use App\sales_invoice;
 use App\products_and_services;
 use App\sales_customers;
 use Mail;
+use Session;
 
 class SalesController extends Controller
 {
@@ -162,9 +163,10 @@ class SalesController extends Controller
         return view('layouts.content', compact('data'))->with('toReturn', $toReturn);
     }
 
-    public function add_products_and_services(Request $request)
+    public function add_edit_products_and_services(Request $request)
     {
         $products = new products_and_services();
+        $products->product_type=$request->product_type;
         $products->name=$request->name;
         $products->sku=$request->sku;
         $products->hsn_code=$request->hsn_code;
@@ -172,7 +174,7 @@ class SalesController extends Controller
         $products->unit=$request->unit;
         $products->category=$request->category;
         $products->sale_price=$request->sale_price;
-        $products->income_acount=$request->income_acount;
+        $products->income_account=$request->income_account;
         $products->inclusive_tax =$request->inclusive_tax;
         $products->tax=$request->tax;
         $products->description=$request->description;
@@ -183,17 +185,33 @@ class SalesController extends Controller
         $products->reverse_change=$request->reverse_change;
         $products->preferred_supplier=$request->preferred_supplier;
 
-        $products->save();
+        // finall query create, edit
+        if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($products), true);
+            $update_query = products_and_services::where('id', $request->hidden_input_id)->update($update_values_array);
+            Session::flash('success', 'Products details has been updated successfully');
+        }
+        else if($request->hidden_input_purpose=="add")
+        {
+            $products->save();
+            Session::flash('success', 'Products details has been saved successfully');
+        }
         
-        return redirect('sale/products&services');
-
- }
+        return redirect('sale/products-and-services');
+    }
 
     public function delete_products_and_services($id=""){
 
 
         $del=products_and_services::where('id',$id)->delete();
-        return redirect('sale/products&services');
+        Session::flash('success', 'Products details has been deleted successfully');
+        return redirect('sale/products-and-services');
+    }
+
+    public function get_products_and_services_details($id=""){
+        $data = products_and_services::where('id', $id)->first();
+        return $data;
     }
 
     public function invoice_mail($id="")
