@@ -13,7 +13,7 @@ class EmployeesController extends Controller
     {
         $toReturn=array();
         $toReturn=employees::orderBy('id', 'desc')->get()->toArray();
-        $data['content'] ='Expenses.employee';
+        $data['content'] ='employee.employee';
 	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
 

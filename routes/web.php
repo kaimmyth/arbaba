@@ -88,13 +88,12 @@ Route::prefix('company')->group(function () {
 	Route::any('edit/{id}', 'CompanyController@edit');
 });
 
-// Expenses
+
+/* Expenses */
 Route::get('expenses','ExpensesController@index');
 Route::post('expenses/add-edit','ExpensesController@add_edit_expenses');
 Route::get('expenses/delete/{id}','ExpensesController@delete_expenses');
 Route::get('expenses/get-expanses-details/{id}','ExpensesController@get_expenses_details');
-Route::post('customer/add','ExpensesController@expenses_customer_insert'); // has to remove, it is deprecated
-Route::get('customer','ExpensesController@view_customer'); // has to remove, it is deprecated
 
 Route::get('expenses/suppliers','ExpensesController@suppliers_index');
 Route::post('expenses/suppliers/add-edit','ExpensesController@add_edit_suppliers');
