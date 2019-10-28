@@ -84,7 +84,6 @@ class ExpensesController extends Controller
             $expenses->save();
             Session::flash('success', 'Expenses details has been saved successfully');
         }
-        //return $expenses;
         
         return redirect('expenses');
     }
@@ -219,7 +218,7 @@ class ExpensesController extends Controller
     // expenses/ suppliers home
     public function suppliers_index(){
         $toReturn=array();
-        $toReturn=expenses::orderBy('id', 'desc')->get()->toArray();
+        $toReturn=expenses_supplier::orderBy('id', 'desc')->get()->toArray();
         
         $data['content'] ='expenses.suppliers';
 	    return view('layouts.content',compact('data'))->with('return', $toReturn);
@@ -237,7 +236,7 @@ class ExpensesController extends Controller
         $supplier->company_name=$request->company_name;
         $supplier->other=$request->other;   
         $supplier->company=$request->company;
-        $supplier->display_name_as=$request->title.$request->first_name;
+        $supplier->display_name_as=$request->title." ".$request->first_name;
         $supplier->website=$request->website;
         $supplier->billing_rate=$request->billing_rate;
         $supplier->address=$request->address;
@@ -256,35 +255,59 @@ class ExpensesController extends Controller
 
         $supplier->effective_date=date("Y-m-d",strtotime($request->effective_date));;
         $supplier->notes=$request->notes;
-        
+
+        // for attachment
+        $supplier->attachment = "";
         if($request->hasFile('attachment'))
         {
+            //
             $file = $request->file('attachment');
 
             $supplier->attachment = $file->getClientOriginalName();
             $destinationPath = 'public/images';
-            $file->move($destinationPath, $file->getClientOriginalName());
+            $file->move($destinationPath, $file->getClientOriginalName()); 
         }
         else{
-            $supplier->attachment = "";
+            if($request->hidden_input_purpose=="edit")
+            {
+                $supplier->attachment = $request->hidden_input_attachment;
+            }
+            else if($request->hidden_input_purpose=="add")
+            {
+                // error has to return
+            }
         }
        
-     
+
+        // finall query create, edit
+        if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($supplier), true);
+            $update_query = expenses_supplier::where('id', $request->hidden_input_id)->update($update_values_array);
+            Session::flash('success', 'Supplier details has been updated successfully');
+        }
+        else if($request->hidden_input_purpose=="add")
+        {
+            $supplier->save();
+            Session::flash('success', 'Supplier details has been saved successfully');
+        }
         
-        $supplier->save();
-        Session::flash('success', 'A new suppliers details has been saved successfully');
-        //return $request;
         return redirect('expenses/suppliers');
     }
 
     // suppliers delete
     public function delete_suppliers($id=""){
-
+        $del=expenses_supplier::where('id',$id)->delete();
+        Session::flash('success', 'Deleted Successfully');
+        return redirect('expenses/suppliers');
     }
 
     // get suplliers details
     public function get_suppliers_details($id=""){
-        
+        $data = expenses_supplier::where('id', $id)->first();
+        $data->as_of = date("d-m-Y", strtotime($data->as_of));
+        $data->effective_date = date("d-m-Y", strtotime($data->effective_date));
+        return $data;
     }
 }
   

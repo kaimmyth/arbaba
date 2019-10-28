@@ -37,7 +37,7 @@
                             <div class="col-lg-12">
                                 <div class="card card-border card-primary">
                                     <div class="card-header"> 
-                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addExpenses();" data-toggle="modal" data-target=".employee" style="float:right;">Add an Employee</button>
+                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addEmployee();" data-toggle="modal" data-target=".employee" style="float:right;">Add an Employee</button>
                                     </div> 
                                     <div class="card-body"> 
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -418,14 +418,14 @@ if((err_pin_code==true) )
 
 <script>
 // to get employee details from controller through ajax, purpose = edit & view
-//add expanses
+//add employees
 function addExpenses(){
-    resetExpensesForms();
+    resetEmployeeForms();
     $(".employee").modal('show');
 }
 // reset expensess form fields
-function resetExpensesForms(){
-    // reset all fileds in expenses form model
+function resetEmployeeForms(){
+    // reset all fileds in employee form model
     document.getElementById("form-employee").reset();
     // assigning hidden inputs
     $("input[name='hidden_input_id'").val("NA");
@@ -470,7 +470,7 @@ function viewEditEmployee(purpose, id){
                 $('.employee-details-model').modal('show');
             }
             else if(purpose=="edit"){
-                resetExpensesForms(); // reseting forms
+                resetEmployeeForms(); // reseting forms
                 $("#title").val(data.title);
                 $("#first_name").val(data.first_name);
                 $("#last_name").val(data.last_name);
