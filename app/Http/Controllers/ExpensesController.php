@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\expenses_customer;
 use App\expenses;
+use App\expenses_supplier;
+use Session;
 
 class ExpensesController extends Controller
 {
@@ -75,10 +77,12 @@ class ExpensesController extends Controller
         {
             $update_values_array = json_decode(json_encode($expenses), true);
             $update_query = expenses::where('id', $Request->hidden_input_id)->update($update_values_array);
+            Session::flash('success', 'Expenses details has been updated successfully');
         }
         else if($Request->hidden_input_purpose=="add")
         {
             $expenses->save();
+            Session::flash('success', 'Expenses details has been saved successfully');
         }
         //return $expenses;
         
@@ -89,6 +93,7 @@ class ExpensesController extends Controller
     public function delete_expenses($id="")
     {
         $del=expenses::where('id',$id)->delete();
+        Session::flash('success', 'Expenses details has been deleted successfully');
         return redirect('expenses');
     }
 
@@ -213,13 +218,63 @@ class ExpensesController extends Controller
 
     // expenses/ suppliers home
     public function suppliers_index(){
+        $toReturn=array();
+        $toReturn=expenses::orderBy('id', 'desc')->get()->toArray();
+        
         $data['content'] ='expenses.suppliers';
-	    return view('layouts.content',compact('data'));
+	    return view('layouts.content',compact('data'))->with('return', $toReturn);
     }
 
     // suppliers insert
     public function add_edit_suppliers(Request $request){
+        $supplier= new expenses_supplier();
+        $supplier->title=$request->title;
+        $supplier->first_name=$request->first_name;
+        $supplier->email_id=$request->email_id;
+        $supplier->mobile_no=$request->mobile_no;
+        $supplier->last_name=$request->last_name;
+        $supplier->middle_name=$request->middle_name;
+        $supplier->company_name=$request->company_name;
+        $supplier->other=$request->other;   
+        $supplier->company=$request->company;
+        $supplier->display_name_as=$request->title.$request->first_name;
+        $supplier->website=$request->website;
+        $supplier->billing_rate=$request->billing_rate;
+        $supplier->address=$request->address;
+        $supplier->city=$request->city;
+        $supplier->state=$request->state;
+        $supplier->pin_code=$request->pin_code;
+        $supplier->country=$request->country;
+        $supplier->pan_no=$request->pan_no;
+        $supplier->terms=$request->terms;
+        $supplier->opening_balance=$request->opening_balance;
+        $supplier->as_of=date("Y-m-d",strtotime($request->as_of));
+        $supplier->account_no=$request->account_no;
+        $supplier->gst_reg_type=$request->gst_reg_type;
+        $supplier->gstin=$request->gstin;
+        $supplier->tax_reg_no=$request->tax_reg_no;
 
+        $supplier->effective_date=date("Y-m-d",strtotime($request->effective_date));;
+        $supplier->notes=$request->notes;
+        
+        if($request->hasFile('attachment'))
+        {
+            $file = $request->file('attachment');
+
+            $supplier->attachment = $file->getClientOriginalName();
+            $destinationPath = 'public/images';
+            $file->move($destinationPath, $file->getClientOriginalName());
+        }
+        else{
+            $supplier->attachment = "";
+        }
+       
+     
+        
+        $supplier->save();
+        Session::flash('success', 'A new suppliers details has been saved successfully');
+        //return $request;
+        return redirect('expenses/suppliers');
     }
 
     // suppliers delete

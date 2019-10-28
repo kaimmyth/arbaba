@@ -4,6 +4,7 @@ input[type=text]:focus {
   box-shadow:1px 1px 0.5px 0.5px #317eeb; 
 }
 </style>
+
 <!-- Start content -->                   
 <div class="content-page">
         <div class="content">
@@ -23,13 +24,14 @@ input[type=text]:focus {
                         <div class="card card-border card-primary">                                                                                                                                                                         
                             <div class="card-header"> </div> 
                                 <div class="card-body">
-                                        <form>
+                                        <form action="{{url('expenses/suppliers/add-edit')}}" method="POST" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-md-3" style="float:left;">
                                                     <div class="form-group">
                                                         <label for="">Title</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="Title">
+                                                                <input type="text" id="title" name="title" class="form-control" placeholder="Title">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                                             </div>
@@ -38,7 +40,7 @@ input[type=text]:focus {
                                                     <div class="form-group">
                                                         <label for="">Last Name</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="Last Name">
+                                                                <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last Name">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                                             </div>
@@ -47,29 +49,29 @@ input[type=text]:focus {
                                                     <div class="form-group">
                                                         <label for="">Company</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="Company">
+                                                                <input type="text" id="company" name="company" class="form-control" placeholder="Company">
                                                         </div><!--input group-->
                                                     </div><!--end of from group-->
 
                                                     <div class="form-group">
                                                         <label for="">Address</label>
                                                             <div class="input-group">
-                                                            <textarea class="form-control" rows="3" id="example-textarea-input"></textarea>
+                                                            <textarea class="form-control" rows="3" id="address" name="address"></textarea>
                                                         </div><!--input group-->
                                                     </div><!--end of from group-->
 
                                                     <div class="form-group"style="width:49%;float:left;">
-                                                        <input type="text" id="" name="" class="form-control" placeholder="City/Town">
+                                                        <input type="text" id="city" name="city" class="form-control" placeholder="City/Town">
                                                     </div>
                                                     <div class="form-group"style="width:49%; float:left; margin-left:2%;">
-                                                        <input type="text" id="" name="" class="form-control" placeholder="State">
+                                                        <input type="text" id="state" name="state" class="form-control" placeholder="State">
                                                     </div>
 
                                                     <div class="form-group"style="width:49%;float:left;">
-                                                        <input type="text" id="" name="" class="form-control" placeholder="PIN Code">
+                                                        <input type="text" id="pin_code" name="pin_code" class="form-control" placeholder="PIN Code">
                                                     </div>
                                                     <div class="form-group"style="width:49%; float:left; margin-left:2%;">
-                                                        <input type="text" id="" name="" class="form-control" placeholder="Country">
+                                                        <input type="text" id="country" name="country" class="form-control" placeholder="Country">
                                                     </div>
                                                 </div><!--col-->
 
@@ -77,7 +79,7 @@ input[type=text]:focus {
                                                 <div class="form-group">
                                                         <label for="">First name</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="First Name">
+                                                                <input type="text" id="first_name" name="first_name" class="form-control" placeholder="First Name">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                                             </div>
@@ -86,7 +88,7 @@ input[type=text]:focus {
                                                     <div class="form-group">
                                                         <label for="">Middle Name</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="Middle Name">
+                                                                <input type="text" id="middle_name" name="middle_name" class="form-control" placeholder="Middle Name">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                                             </div>
@@ -95,16 +97,13 @@ input[type=text]:focus {
 
                                                     <div class="form-group">
                                                         <label for="">Display Name as</label>
-                                                            <div class="input-group">
-                                                                <select class="form-control">
-                                                                   
-                                                                </select>
-                                                            </div><!--input group-->
+                                                        <input type="text" id="display_name_as" name="display_name_as" class="form-control" placeholder="Middle Name">
+   
                                                     </div><!--end of from group-->
                                                     <div class="form-group">
                                                         <label for="">PAN NO.</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="">
+                                                                <input type="text" id="pan_no" name="pan_no" class="form-control" placeholder="">
                                                         </div><!--input group-->
                                                     </div><!--end of from group-->
 
@@ -146,7 +145,7 @@ input[type=text]:focus {
                                                 <div class="form-group">
                                                         <label for="">Email Id.</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="eg.company@gmail.com">
+                                                                <input type="text" id="email_id" name="email_id" class="form-control" placeholder="eg.company@gmail.com">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                                             </div>
@@ -156,7 +155,7 @@ input[type=text]:focus {
                                                     <div class="form-group">
                                                         <label for="">Company</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="Company Name">
+                                                                <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Company Name">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-building-o"></i></span>
                                                             </div>
@@ -165,7 +164,7 @@ input[type=text]:focus {
                                                     <div class="form-group">
                                                         <label for="">Website</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="" name="" class="form-control" placeholder="eg.www.example.com">
+                                                                <input type="text" id="website" name="website" class="form-control" placeholder="eg.www.example.com">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-globe" aria-hidden="true"></i></span>
                                                             </div>
@@ -175,8 +174,8 @@ input[type=text]:focus {
                                                 <div class="form-group">
                                                      <label for="">Terms</label>
                                                         <div class="input-group">
-                                                            <select class="form-control">
-                                                                <option>--select--</option>
+                                                            <select class="form-control" name="terms" id="terms">
+                                                                <option value="">--select--</option>
                                                                 <option>Due On receipt</option>
                                                                 <option>Net 15</option>
                                                                 <option>Nwt 30</option>
@@ -187,13 +186,13 @@ input[type=text]:focus {
                                                         <div class="form-group">
                                                             <label for="">Account No.</label>
                                                                 <div class="input-group">
-                                                                    <input type="text" id="" name="" class="form-control" placeholder="Appear in memo in terms of all payment"> 
+                                                                    <input type="text" id="account_no" name="account_no" class="form-control" placeholder="Appear in memo in terms of all payment"> 
                                                             </div><!--input group-->
                                                         </div><!--end of from group-->
 														<div class="form-group">
                                                             <label for="">GSTIN</label>
                                                                 <div class="input-group">
-                                                                    <input type="text" id="" name="" class="form-control" placeholder="For eg. 29KHIT67895"> 
+                                                                    <input type="text" id="gstin" name="gstin" class="form-control" placeholder="For eg. 29KHIT67895"> 
                                                             </div><!--input group-->
                                                         </div><!--end of from group-->
                                                     </div>
@@ -202,7 +201,7 @@ input[type=text]:focus {
                                                 <div class="form-group">
                                                     <label for="">Mobile No.</label>
                                                         <div class="input-group">
-                                                            <input type="text" placeholder="" data-mask="(999) 999-9999" class="form-control">
+                                                            <input type="text" placeholder="" data-mask="(999) 999-9999" name="mobile_no" id="mobile_no" class="form-control">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-mobile" aria-hidden="true"></i></span>
                                                         </div>
@@ -211,13 +210,13 @@ input[type=text]:focus {
                                                 <div class="form-group">
                                                     <label for="">Other</label>
                                                         <div class="input-group">
-                                                            <input type="text" placeholder="" class="form-control">
+                                                            <input type="text" placeholder="" class="form-control" name="other" id="other">
                                                     </div><!--input group-->
                                                 </div><!--end of fron group-->
                                                 <div class="form-group">
                                                     <label for="">Billing Rate(/hr)</label>
                                                         <div class="input-group">
-                                                        <input type="text" id="" name="" class="form-control" placeholder="">
+                                                        <input type="text" id="billing_rate" name="billing_rate" class="form-control" placeholder="">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                                         </div>
@@ -228,7 +227,7 @@ input[type=text]:focus {
                                                 <div class="form-group" style="width:49%;float:left;">
                                                     <label for="">Opening Balance</label>
                                                         <div class="input-group">
-                                                        <input type="text" id="" name="" class="form-control" placeholder="">
+                                                        <input type="text" id="opening_balance" name="opening_balance" class="form-control" placeholder="">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                                         </div>
@@ -237,7 +236,7 @@ input[type=text]:focus {
                                                 <div class="form-group" style="width:49%; float:left; margin-left:2%;">
                                                     <label for="">as of</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="as_of" name="as_of">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text"><i class="md md-event"></i></span>
                                                         </div>
@@ -247,7 +246,7 @@ input[type=text]:focus {
                                                 <div class="form-group">
                                                     <label for="">GST registration type</label>
                                                         <div class="input-group">
-                                                        <select class="form-control">
+                                                        <select class="form-control" name="gst_reg_type" id="gst_reg_type">
                                                             <option>--select--</option>
                                                             <option>GST Registered Regular</option>
                                                             <option>GST Registered Composition</option>
@@ -259,7 +258,7 @@ input[type=text]:focus {
 												 <div class="form-group" style="width:49%;float:left;">
                                                     <label for="">Tax Registration Number</label>
                                                         <div class="input-group">
-                                                        <input type="text" id="" name="" class="form-control" placeholder="">
+                                                        <input type="text" id="tax_reg_no" name="tax_reg_no" class="form-control" placeholder="">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                                         </div>
@@ -268,21 +267,20 @@ input[type=text]:focus {
                                                 <div class="form-group" style="width:49%; float:left; margin-left:2%;">
                                                     <label for="">Effective Date</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="effective_date" name="effective_date">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text"><i class="md md-event"></i></span>
                                                         </div>
                                                     </div>
                                                 </div><!--end of fron group-->
                                             </div>
-                                        </form>
                                     </div><!-- card-body -->
                                     <div class="row">
 									    <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Notes</label>
                                                     <div class="input-group">
-                                                    <textarea class="form-control" rows="3" id="example-textarea-input"></textarea>
+                                                    <textarea class="form-control" rows="3" id="example-textarea-input" id="notes" name="notes"></textarea>
                                                 </div><!--input group-->
                                             </div><!--end of from group-->
                                         </div>
@@ -290,21 +288,22 @@ input[type=text]:focus {
 												<div class="form-group">
 													<label for="">Attachments</label>
 														<div class="m-b-30">
-															<form action="#" class="dropzone" id="dropzone" style="min-height: 80px;">
-															<div class="fallback">
-																<input name="file" type="file" multiple="multiple">
+															<div class="dropzone" id="dropzone" style="min-height: 80px;">
+															    <div class="fallback">
+																    <input  type="file" name="attachment" id="attachment">
 																</div>
-															</form>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
                                             <hr>
                                             <div style="float:right;">
-                                                <button type="button" class="btn btn-info waves-effect waves-light w-md m-b-5">Save</button>
+                                                <button type="submit" class="btn btn-info waves-effect waves-light w-md m-b-5">Save</button>
                                                 <button type="button" class="btn btn-inverse btn-custom waves-effect waves-light m-b-5">Cancel</button>
                                         </div>
-                                    </div><!--card border-->
+                                    </form>
+                                </div><!--card border-->
                                 </div><!--end of row-->
                             </div><!--end of container fluid-->
                         </div><!--end of content-->
