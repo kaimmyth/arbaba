@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2019 at 09:55 AM
+-- Generation Time: Oct 28, 2019 at 01:14 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -33,14 +33,14 @@ CREATE TABLE `ar_cities` (
   `org_id` int(11) DEFAULT NULL,
   `country_id` int(11) NOT NULL,
   `state_id` int(11) NOT NULL,
-  `city` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `state` varchar(111) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(111) DEFAULT NULL,
   `status` int(11) NOT NULL,
   `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '1 ="Delete"',
-  `ip_address` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `ip_address` varchar(20) NOT NULL,
   `modified_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_date` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_cities`
@@ -1274,11 +1274,11 @@ INSERT INTO `ar_cities` (`id`, `org_id`, `country_id`, `state_id`, `city`, `stat
 CREATE TABLE `ar_city` (
   `id` int(11) NOT NULL,
   `org_id` int(11) DEFAULT NULL,
-  `city_name` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `city_name` varchar(35) NOT NULL,
   `state_id` int(11) NOT NULL,
-  `state_name` varchar(111) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state_name` varchar(111) DEFAULT NULL,
   `is_deleted` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_city`
@@ -2511,15 +2511,15 @@ INSERT INTO `ar_city` (`id`, `org_id`, `city_name`, `state_id`, `state_name`, `i
 CREATE TABLE `ar_countries` (
   `id` int(11) NOT NULL,
   `org_id` int(11) DEFAULT NULL,
-  `code` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `country` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `code` varchar(2) NOT NULL DEFAULT '',
+  `country` varchar(100) NOT NULL DEFAULT '',
   `phone_code` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '1 =''Delete''',
-  `ip_address` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `ip_address` varchar(20) NOT NULL,
   `modified_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_date` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_countries`
@@ -2537,11 +2537,11 @@ INSERT INTO `ar_countries` (`id`, `org_id`, `code`, `country`, `phone_code`, `st
 CREATE TABLE `ar_country` (
   `id` int(11) DEFAULT NULL,
   `org_id` int(11) DEFAULT NULL,
-  `country_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `country_code` varchar(50) NOT NULL,
   `coutry_phone_code` int(50) NOT NULL,
-  `country_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `country_name` varchar(50) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_country`
@@ -2582,15 +2582,14 @@ CREATE TABLE `ar_employees` (
   `dob` date NOT NULL,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_employees`
 --
 
 INSERT INTO `ar_employees` (`id`, `title`, `first_name`, `last_name`, `display_name_as`, `email_id`, `phone_no`, `mobile_no`, `address`, `city`, `state`, `pin_code`, `country`, `billing_rate`, `employee_id_no`, `employee_id`, `gender`, `hire_date`, `release_date`, `dob`, `created_at`, `updated_at`) VALUES
-(4, 'Mr', 'Sachin', 'Pramanik', 'MrSachin', 'sumit.m@itscient.com', '(111) 111-1111', '(111) 111-1111', 'My Addresss', 'Jamshedpur', 'Wabash', 12412, 'dsgsdgs', '455', 'sdgwegw', 'rger', 'Male', '2019-10-08', '2019-10-14', '2019-10-16', '2019-10-25 15:57:09.000000', '2019-10-25 15:57:09.000000'),
-(5, 'ANew Details updates', 'Update Yo', 'New Details updated', 'ANew Details updatesUpdate Yo', 'sumit.m@itscient.comupdated', '(999) 999-9999', '(999) 999-9999', 'My Address Updated', 'jamshedpur updated', 'jharlhand updates', 1111111, 'India Updated', '1111', 'sdgwegw updated', 'updated', 'Female', '2019-10-15', '2019-10-15', '2019-10-15', '2019-10-25 17:43:06.000000', '2019-10-26 10:55:15.000000');
+(4, 'Mr', 'Sachin Updated Yo', 'Pramanik', 'MrSachin Updated Yo', 'sumit.m@itscient.com', '(111) 111-1111', '(111) 111-1111', 'My Addresss', 'Jamshedpur', 'Wabash', 12412, 'dsgsdgs', '455', 'sdgwegw', 'rger', 'Male', '2019-10-08', '2019-10-14', '2019-10-16', '2019-10-25 15:57:09.000000', '2019-10-28 14:37:53.000000');
 
 -- --------------------------------------------------------
 
@@ -2600,25 +2599,24 @@ INSERT INTO `ar_employees` (`id`, `title`, `first_name`, `last_name`, `display_n
 
 CREATE TABLE `ar_expenses` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `payee_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payment_account` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payee_id` varchar(50) NOT NULL,
+  `payment_account` varchar(50) NOT NULL,
   `payment_date` date NOT NULL,
-  `payment_method` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ref_no` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `memo` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `attachment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expenses_details` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_method` varchar(50) NOT NULL,
+  `ref_no` varchar(15) NOT NULL,
+  `memo` text NOT NULL,
+  `attachment` varchar(255) NOT NULL,
+  `expenses_details` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_expenses`
 --
 
 INSERT INTO `ar_expenses` (`id`, `payee_id`, `payment_account`, `payment_date`, `payment_method`, `ref_no`, `memo`, `attachment`, `expenses_details`, `created_at`, `updated_at`) VALUES
-(19, 'Sachin', 'Balance-2', '2019-10-24', 'Cheque', '12120', 'My Memo', 'logo.png', 'Advertisement,newspaper,25000,0:Office Supplies,A4 pages,1200,10:Bank Deposit,deposited in bank,1000000,18', '2019-10-23 09:20:51', '2019-10-23 09:20:51'),
-(20, 'akhil', 'Balance-3', '2019-10-24', 'Cheque', '2510', 'memo', 'work-2.PNG', 'Office Supplies,A4 pages,1200,10:Bank Deposit,A4 pages,1200,18', '2019-10-24 04:48:00', '2019-10-24 04:48:00');
+(19, 'Sachin', 'Balance-2', '2019-10-24', 'Cheque', '12120', 'My Memo', 'logo.png', 'Advertisement,newspaper,25000,0:Office Supplies,A4 pages,1200,10:Bank Deposit,deposited in bank,1000000,18', '2019-10-23 09:20:51', '2019-10-28 07:12:09');
 
 -- --------------------------------------------------------
 
@@ -2664,7 +2662,7 @@ CREATE TABLE `ar_expenses_customer` (
   `attachment` varchar(50) NOT NULL,
   `created_at` timestamp(6) NULL DEFAULT NULL,
   `updated_at` timestamp(6) NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_expenses_customer`
@@ -2684,14 +2682,63 @@ INSERT INTO `ar_expenses_customer` (`id`, `title`, `first_name`, `email_id`, `mo
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ar_expenses_supplier`
+--
+
+CREATE TABLE `ar_expenses_supplier` (
+  `id` int(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `email_id` varchar(50) NOT NULL,
+  `mobile_no` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `middle_name` varchar(50) NOT NULL,
+  `company_name` varchar(50) NOT NULL,
+  `other` varchar(50) NOT NULL,
+  `company` varchar(50) NOT NULL,
+  `display_name_as` varchar(50) NOT NULL,
+  `website` varchar(50) NOT NULL,
+  `billing_rate` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `pin_code` varchar(10) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `pan_no` varchar(50) NOT NULL,
+  `terms` varchar(50) NOT NULL,
+  `opening_balance` varchar(50) NOT NULL,
+  `as_of` date NOT NULL,
+  `account_no` varchar(50) NOT NULL,
+  `gst_reg_type` varchar(50) NOT NULL,
+  `gstin` varchar(50) NOT NULL,
+  `tax_reg_no` varchar(50) NOT NULL,
+  `effective_date` date NOT NULL,
+  `notes` varchar(50) NOT NULL,
+  `attachment` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ar_expenses_supplier`
+--
+
+INSERT INTO `ar_expenses_supplier` (`id`, `title`, `first_name`, `email_id`, `mobile_no`, `last_name`, `middle_name`, `company_name`, `other`, `company`, `display_name_as`, `website`, `billing_rate`, `address`, `city`, `state`, `pin_code`, `country`, `pan_no`, `terms`, `opening_balance`, `as_of`, `account_no`, `gst_reg_type`, `gstin`, `tax_reg_no`, `effective_date`, `notes`, `attachment`, `created_at`, `updated_at`) VALUES
+(3, 'dada', 'Rahul', 'sumit.m@itscient.com', '(111) 111-1111', 'Dutta', 'KUMAR', 'ITSCIENT-LLC', 'hgfhdgf', 'gfdgf', 'dadaRahul', 'gfhgfh', 'hgnhgn', 'thrtht', 'hazaribagh', 'kokra', '5433', 'India', 'xdgfdghfdh', 'Due On receipt', '23512', '2019-10-16', '427845754577', 'GST Registered Composition', '15771ht', 'hfdhdh', '6786-10-26', 'notes', 'invoice_link.PNG', '2019-10-26 10:20:30', '2019-10-26 10:20:30'),
+(4, 'Mr', 'Sachin', 'sachin@itscient.com', '(111) 111-1111', 'New Details', 'Kr', 'ITSCIENT', 'eherhteh', 'Company Name', 'Mr Sachin', 'dfgdfg.vcb', 'etheheheh', 'Address', 'vxdvds', 'vsdvsdv', 'vsdvsdvsd', 'sdvsdvsd', '1234567859', 'Nwt 30', 'herher', '2019-12-10', 'fhdfnhdg', 'GST Registered Regular', 'dthdfhgthe', 'eherher', '2019-12-10', 'sdvsdvsdvsdv', 'simon-migaj-Utvwp12891U-unsplash.jpg', '2019-10-28 04:58:33', '2019-10-28 09:40:46'),
+(5, 'fgs', 'fdhf', 'dhd', '(111) 111-1111', '11111111', 'dfhd1', '11111', '11111', '111111111', 'fgs fdhf', '111111', '1111', '11111111', '11111', '1111111', '1111111', '111111', '111111111', 'Net 15', '1', '2019-10-29', 'fhdfnhdg', 'GST Registered Composition', '11111', '111', '2019-10-29', '1111111111', 'unnamed.jpg', '2019-10-28 09:41:58', '2019-10-28 09:41:58');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ar_migrations`
 --
 
 CREATE TABLE `ar_migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_migrations`
@@ -2713,18 +2760,18 @@ CREATE TABLE `ar_org` (
   `org_id` int(11) DEFAULT NULL,
   `users_id` int(11) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
-  `org_code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `org_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contact_no` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contact_person` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `website` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `org_code` varchar(100) DEFAULT NULL,
+  `org_name` varchar(100) DEFAULT NULL,
+  `contact_no` varchar(20) DEFAULT NULL,
+  `contact_person` varchar(200) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `website` varchar(100) DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
   `state_id` int(11) DEFAULT NULL,
   `country_id` int(11) DEFAULT NULL,
   `zipcode` int(11) DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   `org_type` int(11) DEFAULT 0 COMMENT '1=''Live'' , 0=''Demo''',
   `pf_no` bigint(11) DEFAULT NULL,
   `esic_no` bigint(11) DEFAULT NULL,
@@ -2738,14 +2785,14 @@ CREATE TABLE `ar_org` (
   `deleted_date` timestamp NULL DEFAULT NULL,
   `login_status` int(11) DEFAULT 0 COMMENT '1=''Active'' ,0=''Inactive''',
   `status` int(11) DEFAULT 0 COMMENT '1=''Active'' , 0=''Inactive''',
-  `ip_address` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ip_address` varchar(20) DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL,
   `modified_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_org`
@@ -2761,10 +2808,10 @@ INSERT INTO `ar_org` (`id`, `org_id`, `users_id`, `parent_id`, `org_code`, `org_
 --
 
 CREATE TABLE `ar_password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2774,6 +2821,7 @@ CREATE TABLE `ar_password_resets` (
 
 CREATE TABLE `ar_products_and_services` (
   `id` int(11) NOT NULL,
+  `product_type` varchar(25) NOT NULL,
   `name` varchar(50) NOT NULL,
   `sku` varchar(50) NOT NULL,
   `hsn_code` varchar(50) NOT NULL,
@@ -2781,11 +2829,11 @@ CREATE TABLE `ar_products_and_services` (
   `unit` varchar(50) NOT NULL,
   `category` varchar(50) NOT NULL,
   `sale_price` varchar(50) NOT NULL,
-  `income_acount` varchar(50) NOT NULL,
+  `income_account` varchar(50) NOT NULL,
   `inclusive_tax` varchar(50) NOT NULL,
   `tax` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  `purchasing_information` text NOT NULL,
+  `description` mediumtext NOT NULL,
+  `purchasing_information` mediumtext NOT NULL,
   `cost` varchar(50) NOT NULL,
   `expense_account` varchar(50) NOT NULL,
   `purchase_tax` varchar(50) NOT NULL,
@@ -2793,14 +2841,15 @@ CREATE TABLE `ar_products_and_services` (
   `preferred_supplier` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_products_and_services`
 --
 
-INSERT INTO `ar_products_and_services` (`id`, `name`, `sku`, `hsn_code`, `sac_code`, `unit`, `category`, `sale_price`, `income_acount`, `inclusive_tax`, `tax`, `description`, `purchasing_information`, `cost`, `expense_account`, `purchase_tax`, `reverse_change`, `preferred_supplier`, `created_at`, `updated_at`) VALUES
-(6, 'Abhinav', 'zdgd', 'fhgb', 'gfhb', 'qefde', 'hfybjn', 'bfhynyj', 'fgjnfgn', 'on', '28.0% GST', 'wtfgedfgewg', 'sadfvwdgdg', 'dsgv', 'Rent Expense', '28.0% GST', 'thfyjn', '-Select-', '2019-10-24 05:13:08', '2019-10-24 05:13:08');
+INSERT INTO `ar_products_and_services` (`id`, `product_type`, `name`, `sku`, `hsn_code`, `sac_code`, `unit`, `category`, `sale_price`, `income_account`, `inclusive_tax`, `tax`, `description`, `purchasing_information`, `cost`, `expense_account`, `purchase_tax`, `reverse_change`, `preferred_supplier`, `created_at`, `updated_at`) VALUES
+(9, 'Inventory', 'Abhinav', 'zdgd', 'fhgb', 'gfhb', 'qefde', 'hfybjn', '123456', 'fgjnfgn', 'on', '28.0% GST', 'wtfgedfgewg', 'sadfvwdgdg', '123456', 'Rent Expense', '28.0% GST', 'thfyjn', '-Select-', '2019-10-28 12:04:53', '2019-10-28 12:10:18'),
+(10, 'Service', 'Sachin', 'gvsfgn', '634256', 'jhsefgh', '65', 'jhsfhsdfh', '67532', 'fgjnfgn', 'on', '14.00% GST', 'descriptuhomnyhuj', 'Informatuygyfuwge', '423', 'Small Tools and Equipment', '18.0% GST', '3325', '-Select-', '2019-10-28 12:06:49', '2019-10-28 12:10:34');
 
 -- --------------------------------------------------------
 
@@ -2810,25 +2859,25 @@ INSERT INTO `ar_products_and_services` (`id`, `name`, `sku`, `hsn_code`, `sac_co
 
 CREATE TABLE `ar_record_payment` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `purpose` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `period` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `purpose` varchar(255) NOT NULL,
+  `period` varchar(255) NOT NULL,
   `payment_date` date NOT NULL,
-  `payment_amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pay_memo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_amount` varchar(255) NOT NULL,
+  `pay_memo` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_record_payment`
 --
 
 INSERT INTO `ar_record_payment` (`id`, `purpose`, `period`, `payment_date`, `payment_amount`, `pay_memo`, `created_at`, `updated_at`) VALUES
-(5, 'Cash on hand', 'Upcoming filling', '2019-10-24', '15000', 'ABC', '2019-10-19 12:02:41', '2019-10-19 12:02:41'),
 (6, 'Cash on hand', 'Upcoming filling', '2019-10-19', '4164', 'fthfdtghr', '2019-10-19 13:07:37', '2019-10-19 13:07:37'),
 (7, 'Add New +', 'Upcoming filling', '2019-10-31', '35000', 'To send', '2019-10-20 05:12:24', '2019-10-20 05:12:24'),
 (8, 'Cash on hand', 'Upcoming filling', '2019-10-02', '128000', 'XYZ', '2019-10-20 05:12:43', '2019-10-20 05:12:43'),
-(9, 'Add New +', 'Upcoming filling', '2019-10-10', '154856', 'dgbfgdnhbdnh', '2019-10-20 05:12:54', '2019-10-20 05:12:54');
+(9, 'Add New +', 'Upcoming filling', '2019-10-10', '154856', 'dgbfgdnhbdnh', '2019-10-20 05:12:54', '2019-10-20 05:12:54'),
+(12, 'Cash on hand', 'Upcoming filling', '2019-10-28', '352', 'dfbfd', '2019-10-28 10:21:43', '2019-10-28 10:21:43');
 
 -- --------------------------------------------------------
 
@@ -2858,8 +2907,8 @@ CREATE TABLE `ar_sales_customers` (
   `pin_code` varchar(100) NOT NULL,
   `country` varchar(50) NOT NULL,
   `shipping_address` varchar(50) NOT NULL,
-  `city_town_shipping` text NOT NULL,
-  `state_shipping` text NOT NULL,
+  `city_town_shipping` mediumtext NOT NULL,
+  `state_shipping` mediumtext NOT NULL,
   `pin_code_shipping` varchar(50) NOT NULL,
   `country_shipping` varchar(50) NOT NULL,
   `notes` varchar(50) NOT NULL,
@@ -2868,7 +2917,7 @@ CREATE TABLE `ar_sales_customers` (
   `pan_no` varchar(50) NOT NULL,
   `preferred_payment_method` varchar(50) NOT NULL,
   `preferred_delivery_method` varchar(50) NOT NULL,
-  `terms` text NOT NULL,
+  `terms` mediumtext NOT NULL,
   `opening_balance` varchar(50) NOT NULL,
   `as_of` varchar(50) NOT NULL,
   `attachment` varchar(50) NOT NULL,
@@ -2876,7 +2925,7 @@ CREATE TABLE `ar_sales_customers` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_by` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_sales_customers`
@@ -2909,19 +2958,19 @@ CREATE TABLE `ar_sales_invoice` (
   `msg_on_statement` varchar(50) NOT NULL,
   `attachment` varchar(50) NOT NULL,
   `invoice_details` varchar(100) NOT NULL,
-  `created_at` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
-  `updated_at` timestamp(6) NOT NULL DEFAULT current_timestamp(6)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_sales_invoice`
 --
 
 INSERT INTO `ar_sales_invoice` (`id`, `invoice_no`, `customer`, `customer_email`, `billing_address`, `terms`, `invoice_date`, `due_date`, `place_of_supply`, `msg_on_invoice`, `msg_on_statement`, `attachment`, `invoice_details`, `created_at`, `updated_at`) VALUES
-(1, 1001, 'Add New +', 'hfgh@df.cvb', 'yuygu', 'Net 15', '2019-11-08', '2019-11-08', 'Chandigarh', 'gyug', 'ugygy', 'New DOC Document.doc', '', '2019-10-23 06:50:54.000000', '2019-10-23 06:50:54.000000'),
-(2, 1001, 'Add New +', 'hfgh@df.cvb', 'dsdsa', 'Net 15', '2019-11-07', '2019-11-09', 'Chandigarh', 'sada', 'dsad', 'New DOC Document.doc', '', '2019-10-23 06:52:13.000000', '2019-10-23 06:52:13.000000'),
-(3, 1001, 'Add New +', 'hfgh@df.cvb', 'hfhfd', 'Net 30', '2019-10-31', '2019-11-08', 'Delhi', 'gdgd', 'gdg', 'New DOC Document.doc', 'hours,gddf,gfdg,9,787,5634564,10', '2019-10-23 11:27:42.000000', '2019-10-23 11:27:42.000000'),
-(4, 3252352, 'Add New +', 'a@d.com', 'My Billing Address', 'Net 15', '2019-10-23', '2019-10-29', 'Arunachal Pradesh', 'My Invoice', 'My Statement', 'simon-migaj-Utvwp12891U-unsplash.jpg', 'hours,rfwefwef,wefwef,1,1000,1000,10:services,rfwefwef,wefwef,2,2000,4000,2', '2019-10-25 09:16:57.000000', '2019-10-25 09:16:57.000000');
+(1, 1001, 'Add New +', 'hfgh@df.cvb', 'yuygu', 'Net 15', '2019-11-08', '2019-11-08', 'Chandigarh', 'gyug', 'ugygy', 'New DOC Document.doc', '', '2019-10-23 06:50:54', '2019-10-23 06:50:54'),
+(2, 1001, 'Add New +', 'hfgh@df.cvb', 'dsdsa', 'Net 15', '2019-11-07', '2019-11-09', 'Chandigarh', 'sada', 'dsad', 'New DOC Document.doc', '', '2019-10-23 06:52:13', '2019-10-23 06:52:13'),
+(3, 1001, 'Add New +', 'hfgh@df.cvb', 'hfhfd', 'Net 30', '2019-10-31', '2019-11-08', 'Delhi', 'gdgd', 'gdg', 'New DOC Document.doc', 'hours,gddf,gfdg,9,787,5634564,10', '2019-10-23 11:27:42', '2019-10-23 11:27:42'),
+(4, 3252352, 'Add New +', 'a@d.com', 'My Billing Address', 'Net 15', '2019-10-23', '2019-10-29', 'Arunachal Pradesh', 'My Invoice', 'My Statement', 'simon-migaj-Utvwp12891U-unsplash.jpg', 'hours,rfwefwef,wefwef,1,1000,1000,10:services,rfwefwef,wefwef,2,2000,4000,2', '2019-10-25 09:16:57', '2019-10-25 09:16:57');
 
 -- --------------------------------------------------------
 
@@ -2932,13 +2981,13 @@ INSERT INTO `ar_sales_invoice` (`id`, `invoice_no`, `customer`, `customer_email`
 CREATE TABLE `ar_state` (
   `id` int(10) UNSIGNED NOT NULL,
   `org_id` int(11) DEFAULT NULL,
-  `state` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `state` varchar(50) NOT NULL,
   `status` int(11) NOT NULL,
   `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '1 = ''delete''',
-  `ip_address` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `ip_address` varchar(20) NOT NULL,
   `modified_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_date` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_state`
@@ -3015,7 +3064,7 @@ CREATE TABLE `ar_taxes_return` (
   `status` varchar(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_taxes_return`
@@ -3047,26 +3096,26 @@ CREATE TABLE `ar_users` (
   `users_type` int(11) DEFAULT NULL COMMENT '''1'' Employee',
   `parent_id` int(11) DEFAULT NULL,
   `emp_id` int(11) DEFAULT NULL,
-  `username` varchar(111) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(111) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `phone` bigint(111) DEFAULT NULL,
-  `address` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` longtext DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `token_expire` datetime DEFAULT NULL,
   `status` int(11) DEFAULT NULL COMMENT '''0'' Inactive , ''1'' Active',
   `is_deleted` int(11) DEFAULT 0 COMMENT '''1'' =>delete',
   `deleted_by` int(11) DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL,
-  `ip_address` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ip_address` varchar(20) DEFAULT NULL,
   `modified_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_date` datetime DEFAULT NULL,
   `last_login` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ar_users`
@@ -3114,6 +3163,12 @@ ALTER TABLE `ar_expenses`
 -- Indexes for table `ar_expenses_customer`
 --
 ALTER TABLE `ar_expenses_customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ar_expenses_supplier`
+--
+ALTER TABLE `ar_expenses_supplier`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3202,7 +3257,7 @@ ALTER TABLE `ar_countries`
 -- AUTO_INCREMENT for table `ar_employees`
 --
 ALTER TABLE `ar_employees`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ar_expenses`
@@ -3215,6 +3270,12 @@ ALTER TABLE `ar_expenses`
 --
 ALTER TABLE `ar_expenses_customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `ar_expenses_supplier`
+--
+ALTER TABLE `ar_expenses_supplier`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ar_migrations`
@@ -3232,13 +3293,13 @@ ALTER TABLE `ar_org`
 -- AUTO_INCREMENT for table `ar_products_and_services`
 --
 ALTER TABLE `ar_products_and_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ar_record_payment`
 --
 ALTER TABLE `ar_record_payment`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `ar_sales_customers`
