@@ -96,6 +96,7 @@
     <td>{{$taxes}}</td>
     <td>{{$total}}</td>
      <td>
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
          <?php
          if($value['due_date'] < date("Y-m-d"))
          {

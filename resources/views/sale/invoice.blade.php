@@ -116,7 +116,21 @@
         ?>
         <td>{{$total}}</td>
         <td>{{$total}}</td>
-        <td><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Due in 30 days (Undelivered)</td>
+        <td>
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          <?php
+          if($value['due_date'] < date("Y-m-d"))
+          {
+              echo "Expired";
+          }
+          else{
+             $diff = strtotime($value['due_date']) - strtotime(date("Y-m-d"));
+                 if($diff==0) { echo "Expires Today"; }
+                 else { echo "Due in ".abs(round($diff / 86400))." Days"; }
+             }
+           ?>
+      </td>
+       
         <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
          Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
          <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
