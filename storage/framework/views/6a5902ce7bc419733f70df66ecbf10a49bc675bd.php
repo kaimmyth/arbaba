@@ -69,14 +69,14 @@
      </tr>
  </thead>
  <tbody>
-    @foreach($toReturn as $value)
+    <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <tr>
      <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-     <td>{{$value['invoice_date']}}</td>
+     <td><?php echo e($value['invoice_date']); ?></td>
      <td>Invoice</td>
-    <td>{{$value['invoice_no']}}</td>
-     <td>{{$value['customer']}}</td>
-     <td>{{$value['due_date']}}</td>
+    <td><?php echo e($value['invoice_no']); ?></td>
+     <td><?php echo e($value['customer']); ?></td>
+     <td><?php echo e($value['due_date']); ?></td>
      <?php
      $total=0;
      $amount=0;
@@ -93,10 +93,10 @@
          }
      }
      ?>
-     <td>{{$total}}</td>
-    <td>{{$amount}}</td>
-    <td>{{$taxes}}</td>
-    <td>{{$total}}</td>
+     <td><?php echo e($total); ?></td>
+    <td><?php echo e($amount); ?></td>
+    <td><?php echo e($taxes); ?></td>
+    <td><?php echo e($total); ?></td>
      <td>Open (Undelivered)</td>
      <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
       Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
@@ -112,7 +112,7 @@
    </div>
    </td>
    </tr>
-  @endforeach   
+  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
 
 </tbody>
 </table>
@@ -336,3 +336,4 @@
 </div>
 <!-- /.modal -->
 
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/allsale.blade.php ENDPATH**/ ?>

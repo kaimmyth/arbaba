@@ -15,4 +15,4 @@
 	<?php }else if(Session::get('message')){  ?>
 		toastr.info("<?php echo Session::get('message'); ?>");
 	<?php } ?>
-</script><?php /**PATH D:\xampp\htdocs\arbaba\resources\views/layouts/alert.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/layouts/alert.blade.php ENDPATH**/ ?>

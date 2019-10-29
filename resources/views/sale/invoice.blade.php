@@ -122,7 +122,7 @@
          <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
          <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
          <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
-         <a class="dropdown-item" href="javascript:void();" data-toggle="modal" data-target="#reminderModal">Send remainder</a>
+         <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send remainder</a>
           <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a>
          <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
           <a class="dropdown-item" href="#">View/Edit</a>
@@ -392,31 +392,33 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Send reminder email for&nbsp;</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Send reminder email for&nbsp;<span id="id_no"></span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+      <form action="{{url('sale/invoice/remainder_mail/'.$value['id'])}}" method="POST">
+        @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">To:</label>
-            <input type="text" class="form-control" id="recipient-name" value="">
+            <input type="text" class="form-control" id="reminder_recipient_email" name="reminder_recipient_email">
           </div>
           <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Subject:</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <label for="subject" class="col-form-label">Subject:</label>
+                <input type="text" class="form-control" id="subject" name="subject">
               </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea class="form-control" id="message_text" name="message_text" rows="6"></textarea>
           </div>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-primary">Send</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
@@ -438,12 +440,29 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send</button>
+              <button type="submit" class="btn btn-primary">Send</button>
             </div>
           </div>
         </div>
       </div>
 
+
+
+      <script>
+        function sendReminder(email,id,name){
+          var subject=`Reminder: Invoice `+id+` from technical`;
+          var messageText = `Dear `+name+`,
+Just a reminder that we have not received a payment for this invoice yet. 
+Let us know if you have questions.
+          
+Thanks for your business!`;
+          $("#reminder_recipient_email").val(email);
+          $("#id_no").html(id);
+          $("#reminderModal").modal("show");
+          $("#message_text").val(messageText);
+          $("#subject").val(subject);
+        }
+      </script>
 
 <script>
 

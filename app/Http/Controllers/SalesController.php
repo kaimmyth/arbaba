@@ -15,8 +15,11 @@ class SalesController extends Controller
     //All Sales
     public function view_all_sales()
     {
+        $toReturn=array();
+        $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
+
             $data['content'] ='sale.allsale';
-            return view('layouts.content',compact('data'));
+            return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
        
     }
 
@@ -158,7 +161,7 @@ class SalesController extends Controller
         $toReturn=array();
         $toReturn=products_and_services::get()->toArray();
 
-        //return $toReturn;
+       
         $data['content'] = 'sale.products-services';
         return view('layouts.content', compact('data'))->with('toReturn', $toReturn);
     }
@@ -224,6 +227,7 @@ class SalesController extends Controller
         //             ->subject('Tax Invoice');
         //     $message->from('tax_invoice@arbaba.com','AR BABA');
         // });
+        Session::flash('success', 'Mail has been sent successfully');
         
         return view('emails.sales_invoice_mail')->with('toReturn',$toReturn);
         
@@ -253,10 +257,22 @@ class SalesController extends Controller
         return redirect('sale/invoice')->with('toReturn',$toReturn);
     }
 
-    public function invoice_remainder_email($id="")
+    public function invoice_remainder_email(Request $request)
     {
-        $toReturn=array();
-        $toReturn=sales_invoice::where('id',$id)->get()->toArray();
-        return $toReturn; 
+       
+        // Mail::raw($request->message_text, function ($message) {
+        //     $message->from('tax_invoice@arbaba.com','AR BABA');
+        //     $message->to($request->reminder_recipient_email);
+        //     $message->subject($request->subject);
+        // });
+        
+      
+
+        Session::flash('success', 'Reminder has been sent successfully');
+
+        return redirect('sale/invoice');
+    
     }
+    
+      
 }

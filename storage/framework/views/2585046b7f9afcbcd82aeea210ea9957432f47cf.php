@@ -60,4 +60,4 @@
         </div>
     </body>
 </html>
-<?php /**PATH D:\xampp\htdocs\arbaba\resources\views/errors/minimal.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/errors/minimal.blade.php ENDPATH**/ ?>

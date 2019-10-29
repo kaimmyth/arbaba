@@ -545,8 +545,6 @@ function viewEditExpenses(purpose, id){
     });
 }
 </script>
-
-
     
 
-                        <?php /**PATH D:\xampp\htdocs\arbaba\resources\views/expenses/expenses.blade.php ENDPATH**/ ?>
+                        <?php /**PATH C:\xampp\htdocs\arbaba\resources\views/expenses/expenses.blade.php ENDPATH**/ ?>

@@ -446,4 +446,4 @@
         $("input[name='demo0']").TouchSpin({});
     });
 </script>
-<?php /**PATH D:\xampp\htdocs\arbaba\resources\views/layouts/footer.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/layouts/footer.blade.php ENDPATH**/ ?>

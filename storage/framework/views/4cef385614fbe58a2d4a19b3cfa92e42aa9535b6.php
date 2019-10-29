@@ -26,4 +26,4 @@
         </div>
       </div>
     </div>
-  </section><?php /**PATH D:\xampp\htdocs\arbaba\resources\views/errors/comming-soon.blade.php ENDPATH**/ ?>
+  </section><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/errors/comming-soon.blade.php ENDPATH**/ ?>

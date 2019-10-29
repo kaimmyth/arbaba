@@ -60,7 +60,7 @@
         <li><a href="<?php echo e(url('sale/all-sale')); ?>">All Sales</a></li>
         <li><a href="<?php echo e(url('sale/invoice')); ?>">Invoices</a></li>
         <li><a href="<?php echo e(url('sale/customers')); ?>">Customers</a></li>
-        <li><a href="<?php echo e(url('sale/products&services')); ?>">Products & Services</a></li>
+        <li><a href="<?php echo e(url('sale/products-and-services')); ?>">Products & Services</a></li>
       </ul>
     </li>
     <li class="has_sub">
@@ -117,4 +117,4 @@
 </div>
 </div>
 <!-- Left Sidebar End --> 
-<?php /**PATH D:\xampp\htdocs\arbaba\resources\views/layouts/menubar.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/layouts/menubar.blade.php ENDPATH**/ ?>

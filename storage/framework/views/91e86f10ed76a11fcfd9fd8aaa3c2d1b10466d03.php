@@ -3,6 +3,16 @@
     margin-right: 0px;
     margin-left: 0px;
   }
+
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    width: 100%;
+  }
 </style>
 <!-- Start content -->
 <div class="content-page" >
@@ -16,50 +26,49 @@
           <ol class="breadcrumb pull-right">
             <li><a href="#">Home </a></li>
             <li><a href="#">Taxes </a></li>
-            <li class="active">Return</li>
+            <li class="active">Payments History</li>
           </ol>
         </div>
       </div>
 
 
       <div class="card">
-        <h4 style="margin-left: 4px;">Returns</h4>
+        <h4 style="margin-left: 4px;">Payments History</h4>
+        <div class="col-md-12" style="text-align: right;">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" style="float:right;margin-top: 1%;" ><i class="md md-add-circle-outline"></i> Add Tax</button>  
+        </div>
         <div class="row"><br><br><br>
           <div class="col-md-12 col-sm-12 col-12">
-           <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" style="float:right;margin-top: 1%;" ><i class="md md-add-circle-outline"></i> Add Tax</button><br>
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#custom-width-modal" style="float:right;margin-top: 1%;" >Record Payment</button>  
+           <br>
            <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
             <thead>
               <tr>
-                <th>START DATE</th>
-                <th>END DATE</th>
-                <th>PAYMENTS</th>
-                <th>STATUS</th>
-                <th>ACTION </th>
+                <th>DATE</th>
+                <th>TYPE</th>
+                <th>TAX PERIOD</th>
+                <th>AMOUNT</th>
+                <th>MEMO</th>
+                <th>ACTION</th>
               </tr>
             </thead>
             <tbody>
 
-              <tr>
-                <td>15/10/19</td>
-                <td>20/10/19</td>
-                <td>2000 Rs.</td>
-                <td>Open</td>
-                <td><a href="<?php echo e(URL::to('tax/return/calender')); ?>">Tax adjustment</a></td>
-              </tr>
+             
+              <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               
-              <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-               
+             
               <tr>
-                <td><?php echo e($toReturn[$key]->payment_date); ?></td>
-                <td></td>
-                <td><?php echo e($toReturn[$key]->payment_amount); ?></td>
-                <td>Open</td>
-                <td><a href="<?php echo e(URL::to('tax/return/calender')); ?>">Tax adjustment</a></td>
+                <td><?php echo e($value['payment_date']); ?></td> 
+                <td>Payment</td>
+                <td>01/01/2019 - 31/01/2019</td>
+                <td><?php echo e($value['payment_amount']); ?>&nbsp;Rs.</td>
+                <td><?php echo e($value['pay_memo']); ?></td>
+                <td><i class="fas fa-eye"></i> &nbsp; <a href="<?php echo e(url('tax/payment-history/delete/'.$value['id'])); ?>"><i class="fas fa-trash" title="delete"></i></a></td>
               </tr>
-              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-           </tbody>
+            </tbody>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           </table>
-
         </div>
       </div>
     </div>
@@ -72,7 +81,7 @@
 
 
 <!--  Modal content for the above example -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  style="display: none">
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -81,10 +90,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
-    <form action="<?php echo e(url('tax/return/add')); ?>" method="post">
-      <?php echo e(csrf_field()); ?>
-
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
@@ -108,8 +113,6 @@
                 </a>
               </li>
             </ul>
-
-            
             <div class="tab-content" style="border: 1px solid;">
               <div class="tab-pane  show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row">
@@ -117,22 +120,22 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tax Name</label>
-                        <input type="text"  name="tax_name"class="form-control" placeholder="" required>
+                        <input type="text" class="form-control" placeholder="">
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Description</label>
-                        <textarea class="form-control" name="tax_description" rows="2" style="height: 38px;" required></textarea>
+                        <textarea class="form-control" rows="2" style="height: 38px;"></textarea>
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tax agency</label>
-                        <select class="form-control" name="tax_agency" required>
-                          <option value="">Choose a tax agency</option>
+                        <select class="form-control">
+                          <option>Choose a tax agency</option>
                           <option>GST</option>
                           <option>VAT</option>
                           <option>SERVICE TAX</option>
@@ -168,16 +171,15 @@
                      <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Sales rate</label>
-                        <input type="text" class="form-control" name="sales_rate" id="sales_rate" placeholder="%" style="width: 70px;">
-                        <span id="sale_check"></span>
+                        <input type="text" class="form-control" placeholder="%" style="width: 70px;">
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Account</label>
-                        <select class="form-control" name="sales_account" required>
-                          <option value="">Select</option>
+                        <select class="form-control">
+                          <option>Select</option>
                           <option>Liability</option>
                           <option>Expense</option>
                         </select>
@@ -187,8 +189,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Show tax amount on return line</label>
-                        <select class="form-control" name="sales_tax_amount" required>
-                            <option value="">Select</option>
+                        <select class="form-control">
                           <option>Output - CGST</option>
                           <option>Output - SGST</option>
                           <option>Output - IGST</option>
@@ -212,16 +213,15 @@
                    <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Purchase rate</label>
-                      <input type="text" class="form-control" name="purchase_rate" id="purchase_rate" placeholder="%" style="width: 70px;">
-                      <span id="purchase_check"><span>
+                      <input type="text" class="form-control" placeholder="%" style="width: 70px;">
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Account</label>
-                      <select class="form-control" name="purchase_account" required>
-                        <option value="">Select</option>
+                      <select class="form-control">
+                        <option>Select</option>
                         <option>Liability</option>
                         <option>Expense</option>
                       </select>
@@ -231,8 +231,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Show tax amount on return line</label>
-                      <select class="form-control" name="purchase_tax_amount" required>
-                          <option value="">Select</option>
+                      <select class="form-control">
                         <option>Output - CGST</option>
                         <option>Output - SGST</option>
                         <option>Output - IGST</option>
@@ -258,22 +257,21 @@
              <div class="col-md-6">
               <div class="form-group">
                 <label for="exampleInputEmail1">Group name</label>
-                <input type="text" class="form-control" name="group_name" placeholder="" required>
+                <input type="text" class="form-control" placeholder="">
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="exampleInputEmail1">Description</label>
-                <textarea class="form-control" name="group_description" rows="2" style="height: 38px;" required></textarea>
+                <textarea class="form-control" rows="2" style="height: 38px;"></textarea>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Tax rate</label>
-                <select class="form-control" name="tax_rate" required>
-                    <option value="">Select</option>
+                <select class="form-control">
                   <option>Purchase CGST 0.125%</option>
                   <option>Sales IGST Exempt</option>
                   <option>Purchase IGST 3%</option>
@@ -288,8 +286,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Applicable on</label>
-                <select class="form-control" name="applicable_on" required>
-                    <option value="">Select</option>
+                <select class="form-control">
                   <option>Net amount</option>
                   <option>Tax amount</option>
                   <option>Net + Tax amount</option>
@@ -304,37 +301,36 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Tax name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="custom_tax_name" placeholder="" required>
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Description</label>
-                <textarea class="form-control"  name="custom_description" rows="2" style="height: 38px;" required></textarea>
+                <textarea class="form-control" rows="2" style="height: 38px;"></textarea>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Tax agency name</label>
-                <input type="text" class="form-control" name="tax_agency_name" id="exampleInputEmail1" placeholder="" required>
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Registration number</label>
-                <input type="text" class="form-control" name="registration_number" id="registration_number" placeholder="">
-                <span id="reg_no_check"><span>
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Start of current tax period</label>
-                <select class="form-control" name="tax_period" required>
-                  <option value="">Start of current tax period</option>
+                <select class="form-control">
+                  <option>Start of current tax period</option>
                   <option>January</option>
                   <option>February</option>
                   <option>March</option>
@@ -355,8 +351,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Filing frequency</label>
-                <select class="form-control" name="filling_frequency" required>
-                    <option value="">Select</option>
+                <select class="form-control">
                   <option>Monthly</option>
                   <option>Quarterly</option>
                   <option>Half-yearly</option>
@@ -368,8 +363,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Reporting method</label>
-                <select class="form-control" name="reporting_method" required>
-                    <option value="">Select</option>
+                <select class="form-control">
                   <option>Accural</option>
                   <option>Cash</option>
                 </select>
@@ -399,8 +393,7 @@
                 <div class="col-md-4">
                  <div class="form-group">
                   <label for="exampleInputEmail1">Sales rate</label>
-                  <input type="text" class="form-control"  name="tax_collected_on_sales"  id="tax_collected_on_sales" placeholder="%" style="width: 70px;">
-                <span id="tax_sales"></span>
+                  <input type="text" class="form-control" placeholder="%" style="width: 70px;">
                 </div>
               </div>
             </div>
@@ -411,8 +404,7 @@
               <div class="col-md-2">
                <div class="form-group">
                 <label for="exampleInputEmail1">Purchase rate</label>
-                <input type="text" class="form-control" name="tax_collected_on_purchase" id="tax_collected_on_purchase" placeholder="%" style="width: 70px;">
-                <span id="tax_purchase"></span>
+                <input type="text" class="form-control" placeholder="%" style="width: 70px;">
               </div>
             </div>
 
@@ -435,15 +427,100 @@
 
 </div>
 </div>
-
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-  <button type="submit" class="btn btn-primary waves-effect waves-light" id="validateform">Save</button>
+  <button type="button" class="btn btn-primary waves-effect waves-light">Save</button>
 </div>
-    </form>    
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+
+
+<!-- Custom Modals -->
+<form action="<?php echo e(url('tax/payment-history/add')); ?>" method="POST">
+	<?php echo csrf_field(); ?>
+	<div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none">
+	<div class="modal-dialog" style="width:55%">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title mt-0" id="custom-width-modalLabel">Record CST payment</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+				<label for="rec_cst_pay_purpose"></label>
+				<select class="form-control" name="rec_cst_pay_purpose" id="rec_cst_pay_purpose">
+					<option>Cash on hand</option>
+					<option style="color: green;">Add New +</option>                
+				</select>
+				</div>
+			</div> 
+
+			<div class="col-md-6" style="text-align: right;">
+				<div class="form-group">
+				<label>Payment Amount</label>
+				<h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="rec_cst_pay_payment_amount_span">0.00</span></h3>
+				</div>
+			</div>
+
+			<h5 style="margin-left: 12px; margin-top: 0px;">Balance &nbsp;<i class="fa fa-rupee-sign" aria-hidden="true"></i>-1,20,189.00</h5>
+			<hr>
+			</div>
+
+			<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="rec_cst_pay_cst_period">CST period</label>
+				<input type="text" class="form-control" name="rec_cst_pay_cst_period" id="rec_cst_pay_cst_period" placeholder="Upcoming filing" value="Upcoming filling" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="rec_cst_pay_payment_date">Payment date</label>
+				<div class="input-group">
+					<input type="text" class="form-control autodate" name="rec_cst_pay_payment_date" id="rec_cst_pay_payment_date" placeholder="mm/dd/yyyy">
+					<div class="input-group-append">
+					<span class="input-group-text"><i class="md md-event"></i></span>
+					</div>
+				</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="rec_cst_pay_payment_amount">Payment amount</label>
+				<input type="text" class="form-control" name="rec_cst_pay_payment_amount" id="rec_cst_pay_payment_amount" placeholder="">
+				<span id="rec_cst_pay_payment_amount_check">Please enter payment amount</span>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="rec_cst_pay_memo">Memo</label>
+				<input type="text" class="form-control" name="rec_cst_pay_memo" id="rec_cst_pay_memo" placeholder="">
+				<span id="rec_cst_pay_memo_check">Please enter memo</span>
+				</div>
+			</div>
+			</div>
+
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+			<button type="submit" class="btn btn-primary waves-effect waves-light" id="rec_cst_pay_submit">Save changes</button>
+		</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</form>
+
+
 
 
 <script type="text/javascript">
@@ -488,175 +565,65 @@
 </script>
 
 <script>
- $(document).ready(function()
- {
-   $("#sale_check").hide();
-   $("#purchase_check").hide();
-   $("#reg_no_check").hide();
-   $("#tax_sales").hide();
-   $("#tax_purchase").hide();
-
- var err_sale=true;
- var err_purchase=true;
- var err_reg_no=true;
- var err_tax_sale=true;
- var err_tax_purchase=true;
-
-
- $("#sales_rate").blur(function()
-		{
-			check_sales();
+	$(document).ready(function(){
+		$("#rec_cst_pay_payment_amount").keyup(function(){
+			var tmp = $("#rec_cst_pay_payment_amount").val();
+			//$("#rec_cst_pay_payment_amount").val(tmp.replace(/[^\d]/g, ""));
+			$("#rec_cst_pay_payment_amount").val(tmp.replace(/[^0-9]/g, ''));
+			$("#rec_cst_pay_payment_amount_span").html($("#rec_cst_pay_payment_amount").val());
 		});
 
-    function check_sales()
-{
-  
-var sale_val=$("#sales_rate").val();
+		$("#rec_cst_pay_payment_amount_check").hide();
+		$("#rec_cst_pay_memo_check").hide();
 
-var regexOnlyNumbers=/^[0-9]+$/;
-if (sale_val==""||regexOnlyNumbers.test(sale_val) != true){
-$("#sale_check").show();
-$("#sale_check").html("Please enter values between 1-9");
+		var err_rec_cst_pay_payment_amount=true;
+		var err_rec_cst_pay_memo=true;
 
-$("#sale_check").focus();
-$("#sale_check").css("color","red");
+		// cst amount validation
+		$("#rec_cst_pay_payment_amount").blur(function(){
+			check_rec_cst_pay_payment_amount();
+		});
+		function check_rec_cst_pay_payment_amount(){
+			var tmp = $("#rec_cst_pay_payment_amount").val();
+			if(tmp==""){
+				$("#rec_cst_pay_payment_amount_check").show();
+				$("#rec_cst_pay_payment_amount_check").css("color","red");
+				err_rec_cst_pay_payment_amount=false;
+			}
+			else{
+				err_rec_cst_pay_payment_amount=true;
+				$("#rec_cst_pay_payment_amount_check").hide();
+			}
+		}
 
-err_sale=false;
-}
-else
-{
-err_sale=true;
-$("#sale_check").hide();
-}
-}
+		// cst memo validation
+		$("#rec_cst_pay_memo").blur(function(){
+			check_rec_cst_pay_memo();
+		});
+		function check_rec_cst_pay_memo(){
+			var tmp = $("#rec_cst_pay_memo").val();
+			if(tmp==""){
+				$("#rec_cst_pay_memo_check").show();
+				$("#rec_cst_pay_memo_check").css("color","red");
+				err_rec_cst_pay_memo=false;
+			}
+			else{
+				err_rec_cst_pay_memo=true;
+				$("#rec_cst_pay_memo_check").hide();
+			}
+		}
 
-$("#purchase_rate").blur(function()
-		{
-			check_purchase();
+		$("#rec_cst_pay_submit").click(function(){
+			check_rec_cst_pay_payment_amount();
+			check_rec_cst_pay_memo();
+
+			if((err_rec_cst_pay_payment_amount==true)&&(err_rec_cst_pay_memo==true)){
+				return true;
+			}
+			else{
+				return false;
+			}
 		});
 
-    function check_purchase()
-{
-  
-var purchase_val=$("#purchase_rate").val();
-
-var regexOnlyNumbers=/^[0-9]+$/;
-
-if (purchase_val==""||regexOnlyNumbers.test(purchase_val) != true){
-$("#purchase_check").show();
-$("#purchase_check").html("Please enter values between 1-9");
-
-$("#purchase_check").focus();
-$("#purchase_check").css("color","red");
-err_purchase=false;
-}
-else
-{
-err_purchase=true;
-$("#purchase_check").hide();
-}
-}
-
-$("#registration_number").blur(function()
-		{
-			check_reg_no();
-		});
-
-    function check_reg_no()
-{
-var reg_no_val=$("#registration_number").val();
-
-var regexOnlyNumbers=/^[0-9]+$/;
-
-if (reg_no_val==""||regexOnlyNumbers.test(reg_no_val) != true){
-$("#reg_no_check").show();
-$("#reg_no_check").html("Please enter values between 1-9");
-
-$("#reg_no_check").focus();
-$("#reg_no_check").css("color","red");
-err_reg_no=false;
-}
-else
-{
-err_reg_no=true;
-$("#reg_no_check").hide();
-}
-}
-
-$("#tax_collected_on_sales").blur(function()
-		{
-			check_tax_sales();
-		});
-
-    function check_tax_sales()
-{
-  
-var tax_sale_val=$("#tax_collected_on_sales").val();
-
-var regexOnlyNumbers=/^[0-9]+$/;
-if (tax_sale_val==""||regexOnlyNumbers.test(tax_sale_val) != true){
-$("#tax_sales").show();
-$("#tax_sales").html("Please enter values between 1-9");
-
-$("#tax_sales").focus();
-$("#tax_sales").css("color","red");
-
-err_tax_sale=false;
-}
-else
-{
-  err_tax_sale=true;
-$("#tax_sales").hide();
-}
-}
-
-
-$("#tax_collected_on_purchase").blur(function()
-		{
-			check_tax_purchase();
-		});
-
-    function check_tax_purchase()
-{
-  
-var tax_purchase_val=$("#tax_collected_on_purchase").val();
-
-var regexOnlyNumbers=/^[0-9]+$/;
-if (tax_purchase_val==""||regexOnlyNumbers.test(tax_purchase_val) != true){
-$("#tax_purchase").show();
-$("#tax_purchase").html("Please enter values between 1-9");
-
-$("#tax_purchase").focus();
-$("#tax_purchase").css("color","red");
-
-err_tax_purchase=false;
-}
-else
-{
-  err_tax_purchase=true;
-$("#tax_purchase").hide();
-}
-}
- 
- $("#validatefrm").click(function()
- {
-  check_sales();
-	check_purchase();
-	check_reg_no();
-  check_tax_sales();
-  check_tax_purchase();
-
-   if((err_sale==true) && (err_purchase==true) && (err_reg_no==true) && (err_tax_sale==true) && (err_tax_purchase==true))
-   {
-     return true;
-   }  
-   else
-   {
-        return false;
-   }
- });
-
- });
-</script>
-
-<?php /**PATH D:\xampp\htdocs\arbaba\resources\views/taxes/return.blade.php ENDPATH**/ ?>
+	});
+</script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/taxes/payment_history.blade.php ENDPATH**/ ?>
