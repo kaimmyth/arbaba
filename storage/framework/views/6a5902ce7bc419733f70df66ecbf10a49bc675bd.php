@@ -60,7 +60,6 @@
          <th>No.</th>
          <th>Customer</th>
          <th>Due Date</th>
-         <th>Balance</th>
          <th>Total Before Tax</th>
          <th>Tax</th>
          <th>Total</th>
@@ -78,26 +77,37 @@
      <td><?php echo e($value['customer']); ?></td>
      <td><?php echo e($value['due_date']); ?></td>
      <?php
-     $total=0;
-     $amount=0;
+     $total_before_tax=0;
      $taxes=0;
+     $total=0;
      if($value["invoice_details"]!="")
      {
          $tmp = $value["invoice_details"];
          $tmp = explode(":",$tmp);
          for($i=0;$i<count($tmp);$i++){
              $to_show = explode(",",$tmp[$i]);
-             $taxes=(($to_show[5]*$to_show[6])/100);
-             $total+=$to_show[5]+$taxes;
-             $amount=$to_show[4]*$to_show[5];
+             $total_before_tax += $to_show[5];
+             $taxes += (($to_show[5]*$to_show[6])/100);
          }
      }
+    $total = $total_before_tax + $taxes;
      ?>
-     <td><?php echo e($total); ?></td>
-    <td><?php echo e($amount); ?></td>
+    <td><?php echo e($total_before_tax); ?></td>
     <td><?php echo e($taxes); ?></td>
     <td><?php echo e($total); ?></td>
-     <td>Open (Undelivered)</td>
+     <td>
+         <?php
+         if($value['due_date'] < date("Y-m-d"))
+         {
+             echo "Expired";
+         }
+         else{
+            $diff = strtotime($value['due_date']) - strtotime(date("Y-m-d"));
+                if($diff==0) { echo "Expires Today"; }
+                else { echo "Due in ".abs(round($diff / 86400))." Days"; }
+            }
+          ?>
+     </td>
      <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
       Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
       <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
