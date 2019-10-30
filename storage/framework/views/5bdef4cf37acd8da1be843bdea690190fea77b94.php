@@ -173,7 +173,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Display name as</label>
-                      <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as" disabled>
+                      <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as">
                     </div>
                   </div>
 
