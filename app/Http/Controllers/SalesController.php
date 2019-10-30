@@ -207,7 +207,7 @@ class SalesController extends Controller
         $product->preferred_delivery_method=$request->preferred_delivery_method;
         $product->terms=$request->terms;
         $product->opening_balance=$request->opening_balance;
-        $product->as_of=$request->as_of;
+        $product->as_of=date("Y-m-d",strtotime($request->as_of));
         $product->attachment="NA";
         
 

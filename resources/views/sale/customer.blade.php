@@ -140,7 +140,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Title</label>
-                      <input type="text" class="form-control" value="" id="title" name="title">
+                      <input type="text" class="form-control" value="" id="title" name="title" required>
                       <h6 id="title_val"></h6>
                     </div>
                   </div>
@@ -148,7 +148,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">First Name</label>
-                      <input type="text" class="form-control" value="" id="first_name" name="first_name" maxlength="20">
+                      <input type="text" class="form-control" value="" id="first_name" name="first_name" maxlength="20" required>
                       <h6 id="first_name_val"></h6>
                     </div>
                   </div>
@@ -173,7 +173,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Display name as</label>
-                      <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as">
+                      <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as" disabled>
                     </div>
                   </div>
 
@@ -216,7 +216,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Phone</label>
-                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no" reqired>
+                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no" data-mask="(999) 999-9999" reqired>
                     </div>
                     <h6 id="phone_val"></h6>
                   </div>
@@ -224,7 +224,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Mobile</label>
-                      <input type="text" class="form-control" value="" id="mobile_no" name="mobile_no">
+                      <input type="text" class="form-control" value="" id="mobile_no" name="mobile_no" data-mask="(999) 999-9999">
                     </div>
                     <h6 id="mobile_no_val"></h6>
                   </div>
