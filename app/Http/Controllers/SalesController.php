@@ -225,11 +225,14 @@ class SalesController extends Controller
 
     public function view_customers()
     {
-        $toReturn=array();
-        $toReturn=sales_customers::get()->toArray();
-
-        $data['content'] ='sale.customer';
-        return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
+    $toReturnInvoice=array();
+    $toReturnInvoice=sales_invoice::get()->toArray();
+    
+    $toReturn=array();
+    $toReturn=sales_customers::get()->toArray();
+    
+    $data['content'] ='sale.customer';
+    return view('layouts.content',compact('data','product'))->with(compact('toReturn', 'toReturnInvoice'));
     }
 
     public function view_products_and_services()

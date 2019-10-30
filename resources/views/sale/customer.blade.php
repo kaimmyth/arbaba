@@ -34,30 +34,100 @@
       </div>
 
 
+      <?php
+      $overdue_count=$overdue_amount=$open_invoice_count= $estimate_count= $estimate_amount=$paid_count=$paid_amount=0;
+      $total_before_tax=0;
+     $taxes=0;
+     $total=0;
+      ?>
+      @foreach($toReturnInvoice as $value)
+        <?php
+        // overdue
+        if($value['due_date'] < date("Y-m-d")&&$value['status']==1)
+        {
+            $overdue_count++;
+            if($value["invoice_details"]!="")
+            {
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $overdue_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        }
 
+         //open invoie
+         if($value['status'] == 1)
+            {
+                $open_invoice_count++;
+            }
+            if($value["invoice_details"]!="")
+     {
+         $tmp = $value["invoice_details"];
+         $tmp = explode(":",$tmp);
+         for($i=0;$i<count($tmp);$i++){
+             $to_show = explode(",",$tmp[$i]);
+             $total_before_tax += $to_show[5];
+             $taxes += (($to_show[5]*$to_show[6])/100);
+         }
+     }
+    $total = $total_before_tax + $taxes;
+
+    //estimate
+    if($value['due_date'] > date("Y-m-d") && $value['status']==1)
+        {
+            $estimate_count++;
+            if($value["invoice_details"]!="")
+            {
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $estimate_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        }
+
+        //paid
+        if($value['status'] == 2 && date('Y-m-d', strtotime('today - 30 days')))
+        {
+            $paid_count++;
+            if($value["invoice_details"]!="")
+            {
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $paid_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        }
+         ?>
+      @endforeach
       <div class="row">
         <div class="col-lg-12">
          <div class="card">
           <div class="row">
            <div class="col-md-3 dv" style="background-color: #21ABF6;">
-            <i class="fa fa-calculator sz" aria-hidden="true"></i>  0
-            <p style="font-size: 15px; font-weight: 600;">0 ESTIMATE</p>
+            <i class="fa fa-calculator sz" aria-hidden="true"></i>  {{$estimate_amount}}
+            <p style="font-size: 15px; font-weight: 600;">{{$estimate_count}} ESTIMATE</p>
           </div>
           <div class="col-md-3 dv" style="background-color: #0077C5;">
-            <i class="fa fa-file sz" aria-hidden="true"></i>  0
-            <p style="font-size: 15px; font-weight: 600;">0 UNBILLED ACTIVITY</p>
+            <i class="fa fa-file sz" aria-hidden="true"></i>  {{$total}}
+            <p style="font-size: 15px; font-weight: 600;">{{$open_invoice_count}} UNBILLED ACTIVITY</p>
           </div>
           <div class="col-md-3 dv" style="background-color: #FF8000;">
-            <i class="fa fa-clock sz" aria-hidden="true"></i>  0
-            <p style="font-size: 15px; font-weight: 600;">0 OVERDUE</p>
+            <i class="fa fa-clock sz" aria-hidden="true"></i>  {{$overdue_amount}}
+            <p style="font-size: 15px; font-weight: 600;">{{$overdue_count}} OVERDUE</p>
           </div>
           <div class="col-md-3 dv" style="background-color: #BABEC5;">
-            <i class="fa fa-address-book sz" aria-hidden="true"></i>  0
-            <p style="font-size: 15px; font-weight: 600;">0 Open Invoice</p>
+            <i class="fa fa-address-book sz" aria-hidden="true"></i>  {{$total}}
+            <p style="font-size: 15px; font-weight: 600;">{{$open_invoice_count}} Open Invoice</p>
           </div>
           <div class="col-md-3 dv" style="background-color: #7FD000;">
-            <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  0
-            <p style="font-size: 15px; font-weight: 600;">0 PAID LAST 30 DAYS</p>
+            <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  {{$paid_amount}}
+            <p style="font-size: 15px; font-weight: 600;">{{$paid_count}} PAID LAST 30 DAYS</p>
           </div>
           <div class="col-md-12">
             <div class="col-md-12" style="text-align: right; margin-bottom: 4px;">
