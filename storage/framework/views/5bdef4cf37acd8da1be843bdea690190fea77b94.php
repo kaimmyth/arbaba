@@ -172,6 +172,7 @@
                         <a class="dropdown-item" href="#">Create Invoice</a>
                         <a class="dropdown-item" href="#">Create Sales Receipt</a>
                         <a class="dropdown-item" href="#">Create Estimate</a>
+                      <a class="dropdown-item" href="<?php echo e(url('sale/customer/delete/'.$items1['id'])); ?>">Delete</a>
                       </div></td>
 
                     </tr>
