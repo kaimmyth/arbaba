@@ -99,6 +99,7 @@ input[type=text]:focus {
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
                                 </div><!--input group-->
+                                <h6 id="last_name_val"></h6>
                             </div><!--end of from group-->
                             <div class="form-group">
                                 <label for="">Company</label>
@@ -112,6 +113,7 @@ input[type=text]:focus {
                                     <div class="input-group">
                                     <textarea class="form-control" rows="3" id="address" name="address"></textarea>
                                 </div><!--input group-->
+                                <h6 id="address_val"></h6>
                             </div><!--end of from group-->
 
                             <div class="form-group"style="width:49%;float:left;">
@@ -123,7 +125,9 @@ input[type=text]:focus {
 
                             <div class="form-group"style="width:49%;float:left;">
                                 <input type="text" id="pin_code" name="pin_code" class="form-control" placeholder="PIN Code">
-                            </div>
+                            <h6 id="pin_code_val"></h6>
+                        </div>
+                            
                             <div class="form-group"style="width:49%; float:left; margin-left:2%;">
                                 <input type="text" id="country" name="country" class="form-control" placeholder="Country">
                             </div>
@@ -138,6 +142,7 @@ input[type=text]:focus {
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
                                 </div><!--input group-->
+                                <h6 id="first_name_val"></h6>
                             </div><!--end of from group-->
                             <div class="form-group">
                                 <label for="">Middle Name</label>
@@ -159,6 +164,7 @@ input[type=text]:focus {
                                     <div class="input-group">
                                         <input type="text" id="pan_no" name="pan_no" class="form-control" placeholder="">
                                 </div><!--input group-->
+                                <h6 id="pan_no_val"></h6>
                             </div><!--end of from group-->
 
 
@@ -204,6 +210,7 @@ input[type=text]:focus {
                                         <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                     </div>
                                 </div><!--input group-->
+                                <h6 id="email_id_val"></h6>
                             </div><!--end of from group-->
                            
                             <div class="form-group">
@@ -214,6 +221,7 @@ input[type=text]:focus {
                                         <span class="input-group-text"><i class="fa fa-building-o"></i></span>
                                     </div>
                                 </div><!--input group-->
+                                <h6 id="company_val"></h6>
                             </div><!--end of from group-->
                             <div class="form-group">
                                 <label for="">Website</label>
@@ -242,6 +250,7 @@ input[type=text]:focus {
                                         <div class="input-group">
                                             <input type="text" id="account_no" name="account_no" class="form-control" placeholder="Appear in memo in terms of all payment"> 
                                     </div><!--input group-->
+                                    <h6 id="account_no_val"></h6>
                                 </div><!--end of from group-->
                                 <div class="form-group">
                                     <label for="">GSTIN</label>
@@ -260,6 +269,7 @@ input[type=text]:focus {
                                     <span class="input-group-text"><i class="fa fa-mobile" aria-hidden="true"></i></span>
                                 </div>
                             </div><!--input group-->
+                            <h6 id="mobile_no_val"></h6>
                         </div><!--end of fron group-->
                         <div class="form-group">
                             <label for="">Other</label>
@@ -286,6 +296,7 @@ input[type=text]:focus {
                                     <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                 </div>
                             </div><!--input group-->
+                            <h6 id="opening_balance_val"></h6>
                         </div><!--end of fron group-->
                         <div class="form-group" style="width:49%; float:left; margin-left:2%;">
                             <label for="">as of</label>
@@ -358,7 +369,7 @@ input[type=text]:focus {
                             <input type="text" name="hidden_input_purpose" value="add" hidden>
                             <input type="text" name="hidden_input_attachment" value="NA" hidden>
                             <!-- hidden inputs -->
-                            <button type="submit" class="btn btn-info waves-effect waves-light w-md m-b-5">Save</button>
+                            <button type="submit" class="btn btn-info waves-effect waves-light w-md m-b-5" id="submitBtn">Save</button>
                             <button type="button" class="btn btn-inverse btn-custom waves-effect waves-light m-b-5" class="close" data-dismiss="modal" aria-label="Close">Cancel</button>
                         </div>
                     </div>
@@ -367,311 +378,6 @@ input[type=text]:focus {
         </div>
     </div>
 </form>
-
-
-<!-- Start content -->                   
-{{-- <div class="content-page">
-        <div class="content">
-            <div class="container-fluid">
-                <!-- Page-Title -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <!--<h4 class="pull-left page-title">Other Charts</h4>-->
-                                <ol class="breadcrumb pull-right">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Spplier</a></li>
-                                    <li class="active">All Supplier</li>
-                                </ol>
-                            </div>
-                        </div>
-                      
-                        <div class="card card-border card-primary">                                                                                                                                                                         
-                            <div class="card-header"> </div> 
-                                <div class="card-body">
-                                        <form action="{{url('expenses/suppliers/add-edit')}}" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-md-3" style="float:left;">
-                                                    <div class="form-group">
-                                                        <label for="">Title</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="title" name="title" class="form-control" placeholder="Title">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                            </div>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-                                                    <div class="form-group">
-                                                        <label for="">Last Name</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last Name">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                            </div>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-                                                    <div class="form-group">
-                                                        <label for="">Company</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="company" name="company" class="form-control" placeholder="Company">
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-
-                                                    <div class="form-group">
-                                                        <label for="">Address</label>
-                                                            <div class="input-group">
-                                                            <textarea class="form-control" rows="3" id="address" name="address"></textarea>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-
-                                                    <div class="form-group"style="width:49%;float:left;">
-                                                        <input type="text" id="city" name="city" class="form-control" placeholder="City/Town">
-                                                    </div>
-                                                    <div class="form-group"style="width:49%; float:left; margin-left:2%;">
-                                                        <input type="text" id="state" name="state" class="form-control" placeholder="State">
-                                                    </div>
-
-                                                    <div class="form-group"style="width:49%;float:left;">
-                                                        <input type="text" id="pin_code" name="pin_code" class="form-control" placeholder="PIN Code">
-                                                    </div>
-                                                    <div class="form-group"style="width:49%; float:left; margin-left:2%;">
-                                                        <input type="text" id="country" name="country" class="form-control" placeholder="Country">
-                                                    </div>
-                                                </div><!--col-->
-
-                                            <div class="col-md-3" style="float:left;">
-                                                <div class="form-group">
-                                                        <label for="">First name</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="first_name" name="first_name" class="form-control" placeholder="First Name">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                            </div>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-                                                    <div class="form-group">
-                                                        <label for="">Middle Name</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="middle_name" name="middle_name" class="form-control" placeholder="Middle Name">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                            </div>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-
-                                                    <div class="form-group">
-                                                        <label for="">Display Name as</label>
-                                                        <input type="text" id="display_name_as" name="display_name_as" class="form-control" placeholder="Middle Name">
-   
-                                                    </div><!--end of from group-->
-                                                    <div class="form-group">
-                                                        <label for="">PAN NO.</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="pan_no" name="pan_no" class="form-control" placeholder="">
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-
-
-                                                    <div class="form-group">
-                                                        <input type="checkbox" id="myCheck" class="checkbox checkbox-success" onclick="myFunction()">&nbsp;&nbsp;<b>Apply TDS for this supplier</b><br>
-                                                            <div id="options" style="display:none;">
-                                                                <div class="form-group"style="width:49%;float:left;">
-                                                                    <label for="">Entity</label>  <br> 
-                                                                        <div class="input-group">
-                                                                            <select class="form-control">
-                                                                                <option>Choose a TDS ENTRY</option>
-                                                                                <option>Resident Indivisual</option>
-                                                                                <option>Resident Other</option>
-                                                                                <option>NRI Indivisual/HUF</option>
-                                                                                <option>NRI Other</option>
-                                                                            </select>
-                                                                    </div><!--input group-->
-                                                                </div>
-                                                                <div class="form-group"  style="width:49%;margin-left:2%;float:left;">
-                                                                    <label for="">Section</label> 
-                                                                        <div class="input-group">
-                                                                            <select class="form-control">
-                                                                                <option>Choose a TDS ENTRY</option>
-                                                                                <option>Resident Indivisual</option>
-                                                                                <option>Resident Other</option>
-                                                                                <option>NRI Indivisual/HUF</option>
-                                                                                <option>NRI Other</option>
-                                                                            </select>
-                                                                    </div><!--input group-->
-                                                            </div>
-                                                         <input type="checkbox" id="check1"><b>&nbsp;&nbsp;Override calculation threshold</b>
-                                                    </div>
-                                                </div><!--end of p-->
-                                            </div><!--col-->
-                                               
-
-                                            <div class="col-md-3" style="float:left;">
-                                                <div class="form-group">
-                                                        <label for="">Email Id.</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="email_id" name="email_id" class="form-control" placeholder="eg.company@gmail.com">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                                            </div>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-                                                   
-                                                    <div class="form-group">
-                                                        <label for="">Company</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Company Name">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-building-o"></i></span>
-                                                            </div>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-                                                    <div class="form-group">
-                                                        <label for="">Website</label>
-                                                            <div class="input-group">
-                                                                <input type="text" id="website" name="website" class="form-control" placeholder="eg.www.example.com">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-globe" aria-hidden="true"></i></span>
-                                                            </div>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-
-                                                <div class="form-group">
-                                                     <label for="">Terms</label>
-                                                        <div class="input-group">
-                                                            <select class="form-control" name="terms" id="terms">
-                                                                <option value="">--select--</option>
-                                                                <option>Due On receipt</option>
-                                                                <option>Net 15</option>
-                                                                <option>Nwt 30</option>
-                                                                <option>Nwt 60</option>
-                                                            </select>
-                                                        </div><!--input group-->
-                                                    </div><!--end of from group-->
-                                                        <div class="form-group">
-                                                            <label for="">Account No.</label>
-                                                                <div class="input-group">
-                                                                    <input type="text" id="account_no" name="account_no" class="form-control" placeholder="Appear in memo in terms of all payment"> 
-                                                            </div><!--input group-->
-                                                        </div><!--end of from group-->
-														<div class="form-group">
-                                                            <label for="">GSTIN</label>
-                                                                <div class="input-group">
-                                                                    <input type="text" id="gstin" name="gstin" class="form-control" placeholder="For eg. 29KHIT67895"> 
-                                                            </div><!--input group-->
-                                                        </div><!--end of from group-->
-                                                    </div>
-
-                                            <div class="col-md-3" style="float:left;">
-                                                <div class="form-group">
-                                                    <label for="">Mobile No.</label>
-                                                        <div class="input-group">
-                                                            <input type="text" placeholder="" data-mask="(999) 999-9999" name="mobile_no" id="mobile_no" class="form-control">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fa fa-mobile" aria-hidden="true"></i></span>
-                                                        </div>
-                                                    </div><!--input group-->
-                                                </div><!--end of fron group-->
-                                                <div class="form-group">
-                                                    <label for="">Other</label>
-                                                        <div class="input-group">
-                                                            <input type="text" placeholder="" class="form-control" name="other" id="other">
-                                                    </div><!--input group-->
-                                                </div><!--end of fron group-->
-                                                <div class="form-group">
-                                                    <label for="">Billing Rate(/hr)</label>
-                                                        <div class="input-group">
-                                                        <input type="text" id="billing_rate" name="billing_rate" class="form-control" placeholder="">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                                        </div>
-                                                    </div><!--input group-->
-                                                </div><!--end of fron group-->
-
-                                                
-                                                <div class="form-group" style="width:49%;float:left;">
-                                                    <label for="">Opening Balance</label>
-                                                        <div class="input-group">
-                                                        <input type="text" id="opening_balance" name="opening_balance" class="form-control" placeholder="">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                                        </div>
-                                                    </div><!--input group-->
-                                                </div><!--end of fron group-->
-                                                <div class="form-group" style="width:49%; float:left; margin-left:2%;">
-                                                    <label for="">as of</label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="as_of" name="as_of">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text"><i class="md md-event"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </div><!--end of fron group-->
-
-                                                <div class="form-group">
-                                                    <label for="">GST registration type</label>
-                                                        <div class="input-group">
-                                                        <select class="form-control" name="gst_reg_type" id="gst_reg_type">
-                                                            <option>--select--</option>
-                                                            <option>GST Registered Regular</option>
-                                                            <option>GST Registered Composition</option>
-                                                            <option>Oversas</option>
-                                                            <option>SEZ</option>
-                                                        </select>
-                                                    </div><!--input group-->
-                                                </div><!--end of from group-->
-												 <div class="form-group" style="width:49%;float:left;">
-                                                    <label for="">Tax Registration Number</label>
-                                                        <div class="input-group">
-                                                        <input type="text" id="tax_reg_no" name="tax_reg_no" class="form-control" placeholder="">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                                        </div>
-                                                    </div><!--input group-->
-                                                </div><!--end of fron group-->
-                                                <div class="form-group" style="width:49%; float:left; margin-left:2%;">
-                                                    <label for="">Effective Date</label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="effective_date" name="effective_date">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text"><i class="md md-event"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </div><!--end of fron group-->
-                                            </div>
-                                    </div><!-- card-body -->
-                                    <div class="row">
-									    <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Notes</label>
-                                                    <div class="input-group">
-                                                    <textarea class="form-control" rows="3" id="example-textarea-input" id="notes" name="notes"></textarea>
-                                                </div><!--input group-->
-                                            </div><!--end of from group-->
-                                        </div>
-										   <div class="col-md-6 portlets">
-												<div class="form-group">
-													<label for="">Attachments</label>
-														<div class="m-b-30">
-															<div class="dropzone" id="dropzone" style="min-height: 80px;">
-															    <div class="fallback">
-																    <input  type="file" name="attachment" id="attachment">
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-                                            <hr>
-                                            <div style="float:right;">
-                                                <button type="submit" class="btn btn-info waves-effect waves-light w-md m-b-5">Save</button>
-                                                <button type="button" class="btn btn-inverse btn-custom waves-effect waves-light m-b-5">Cancel</button>
-                                        </div>
-                                    </form>
-                                </div><!--card border-->
-                                </div><!--end of row-->
-                            </div><!--end of container fluid-->
-                        </div><!--end of content-->
-                    </div><!--end of content page--> --}}
 
 
 <!-- view model start -->
@@ -901,4 +607,335 @@ input[type=text]:focus {
             }
         });
     }
+</script>
+<script>
+     $("document").ready(function(){
+
+        $("#first_name_val").hide();
+        $("#last_name_val").hide();
+        $("#email_id_val").hide();
+        $("#mobile_no_val").hide();
+        $("#company_val").hide();
+        $("#pan_no_val").hide();
+        $("#address_val").hide();
+        $("#pin_code_val").hide();
+        $("#opening_balance_val").hide();
+        $("#account_no_val").hide();
+        
+ 
+        var err_first_name =true;
+        var err_last_name =true;
+        var err_email_id =true;
+        var err_mobile_no = true;
+        var err_company=true;
+        var err_pan_no=true;
+        var err_address=true;
+        var err_pin_code = true;
+        var err_opening_balance =true;
+        var err_account_no =true;
+
+
+        $("#first_name").blur(function(){
+
+            username1();
+        });
+        function username1(){
+
+          var k = $("#first_name").val();
+
+          if(k.length==""){
+
+            $("#first_name_val").show();
+            $("#first_name_val").html("**please input the first name");
+            $("#first_name_val").focus();
+            $("#first_name_val").css("color","red");
+
+              err_first_name=false;
+              return false;
+          }
+
+          else{
+
+              $("#first_name_val").hide();
+          }
+
+            if((k.length<3)||(k.length>15)){
+
+            $("#first_name_val").show();
+            $("#first_name_val").html("**user name must be between 3 to 10");
+            $("#first_name_val").focus();
+            $("#first_name_val").css("color","red");
+
+              err_first_name=false;
+              return false;
+          }
+          else{
+            err_first_name=true;
+            $("#first_name_val").hide();
+          } 
+        }
+       
+
+        $("#last_name").blur(function(){
+
+            username2();
+        });
+        function username2(){
+
+          var s = $("#last_name").val();
+
+          if(s.length==""){
+
+            $("#last_name_val").show();
+            $("#last_name_val").html("**please input last name");
+            $("#last_name_val").focus();
+            $("#last_name_val").css("color","red");
+
+              err_last_name=false;
+              return false;
+          }else{
+            err_last_name=true;
+            $("#last_name_val").hide();
+          }
+        }
+
+
+             $("#email_id").keyup(function(){
+
+            username3();
+        });
+        function username3(){
+
+          var h = $("#email_id").val();
+          var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+          var result = h.match(v);
+
+          if((h.length=="")||(result == null)){
+
+            $("#email_id_val").show();
+            $("#email_id_val").html("**please input valid email ");
+            $("#email_id_val").focus();
+            $("#email_id_val").css("color","red");
+
+              err_email_id=false;
+              return false;
+          }else{
+            err_email_id=true;
+            $("#email_id_val").hide();
+          }
+        }
+
+
+
+             $("#mobile_no").keyup(function(){
+
+            username4();
+        });
+        function username4(){
+
+          var q = $("#mobile_no").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+            $("#mobile_no_val").show();
+            $("#mobile_no_val").html("**please input numbers between 0-9 ");
+            $("#mobile_no_val").focus();
+            $("#mobile_no_val").css("color","red");
+
+              err_mobile_no=false;
+              return false;
+          }else{
+            err_mobile_no=true;
+            $("#mobile_no_val").hide();
+          }
+        }
+
+
+         $("#company").blur(function(){
+
+            username5();
+        });
+        function username5(){
+
+          var l = $("#company").val();
+
+          if(l.length==""){
+
+            $("#company_val").show();
+            $("#company_val").html("**please input company name  ");
+            $("#company_val").focus();
+            $("#company_val").css("color","red");
+
+              err_company=false;
+              return false;
+          }else{
+            err_company=true;
+            $("#company_val").hide();
+          }
+        }
+       
+
+           $("#pan_no").blur(function(){
+
+            username6();
+        });
+        function username6(){
+
+          var b = $("#pan_no").val();
+
+          if(b.length==""){
+
+            $("#pan_no_val").show();
+            $("#pan_no_val").html("**please input pan no ");
+            $("#pan_no_val").focus();
+            $("#pan_no_val").css("color","red");
+
+              err_pan_no=false;
+              return false;
+          }else{
+            err_pan_no=true;
+            $("#pan_no_val").hide();
+          }
+        }
+
+        
+
+           $("#address").blur(function(){
+
+            username7();
+        });
+        function username7(){
+
+          var b = $("#address").val();
+
+          if(b.length==""){
+
+            $("#address_val").show();
+            $("#address_val").html("**please input the address ");
+            $("#address_val").focus();
+            $("#address_val").css("color","red");
+
+              err_address=false;
+              return false;
+          }else{
+            err_address=true;
+            $("#address_val").hide();
+          }
+        }
+
+
+         $("#pin_code").blur(function(){
+
+            username8();
+        });
+        function username8(){
+          var z = $("#pin_code").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((z=="")|| regexOnlyNumbers.test(z)!=true){
+
+            $("#pin_code_val").show();
+            $("#pin_code_val").html("**please input valid pin code ");
+            $("#pin_code_val").focus();
+            $("#pin_code_val").css("color","red");
+
+              err_pin_code=false;
+              return false;
+          }else{
+            err_pin_code=true;
+            $("#pin_code_val").hide();
+          }
+        }
+                
+
+          $("#opening_balance").blur(function(){
+
+              username9();
+        });
+        function username9(){
+          var opening_bal = $("#opening_balance").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((opening_bal=="")|| regexOnlyNumbers.test(opening_bal)!=true){
+
+            $("#opening_balance_val").show();
+            $("#opening_balance_val").html("**please input valid balance ");
+            $("#opening_balance_val").focus();
+            $("#opening_balance_val").css("color","red");
+
+              err_opening_balance=false;
+              return false;
+          }else{
+            err_opening_balance=true;
+            $("#opening_balance_val").hide();
+          }
+        }
+
+         $("#account_no").blur(function(){
+
+            username10();
+        });
+        function username10(){
+          var ac_no = $("#account_no").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((ac_no=="")|| regexOnlyNumbers.test(ac_no)!=true){
+
+            $("#account_no_val").show();
+            $("#account_no_val").html("**please insert valid ac no ");
+            $("#account_no_val").focus();
+            $("#account_no_val").css("color","red");
+
+              err_account_no=false;
+              return false;
+          }else{
+            err_account_no=true;
+            $("#account_no_val").hide();
+          }
+        }
+
+     $("#submitBtn").click(function(){
+
+      err_first_name=true;
+      err_last_name=true;
+      err_email_id=true;
+      err_mobile_no=true;
+      err_company=true;
+      err_pan_no=true;
+      err_address=true;
+      err_pin_code=true;
+      err_opening_balance=true;
+      err_account_no=true;
+
+
+      username1();
+      username2();
+      username3();
+      username4();
+      username5();
+      username6();
+      username7();
+      username8();
+      username9();
+      username10();
+
+
+     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_company==true)&&(err_pan_no==true)&&(err_address==true)&&(err_pin_code==true)&&(err_opening_balance)&&(account_no))
+        {
+            return true;
+        }
+        else{
+            return false;
+            
+        }
+
+    });
+         
+
+
+
+
+  });
+
 </script>

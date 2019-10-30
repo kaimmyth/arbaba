@@ -194,6 +194,7 @@
                     <label for="exampleInputEmail1">Customer Email</label>
                     <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Enter email" required>
                 </div>
+                <h6 id="email_val"></h6>
             </div>
         </div>
 
@@ -213,6 +214,7 @@
                     <label for="exampleInputEmail1">Billing address</label>
                     <textarea class="form-control" rows="2" id="billing_address" name="billing_address" style="margin-top: 0px; margin-bottom: 0px; height: 87px;" required></textarea>
                 </div>
+                <h6 id="billing_address_val"></h6>
             </div>
 
             <div class="col-md-3">
@@ -264,6 +266,7 @@
                 <input type="text" class="form-control" value="" id="invoice_no" name="invoice_no" required>
                 <span id="invoice_check"></span>
             </div>
+            <h6 id="invoice_no_val"></h6>
         </div>
 
     </div>
@@ -454,7 +457,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Send</button>
+              <button type="submit" class="btn btn-primary" id="btnSubmit">Send</button>
             </div>
           </div>
         </div>
@@ -547,52 +550,7 @@ $('#invoice_no').keyup(function () {
      });
 </script>
 
-<script>
-     $(document).ready(function () {
 
-    $("#invoice_check").hide();
-
-    var err_invoice=false;
-    $('#invoice_no').blur(function () {
-    check_invoice();
-});
-
-function check_invoice()
-{
-    
-    var invoice_no_val=$("#invoice_no").val();
-    var regexOnlyNumbers=/^[0-9]+$/;
-    if(invoice_no_val=="" || regexOnlyNumbers.test(invoice_no_val) != true)
-    {
-        
-$("#invoice_check").show();
-$("#invoice_check").html("Please enter a valid number");
-$("#invoice_check").focus();
-$("#invoice_check").css("color","red");
-err_invoice=false;
-}
-else
-{
- err_invoice=true;
-$("#invoice_check").hide();
-}
-    
-}
-$("#btnSubmit").click(function()
- {
-    check_invoice();
-  
-if(( err_invoice==true) )
-   {
-     return true;
-   }  
-   else
-   {
-        return false;
-   }
- });
-});
-</script>
 
 
 <script>
@@ -643,5 +601,108 @@ getSalesDetailsValues();
         
     }
     </script>
+    <script>
+$(document).ready(function(){
+    $("#email_val").hide();
+    $("#billing_address_val").hide();
+    $("#invoice_no_val").hide();
+
+    var err_invoice=true;
+    var err_email_val=true;
+    var err_billing_address=true;
+
+
+    $("#customer_email").blur(function(){
+        email_id_f();
+    });
+    function email_id_f(){
+        var m = $("#customer_email").val();
+        var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        var result = m.match(v); 
+
+        if((m.length=="")||(result == null)){
+
+        $("#email_val").show();
+        $("#email_val").html("**please insert valid email ");
+        $("#email_val").focus();
+        $("#email_val").css("color","red");
+
+        err_email_val=false;
+            return false;
+        }
+        else{
+            err_email_val=true;
+            $("#email_val").hide();
+        }
+    }
+
+
+    $("#billing_address").blur(function(){
+        billing_address_f();
+    });
+    function billing_address_f(){
+
+        var d = $("#billing_address").val();
+
+        if(d.length==""){
+            $("#billing_address_val").show();
+            $("#billing_address_val").html("**please insert billing address ");
+            $("#billing_address_val").focus();
+            $("#billing_address_val").css("color","red");
+
+            err_billing_address=false;
+            return false;
+        }
+        else{
+            err_billing_address=true;
+            $("#billing_address_val").hide();
+        }
+    }
+
+    $('#invoice_no').blur(function () {
+        check_invoice();
+    });
+    function check_invoice()
+    {
+        
+        var invoice_no_val=$("#invoice_no").val();
+        var regexOnlyNumbers=/^[0-9]+$/;
+        if(invoice_no_val=="" || regexOnlyNumbers.test(invoice_no_val) != true)
+        {
+            
+            $("#invoice_check").show();
+            $("#invoice_check").html("Please enter a valid number");
+            $("#invoice_check").focus();
+            $("#invoice_check").css("color","red");
+            err_invoice=false;
+        }
+        else
+        {
+            err_invoice=true;
+            $("#invoice_check").hide();
+        }  
+    }
+
+    $("#btnSubmit").click(function(){
+        err_invoice = true;
+        err_email_val = true;
+        err_biiling_address=true;
+        
+        check_invoice();
+        email_id_f();
+        billing_address_f();
+
+        if((err_email_val==true)&&(err_billing_address==true)&&(err_invoice==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+});
+</script>
+
+   
 
    

@@ -170,6 +170,7 @@
                     <label for="exampleInputEmail1">Customer Email</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                 </div>
+                <h6 id="email_val"></h6>
             </div>
         </div>
 
@@ -189,6 +190,7 @@
                     <label for="exampleInputEmail1">Billing address</label>
                     <textarea class="form-control" rows="2" id="example-textarea-input" style="margin-top: 0px; margin-bottom: 0px; height: 87px;"></textarea>
                 </div>
+                <h6 id="billing_address_val"></h6>
             </div>
 
             <div class="col-md-3">
@@ -239,6 +241,7 @@
                 <label for="exampleInputEmail1">Invoice no.</label>
                 <input type="text" class="form-control" value="1001" id="example-text-input">
             </div>
+            <h6 id="invoice_no_val"></h6>
         </div>
 
     </div>
@@ -338,7 +341,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" id="btn">Save changes</button>
 </div>
 </div>
 <!-- /.modal-content -->
@@ -346,4 +349,121 @@
 <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+<script> 
 
+  $(document).ready(function(){
+
+    $("#email_val").hide();
+    $("#billing_address_val").hide();
+     $("#invoice_no_val").hide();
+
+
+    err_email_val = true;
+    err_biiling_address=true;
+    err_invoice_no = true;
+
+      $("#exampleInputEmail1").blur(function(){
+
+            email_id_f();
+         });
+            function email_id_f(){
+
+               var m = $("#exampleInputEmail1").val();
+               var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+               var result = m.match(v); 
+               
+            if((m.length=="")||(result == null)){
+
+                $("#email_val").show();
+                $("#email_val").html("**please insert valid email ");
+                $("#email_val").focus();
+                $("#email_val").css("color","red");
+
+                  err_email_val=false;
+                        return false;
+                }else{
+                  err_email_val=true;
+                  $("#email_val").hide();
+                }
+             }
+
+
+
+
+             $("#example-textarea-input").blur(function(){
+
+            billing_address_f();
+        });
+        function billing_address_f(){
+
+          var d = $("#example-textarea-input").val();
+
+          if(d.length==""){
+
+            $("#billing_address_val").show();
+            $("#billing_address_val").html("**please insert billing address ");
+            $("#billing_address_val").focus();
+            $("#billing_address_val").css("color","red");
+
+              err_billing_address=false;
+              return false;
+          }else{
+            err_billing_address=true;
+            $("#billing_address_val").hide();
+          }
+        }
+
+          $("#example-text-input").blur(function(){
+
+            invoice_no_f();
+        });
+        function invoice_no_f(){
+
+          var p = $("#example-text-input").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((p=="")|| regexOnlyNumbers.test(p)!=true){
+
+            $("#invoice_no_val").show();
+            $("#invoice_no_val").html("**please input numbers between 0-9 ");
+            $("#invoice_no_val").focus();
+            $("#invoice_no_val").css("color","red");
+
+              err_invoice_no=false;
+              return false;
+          }else{
+            err_invoice_no=true;
+            $("#invoice_no_val").hide();
+          }
+        }
+
+            $("#btn").click(function(){
+
+      
+       err_email_val = true;
+       err_biiling_address=true;
+       err_invoice_no = true;
+
+     
+
+
+    
+      email_id_f();
+      billing_address_f();
+      invoice_no_f();
+      
+
+     if((err_email_val==true)&&(err_billing_address==true)&&(err_invoice_no==true))
+     {
+        return true;
+     }else{
+        return false;
+
+     }
+
+     });
+         
+
+  });
+
+</script>
