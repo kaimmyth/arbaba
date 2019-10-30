@@ -28,25 +28,101 @@
          <div class="col-md-12" style="text-align: right;">
           <button class="btn btn-primary" data-toggle="modal" data-target="#full-width-modal">New transaction</button>
       </div>
+      <?php
+      $overdue_count=$overdue_amount=$open_invoice_count= $estimate_count= $estimate_amount=$paid_count=$paid_amount=0;
+      $total_before_tax=0;
+     $taxes=0;
+     $total=0;
+      ?>
+      <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php
+        // overdue
+        if($value['due_date'] < date("Y-m-d")&&$value['status']==1)
+        {
+            $overdue_count++;
+            if($value["invoice_details"]!="")
+            {
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $overdue_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        }
+
+         //open invoie
+         if($value['status'] == 1)
+            {
+                $open_invoice_count++;
+            }
+            if($value["invoice_details"]!="")
+     {
+         $tmp = $value["invoice_details"];
+         $tmp = explode(":",$tmp);
+         for($i=0;$i<count($tmp);$i++){
+             $to_show = explode(",",$tmp[$i]);
+             $total_before_tax += $to_show[5];
+             $taxes += (($to_show[5]*$to_show[6])/100);
+         }
+     }
+    $total = $total_before_tax + $taxes;
+
+    //estimate
+    if($value['due_date'] > date("Y-m-d") && $value['status']==1)
+        {
+            $estimate_count++;
+            if($value["invoice_details"]!="")
+            {
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $estimate_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        }
+
+        //paid
+        if($value['status'] == 2 && date('Y-m-d', strtotime('today - 30 days')))
+        {
+            $paid_count++;
+            if($value["invoice_details"]!="")
+            {
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $paid_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        }
+         ?>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       <div class="col-md-3 dv" style="background-color: #21ABF6;">
-          <i class="fa fa-calculator sz" aria-hidden="true"></i>  0
-          <p style="font-size: 15px; font-weight: 600;">0 ESTIMATE</p>
+          <i class="fa fa-calculator sz" aria-hidden="true"></i>  <?php echo e($estimate_amount); ?>
+
+      <p style="font-size: 15px; font-weight: 600;"><?php echo e($estimate_count); ?> ESTIMATE</p>
       </div>
       <div class="col-md-3 dv" style="background-color: #0077C5;">
-          <i class="fa fa-file sz" aria-hidden="true"></i>  0
-          <p style="font-size: 15px; font-weight: 600;">0 UNBILLED ACTIVITY</p>
+          <i class="fa fa-file sz" aria-hidden="true"></i> <?php echo e($total); ?>
+
+          <p style="font-size: 15px; font-weight: 600;"><?php echo e($open_invoice_count); ?> UNBILLED ACTIVITY</p>
       </div>
       <div class="col-md-3 dv" style="background-color: #FF8000;">
-          <i class="fa fa-clock sz" aria-hidden="true"></i>  0
-          <p style="font-size: 15px; font-weight: 600;">0 OVERDUE</p>
+          <i class="fa fa-clock sz" aria-hidden="true"></i>  <?php echo e($overdue_amount); ?>
+
+          <p style="font-size: 15px; font-weight: 600;"><?php echo e($overdue_count); ?> OVERDUE</p>
       </div>
       <div class="col-md-3 dv" style="background-color: #BABEC5;">
-          <i class="fa fa-address-book sz" aria-hidden="true"></i>  0
-          <p style="font-size: 15px; font-weight: 600;">0 Open Invoice</p>
+          <i class="fa fa-address-book sz" aria-hidden="true"></i>  <?php echo e($total); ?>
+
+      <p style="font-size: 15px; font-weight: 600;"><?php echo e($open_invoice_count); ?>&nbsp;Open Invoice</p>
       </div>
       <div class="col-md-3 dv" style="background-color: #7FD000;">
-          <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  0
-          <p style="font-size: 15px; font-weight: 600;">0 PAID LAST 30 DAYS</p>
+          <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  <?php echo e($paid_amount); ?>
+
+          <p style="font-size: 15px; font-weight: 600;"><?php echo e($paid_count); ?> PAID LAST 30 DAYS</p>
       </div>
   </div>
   <div class="tab-content colm">
@@ -100,12 +176,17 @@
          <?php
          if($value['due_date'] < date("Y-m-d"))
          {
-             echo "Expired";
+             echo "Expired(Opened)";
+         }
+         elseif($value['status'] == 2)
+         
+         {
+             echo "Paid(Closed)";
          }
          else{
             $diff = strtotime($value['due_date']) - strtotime(date("Y-m-d"));
-                if($diff==0) { echo "Expires Today"; }
-                else { echo "Due in ".abs(round($diff / 86400))." Days"; }
+                if($diff==0) { echo "Expires Today(Opened)"; }
+                else { echo "Due in ".abs(round($diff / 86400))." Days(Opened)"; }
             }
           ?>
      </td>
@@ -170,6 +251,7 @@
                     <label for="exampleInputEmail1">Customer Email</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                 </div>
+                <h6 id="email_val"></h6>
             </div>
         </div>
 
@@ -189,6 +271,7 @@
                     <label for="exampleInputEmail1">Billing address</label>
                     <textarea class="form-control" rows="2" id="example-textarea-input" style="margin-top: 0px; margin-bottom: 0px; height: 87px;"></textarea>
                 </div>
+                <h6 id="billing_address_val"></h6>
             </div>
 
             <div class="col-md-3">
@@ -239,6 +322,7 @@
                 <label for="exampleInputEmail1">Invoice no.</label>
                 <input type="text" class="form-control" value="1001" id="example-text-input">
             </div>
+            <h6 id="invoice_no_val"></h6>
         </div>
 
     </div>
@@ -338,7 +422,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" id="btn">Save changes</button>
 </div>
 </div>
 <!-- /.modal-content -->
@@ -346,5 +430,122 @@
 <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+<script> 
 
+  $(document).ready(function(){
+
+    $("#email_val").hide();
+    $("#billing_address_val").hide();
+     $("#invoice_no_val").hide();
+
+
+    err_email_val = true;
+    err_biiling_address=true;
+    err_invoice_no = true;
+
+      $("#exampleInputEmail1").blur(function(){
+
+            email_id_f();
+         });
+            function email_id_f(){
+
+               var m = $("#exampleInputEmail1").val();
+               var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+               var result = m.match(v); 
+               
+            if((m.length=="")||(result == null)){
+
+                $("#email_val").show();
+                $("#email_val").html("**please insert valid email ");
+                $("#email_val").focus();
+                $("#email_val").css("color","red");
+
+                  err_email_val=false;
+                        return false;
+                }else{
+                  err_email_val=true;
+                  $("#email_val").hide();
+                }
+             }
+
+
+
+
+             $("#example-textarea-input").blur(function(){
+
+            billing_address_f();
+        });
+        function billing_address_f(){
+
+          var d = $("#example-textarea-input").val();
+
+          if(d.length==""){
+
+            $("#billing_address_val").show();
+            $("#billing_address_val").html("**please insert billing address ");
+            $("#billing_address_val").focus();
+            $("#billing_address_val").css("color","red");
+
+              err_billing_address=false;
+              return false;
+          }else{
+            err_billing_address=true;
+            $("#billing_address_val").hide();
+          }
+        }
+
+          $("#example-text-input").blur(function(){
+
+            invoice_no_f();
+        });
+        function invoice_no_f(){
+
+          var p = $("#example-text-input").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((p=="")|| regexOnlyNumbers.test(p)!=true){
+
+            $("#invoice_no_val").show();
+            $("#invoice_no_val").html("**please input numbers between 0-9 ");
+            $("#invoice_no_val").focus();
+            $("#invoice_no_val").css("color","red");
+
+              err_invoice_no=false;
+              return false;
+          }else{
+            err_invoice_no=true;
+            $("#invoice_no_val").hide();
+          }
+        }
+
+            $("#btn").click(function(){
+
+      
+       err_email_val = true;
+       err_biiling_address=true;
+       err_invoice_no = true;
+
+     
+
+
+    
+      email_id_f();
+      billing_address_f();
+      invoice_no_f();
+      
+
+     if((err_email_val==true)&&(err_billing_address==true)&&(err_invoice_no==true))
+     {
+        return true;
+     }else{
+        return false;
+
+     }
+
+     });
+         
+
+  });
+
+</script>
 <?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/allsale.blade.php ENDPATH**/ ?>

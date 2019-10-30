@@ -18,8 +18,11 @@ class SalesController extends Controller
         $toReturn=array();
         $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
 
-            $data['content'] ='sale.allsale';
-            return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
+       
+        
+
+        $data['content'] ='sale.allsale';
+        return view('layouts.content',compact('data'))->with(compact('toReturn',$toReturn));
        
     }
 
@@ -49,6 +52,7 @@ class SalesController extends Controller
         $invoice->place_of_supply =$request->place_of_supply ; 
         $invoice->msg_on_invoice = $request->msg_on_invoice; 
         $invoice->msg_on_statement=$request->msg_on_statement;
+        $invoice->status=1;
         
         // for attachment
         $invoice->attachment = "";

@@ -100,7 +100,9 @@
                                 <label for="">First Name</label>
                                     <div class="input-group">
                                         <input type="" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+
                                     </div>
+                                   <h6 id="first_name_val"></h6>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
@@ -108,6 +110,7 @@
                                     <div class="input-group">
                                         <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name" >
                                     </div>
+                                    <h6 id="last_name_val"></h6>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
@@ -122,6 +125,7 @@
                                     <div class="input-group">
                                         <input type="email" class="form-control" id="email_id" name="email_id" placeholder="eg.example@gmail.com" required>
                                     </div>
+                                    <h6 id="email_id_val"></h6>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
@@ -136,6 +140,7 @@
                                     <div class="input-group">
                                     <input type="text" placeholder="" data-mask="(999) 999-9999" name="mobile_no" id="mobile_no" class="form-control">
                                     </div>
+                                    <h6 id="mobile_no_val"></h6>
                                 </div><!--form-group-->
 
                             <div class="form-group">
@@ -143,6 +148,7 @@
                                     <div class="input-group">
                                         <textarea class="form-control" rows="5" id="address" name="address" required></textarea>
                                     </div>
+                                    <h6 id="address_val"></h6>
                                 </div><!--form-group-->
 
                             <div class="form-group add-detail">
@@ -162,6 +168,7 @@
                                         <input style="display: block;width: 100;" type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code" required>
                                         <span id="pin_code_check"></span>
                                     </div>
+
                                 </div><!--form-group-->
 
                                 <div class="form-group add-detail">
@@ -175,6 +182,7 @@
                                     <div class="input-group">
                                         <input type="" class="form-control" id="billing_rate" name="billing_rate" placeholder="" required>
                                     </div>
+                                    <h6 id="billing_rate_val"></h6>
                                 </div><!--form-group--> 
 
                                 <div class="form-group display-detail"><br><br>
@@ -191,6 +199,7 @@
                                     <div class="input-group">
                                         <input type="" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." required>
                                     </div>
+                                    <h6 id="employee_id_no_val"></h6>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
@@ -198,6 +207,7 @@
                                     <div class="input-group">
                                         <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID" required>
                                     </div>
+                                    <h6 id="employee_id_val"></h6>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
@@ -362,57 +372,299 @@
     
     </script>  
 
-    <script>
+<script>
 $(document).ready(function()
  {
    $("#pin_code_check").hide();
+   $("#first_name_val").hide();
+   $("#last_name_val").hide();
+   $("#email_id_val").hide();
+   $("#mobile_no_val").hide();
+   $("#address_val").hide();
+   $("#billing_rate_val").hide();
+   $("#employee_id_no_val").hide();
+   $("#employee_id_val").hide();
   
   
 
- var err_pin_code=true;
+    var err_pin_code=true;
+    var err_first_name =true;
+    var err_last_name =true;
+    var err_email_id =true;
+    var err_mobile_no = true;
+    var err_address=true;
+    var err_billing_rate=true;
+    var err_employee_id_no=true;
+    var err_employee_id = true;
+
+
+
+
+
+
  
- $("#pin_code").blur(function()
-		{
-			check_bill_pin();
-		});
-        function check_bill_pin()
-{
+    $("#pin_code").blur(function()
+        {
+            username1();
+        });
+        function username1()
+        {
   
-var pin_val=$("#pin_code").val();
+          var pin_val=$("#pin_code").val();
 
-var regexOnlyNumbers=/^[0-9]+$/;
-if (pin_val==""||regexOnlyNumbers.test(pin_val) != true)
-{
-$("#pin_code_check").show();
-$("#pin_code_check").html("Please enter a valid pin");
+          var regexOnlyNumbers=/^[0-9]+$/;
 
-$("#pin_code_check").focus();
-$("#pin_code_check").css("color","red");
+         if (pin_val==""||regexOnlyNumbers.test(pin_val) != true)
+           {
+              $("#pin_code_check").show();
+              $("#pin_code_check").html("Please enter a valid pin");
+              $("#pin_code_check").focus();
+              $("#pin_code_check").css("color","red");
 
-err_pin_code=false;
-}
-else
-{
-err_pin_code=true;
-$("#billing_pin_check").hide();
-}
-}
+              err_pin_code=false;
+            }
+             else
+            {
+              err_pin_code=true;
+              $("#billing_pin_check").hide();
+            }
+        }
+
+        $("#first_name").blur(function(){
+
+            username2();
+        });
+        function username2(){
+
+          var k = $("#first_name").val();
+
+          if(k.length==""){
+
+            $("#first_name_val").show();
+            $("#first_name_val").html("**please input the first name");
+            $("#first_name_val").focus();
+            $("#first_name_val").css("color","red");
+
+              err_first_name=false;
+              return false;
+          }
+
+          else{
+                err_first_name=true;
+              $("#first_name_val").hide();
+              
+          }
+        }
+
+         $("#last_name").blur(function(){
+
+            username3();
+        });
+        function username3(){
+
+          var s = $("#last_name").val();
+
+          if(s.length==""){
+
+            $("#last_name_val").show();
+            $("#last_name_val").html("**please input last name");
+            $("#last_name_val").focus();
+            $("#last_name_val").css("color","red");
+
+              err_last_name=false;
+              return false;
+          }else{
+            err_last_name=true;
+            $("#last_name_val").hide();
+          }
+        }
 
 
-$("#btnSubmit").click(function()
- {
-    check_bill_pin();
-  
-if((err_pin_code==true) )
-   {
-     return true;
-   }  
-   else
-   {
-        return false;
-   }
- });
- });
+             $("#email_id").keyup(function(){
+
+            username4();
+        });
+        function username4(){
+
+          var h = $("#email_id").val();
+          var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+          var result = h.match(v);
+
+          if((h.length=="")||(result == null)){
+
+            $("#email_id_val").show();
+            $("#email_id_val").html("**please input valid email ");
+            $("#email_id_val").focus();
+            $("#email_id_val").css("color","red");
+
+              err_email_id=false;
+              return false;
+          }else{
+            err_email_id=true;
+            $("#email_id_val").hide();
+          }
+        }
+
+        $("#mobile_no").keyup(function(){
+
+            username5();
+        });
+        function username5(){
+
+          var q = $("#mobile_no").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+            $("#mobile_no_val").show();
+            $("#mobile_no_val").html("**please input numbers between 0-9 ");
+            $("#mobile_no_val").focus();
+            $("#mobile_no_val").css("color","red");
+
+              err_mobile_no=false;
+              return false;
+          }else{
+            err_mobile_no=true;
+            $("#mobile_no_val").hide();
+          }
+        }
+
+
+         $("#address").blur(function(){
+
+            username6();
+        });
+        function username6(){
+
+          var l = $("#address").val();
+
+          if(l.length==""){
+
+            $("#address_val").show();
+            $("#address_val").html("**please insert address  ");
+            $("#address_val").focus();
+            $("#address_val").css("color","red");
+
+              err_address=false;
+              return false;
+          }else{
+            err_address=true;
+            $("#address_val").hide();
+          }
+        }
+
+        $("#billing_rate").blur(function(){
+
+            username7();
+        });
+        function username7(){
+
+          var q = $("#billing_rate").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+            $("#billing_rate_val").show();
+            $("#billing_rate_val").html("**please input numbers between 0-9 ");
+            $("#billing_rate_val").focus();
+            $("#billing_rate_val").css("color","red");
+
+              err_billing_rate=false;
+              return false;
+          }else{
+            err_billing_rate=true;
+            $("#billing_rate_val").hide();
+          }
+        }
+
+         $("#employee_id_no").blur(function(){
+
+            username8();
+        });
+        function username8(){
+
+          var e = $("#employee_id_no").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((e=="")|| regexOnlyNumbers.test(e)!=true){
+
+            $("#employee_id_no_val").show();
+            $("#employee_id_no_val").html("**please input numbers between 0-9 ");
+            $("#employee_id_no_val").focus();
+            $("#employee_id_no_val").css("color","red");
+
+              err_employee_id_no=false;
+              return false;
+          }else{
+            err_employee_id_no=true;
+            $("#employee_id_no_val").hide();
+          }
+        }
+
+             $("#employee_id").blur(function(){
+
+            username8();
+        });
+        function username8(){
+
+          var p = $("#employee_id").val();
+
+          if(p.length==""){
+
+            $("#employee_id_val").show();
+            $("#employee_id_val").html("**please input employee id");
+            $("#employee_id_val").focus();
+            $("#employee_id_val").css("color","red");
+
+              err_employee_id=false;
+              return false;
+          }
+
+          else{
+                err_employee_id=true;
+              $("#employee_id_val").hide();
+              
+          }
+        }
+ $("#btnSubmit").click(function(){
+
+      err_first_name=true;
+      err_last_name=true;
+      err_email_id=true;
+      err_mobile_no=true;
+      err_address=true;
+      err_billing_rate=true;
+      err_employee_id_no=true;
+      err_employee_id=true;
+     
+
+      username1();
+      username2();
+      username3();
+      username4();
+      username5();
+      username6();
+      username7();
+      username8();
+     
+
+
+     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_address==true)&&(err_billing_rate==true)&&(err_employee_id_no==true)&&(err_employee_id==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+            
+        }
+
+    });
+         
+
+
+
+
+  });
     </script>
 
 

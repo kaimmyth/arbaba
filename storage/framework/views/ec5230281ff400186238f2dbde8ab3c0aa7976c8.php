@@ -109,6 +109,7 @@
                                             
                                             <input type="text" name="expenses_payee_id" id="expenses_payee_id" class="form-control" placeholder="Who do you pay?">
                                         </div>
+                                        <h6 id="payee_val"></h6>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Payment Account</label>
@@ -122,6 +123,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
                                             </div>
+                                            <h6 id="payment_account_val"></h6>
                                         </div>
                                     </div>
                                 </div><!-- card-body -->
@@ -137,6 +139,7 @@
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i class="md md-event"></i></span>
                                                 </div>
+                                                <h6 id="payment_date_val"></h6>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -151,6 +154,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
                                             </div>
+                                            <h6 id="payment_method_val"></h6>
                                         </div>
                                     </div>
                             </div><!-- card-body -->
@@ -161,7 +165,8 @@
                                 <div class="form-group row">
                                     <label for="" class="control-label">Ref No.</label><br>
                                     <input type="text" class="form-control" name="expenses_ref_no" id="expenses_ref_no" placeholder="">
-                                </div>                                       
+                                </div>   
+                                <h6 id="ref_no_val"></h6>                                    
                             </div>
                         </div>
                         <hr>
@@ -255,7 +260,7 @@
                         <input type="text" name="hidden_input_purpose" value="add" hidden>
                         <input type="text" name="hidden_input_attachment" value="NA" hidden>
                         <!-- hidden inputs -->
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">Save & Close</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit">Save & Close</button>
                     </div>
                     <div class="pull-right">
                         <a href="#" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal" aria-label="Close">Cancel</a>
@@ -354,7 +359,7 @@
                                                 <th>Tax Category</th>
                                                 <th>Description</th>
                                                 <th>Amount</th>
-                                                <th>Tax</th>
+                                                <th>Tax(%)</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
@@ -546,5 +551,159 @@ function viewEditExpenses(purpose, id){
 }
 </script>
     
+    <script>
+ $(document).ready(function(){
+
+
+    $("#payee_val").hide();
+    $("#payment_date_val").hide();
+    $("#payment_account_val").hide();
+    $("#payment_method_val").hide();
+    $("#ref_no_val").hide();
+
+    var err_payee=true;
+    var err_payment_date=true;
+    var err_payment_account=true;
+    var err_payment_method=true;
+    var err_ref_no=true;
+
+
+    
+
+
+    $("#expenses_payee_id").blur(function(){
+        payee_f();
+    });
+    function payee_f(){
+
+        var d = $("#expenses_payee_id").val();
+
+        if(d.length==""){
+            $("#payee_val").show();
+            $("#payee_val").html("**please insert payee ");
+            $("#payee_val").focus();
+            $("#payee_val").css("color","red");
+
+            err_payee=false;
+            return false;
+        }
+        else{
+            err_payee=true;
+            $("#payee_val").hide();
+        }
+    }
+
+     $("input[name='expenses_payment_date']").blur(function(){
+        payment_date_f();
+    });
+    function payment_date_f(){
+
+        var t = $("input[name='expenses_payment_date']").val();
+
+        if(t.length==""){
+            $("#payment_date_val").show();
+            $("#payment_date_val").html("**please insert payment data ");
+            $("#payment_date_val").focus();
+            $("#payment_date_val").css("color","red");
+
+            err_payment_date=false;
+            return false;
+        }
+        else{
+            err_payment_date=true;
+            $("#payment_date_val").hide();
+        }
+    }
+
+     $("#expenses_payment_account").blur(function(){
+        payment_account_f();
+    });
+    function payment_account_f(){
+
+        var y = $("#expenses_payment_account").val();
+
+        if(!y){
+            $("#payment_account_val").show();
+            $("#payment_account_val").html("**please insert payment account ");
+            $("#payment_account_val").focus();
+            $("#payment_account_val").css("color","red");
+
+            err_payment_account=false;
+            return false;
+        }
+        else{
+            err_payment_account=true;
+            $("#payment_account_val").hide();
+        }
+    }
+
+    $("#expenses_payment_method").blur(function(){
+        payment_method_f();
+    });
+    function payment_method_f(){
+
+        var v = $("#expenses_payment_method").val();
+
+        if(!v){
+            $("#payment_method_val").show();
+            $("#payment_method_val").html("**please insert payment method ");
+            $("#payment_method_val").focus();
+            $("#payment_method_val").css("color","red");
+
+            err_payment_method=false;
+            return false;
+        }
+        else{
+            err_payment_method=true;
+            $("#payment_method_val").hide();
+        }
+    }
+
+    $("#expenses_ref_no").blur(function(){
+        ref_no_f();
+    });
+    function ref_no_f(){
+
+        var p = $("#expenses_ref_no").val();
+
+        if(p.length==""){
+            $("#ref_no_val").show();
+            $("#ref_no_val").html("**please insert ref no ");
+            $("#ref_no_val").focus();
+            $("#ref_no_val").css("color","red");
+
+            err_ref_no=false;
+            return false;
+        }
+        else{
+            err_ref_no=true;
+            $("#ref_no_val").hide();
+        }
+    }
+
+    $("#btnSubmit").click(function(){
+         err_payee=true;
+         err_payment_date=true;
+         err_payment_account=true;
+         err_payment_method=true;
+         err_ref_no=true;
+        
+        payee_f();
+        payment_date_f();
+        payment_account_f();
+        payment_method_f();
+        ref_no_f();
+
+
+        if((err_payee==true)&&(err_payment_date==true)&&(err_payment_account==true)&&(err_payment_method==true)&&(err_ref_no==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+});
+</script>
 
                         <?php /**PATH C:\xampp\htdocs\arbaba\resources\views/expenses/expenses.blade.php ENDPATH**/ ?>
