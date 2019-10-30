@@ -140,29 +140,34 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Title</label>
-                      <input type="text" class="form-control" value="" id="title" name="title">
+                      <input type="text" class="form-control" value="" id="title" name="title" required>
+                      <h6 id="title_val"></h6>
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">First Name</label>
-                      <input type="text" class="form-control" value="" id="first_name" name="first_name">
+                      <input type="text" class="form-control" value="" id="first_name" name="first_name" maxlength="20" required>
+                      <h6 id="first_name_val"></h6>
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Last Name</label>
-                      <input type="text" class="form-control" value="" id="last_name" name="last_name">
+                      <input type="text" class="form-control" value="" id="last_name" name="last_name" required  maxlength="20">
                     </div>
+                    <h6 id="last_name_val"></h6>
                   </div>
 
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Company</label>
                       <input type="text" class="form-control" value="" id="company" name="company">
+                      
                     </div>
+                    <h6 id="company_val"></h6>
                   </div>
 
                   <div class="col-md-12">
@@ -185,12 +190,13 @@
                         <option>Deemed exports- EOU's, STP's EHTP's etc</option>
                       </select>
                     </div>
+                        <h6 id="gst_reg__val"></h6>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">GSTIN</label>
-                      <input type="text" class="form-control" value="35AABCS1429B1ZX" id="gst_in" name="gst_in" readonly="">
+                      <input type="text" class="form-control" value="35AABCS1429B1ZX" id="gst_in" name="gst_in" readonly="" >
                     </div>
                   </div>
                 </div>
@@ -202,15 +208,17 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Email</label>
-                      <input type="email" class="form-control" id="email_id" name="email_id" placeholder="Enter email">
+                      <input type="email" required pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control" id="email_id" name="email_id" placeholder="Enter email" >
                     </div>
+                    <h6 id="email_id_val"></h6>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Phone</label>
-                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no">
+                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no" reqired>
                     </div>
+                    <h6 id="phone_val"></h6>
                   </div>
 
                   <div class="col-md-4">
@@ -218,6 +226,7 @@
                       <label for="exampleInputEmail1">Mobile</label>
                       <input type="text" class="form-control" value="" id="mobile_no" name="mobile_no">
                     </div>
+                    <h6 id="mobile_no_val"></h6>
                   </div>
 
                   <div class="col-md-4">
@@ -316,8 +325,9 @@
                           <textarea class="form-control" rows="2" id="billing_address" name="billing_address"></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="city_town "name="city_town" placeholder="City/Town">
+                          <input type="text" class="form-control" id="city_town "name="city_town" placeholder="City/Town" required>
                         </div>
+                        <h6 id="city_town_val"></h6>
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="state" name="state" placeholder="State">
                         </div>
@@ -325,9 +335,11 @@
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="pin_code" name="pin_code" placeholder="Pincode">
                         </div>
+                        <h6 id="pin_code_val"></h6>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                          <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
                         </div>
+                        <h6 id="country_val"></h6>
                       </div>
                     </div>
 
@@ -340,6 +352,7 @@
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="city_town_shipping" name="city_town_shipping" placeholder="City/Town">
                         </div>
+
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="state_shipping" name="state_shipping" placeholder="State">
                         </div>
@@ -347,6 +360,7 @@
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="pin_code_shipping" name="pin_code_shipping" placeholder="Pincode">
                         </div>
+                        <h6 id="pin_code_shipping_val"></h6>
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="country_shipping" name="country_shipping" placeholder="Country">
                         </div>
@@ -368,6 +382,7 @@
                         <label for="exampleInputEmail1">Tax Reg. No.</label>
                         <input type="text" class="form-control" id="tax_reg_no" name="tax_reg_no" placeholder="">
                       </div>
+                      <h6 id="tax_reg_no_val"></h6>
                     </div>
 
                     <div class="col-md-4">
@@ -375,6 +390,7 @@
                         <label for="exampleInputEmail1">CST reg. no.</label>
                         <input type="text" class="form-control" id="cst_reg_no" name="cst_reg_no" placeholder="">
                       </div>
+                      <h6 id="cst_reg_no_val"></h6>
                     </div>
 
                     <div class="col-md-4">
@@ -382,6 +398,7 @@
                         <label for="exampleInputEmail1">PAN No.</label>
                         <input type="text" class="form-control" id="pan_no" name="pan_no" placeholder="">
                       </div>
+                            <h6 id="pan_no_val"></h6>
                     </div>
 
                     <div class="col-md-4">
@@ -439,6 +456,7 @@
                         <label for="exampleInputEmail1">Opening balance</label>
                         <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="">
                       </div>
+                      <h6 id="opening_balance_val"></h6>
                     </div>
 
                     <div class="col-md-4">
@@ -479,4 +497,352 @@
     </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 
-</form><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/customer.blade.php ENDPATH**/ ?>
+</form>
+
+<script>
+  
+
+$("document").ready(function(){
+
+        
+        $("#first_name_val").hide();
+        $("#last_name_val").hide();
+        $("#company_val").hide();
+        $("#email_id_val").hide();
+        $("#mobile_no_val").hide();
+        $("#pin_code_val").hide();
+        $("#pin_code_shipping_val").hide();
+        $("#tax_reg_no_val").hide();
+        $("#cst_reg_no_val").hide();
+        $("#pan_no_val").hide();
+        
+ 
+        var err_first_name =true;
+        var err_last_name =true;
+        var err_company =true;
+        var err_email_id =true;
+        var err_mobile_no = true;
+        var err_pin_code=true;
+        var err_pin_code_shipping=true;
+        var err_tax_reg_no=true;
+        var err_cst_reg_no=true;
+        var err_pan_no=true;
+      
+
+
+        $("#first_name").blur(function(){
+
+            first_name_f();
+
+        });
+        function first_name_f(){
+
+          var c = $("#first_name").val();
+          
+          var regexOnlyText = /^[a-zA-Z]+$/;
+          if (c==""||regexOnlyText.test(c) != true){
+            $("#first_name_val").show();
+            $("#first_name_val").html("**please input alphabets");
+            $("#first_name_val").focus();
+            $("#first_name_val").css("color","red");
+            err_first_name=false;
+            return false;
+          }
+          else{
+            err_first_name=true;
+            $("#first_name_val").hide();
+          }
+
+     
+        }
+
+         
+         $("#last_name").blur(function(){
+
+            last_name_f();
+
+        });
+        function last_name_f(){
+
+          var j = $("#last_name").val();
+           var regexOnlyText = /^[a-zA-Z]+$/;
+          if (j==""||regexOnlyText.test(j) != true){
+            $("#last_name_val").show();
+            $("#last_name_val").html("**please input alphabets");
+            $("#last_name_val").focus();
+            $("#last_name_val").css("color","red");
+            err_last_name=false;
+            return false;
+          }else{
+            err_last_name=true;
+            $("#last_name_val").hide();
+          }
+
+     
+        }
+
+
+        $("#first_name").keyup(function(){
+
+            display_name_as_append();
+
+        });
+        $("#last_name").keyup(function(){
+
+            display_name_as_append();
+
+        });
+        function display_name_as_append(){
+          $("#display_name_as").val($("#first_name").val()+" "+$("#last_name").val());
+        }
+
+        $("#company").blur(function(){
+
+            company_f();
+        });
+
+        
+        function company_f(){
+
+          var f = $("#company").val();
+
+          if(f.length==""){
+
+            $("#company_val").show();
+            $("#company_val").html("**this field is required");
+            $("#company_val").focus();
+            $("#company_val").css("color","red");
+
+              err_company=false;
+              return false;
+          }else{
+            err_company=true;
+            $("#company_val").hide();
+          }
+        }
+
+
+             $("#email_id").blur(function(){
+
+            email_id_f();
+        });
+        function email_id_f(){
+
+          var m = $("#email_id").val();
+           var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+           var result = m.match(v); 
+
+          if((m.length=="")||(result == null)){
+
+            $("#email_id_val").show();
+            $("#email_id_val").html("**please insert valid email ");
+            $("#email_id_val").focus();
+            $("#email_id_val").css("color","red");
+
+              err_email_id=false;
+              return false;
+          }else{
+            err_email_id=true;
+            $("#email_id_val").hide();
+          }
+        }
+
+
+         $("#mobile_no").blur(function(){
+
+            mobile_no_f();
+        });
+        function mobile_no_f(){
+
+          var q = $("#mobile_no").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+            $("#mobile_no_val").show();
+            $("#mobile_no_val").html("**please input numbers between 0-9 ");
+            $("#mobile_no_val").focus();
+            $("#mobile_no_val").css("color","red");
+
+              err_mobile_no=false;
+              return false;
+          }else{
+            err_mobile_no=true;
+            $("#mobile_no_val").hide();
+          }
+        }
+
+
+
+
+         $("#pin_code").blur(function(){
+
+            pin_code_f();
+        });
+        function pin_code_f(){
+
+          var c = $("#pin_code").val();
+
+          if(c.length==""){
+
+            $("#pin_code_val").show();
+            $("#pin_code_val").html("**please input pin code ");
+            $("#pin_code_val").focus();
+            $("#pin_code_val").css("color","red");
+
+              err_pin_code=false;
+              return false;
+          }else{
+            err_pin_code=true;
+            $("#pin_code_val").hide();
+          }
+        }
+       
+
+           $("#pin_code_shipping").blur(function(){
+
+            pin_code_shipping_f();
+        });
+        function pin_code_shipping_f(){
+
+          var w = $("#pin_code_shipping").val();
+
+          if(w.length==""){
+
+            $("#pin_code_shipping_val").show();
+            $("#pin_code_shipping_val").html("**please input website ");
+            $("#pin_code_shipping_val").focus();
+            $("#pin_code_shipping_val").css("color","red");
+
+              err_pin_code_shipping=false;
+              return false;
+          }else{
+            err_pin_code_shipping=true;
+            $("#pin_code_shipping_val").hide();
+          }
+        }
+
+
+
+
+         $("#tax_reg_no").blur(function(){
+
+            tax_reg_f();
+        });
+        function tax_reg_f(){
+          var z = $("#tax_reg_no").val();
+
+            if(z.length==""){
+
+            $("#tax_reg_no_val").show();
+            $("#tax_reg_no_val").html("**this field is required ");
+            $("#tax_reg_no_val").focus();
+            $("#tax_reg_no_val").css("color","red");
+
+              err_tax_reg_no=false;
+              return false;
+          }else{
+            err_tax_reg_no=true;
+            $("#tax_reg_no_val").hide();
+          }
+        }
+                
+
+         $("#cst_reg_no").blur(function(){
+             cst_reg_no_f();
+           });
+        function cst_reg_no_f(){
+          
+          var u = $("#cst_reg_no").val();
+
+          if(u.length==""){
+
+            $("#cst_reg_no_val").show();
+            $("#cst_reg_no_val").html("**plesee insert cst reg no ");
+            $("#cst_reg_no_val").focus();
+            $("#cst_reg_no_val").css("color","red");
+
+              err_cst_reg_no=false;
+              return false;
+          }
+           else {
+            err_cst_reg_no = true;
+            $("#cst_reg_no_val").hide();
+
+          }
+        }
+
+
+
+         $("#pan_no").blur(function(){
+             pan_no_f();
+           });
+        function pan_no_f(){
+          
+          var r = $("#pan_no").val();
+
+          if(r.length==""){
+
+            $("#pan_no_val").show();
+            $("#pan_no_val").html("**please enter pan no ");
+            $("#pan_no_val").focus();
+            $("#pan_no_val").css("color","red");
+
+              err_pan_no=false;
+              return false;
+          }
+           else {
+            err_pan_no=true;
+            $("#pan_no_val").hide();
+          }
+
+          }
+
+     $("#save").click(function(){
+
+      
+      err_first_name=true;
+      err_company=true;
+      err_email_id=true;
+      err_mobile_no=true;
+      err_pin_code=true;
+      err_pin_code_shipping=true;
+      err_tax_reg_no=true;
+      err_cst_reg_no=true;
+      err_pan_no=true;
+
+
+     
+
+
+    
+      first_name_f();
+      company_f();
+      email_id_f();
+      mobile_no_f();
+      pin_code_f();
+      pin_code_shipping();
+      tax_reg_no_f();
+      cst_reg_no_f();
+      pan_no_f();
+      
+
+     if((err_first_name==true)&&(err_company==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_pin_code==true)&&(err_pin_code_shipping==true)&&(err_tax_reg_no=true)&&(err_cst_reg_no=true)&&(err_pan_no=true))
+     {
+        return true;
+     }else{
+        return false;
+
+     }
+
+     });
+         
+
+
+
+
+  });
+</script>
+
+
+</script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/customer.blade.php ENDPATH**/ ?>

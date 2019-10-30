@@ -140,7 +140,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Title</label>
-                      <input type="text" class="form-control" value="" id="title" name="title">
+                      <input type="text" class="form-control" value="" id="title" name="title" required>
                       <h6 id="title_val"></h6>
                     </div>
                   </div>
@@ -148,7 +148,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">First Name</label>
-                      <input type="text" class="form-control" value="" id="first_name" name="first_name" maxlength="20">
+                      <input type="text" class="form-control" value="" id="first_name" name="first_name" maxlength="20" required>
                       <h6 id="first_name_val"></h6>
                     </div>
                   </div>
