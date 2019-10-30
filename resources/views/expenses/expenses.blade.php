@@ -359,7 +359,7 @@
                                                 <th>Tax Category</th>
                                                 <th>Description</th>
                                                 <th>Amount</th>
-                                                <th>Tax</th>
+                                                <th>Tax(%)</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
