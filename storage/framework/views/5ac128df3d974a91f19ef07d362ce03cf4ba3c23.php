@@ -18,6 +18,85 @@
     </ol>
   </div>
 </div>
+<?php
+      $overdue_amount= $estimate_amount=$paid_amount=$tax=0;
+      $total_before_tax=0;
+     $taxes=0;
+     $total=0;
+     $before_tax=0;
+      ?>
+      <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php
+        // overdue
+        if($value['due_date'] < date("Y-m-d") &&  $value['status'] == 1 && $value["invoice_details"]!="" && date('Y-m-d', strtotime('today + 365 days')))
+        {
+           
+           
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $overdue_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        
+
+         
+      //unpaid
+      if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strtotime('today + 365 days')))
+     {
+         $tmp = $value["invoice_details"];
+         $tmp = explode(":",$tmp);
+         for($i=0;$i<count($tmp);$i++){
+             $to_show = explode(",",$tmp[$i]);
+             $amount=$to_show[3]*$to_show[4];
+             $total_before_tax += $to_show[5];
+             $taxes += (($to_show[5]*$to_show[6])/100);
+         }
+     }
+    $total = $total_before_tax + $taxes;
+
+    //not due yet
+    if($value['due_date'] > date("Y-m-d") && $value["invoice_details"]!="" && date('Y-m-d', strtotime('today + 365 days')) )
+        {
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $estimate_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        
+//not deposited
+if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strtotime('today - 30 days')))
+     {
+         $tmp = $value["invoice_details"];
+         $tmp = explode(":",$tmp);
+         for($i=0;$i<count($tmp);$i++){
+             $to_show = explode(",",$tmp[$i]);
+             $amt=$to_show[3]*$to_show[4];
+             $before_tax += $to_show[5];
+             $tax += (($to_show[5]*$to_show[6])/100);
+         }
+     }
+    $total_not_deposited = $before_tax + $tax;
+
+
+        //paid
+        if($value['status'] == 2 && date('Y-m-d', strtotime('today - 30 days')) && $value["invoice_details"]!="" )
+        {
+          
+                $tmp = $value["invoice_details"];
+                $tmp = explode(":",$tmp);
+                for($i=0;$i<count($tmp);$i++){
+                    $tmp_2 = explode(",",$tmp[$i]);
+                    $paid_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                }
+            }
+        
+            
+         ?>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <div class="row">
   <div class="col-lg-12">
    <div class="card">
@@ -25,17 +104,17 @@
       <div class="col-md-6" style="border: 1px solid;">
         <div class="row">
           <div class="col-md-4">
-           <h4 class="unp"><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp; 11,000.00 Unpaid</h4>
+           <h4 class="unp"><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp;<?php echo e($total); ?> Unpaid</h4>
          </div>
          <div class="col-md-8">
           <p style="margin-top: 12px;">LAST 365 DAYS </p>
         </div>
 
         <div class="col-md-6">
-         <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h3> OVERDUE
+        <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><?php echo e($overdue_amount); ?></h3> OVERDUE
        </div>
        <div class="col-md-6" style="text-align: right;">
-         <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 118,000.00</h3> NOT DUE YET
+       <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> <?php echo e($estimate_amount); ?></h3> NOT DUE YET
        </div>
 
        <div class="col-md-12" style="margin-top: 18px;">
@@ -49,17 +128,17 @@
   <div class="col-md-6" style="border: 1px solid;">
    <div class="row">
     <div class="col-md-4">
-     <h4><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp; 0.00 Paid</h4>
+     <h4><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp; <?php echo e($paid_amount); ?> Paid</h4>
    </div>
    <div class="col-md-8">
     <p style="margin-top: 12px;">LAST 30 DAYS </p>
   </div>
 
   <div class="col-md-6">
-   <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h3> NOT DEPOSITED
+  <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> <?php echo e($total_not_deposited); ?></h3> NOT DEPOSITED
  </div>
  <div class="col-md-6" style="text-align: right;">
-   <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00</h3> DEPOSITED
+ <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> <?php echo e($paid_amount); ?></h3> DEPOSITED
  </div>
 
  <div class="col-md-12" style="margin-top: 18px;">
@@ -132,7 +211,7 @@
       </td>
        
         <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
-         Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+         Receive payment<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
          <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
          <a class="dropdown-item" href="<?php echo e(url('sale/invoice/print/'.$value['id'])); ?>">Print</a>
          <a class="dropdown-item" href="<?php echo e(url('sale/invoice/email/'.$value['id'])); ?>">Send</a>
@@ -462,6 +541,8 @@
           </div>
         </div>
       </div>  
+
+
 
 
 <!-- view model start -->
