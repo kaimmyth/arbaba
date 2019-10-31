@@ -37,7 +37,8 @@
                             <div class="col-lg-12">
                                 <div class="card card-border card-primary">
                                     <div class="card-header"> 
-                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addEmployee();" data-toggle="modal" data-target=".employee" style="float:right;">Add an Employee</button>
+                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addEmployee();" data-toggle="modal" style="float:right;">Add an Employee</button>
+                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addAccount();" data-toggle="modal" style="float:right;">Account</button>
                                     </div> 
                                     <div class="card-body"> 
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -100,7 +101,9 @@
                                 <label for="">First Name</label>
                                     <div class="input-group">
                                         <input type="" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+
                                     </div>
+                                   <h6 id="first_name_val"></h6>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
@@ -108,6 +111,7 @@
                                     <div class="input-group">
                                         <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name" >
                                     </div>
+                                    <h6 id="last_name_val"></h6>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
@@ -122,6 +126,7 @@
                                     <div class="input-group">
                                         <input type="email" class="form-control" id="email_id" name="email_id" placeholder="eg.example@gmail.com" required>
                                     </div>
+                                    <h6 id="email_id_val"></h6>
                                 </div><!--form-group-->
 
                             <div class="form-group display-detail">
@@ -136,6 +141,7 @@
                                     <div class="input-group">
                                     <input type="text" placeholder="" data-mask="(999) 999-9999" name="mobile_no" id="mobile_no" class="form-control">
                                     </div>
+                                    <h6 id="mobile_no_val"></h6>
                                 </div><!--form-group-->
 
                             <div class="form-group">
@@ -143,6 +149,7 @@
                                     <div class="input-group">
                                         <textarea class="form-control" rows="5" id="address" name="address" required></textarea>
                                     </div>
+                                    <h6 id="address_val"></h6>
                                 </div><!--form-group-->
 
                             <div class="form-group add-detail">
@@ -162,6 +169,7 @@
                                         <input style="display: block;width: 100;" type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code" required>
                                         <span id="pin_code_check"></span>
                                     </div>
+
                                 </div><!--form-group-->
 
                                 <div class="form-group add-detail">
@@ -175,6 +183,7 @@
                                     <div class="input-group">
                                         <input type="" class="form-control" id="billing_rate" name="billing_rate" placeholder="" required>
                                     </div>
+                                    <h6 id="billing_rate_val"></h6>
                                 </div><!--form-group--> 
 
                                 <div class="form-group display-detail"><br><br>
@@ -191,6 +200,7 @@
                                     <div class="input-group">
                                         <input type="" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." required>
                                     </div>
+                                    <h6 id="employee_id_no_val"></h6>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
@@ -198,6 +208,7 @@
                                     <div class="input-group">
                                         <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID" required>
                                     </div>
+                                    <h6 id="employee_id_val"></h6>
                                 </div><!--form-group-->
 
                                 <div class="form-group emp-detail">
@@ -337,6 +348,137 @@
 <!-- end model -->
 
 
+<div class="modal account fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+   <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myLargeModalLabel"><i class="fa fa-users"></i>&nbsp;&nbsp;Bank</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0px 0;">
+                <form action="<?php echo e(url('accounting/add')); ?>" method="post">
+                    <?php echo csrf_field(); ?>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Account type:</label>
+                                <select class="form-control" placeholder="account type" name="account_type" id="account_type" required>
+                                    <option>Bank</option>
+                                    <option>Current assets</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="text">Detail type:</label>
+                               <select class="form-control" placeholder="" name="detail_type" id="detail_type" required>
+                                    <option>cash and cash equivalent</option>
+                                    <option>cash on hand</option>
+                                    <option>client trust account</option>
+                                    <option>current</option>
+                                    <option>Money marcket</option>
+                                    <option>other ermarked bank accounts</option>
+                                    <option>rents held in trust</option>
+                                    <option>savings</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div style="padding:60px; background-color:lightgrey;"><p>ohh yeahhhhh</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                  <label for="pwd">Name:</label>
+                                  <input type="text" class="form-control" id="name" placeholder="name" name="name">
+                            </div> 
+                            <h6 id="name_val"></h6>
+                            <div class="form-group"> 
+                                  <label for="text">Discription:</label>
+                                  <input type="text" class="form-control" id="discription" placeholder="discription" name="discription">
+                            </div>   
+                            <h6 id="discription_val"></h6>
+                             <div class="form-group">
+                                    <label for="">Default tax code</label>
+                                    <select class="form-control" placeholder="default tax code" name="default_tax_code" id="default_tax_code" required>
+                                            <option>18% IGST</option>
+                                            <option> 18% IGST</option>
+                                            <option>29.00% ST</option>
+                                            <option>00% IGST</option>
+                                            <option>OPT OF SCOPE</option>
+                                            <option>00% GST</option>
+                                            <option>14.5% </option>
+                                            <option>14.00% VAT</option>
+                                            <option>6.00% IGST</option>
+                                            <option>28.00% IGST</option>
+                                            <option>15.005 ST</option>
+                                            <option>28.00% GST</option>
+                                            <option>12.0% GST</option>
+                                            <option>18.00% GST</option>
+                                            <option>3.0% GST</option>
+                                            <option>0.28% GST</option>
+                                            <option>5.0% GST</option>
+                                            <option>6.0% GST</option>
+                                            <option>0.28% GST</option>
+                                            <option>exempt IGST</option>
+                                            <option>3.0% IGST</option>
+                                            <option>4.0% VAT</option>
+                                            <option>3.05 IGST</option>
+                                            <option>12.36% ST</option>
+                                            <option>5.0% VAT</option>
+                                            <option>exempt GST</option>
+
+                                           
+                                        </select>
+
+                             </div> 
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="">Balance:</label>
+                                        <input type="text" class="form-control" id="balance" placeholder="" name="balance">
+                                        <h6 id="balance_val"></h6>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label for="">As of:</label>
+                                        <input type="text" class="form-control" id="as_of" placeholder="" name="as_of">
+                                    </div>
+                                    <h6 id="as_of_val"></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div style="width:100%; padding: 0.5px;background: #6f6f6f;"></div><br>
+                             <div class="d-print-none">
+                                 <div class="pull-left">
+                                <!-- hidden inputs -->
+                                <input type="text" name="hidden_input_id" value="NA" hidden>
+                                <input type="text" name="hidden_input_purpose" value="add" hidden>
+                                <!-- hidden inputs -->
+                                <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit1">Save</a>
+                                </div>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Cancel</button>
+                        </div>
+                                  </div>
+                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
         $(document).ready(function () {
             $('#first_name').keyup(function () {
@@ -362,64 +504,310 @@
     
     </script>  
 
-    <script>
+<script>
 $(document).ready(function()
  {
    $("#pin_code_check").hide();
+   $("#first_name_val").hide();
+   $("#last_name_val").hide();
+   $("#email_id_val").hide();
+   $("#mobile_no_val").hide();
+   $("#address_val").hide();
+   $("#billing_rate_val").hide();
+   $("#employee_id_no_val").hide();
+   $("#employee_id_val").hide();
   
   
 
- var err_pin_code=true;
+    var err_pin_code=true;
+    var err_first_name =true;
+    var err_last_name =true;
+    var err_email_id =true;
+    var err_mobile_no = true;
+    var err_address=true;
+    var err_billing_rate=true;
+    var err_employee_id_no=true;
+    var err_employee_id = true;
+
+
+
+
+
+
  
- $("#pin_code").blur(function()
-		{
-			check_bill_pin();
-		});
-        function check_bill_pin()
-{
+    $("#pin_code").blur(function()
+        {
+            username1();
+        });
+        function username1()
+        {
   
-var pin_val=$("#pin_code").val();
+          var pin_val=$("#pin_code").val();
 
-var regexOnlyNumbers=/^[0-9]+$/;
-if (pin_val==""||regexOnlyNumbers.test(pin_val) != true)
-{
-$("#pin_code_check").show();
-$("#pin_code_check").html("Please enter a valid pin");
+          var regexOnlyNumbers=/^[0-9]+$/;
 
-$("#pin_code_check").focus();
-$("#pin_code_check").css("color","red");
+         if (pin_val==""||regexOnlyNumbers.test(pin_val) != true)
+           {
+              $("#pin_code_check").show();
+              $("#pin_code_check").html("Please enter a valid pin");
+              $("#pin_code_check").focus();
+              $("#pin_code_check").css("color","red");
 
-err_pin_code=false;
-}
-else
-{
-err_pin_code=true;
-$("#billing_pin_check").hide();
-}
-}
+              err_pin_code=false;
+            }
+             else
+            {
+              err_pin_code=true;
+              $("#pin_code_check").hide();
+            }
+        }
+
+        $("#first_name").blur(function(){
+
+            username2();
+        });
+        function username2(){
+
+          var k = $("#first_name").val();
+
+          if(k.length==""){
+
+            $("#first_name_val").show();
+            $("#first_name_val").html("**please input the first name");
+            $("#first_name_val").focus();
+            $("#first_name_val").css("color","red");
+
+              err_first_name=false;
+              return false;
+          }
+
+          else{
+                err_first_name=true;
+              $("#first_name_val").hide();
+              
+          }
+        }
+
+         $("#last_name").blur(function(){
+
+            username3();
+        });
+        function username3(){
+
+          var s = $("#last_name").val();
+
+          if(s.length==""){
+
+            $("#last_name_val").show();
+            $("#last_name_val").html("**please input last name");
+            $("#last_name_val").focus();
+            $("#last_name_val").css("color","red");
+
+              err_last_name=false;
+              return false;
+          }else{
+            err_last_name=true;
+            $("#last_name_val").hide();
+          }
+        }
 
 
-$("#btnSubmit").click(function()
- {
-    check_bill_pin();
-  
-if((err_pin_code==true) )
-   {
-     return true;
-   }  
-   else
-   {
-        return false;
-   }
- });
- });
+             $("#email_id").keyup(function(){
+
+            username4();
+        });
+        function username4(){
+
+          var h = $("#email_id").val();
+          var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+          var result = h.match(v);
+
+          if((h.length=="")||(result == null)){
+
+            $("#email_id_val").show();
+            $("#email_id_val").html("**please input valid email ");
+            $("#email_id_val").focus();
+            $("#email_id_val").css("color","red");
+
+              err_email_id=false;
+              return false;
+          }else{
+            err_email_id=true;
+            $("#email_id_val").hide();
+          }
+        }
+
+        // $("#mobile_no").keyup(function(){
+
+        //     username5();
+        // });
+        // function username5(){
+
+        //   var q = $("#mobile_no").val();
+
+        //   var regexOnlyNumbers=/^[0-9]+$/;
+        //   if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+        //     $("#mobile_no_val").show();
+        //     $("#mobile_no_val").html("**please input numbers between 0-9 ");
+        //     $("#mobile_no_val").focus();
+        //     $("#mobile_no_val").css("color","red");
+
+        //       err_mobile_no=false;
+        //       return false;
+        //   }else{
+        //     err_mobile_no=true;
+        //     $("#mobile_no_val").hide();
+        //   }
+        // }
+
+
+         $("#address").blur(function(){
+
+            username6();
+        });
+        function username6(){
+
+          var l = $("#address").val();
+
+          if(l.length==""){
+
+            $("#address_val").show();
+            $("#address_val").html("**please insert address  ");
+            $("#address_val").focus();
+            $("#address_val").css("color","red");
+
+              err_address=false;
+              return false;
+          }else{
+            err_address=true;
+            $("#address_val").hide();
+          }
+        }
+
+        $("#billing_rate").blur(function(){
+
+            username7();
+        });
+        function username7(){
+
+          var q = $("#billing_rate").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+            $("#billing_rate_val").show();
+            $("#billing_rate_val").html("**please input numbers between 0-9 ");
+            $("#billing_rate_val").focus();
+            $("#billing_rate_val").css("color","red");
+
+              err_billing_rate=false;
+              return false;
+          }else{
+            err_billing_rate=true;
+            $("#billing_rate_val").hide();
+          }
+        }
+
+         $("#employee_id_no").blur(function(){
+
+            username8();
+        });
+        function username8(){
+
+          var e = $("#employee_id_no").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((e=="")|| regexOnlyNumbers.test(e)!=true){
+
+            $("#employee_id_no_val").show();
+            $("#employee_id_no_val").html("**please input numbers between 0-9 ");
+            $("#employee_id_no_val").focus();
+            $("#employee_id_no_val").css("color","red");
+
+              err_employee_id_no=false;
+              return false;
+          }else{
+            err_employee_id_no=true;
+            $("#employee_id_no_val").hide();
+          }
+        }
+
+             $("#employee_id").blur(function(){
+
+            username9();
+        });
+        function username9(){
+
+          var p = $("#employee_id").val();
+
+          if(p.length==""){
+
+            $("#employee_id_val").show();
+            $("#employee_id_val").html("**please input employee id");
+            $("#employee_id_val").focus();
+            $("#employee_id_val").css("color","red");
+
+              err_employee_id=false;
+              return false;
+          }
+
+          else{
+                err_employee_id=true;
+              $("#employee_id_val").hide();
+              
+          }
+        }
+ $("#btnSubmit").click(function(){
+
+      err_first_name=true;
+      err_last_name=true;
+      err_email_id=true;
+      err_mobile_no=true;
+      err_address=true;
+      err_billing_rate=true;
+      err_employee_id_no=true;
+      err_employee_id=true;
+     
+
+      username1();
+      username2();
+      username3();
+      username4();
+      username5();
+      username6();
+      username7();
+      username8();
+      username9();
+     
+
+
+     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_address==true)&&(err_billing_rate==true)&&(err_employee_id_no==true)&&(err_employee_id==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+            
+        }
+
+    });
+         
+
+
+
+
+  });
     </script>
 
 
 <script>
 // to get employee details from controller through ajax, purpose = edit & view
+function addAccount(){
+    $(".account").modal('show');
+}
 //add employees
-function addExpenses(){
+function addEmployee(){
     resetEmployeeForms();
     $(".employee").modal('show');
 }
@@ -501,4 +889,108 @@ function viewEditEmployee(purpose, id){
         }
     });
 }
+</script>
+    <script>
+$(document).ready(function(){
+    $("#name_val").hide();
+    $("#discription_val").hide();
+    $("#balance_val").hide();
+   
+
+    var err_name=true;
+    var err_discription=true;
+    var err_balance=true;
+    
+
+
+   
+
+    $("#name").blur(function(){
+        name_f();
+    });
+    function name_f(){
+
+        var d = $("#name").val();
+
+        if(d.length==""){
+            $("#name_val").show();
+            $("#name_val").html("**please insert your name ");
+            $("#name_val").focus();
+            $("#name_val").css("color","red");
+
+            err_name=false;
+            return false;
+        }
+        else{
+            err_name=true;
+            $("#name_val").hide();
+        }
+    }
+
+    $("#discription").blur(function(){
+        discription_f();
+    });
+    function discription_f(){
+
+        var v = $("#discription").val();
+
+        if(v.length==""){
+            $("#discription_val").show();
+            $("#discription_val").html("**please insert discription ");
+            $("#discription_val").focus();
+            $("#discription_val").css("color","red");
+
+            err_discription=false;
+            return false;
+        }
+        else{
+            err_discription=true;
+            $("#discription_val").hide();
+        }
+    }
+
+  $('#balance').blur(function () {
+        balance_f();
+    });
+    function balance_f()
+    {
+        
+        var balance_val_chk=$("#balance").val();
+        var regexOnlyNumbers=/^[0-9]+$/;
+        if(balance_val=="" || regexOnlyNumbers.test(balance_val) != true)
+        {
+            
+            $("#balance_val").show();
+            $("#balance_val").html("Please enter a valid number");
+            $("#balance_val").focus();
+            $("#balance_val").css("color","red");
+            err_balance=false;
+        }
+        else
+        {
+            err_balance=true;
+            $("#balance_val").hide();
+        }  
+    }
+
+   
+
+    $("#btnSubmit1").click(function(){
+        err_name = true;
+        err_discription = true;
+        err_balance=true;
+        
+        name_f();
+        discription_f();
+        balance_f();
+
+        if((err_name==true)&&(err_discription==true)&&(err_balance==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+});
 </script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/employee/employee.blade.php ENDPATH**/ ?>

@@ -154,6 +154,13 @@ class SalesController extends Controller
 
         $data['content'] ='sale.customer';
         return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
+
+    }
+
+     public function delete_customer($id=""){
+        $del=sales_customers::where('id',$id)->delete();
+        Session::flash('success', 'customer has been deleted successfully');
+        return redirect('sale/customers');
     }
 
     public function view_products_and_services()

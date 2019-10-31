@@ -97,6 +97,7 @@
                         <a class="dropdown-item" href="#">Create Invoice</a>
                         <a class="dropdown-item" href="#">Create Sales Receipt</a>
                         <a class="dropdown-item" href="#">Create Estimate</a>
+                        <a class="dropdown-item" href="<?php echo e(url('sale/customer/delete/'.$items1['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                       </div></td>
 
                     </tr>
@@ -173,7 +174,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Display name as</label>
-                      <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as">
+                      <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as" disabled>
                     </div>
                   </div>
 
