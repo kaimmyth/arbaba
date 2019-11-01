@@ -22,7 +22,7 @@ class SalesController extends Controller
         
 
         $data['content'] ='sale.allsale';
-        return view('layouts.content',compact('data'))->with(compact('toReturn',$toReturn));
+        return view('layouts.content',compact('data'))->with(compact('toReturn'));
        
     }
 
