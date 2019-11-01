@@ -52,15 +52,15 @@
                                             </thead>
                                             <tbody>
                                                 <?php $sl_no=1; ?>
-                                                @foreach ($toReturn as $value)
+                                                <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr>
-                                                        <td>{{$sl_no++}}</td>
-                                                        <td>{{$value['first_name']}}</td>
-                                                        <td>{{$value['phone_no']}}</td>
-                                                        <td>{{$value['email_id']}}</td>
-                                                        <td><a href="javascript:void();" onclick="viewEditEmployee('view', {{$value['id']}});"><i class="fas fa-eye"></i></a> &nbsp; <a href="javascript:void();" onclick="viewEditEmployee('edit', {{$value['id']}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; <a href="{{url('employee/delete/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a></td>
+                                                        <td><?php echo e($sl_no++); ?></td>
+                                                        <td><?php echo e($value['first_name']); ?></td>
+                                                        <td><?php echo e($value['phone_no']); ?></td>
+                                                        <td><?php echo e($value['email_id']); ?></td>
+                                                        <td><a href="javascript:void();" onclick="viewEditEmployee('view', <?php echo e($value['id']); ?>);"><i class="fas fa-eye"></i></a> &nbsp; <a href="javascript:void();" onclick="viewEditEmployee('edit', <?php echo e($value['id']); ?>);"><i class="fas fa-pencil-alt"></i></a> &nbsp; <a href="<?php echo e(url('employee/delete/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a></td>
                                                     </tr>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </tbody>
                                         </table>
                                     </div><!--card body--> 
@@ -85,8 +85,8 @@
                     </button>
                 </div>
                 <div class="modal-body" style="padding: 0px 0;">
-                    <form action={{url('employee/add-edit-employee')}} method="post" id="form-employee">
-                    @csrf
+                    <form action=<?php echo e(url('employee/add-edit-employee')); ?> method="post" id="form-employee">
+                    <?php echo csrf_field(); ?>
                     <div class="row">
                         <div class="col-md-12"><br>
                             <div class="form-group emp-detail">
@@ -694,7 +694,7 @@ function viewEditEmployee(purpose, id){
         }
     });
     $.ajax({
-        url: "{{url('employee/get-employee-details')}}" + "/" + id,
+        url: "<?php echo e(url('employee/get-employee-details')); ?>" + "/" + id,
         method: "GET",
         contentType: 'application/json',
         dataType: "json",
@@ -757,4 +757,4 @@ function viewEditEmployee(purpose, id){
         }
     });
 }
-</script>
+</script><?php /**PATH D:\xampp\htdocs\arbaba\resources\views/employee/employee.blade.php ENDPATH**/ ?>

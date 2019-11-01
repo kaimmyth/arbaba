@@ -467,6 +467,11 @@ function resetExpensesForms(){
     $("input[name='hidden_input_attachment'").val("NA");
     // removing extra row forms (expense details)
     $("#expenses-details-expand").find("tr:gt(0)").remove();
+    // remove total amount etc
+    $("#subtotal-span").html("0");
+    $("#taxes-span").html("0");
+    $("#total-span").html("0");
+    $("#total-span-h").html("0"); // large text
     //remove old attachment span (link)
     $("#e_expenses_attachment").html("");
 }

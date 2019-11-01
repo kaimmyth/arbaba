@@ -24,7 +24,7 @@ class EmployeesController extends Controller
         $employee->title = $request->title;
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
-        $employee->display_name_as = $request->title.$request->first_name;
+        $employee->display_name_as = $request->title." ".$request->first_name." ".$request->last_name;
         $employee->email_id = $request->email_id;
         $employee->phone_no = $request->phone_no;
         $employee->mobile_no = $request->mobile_no;
