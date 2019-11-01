@@ -12,8 +12,8 @@
     <body style="margin-left:20px;">
         
         <div class="container" style="border-style: solid;background-color:#e6f2ff;">
-            @foreach ($toReturn as $value)
-               <div style="margin-top:30px;"><h4><b>Billing Address</b></h4><br>{{$value['billing_address']}}</div>
+            <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+               <div style="margin-top:30px;"><h4><b>Billing Address</b></h4><br><?php echo e($value['billing_address']); ?></div>
                 <br>
                 
                 <h1 style="color:cornflowerblue">Tax Invoice</h1>
@@ -21,15 +21,15 @@
                 
                 <div class="row">
                         <div class="col-sm-6" >
-                <h5><b>INVOICE TO :</b>&nbsp;&nbsp;{{$value['customer']}}</h5>  
+                <h5><b>INVOICE TO :</b>&nbsp;&nbsp;<?php echo e($value['customer']); ?></h5>  
                 
-                <h5><b>PLACE OF SUPPLY :</b>&nbsp;&nbsp;{{$value['place_of_supply']}}</h5>
+                <h5><b>PLACE OF SUPPLY :</b>&nbsp;&nbsp;<?php echo e($value['place_of_supply']); ?></h5>
                         </div>
                 <div  class="col-sm-6">
-                <h5><b>INVOICE NO :</b>&nbsp;&nbsp;{{$value['invoice_no']}}</h5>
-                <h5><b>DATE :</b>&nbsp;&nbsp;{{$value['invoice_date']}}</h5>
-                <h5><b>DUE DATE :</b>&nbsp;&nbsp;{{$value['due_date']}}</h5>
-                <h5><b>TERMS :</b>&nbsp;&nbsp;{{$value['terms']}}</h5>
+                <h5><b>INVOICE NO :</b>&nbsp;&nbsp;<?php echo e($value['invoice_no']); ?></h5>
+                <h5><b>DATE :</b>&nbsp;&nbsp;<?php echo e($value['invoice_date']); ?></h5>
+                <h5><b>DUE DATE :</b>&nbsp;&nbsp;<?php echo e($value['due_date']); ?></h5>
+                <h5><b>TERMS :</b>&nbsp;&nbsp;<?php echo e($value['terms']); ?></h5>
                 </div>
             </div>
         
@@ -67,6 +67,7 @@
 
                                 $subtotal+=$to_show[5];
                                 $taxes+=(($to_show[6]*$to_show[5])/100);
+                              
                                 $total+=$subtotal+$taxes;
                             ?></tr><?php
                         }
@@ -78,11 +79,11 @@
                 <br>
                 <div style="margin-left:90%;">
                     <?php  echo "<b>Subtotal:</b>".$subtotal."<br/><b>Taxes:</b>".$taxes."<br/><b>Total:</b>".$total; ?>
+                </div>
 
-              @endforeach
-              <br><br><br><br>
-        <input name="" id="" class="btn btn-primary"  type="button" onclick="window.print();" value="Print">
-        <br><br><br> <br><br><br> <br><br><br> <br><br><br>  
-    </div>
+               
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <br><br><br> <br><br><br> <br><br><br> <br><br><br> <br><br><br>
+            </div>
     </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/emails/sales_invoice_mail.blade.php ENDPATH**/ ?>

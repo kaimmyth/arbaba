@@ -11,7 +11,7 @@
     </head>
     <body style="margin-left:20px;">
         
-        
+        <div class="container" style="border-style: solid;background-color:#e6f2ff;">
             @foreach ($toReturn as $value)
                <div style="margin-top:30px;"><h4><b>Billing Address</b></h4><br>{{$value['billing_address']}}</div>
                 <br>
@@ -83,7 +83,7 @@
 
                
               @endforeach
-        
-    
+        <br><br><br> <br><br><br> <br><br><br> <br><br><br> <br><br><br>
+            </div>
     </body>
 </html>

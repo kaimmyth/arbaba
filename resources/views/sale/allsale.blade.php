@@ -26,7 +26,7 @@
         <h4>Sales Transactions</h4>
         <div class="row">
          <div class="col-md-12" style="text-align: right;">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#full-width-modal">New transaction</button>
+         <a href="{{url('sale/invoice?invoice=yes')}}" class="btn btn-primary">New transaction</a>
       </div>
       <?php
       $overdue_count=$overdue_amount=$open_invoice_count= $estimate_count= $estimate_amount=$paid_count=$paid_amount=0;
@@ -135,7 +135,7 @@
          <th>Tax</th>
          <th>Total</th>
          <th>Status</th>
-         <th>Action</th>
+         {{-- <th>Action</th> --}}
      </tr>
  </thead>
  <tbody>
@@ -185,7 +185,7 @@
             }
           ?>
      </td>
-     <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
+     {{-- <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
       Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
       <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
        <a class="dropdown-item" href="#">Print</a>
@@ -197,7 +197,7 @@
        <a class="dropdown-item" href="#">Copy</a>
        <a class="dropdown-item" href="#">Delete</a>
    </div>
-   </td>
+   </td> --}}
    </tr>
   @endforeach   
 

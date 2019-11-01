@@ -10,6 +10,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body style="margin-left:20px;">
+        <div class="container" style="border-style: solid;background-color:#e6f2ff;">
         
         
             @foreach ($toReturn as $value)
@@ -73,6 +74,7 @@
               
 
               @endforeach
-              
+              <br><br><br> <br><br><br> <br><br><br> <br><br><br> <br><br><br> <br><br><br> <br><br><br>
+            </div>       
     </body>
 </html>

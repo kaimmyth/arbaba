@@ -26,7 +26,7 @@
         <h4>Sales Transactions</h4>
         <div class="row">
          <div class="col-md-12" style="text-align: right;">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#full-width-modal">New transaction</button>
+         <a href="<?php echo e(url('sale/invoice?modal=open')); ?>" class="btn btn-primary">New transaction</a>
       </div>
       <?php
       $overdue_count=$overdue_amount=$open_invoice_count= $estimate_count= $estimate_amount=$paid_count=$paid_amount=0;
@@ -140,7 +140,7 @@
          <th>Tax</th>
          <th>Total</th>
          <th>Status</th>
-         <th>Action</th>
+         
      </tr>
  </thead>
  <tbody>
@@ -190,19 +190,7 @@
             }
           ?>
      </td>
-     <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
-      Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-      <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-       <a class="dropdown-item" href="#">Print</a>
-       <a class="dropdown-item" href="#">Send</a>
-       <a class="dropdown-item" href="#">Send remainder</a>
-       <a class="dropdown-item" href="#">Share Invoice Link</a>
-       <a class="dropdown-item" href="#">Print Delivery Challan</a>
-       <a class="dropdown-item" href="#">View/Edit</a>
-       <a class="dropdown-item" href="#">Copy</a>
-       <a class="dropdown-item" href="#">Delete</a>
-   </div>
-   </td>
+     
    </tr>
   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
 

@@ -10,26 +10,27 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body style="margin-left:20px;">
-        
         <div class="container" style="border-style: solid;background-color:#e6f2ff;">
-            @foreach ($toReturn as $value)
-               <div style="margin-top:30px;"><h4><b>Billing Address</b></h4><br>{{$value['billing_address']}}</div>
+        
+        
+            <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+               <div style="margin-top:30px;"><h4><b>Billing Address</b></h4><br><?php echo e($value['billing_address']); ?></div>
                 <br>
                 
-                <h1 style="color:cornflowerblue">Tax Invoice</h1>
+                <h1 style="color:cornflowerblue">Delivery Challan</h1>
                 <br>
                 
                 <div class="row">
                         <div class="col-sm-6" >
-                <h5><b>INVOICE TO :</b>&nbsp;&nbsp;{{$value['customer']}}</h5>  
+                <h5><b>INVOICE TO :</b>&nbsp;&nbsp;<?php echo e($value['customer']); ?></h5>  
                 
-                <h5><b>PLACE OF SUPPLY :</b>&nbsp;&nbsp;{{$value['place_of_supply']}}</h5>
+                <h5><b>PLACE OF SUPPLY :</b>&nbsp;&nbsp;<?php echo e($value['place_of_supply']); ?></h5>
                         </div>
                 <div  class="col-sm-6">
-                <h5><b>INVOICE NO :</b>&nbsp;&nbsp;{{$value['invoice_no']}}</h5>
-                <h5><b>DATE :</b>&nbsp;&nbsp;{{$value['invoice_date']}}</h5>
-                <h5><b>DUE DATE :</b>&nbsp;&nbsp;{{$value['due_date']}}</h5>
-                <h5><b>TERMS :</b>&nbsp;&nbsp;{{$value['terms']}}</h5>
+                <h5><b>INVOICE NO :</b>&nbsp;&nbsp;<?php echo e($value['invoice_no']); ?></h5>
+                <h5><b>DATE :</b>&nbsp;&nbsp;<?php echo e($value['invoice_date']); ?></h5>
+                <h5><b>DUE DATE :</b>&nbsp;&nbsp;<?php echo e($value['due_date']); ?></h5>
+                <h5><b>TERMS :</b>&nbsp;&nbsp;<?php echo e($value['terms']); ?></h5>
                 </div>
             </div>
         
@@ -39,12 +40,10 @@
                 <table class="table table-striped">
                     <tr>
                     <th>Product/Service</th>
-                    <th>HSN/SAC</th>
+                   
                     <th>Description</th>
                     <th>Qty</th>
-                    <th>Rate</th>
-                    <th>Amount</th>
-                    <th>Tax</th>
+                   
                     </tr>
                     <?php
                     $subtotal=0;
@@ -58,31 +57,24 @@
                             ?><tr><?php
                                 $to_show = explode(",",$tmp[$i]);
                                 echo "<td>".$to_show[0]."</td>"; // product service
-                                echo "<td>".$to_show[1]."</td>"; // hsc sac
+                               
                                 echo "<td>".$to_show[2]."</td>"; // description
                                 echo "<td>".$to_show[3]."</td>"; // qty
-                                echo "<td>".$to_show[4]."</td>"; // rate
-                                echo "<td>".$to_show[5]."</td>"; // amount
-                                echo "<td>".$to_show[6]."% IGST</td>"; // tax
+                              
 
                                 $subtotal+=$to_show[5];
-                                $taxes+=(($to_show[6]*$to_show[5])/100);
+                                $taxes+=$to_show[6];
                                 $total+=$subtotal+$taxes;
                             ?></tr><?php
                         }
                     }
                     ?>
                 </table>
-                <br>
-                <br>
-                <br>
-                <div style="margin-left:90%;">
-                    <?php  echo "<b>Subtotal:</b>".$subtotal."<br/><b>Taxes:</b>".$taxes."<br/><b>Total:</b>".$total; ?>
+               
+              
 
-              @endforeach
-              <br><br><br><br>
-        <input name="" id="" class="btn btn-primary"  type="button" onclick="window.print();" value="Print">
-        <br><br><br> <br><br><br> <br><br><br> <br><br><br>  
-    </div>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+              <br><br><br> <br><br><br> <br><br><br> <br><br><br> <br><br><br> <br><br><br> <br><br><br>
+            </div>       
     </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sales_invoice_delivery_challan.blade.php ENDPATH**/ ?>
