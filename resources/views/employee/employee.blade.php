@@ -445,7 +445,7 @@ $(document).ready(function()
           if(k.length==""){
 
             $("#first_name_val").show();
-            $("#first_name_val").html("please input the first name");
+            $("#first_name_val").html("Please input the first name");
             $("#first_name_val").focus();
             $("#first_name_val").css("color","red");
 
@@ -471,7 +471,7 @@ $(document).ready(function()
           if(s.length==""){
 
             $("#last_name_val").show();
-            $("#last_name_val").html("please input last name");
+            $("#last_name_val").html("Please input last name");
             $("#last_name_val").focus();
             $("#last_name_val").css("color","red");
 
@@ -497,7 +497,7 @@ $(document).ready(function()
           if((h.length=="")||(result == null)){
 
             $("#email_id_val").show();
-            $("#email_id_val").html("please input valid email ");
+            $("#email_id_val").html("Please input valid email ");
             $("#email_id_val").focus();
             $("#email_id_val").css("color","red");
 
@@ -545,7 +545,7 @@ $(document).ready(function()
           if(l.length==""){
 
             $("#address_val").show();
-            $("#address_val").html("please insert address  ");
+            $("#address_val").html("Please insert address  ");
             $("#address_val").focus();
             $("#address_val").css("color","red");
 
@@ -569,7 +569,7 @@ $(document).ready(function()
           if((q=="")|| regexOnlyNumbers.test(q)!=true){
 
             $("#billing_rate_val").show();
-            $("#billing_rate_val").html("please input numbers between 0-9 ");
+            $("#billing_rate_val").html("Please input numbers between 0-9 ");
             $("#billing_rate_val").focus();
             $("#billing_rate_val").css("color","red");
 
@@ -593,7 +593,7 @@ $(document).ready(function()
           if((e=="")|| regexOnlyNumbers.test(e)!=true){
 
             $("#employee_id_no_val").show();
-            $("#employee_id_no_val").html("please input numbers between 0-9 ");
+            $("#employee_id_no_val").html("Please input numbers between 0-9 ");
             $("#employee_id_no_val").focus();
             $("#employee_id_no_val").css("color","red");
 
@@ -616,7 +616,7 @@ $(document).ready(function()
           if(p.length==""){
 
             $("#employee_id_val").show();
-            $("#employee_id_val").html("please input employee id");
+            $("#employee_id_val").html("Pinlease input employee id");
             $("#employee_id_val").focus();
             $("#employee_id_val").css("color","red");
 
