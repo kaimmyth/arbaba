@@ -646,7 +646,7 @@ input[type=text]:focus {
           if(k.length==""){
 
             $("#first_name_val").show();
-            $("#first_name_val").html("**please input the first name");
+            $("#first_name_val").html("Please input the first name");
             $("#first_name_val").focus();
             $("#first_name_val").css("color","red");
 
@@ -662,7 +662,7 @@ input[type=text]:focus {
             if((k.length<3)||(k.length>15)){
 
             $("#first_name_val").show();
-            $("#first_name_val").html("**user name must be between 3 to 10");
+            $("#first_name_val").html("User name must be between 3 to 10");
             $("#first_name_val").focus();
             $("#first_name_val").css("color","red");
 
@@ -687,7 +687,7 @@ input[type=text]:focus {
           if(s.length==""){
 
             $("#last_name_val").show();
-            $("#last_name_val").html("**please input last name");
+            $("#last_name_val").html("Please input last name");
             $("#last_name_val").focus();
             $("#last_name_val").css("color","red");
 
@@ -713,7 +713,7 @@ input[type=text]:focus {
           if((h.length=="")||(result == null)){
 
             $("#email_id_val").show();
-            $("#email_id_val").html("**please input valid email ");
+            $("#email_id_val").html("Please input valid email ");
             $("#email_id_val").focus();
             $("#email_id_val").css("color","red");
 
@@ -739,7 +739,7 @@ input[type=text]:focus {
           if((q=="")|| regexOnlyNumbers.test(q)!=true){
 
             $("#mobile_no_val").show();
-            $("#mobile_no_val").html("**please input numbers between 0-9 ");
+            $("#mobile_no_val").html("Please input numbers between 0-9 ");
             $("#mobile_no_val").focus();
             $("#mobile_no_val").css("color","red");
 
@@ -763,7 +763,7 @@ input[type=text]:focus {
           if(l.length==""){
 
             $("#company_val").show();
-            $("#company_val").html("**please input company name  ");
+            $("#company_val").html("Please input company name  ");
             $("#company_val").focus();
             $("#company_val").css("color","red");
 
@@ -787,7 +787,7 @@ input[type=text]:focus {
           if(b.length==""){
 
             $("#pan_no_val").show();
-            $("#pan_no_val").html("**please input pan no ");
+            $("#pan_no_val").html("Please input pan no ");
             $("#pan_no_val").focus();
             $("#pan_no_val").css("color","red");
 
@@ -812,7 +812,7 @@ input[type=text]:focus {
           if(b.length==""){
 
             $("#address_val").show();
-            $("#address_val").html("**please input the address ");
+            $("#address_val").html("Please input the address ");
             $("#address_val").focus();
             $("#address_val").css("color","red");
 
@@ -836,7 +836,7 @@ input[type=text]:focus {
           if((z=="")|| regexOnlyNumbers.test(z)!=true){
 
             $("#pin_code_val").show();
-            $("#pin_code_val").html("**please input valid pin code ");
+            $("#pin_code_val").html("Please input valid pin code ");
             $("#pin_code_val").focus();
             $("#pin_code_val").css("color","red");
 
@@ -860,7 +860,7 @@ input[type=text]:focus {
           if((opening_bal=="")|| regexOnlyNumbers.test(opening_bal)!=true){
 
             $("#opening_balance_val").show();
-            $("#opening_balance_val").html("**please input valid balance ");
+            $("#opening_balance_val").html("Please input valid balance ");
             $("#opening_balance_val").focus();
             $("#opening_balance_val").css("color","red");
 
@@ -883,7 +883,7 @@ input[type=text]:focus {
           if((ac_no=="")|| regexOnlyNumbers.test(ac_no)!=true){
 
             $("#account_no_val").show();
-            $("#account_no_val").html("**please insert valid ac no ");
+            $("#account_no_val").html("Please insert valid ac no ");
             $("#account_no_val").focus();
             $("#account_no_val").css("color","red");
 
