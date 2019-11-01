@@ -449,7 +449,7 @@
           if(k.length==""){
 
             $("#name_val").show();
-            $("#name_val").html("**please input the user name");
+            $("#name_val").html("please input the user name");
             $("#name_val").focus();
             $("#name_val").css("color","red");
 
@@ -460,10 +460,10 @@
             $("#name_val").hide();
           }
 
-            if((k.length<3)||(k.length>10)){
+            if((k.length<2)||(k.length>20)){
 
             $("#name_val").show();
-            $("#name_val").html("**user name must be between 3 to 10");
+            $("#name_val").html("User name must be between 2 to 20");
             $("#name_val").focus();
             $("#name_val").css("color","red");
 
@@ -487,7 +487,7 @@
           if(s.length==""){
 
             $("#sku_val").show();
-            $("#sku_val").html("**this field is required");
+            $("#sku_val").html("This field is required");
             $("#sku_val").focus();
             $("#sku_val").css("color","red");
 
@@ -511,7 +511,7 @@
           if(h.length==""){
 
             $("#hsn_val").show();
-            $("#hsn_val").html("**please input HSN ");
+            $("#hsn_val").html("Please input HSN ");
             $("#hsn_val").focus();
             $("#hsn_val").css("color","red");
 
@@ -536,7 +536,7 @@
           if(j.length==""){
 
             $("#sac_val").show();
-            $("#sac_val").html("**please input sac code ");
+            $("#sac_val").html("Please input sac code ");
             $("#sac_val").focus();
             $("#sac_val").css("color","red");
 
@@ -554,13 +554,13 @@
             username5();
         });
         function username5(){
-
+          var regexOnlyNumbers=/^[0-9]+$/;
           var l = $("#unit").val();
 
-          if(l.length==""){
+         if((l=="")|| regexOnlyNumbers.test(l)!=true){
 
             $("#unit_val").show();
-            $("#unit_val").html("**please input unit  ");
+            $("#unit_val").html("Please input numbers  ");
             $("#unit_val").focus();
             $("#unit_val").css("color","red");
 
@@ -584,7 +584,7 @@
           if(l.length==""){
 
             $("#category_val").show();
-            $("#category_val").html("**please input category ");
+            $("#category_val").html("Please input category ");
             $("#category_val").focus();
             $("#category_val").css("color","red");
 
@@ -608,7 +608,7 @@
           if((q=="")|| regexOnlyNumbers.test(q)!=true){
 
             $("#cost_val").show();
-            $("#cost_val").html("**please input numbers between 0-9 ");
+            $("#cost_val").html("Please input numbers between 0-9 ");
             $("#cost_val").focus();
             $("#cost_val").css("color","red");
 
@@ -633,7 +633,7 @@
           if((z=="")|| regexOnlyNumbers.test(z)!=true){
 
             $("#sale_price_val").show();
-            $("#sale_price_val").html("**please input numbers between 0-9 ");
+            $("#sale_price_val").html("Please input numbers between 0-9 ");
             $("#sale_price_val").focus();
             $("#sale_price_val").css("color","red");
 
@@ -654,7 +654,7 @@
           if($("#inclusive_tax").prop("checked") == false){
 
             $("#inclusive_tax_val").show();
-            $("#inclusive_tax_val").html("**plesee check the button ");
+            $("#inclusive_tax_val").html("Plesee check the button ");
             $("#inclusive_tax_val").focus();
             $("#inclusive_tax_val").css("color","red");
 

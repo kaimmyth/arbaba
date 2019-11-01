@@ -244,7 +244,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Display name as</label>
-                      <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as" disabled>
+                      <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as" readonly>
                     </div>
                   </div>
 
@@ -267,7 +267,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">GSTIN</label>
-                      <input type="text" class="form-control" value="35AABCS1429B1ZX" id="gst_in" name="gst_in" readonly="" >
+                      <input type="text" class="form-control" value="35AABCS1429B1ZX" id="gst_in" name="gst_in" readonly >
                     </div>
                   </div>
                 </div>
@@ -303,21 +303,21 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Fax</label>
-                      <input type="text" class="form-control" value="" id="fax" name="fax">
+                      <input type="text" class="form-control" value="" id="fax" name="fax" data-mask="99-999-9999999">
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Other</label>
-                      <input type="text" class="form-control" value="" id="other" name="other">
+                      <input type="text" class="form-control" value="" id="other" name="other" required>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Website</label>
-                      <input type="text" class="form-control" value="" id="website" name="website">
+                      <input type="text" class="form-control" value="" id="website" name="website" required>
                     </div>
                   </div>
 
@@ -362,13 +362,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true" required>
                     <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
                     <span class="d-none d-sm-block">Notes</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="message-tab" data-toggle="tab" href="#message" role="tab" aria-controls="message" aria-selected="false">
+                  <a class="nav-link" id="message-tab" data-toggle="tab" href="#message" role="tab" aria-controls="message" aria-selected="false" required>
                     <span class="d-block d-sm-none"><i class="fa fa-envelope-o"></i></span>
                     <span class="d-none d-sm-block">Tax Info</span>
                   </a>
@@ -400,13 +400,14 @@
                         </div>
                         <h6 id="city_town_val"></h6>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="state" name="state" placeholder="State">
+                          <input type="text" class="form-control" id="state" name="state" placeholder="State" required>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="pin_code" name="pin_code" placeholder="Pincode">
+                            <h6 id="pin_code_val"></h6>
                         </div>
-                        <h6 id="pin_code_val"></h6>
+                        
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
                         </div>
@@ -421,19 +422,20 @@
                           <textarea class="form-control" rows="2" id="shipping_address" name="shipping_address"></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="city_town_shipping" name="city_town_shipping" placeholder="City/Town">
+                          <input type="text" class="form-control" id="city_town_shipping" name="city_town_shipping" placeholder="City/Town" required>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="state_shipping" name="state_shipping" placeholder="State">
+                          <input type="text" class="form-control" id="state_shipping" name="state_shipping" placeholder="State" required>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="pin_code_shipping" name="pin_code_shipping" placeholder="Pincode">
-                        </div>
+                          <input type="text" class="form-control" id="pin_code_shipping" name="pin_code_shipping" placeholder="Pincode" required>
                         <h6 id="pin_code_shipping_val"></h6>
+                      </div>
+                        
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="country_shipping" name="country_shipping" placeholder="Country">
+                          <input type="text" class="form-control" id="country_shipping" name="country_shipping" placeholder="Country" required>
                         </div>
                       </div>
                     </div>
@@ -586,7 +588,7 @@ $("document").ready(function(){
         $("#tax_reg_no_val").hide();
         $("#cst_reg_no_val").hide();
         $("#pan_no_val").hide();
-        
+         $("#opening_balance_val").hide();
  
         var err_first_name =true;
         var err_last_name =true;
@@ -598,7 +600,7 @@ $("document").ready(function(){
         var err_tax_reg_no=true;
         var err_cst_reg_no=true;
         var err_pan_no=true;
-      
+        var err_opening_balance=true;
 
 
         $("#first_name").blur(function(){
@@ -613,7 +615,7 @@ $("document").ready(function(){
           var regexOnlyText = /^[a-zA-Z]+$/;
           if (c==""||regexOnlyText.test(c) != true){
             $("#first_name_val").show();
-            $("#first_name_val").html("**please input alphabets");
+            $("#first_name_val").html("Please input alphabets");
             $("#first_name_val").focus();
             $("#first_name_val").css("color","red");
             err_first_name=false;
@@ -639,7 +641,7 @@ $("document").ready(function(){
            var regexOnlyText = /^[a-zA-Z]+$/;
           if (j==""||regexOnlyText.test(j) != true){
             $("#last_name_val").show();
-            $("#last_name_val").html("**please input alphabets");
+            $("#last_name_val").html("Please input alphabets");
             $("#last_name_val").focus();
             $("#last_name_val").css("color","red");
             err_last_name=false;
@@ -680,7 +682,7 @@ $("document").ready(function(){
           if(f.length==""){
 
             $("#company_val").show();
-            $("#company_val").html("**this field is required");
+            $("#company_val").html("This field is required");
             $("#company_val").focus();
             $("#company_val").css("color","red");
 
@@ -706,7 +708,7 @@ $("document").ready(function(){
           if((m.length=="")||(result == null)){
 
             $("#email_id_val").show();
-            $("#email_id_val").html("**please insert valid email ");
+            $("#email_id_val").html("Please insert valid email ");
             $("#email_id_val").focus();
             $("#email_id_val").css("color","red");
 
@@ -727,11 +729,11 @@ $("document").ready(function(){
 
           var q = $("#mobile_no").val();
 
-          var regexOnlyNumbers=/^[0-9]+$/;
+          var regexOnlyNumbers=/^[0-9() -]+$/;
           if((q=="")|| regexOnlyNumbers.test(q)!=true){
 
             $("#mobile_no_val").show();
-            $("#mobile_no_val").html("**please input numbers between 0-9 ");
+            $("#mobile_no_val").html("Please input numbers between 0-9 ");
             $("#mobile_no_val").focus();
             $("#mobile_no_val").css("color","red");
 
@@ -751,13 +753,13 @@ $("document").ready(function(){
             pin_code_f();
         });
         function pin_code_f(){
-
+           var regexOnlyNumbers=/^[0-9]+$/;
           var c = $("#pin_code").val();
 
-          if(c.length==""){
+         if((c=="")|| regexOnlyNumbers.test(c)!=true){
 
             $("#pin_code_val").show();
-            $("#pin_code_val").html("**please input pin code ");
+            $("#pin_code_val").html("Please input pin code ");
             $("#pin_code_val").focus();
             $("#pin_code_val").css("color","red");
 
@@ -775,13 +777,13 @@ $("document").ready(function(){
             pin_code_shipping_f();
         });
         function pin_code_shipping_f(){
-
+          var regexOnlyNumbers=/^[0-9]+$/;
           var w = $("#pin_code_shipping").val();
 
-          if(w.length==""){
+          if((w=="")|| regexOnlyNumbers.test(w)!=true){
 
             $("#pin_code_shipping_val").show();
-            $("#pin_code_shipping_val").html("**please input website ");
+            $("#pin_code_shipping_val").html("Please insert pin code ");
             $("#pin_code_shipping_val").focus();
             $("#pin_code_shipping_val").css("color","red");
 
@@ -801,12 +803,13 @@ $("document").ready(function(){
             tax_reg_f();
         });
         function tax_reg_f(){
+          var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
           var z = $("#tax_reg_no").val();
 
-            if(z.length==""){
+             if((z=="")|| regexOnlyNumbers.test(z)!=true){
 
             $("#tax_reg_no_val").show();
-            $("#tax_reg_no_val").html("**this field is required ");
+            $("#tax_reg_no_val").html("This field is required ");
             $("#tax_reg_no_val").focus();
             $("#tax_reg_no_val").css("color","red");
 
@@ -823,13 +826,14 @@ $("document").ready(function(){
              cst_reg_no_f();
            });
         function cst_reg_no_f(){
-          
+
+          var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
           var u = $("#cst_reg_no").val();
 
-          if(u.length==""){
+          if((u=="")|| regexOnlyNumbers.test(u)!=true){
 
             $("#cst_reg_no_val").show();
-            $("#cst_reg_no_val").html("**plesee insert cst reg no ");
+            $("#cst_reg_no_val").html("Plesee insert cst reg no ");
             $("#cst_reg_no_val").focus();
             $("#cst_reg_no_val").css("color","red");
 
@@ -849,13 +853,13 @@ $("document").ready(function(){
              pan_no_f();
            });
         function pan_no_f(){
-          
+          var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
           var r = $("#pan_no").val();
 
-          if(r.length==""){
+          if((r=="")|| regexOnlyNumbers.test(r)!=true){
 
             $("#pan_no_val").show();
-            $("#pan_no_val").html("**please enter pan no ");
+            $("#pan_no_val").html("Please enter pan no ");
             $("#pan_no_val").focus();
             $("#pan_no_val").css("color","red");
 
@@ -865,6 +869,30 @@ $("document").ready(function(){
            else {
             err_pan_no=true;
             $("#pan_no_val").hide();
+          }
+
+          }
+
+           $("#opening_balance").blur(function(){
+             opening_balance_f();
+           });
+        function opening_balance_f(){
+          var regexOnlyNumbers=/^[0-9]+$/;
+          var op_bal = $("#opening_balance").val();
+
+          if((op_bal=="")|| regexOnlyNumbers.test(op_bal)!=true){
+
+            $("#opening_balance_val").show();
+            $("#opening_balance_val").html("Please insert numbers only ");
+            $("#opening_balance_val").focus();
+            $("#opening_balance_val").css("color","red");
+
+              err_opening_balance=false;
+              return false;
+          }
+           else {
+            err_opening_balance=true;
+            $("#opening_balance_val").hide();
           }
 
           }
@@ -881,6 +909,7 @@ $("document").ready(function(){
       err_tax_reg_no=true;
       err_cst_reg_no=true;
       err_pan_no=true;
+      err_opening_balance=true;
 
 
      
@@ -896,9 +925,10 @@ $("document").ready(function(){
       tax_reg_no_f();
       cst_reg_no_f();
       pan_no_f();
+      opening_balance_f();
       
 
-     if((err_first_name==true)&&(err_company==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_pin_code==true)&&(err_pin_code_shipping==true)&&(err_tax_reg_no=true)&&(err_cst_reg_no=true)&&(err_pan_no=true))
+     if((err_first_name==true)&&(err_company==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_pin_code==true)&&(err_pin_code_shipping==true)&&(err_tax_reg_no=true)&&(err_cst_reg_no=true)&&(err_pan_no=true)&&(err_opening_balance=true))
      {
         return true;
      }else{
