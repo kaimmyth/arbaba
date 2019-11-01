@@ -152,7 +152,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
 <div class="row">
  <div class="col-md-12">
   <div class="col-md-12" style="text-align: right; margin-bottom: 4px; margin-top: 4px;">
-    <button class="btn btn-primary" onclick="addInvoice();" >New transaction</button>
+    <button class="btn btn-primary" onclick="addInvoice();" >Add New Invoice</button>
  </div>
  <div class="tab-content colm">
    <div class="tab-pane show active" id="home-2" role="tabpanel" aria-labelledby="home-tab-2" style="">
@@ -211,17 +211,18 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
       </td>
        
         <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
-         Receive payment<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-         <a class="dropdown-item" href="<?php echo e(url('sale/invoice/print/'.$value['id'])); ?>">Print</a>
-         <a class="dropdown-item" href="<?php echo e(url('sale/invoice/email/'.$value['id'])); ?>">Send</a>
-         <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('<?php echo e($value['customer_email']); ?>','<?php echo e($value['invoice_no']); ?>','<?php echo e($value['customer']); ?>');">Send remainder</a>
-         <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a>
-         <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delivery_challan/'.$value['id'])); ?>">Print Delivery Challan</a>
-         <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', <?php echo e($value['id']); ?>);">View</a>
-         <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', <?php echo e($value['id']); ?>);">Edit</a>
-         <a class="dropdown-item" href="#">Copy</a>
-         <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delete/'.$value['id'])); ?>">Delete</a>
+         
+         <button class="btn btn-secondary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select&nbsp;<i class="fa fa-caret-down"></i></button>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="<?php echo e(url('sale/invoice/print/'.$value['id'])); ?>">Print</a>
+            <a class="dropdown-item" href="<?php echo e(url('sale/invoice/email/'.$value['id'])); ?>">Send</a>
+            <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('<?php echo e($value['customer_email']); ?>','<?php echo e($value['invoice_no']); ?>','<?php echo e($value['customer']); ?>');">Send remainder</a>
+            
+            <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delivery_challan/'.$value['id'])); ?>">Print Delivery Challan</a>
+            <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', <?php echo e($value['id']); ?>);">View</a>
+            <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', <?php echo e($value['id']); ?>);">Edit</a>
+            
+            <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delete/'.$value['id'])); ?>" onclick="return confirm('Do you want to delete this data?')">Delete</a>
         </div>
       </td> 
       </tr>
@@ -308,7 +309,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                 <div class="form-group">
                     <label for="exampleInputEmail1">Invoice date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="invoice_date" id="datepicker" required>
+                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="invoice_date" id="datepicker" required autocomplete="off">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -321,7 +322,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                 <div class="form-group">
                     <label for="exampleInputEmail1">Due date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="due_date" id="datepicker2" required>
+                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="due_date" id="datepicker2" required autocomplete="off">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -367,7 +368,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
       <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
        <thead>
         <tr>
-         <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
+         <th><input type="checkbox" name="chkall[]" id="selectall" /></th>
          <th>Product/Service</th>
          <th>HSN/SAC</th>
          <th>Description</th>
@@ -609,7 +610,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr style="border: none; background:white !important;">
-                                                <th>#</th>
+                                                <th><input  type="checkbox" name="ids[]" value="" /></th>
                                                 <th>Product/Services</th>
                                                 <th>Description</th>
                                                 <th>Qty</th>
@@ -631,6 +632,129 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
             </div>
         </div>
     </div>
+</div>
+
+
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentModalLabel">Receive Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="">
+         <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+            <label for="customer" class="col-form-label">Customer</label>
+            <input type="text" class="form-control" id="customer">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Email</label>
+            <input type="text" class="form-control" id="email">
+          </div>
+        </div>
+        <div class="col-md-4">
+<span></span>
+          <button type="button" class="btn btn-primary">Find by invoice no.</button>
+        </div>
+    </div>
+    <div class="row">
+          <div class="col-md-3">
+          <div class="form-group">
+                <label for="payment-date" class="col-form-label">Payment Date</label>
+                <input type="date" class="form-control" id="datepicker">
+              </div>
+            </div>
+        </div>
+        <div class="row">
+              <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="payment-method">Payment method</label>
+                        <select class="form-control" name="payment-method" id="payment-method" required>
+                            <option value="0" selected>---Select---</option>
+                            <option value="">Cash</option>
+                            <option value="">Cheque</option>
+                            <option value="">Credit Card</option>
+                            <option value="">Debit Card</option>
+                            <option value="">Net Banking</option>
+                           
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                        <div class="form-group">
+                              <label for="reference-no" class="col-form-label">Reference No.</label>
+                              <input type="text" class="form-control" id="reference-no">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="deposited-to">Deposited To</label>
+                                    <select class="form-control" name="deposited-to" id="deposited-to" required>
+                                        <option value="0" selected>---Select---</option>
+                                        <option value="">Axis Bank</option>
+                                        <option value="">ICICI</option>
+                                        
+                                       
+                                    </select>
+                                </div>
+                            </div> 
+                            <div class="col-md-3">
+                                    <div class="form-group">
+                                          <label for="amount-received" class="col-form-label">Amount Received</label>
+                                          <input type="text" class="form-control" id="amount-received">
+                                        </div>
+                                      </div>  
+
+        </div>
+<br><br><br>
+        <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>DESCRIPTION</th>
+                    <th>DUE DATE</th>
+                    <th>ORIGINAL AMOUNT</th>
+                    <th>OPENING BALANCE</th>
+                    <th>PAYMENT</th>
+                   
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input  type="checkbox" name="ids[]" value="" /></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row" >
+            <div class="col-md-3">
+                    <div class="form-group">
+                          <label for="amount-to-apply" class="col-form-label">Amount to Apply</label>
+                          <input type="text" class="form-control" id="amount-to-apply" >
+                    </div>
+            </div> 
+            </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Clear Payment</button>
+      </div>
+    </form>
+    </div>
+  </div>
 </div>
 
 
@@ -813,7 +937,7 @@ function viewEditInvoice(purpose, id){
 
                 // view invoice details
                 for(var i=0; i<data.no_of_rows; i++){
-                    var v_invoice_details='<tr style="border: none; background:white !important;"><td>1</td><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
+                    var v_invoice_details='<tr style="border: none; background:white !important;"><td><input  type="checkbox" name="ids[]" value="" /></td><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
                     $("#v_invoice_details tbody").append(v_invoice_details);
                 }
                 $("#v_invoice_details_amounts").html('<div style="text-align:right;padding:5px;"><p><b>Subtotal: ₹</b>'+data.subtotal+'</p><p><b>Taxes: ₹</b>'+data.total_tax+'</p><p><b>Total: ₹</b>'+data.total+'</p></div>');
@@ -869,6 +993,22 @@ function viewEditInvoice(purpose, id){
         }
     });
 }
+
+// yo open invoice form/ modal form if GET to open invoice
+var modalOpen="";
+modalOpen='<?php echo e($invoice); ?>';
+$(document).ready(function(){
+    if(modalOpen=="yes"){
+        // to remove query from url i.e. invoice=yes
+        var uri = window.location.toString();
+        if (uri.indexOf("?") > 0) {
+            var clean_uri = uri.substring(0, uri.indexOf("?"));
+            window.history.replaceState({}, document.title, clean_uri);
+        }
+        // call addInvoice to open invoice modal
+        setInterval(addInvoice(), 3000);
+    }
+});
 </script>
 
 <script>
@@ -893,7 +1033,7 @@ $(document).ready(function(){
         if((m.length=="")||(result == null)){
 
         $("#email_val").show();
-        $("#email_val").html("**please insert valid email ");
+        $("#email_val").html("Please insert valid email ");
         $("#email_val").focus();
         $("#email_val").css("color","red");
 
@@ -916,7 +1056,7 @@ $(document).ready(function(){
 
         if(d.length==""){
             $("#billing_address_val").show();
-            $("#billing_address_val").html("**please insert billing address ");
+            $("#billing_address_val").html("Please insert billing address ");
             $("#billing_address_val").focus();
             $("#billing_address_val").css("color","red");
 

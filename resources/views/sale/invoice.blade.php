@@ -309,7 +309,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                 <div class="form-group">
                     <label for="exampleInputEmail1">Invoice date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="invoice_date" id="datepicker" required>
+                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="invoice_date" id="datepicker" required autocomplete="off">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -322,7 +322,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                 <div class="form-group">
                     <label for="exampleInputEmail1">Due date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="due_date" id="datepicker2" required>
+                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="due_date" id="datepicker2" required autocomplete="off">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -368,7 +368,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
       <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
        <thead>
         <tr>
-         <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
+         <th><input type="checkbox" name="chkall[]" id="selectall" /></th>
          <th>Product/Service</th>
          <th>HSN/SAC</th>
          <th>Description</th>
@@ -610,7 +610,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr style="border: none; background:white !important;">
-                                                <th>#</th>
+                                                <th><input  type="checkbox" name="ids[]" value="" /></th>
                                                 <th>Product/Services</th>
                                                 <th>Description</th>
                                                 <th>Qty</th>
@@ -937,7 +937,7 @@ function viewEditInvoice(purpose, id){
 
                 // view invoice details
                 for(var i=0; i<data.no_of_rows; i++){
-                    var v_invoice_details='<tr style="border: none; background:white !important;"><td>1</td><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
+                    var v_invoice_details='<tr style="border: none; background:white !important;"><td><input  type="checkbox" name="ids[]" value="" /></td><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
                     $("#v_invoice_details tbody").append(v_invoice_details);
                 }
                 $("#v_invoice_details_amounts").html('<div style="text-align:right;padding:5px;"><p><b>Subtotal: ₹</b>'+data.subtotal+'</p><p><b>Taxes: ₹</b>'+data.total_tax+'</p><p><b>Total: ₹</b>'+data.total+'</p></div>');
@@ -1033,7 +1033,7 @@ $(document).ready(function(){
         if((m.length=="")||(result == null)){
 
         $("#email_val").show();
-        $("#email_val").html("**please insert valid email ");
+        $("#email_val").html("Please insert valid email ");
         $("#email_val").focus();
         $("#email_val").css("color","red");
 
@@ -1056,7 +1056,7 @@ $(document).ready(function(){
 
         if(d.length==""){
             $("#billing_address_val").show();
-            $("#billing_address_val").html("**please insert billing address ");
+            $("#billing_address_val").html("Please insert billing address ");
             $("#billing_address_val").focus();
             $("#billing_address_val").css("color","red");
 

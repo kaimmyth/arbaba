@@ -26,7 +26,7 @@
         <h4>Sales Transactions</h4>
         <div class="row">
          <div class="col-md-12" style="text-align: right;">
-         <a href="<?php echo e(url('sale/invoice?modal=open')); ?>" class="btn btn-primary">New transaction</a>
+         <a href="<?php echo e(url('sale/invoice?invoice=yes')); ?>" class="btn btn-primary">New transaction</a>
       </div>
       <?php
       $overdue_count=$overdue_amount=$open_invoice_count= $estimate_count= $estimate_amount=$paid_count=$paid_amount=0;
