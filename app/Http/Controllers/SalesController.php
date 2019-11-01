@@ -18,8 +18,11 @@ class SalesController extends Controller
         $toReturn=array();
         $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
 
-            $data['content'] ='sale.allsale';
-            return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
+       
+        
+
+        $data['content'] ='sale.allsale';
+        return view('layouts.content',compact('data'))->with(compact('toReturn',$toReturn));
        
     }
 
@@ -34,7 +37,7 @@ class SalesController extends Controller
         return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
     }
 
-    public function insert_invoice(Request $request)
+    public function add_edit_invoice(Request $request)
     {
        
         //return $request;
@@ -46,23 +49,32 @@ class SalesController extends Controller
         $invoice->terms = $request->terms ; 
         $invoice->invoice_date=date("Y-m-d",strtotime($request->invoice_date));
         $invoice->due_date=date("Y-m-d",strtotime($request->due_date));
-
-        // $invoice->invoice_date =$request->invoice_date ; 
-        // $invoice->due_date =$request->due_date ; 
         $invoice->place_of_supply =$request->place_of_supply ; 
         $invoice->msg_on_invoice = $request->msg_on_invoice; 
         $invoice->msg_on_statement=$request->msg_on_statement;
+        $invoice->status=1;
+        
+        // for attachment
+        $invoice->attachment = "";
         if($request->hasFile('attachment'))
         {
+            //
             $file = $request->file('attachment');
 
             $invoice->attachment = $file->getClientOriginalName();
-            $destinationPath = 'public/images/sales';
-            $file->move($destinationPath, $file->getClientOriginalName());
+            $destinationPath = 'public/images';
+            $file->move($destinationPath, $file->getClientOriginalName()); 
         }
         else{
-            $invoice->attachment = "";
-        } 
+            if($request->hidden_input_purpose=="edit")
+            {
+                $invoice->attachment = $request->hidden_input_attachment;
+            }
+            else if($request->hidden_input_purpose=="add")
+            {
+                // error has to return
+            }
+        }
 
 
         $count = count($request->product_service);
@@ -92,11 +104,75 @@ class SalesController extends Controller
         $invoice->invoice_details =rtrim($tmp, ':');
 
       
-
-      //  return $tmp;
-   $invoice->save();
+        // finall query create, edit
+        if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($invoice), true);
+            $update_query = sales_invoice::where('id', $request->hidden_input_id)->update($update_values_array);
+            Session::flash('success', 'Invoice details has been updated successfully');
+        }
+        else if($request->hidden_input_purpose=="add")
+        {
+            $invoice->save();
+            Session::flash('success', 'Invoice details has been saved successfully');
+        }
      
          return redirect('sale/invoice');
+    }
+
+    public function get_invoice_details($id=""){
+        $data = sales_invoice::where('id', $id)->first();
+
+        // for expenses_details
+        $no_of_rows=0;
+        $product_services=[];
+        $hac_sac=[];
+        $description=[];
+        $qty=[];
+        $rate=[];
+        $amount=[];
+        $tax=[];
+        $subtotal=0;
+        $total_tax=0;
+        $total=0;
+
+        if($data->invoice_details!="")
+        {
+            $tmp = $data->invoice_details;
+            $tmp = explode(":",$tmp);
+            for($i=0;$i<count($tmp);$i++){
+                $tmp_2 = explode(",",$tmp[$i]);
+                $product_services[$i]=$tmp_2[0];
+                $hac_sac[$i]=$tmp_2[1];
+                $description[$i]=$tmp_2[2];
+                $qty[$i]=$tmp_2[3];
+                $rate[$i]=$tmp_2[4];
+                $amount[$i]=$tmp_2[5];
+                $tax[$i]=$tmp_2[6];
+
+                $subtotal+=$tmp_2[5];
+                $total_tax+=(($tmp_2[5]*$tmp_2[6])/100);
+                $total+=($subtotal+$total_tax);
+            }
+            $no_of_rows=count($tmp);
+        }
+        $data->no_of_rows=$no_of_rows;
+        $data->invoice_details_product_services=$product_services;
+        $data->invoice_details_hac_sac=$hac_sac;
+        $data->invoice_details_description=$description;
+        $data->invoice_details_qty=$qty;
+        $data->invoice_details_rate=$rate;
+        $data->invoice_details_amount=$amount;
+        $data->invoice_details_tax=$tax;
+        $data->subtotal=$subtotal;
+        $data->total_tax=$total_tax;
+        $data->total=$total;
+
+        // change date format for font end
+        $data->invoice_date = date("d-m-Y", strtotime($data->invoice_date));
+        $data->due_date = date("d-m-Y", strtotime($data->due_date));
+
+        return $data;
     }
 
     public function add_customers(Request $request)
@@ -149,18 +225,22 @@ class SalesController extends Controller
 
     public function view_customers()
     {
-        $toReturn=array();
-        $toReturn=sales_customers::get()->toArray();
-
-        $data['content'] ='sale.customer';
-        return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
-
+    $toReturnInvoice=array();
+    $toReturnInvoice=sales_invoice::get()->toArray();
+    
+    $toReturn=array();
+    $toReturn=sales_customers::get()->toArray();
+    
+    $data['content'] ='sale.customer';
+    return view('layouts.content',compact('data','product'))->with(compact('toReturn', 'toReturnInvoice'));
     }
 
-     public function delete_customer($id=""){
+    public function delete_customer($id="")
+    {
         $del=sales_customers::where('id',$id)->delete();
-        Session::flash('success', 'customer has been deleted successfully');
-        return redirect('sale/customers');
+        Session::flash('success', 'Products details has been deleted successfully');
+      
+        return redirect('sale/customers'); 
     }
 
     public function view_products_and_services()

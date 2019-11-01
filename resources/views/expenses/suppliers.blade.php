@@ -614,7 +614,7 @@ input[type=text]:focus {
         $("#first_name_val").hide();
         $("#last_name_val").hide();
         $("#email_id_val").hide();
-        // $("#mobile_no_val").hide();
+        $("#mobile_no_val").hide();
         $("#company_val").hide();
         $("#pan_no_val").hide();
         $("#address_val").hide();
@@ -626,7 +626,7 @@ input[type=text]:focus {
         var err_first_name =true;
         var err_last_name =true;
         var err_email_id =true;
-        // var err_mobile_no = true;
+        var err_mobile_no = true;
         var err_company=true;
         var err_pan_no=true;
         var err_address=true;
@@ -727,29 +727,29 @@ input[type=text]:focus {
 
 
 
-        //      $("#mobile_no").keyup(function(){
+             $("#mobile_no").keyup(function(){
 
-        //     username4();
-        // });
-        // function username4(){
+            username4();
+        });
+        function username4(){
 
-        //   var q = $("#mobile_no").val();
+          var q = $("#mobile_no").val();
 
-        //   var regexOnlyNumbers=/^[0-9]+$/;
-        //   if((q=="")|| regexOnlyNumbers.test(q)!=true){
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
 
-        //     $("#mobile_no_val").show();
-        //     $("#mobile_no_val").html("**please input numbers between 0-9 ");
-        //     $("#mobile_no_val").focus();
-        //     $("#mobile_no_val").css("color","red");
+            $("#mobile_no_val").show();
+            $("#mobile_no_val").html("**please input numbers between 0-9 ");
+            $("#mobile_no_val").focus();
+            $("#mobile_no_val").css("color","red");
 
-        //       err_mobile_no=false;
-        //       return false;
-        //   }else{
-        //     err_mobile_no=true;
-        //     $("#mobile_no_val").hide();
-        //   }
-        // }
+              err_mobile_no=false;
+              return false;
+          }else{
+            err_mobile_no=true;
+            $("#mobile_no_val").hide();
+          }
+        }
 
 
          $("#company").blur(function(){
@@ -900,7 +900,7 @@ input[type=text]:focus {
       err_first_name=true;
       err_last_name=true;
       err_email_id=true;
-      // err_mobile_no=true;
+      err_mobile_no=true;
       err_company=true;
       err_pan_no=true;
       err_address=true;
@@ -912,7 +912,7 @@ input[type=text]:focus {
       username1();
       username2();
       username3();
-      // username4();
+      username4();
       username5();
       username6();
       username7();
@@ -921,7 +921,7 @@ input[type=text]:focus {
       username10();
 
 
-     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_company==true)&&(err_pan_no==true)&&(err_address==true)&&(err_pin_code==true)&&(err_opening_balance)&&(account_no))
+     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_company==true)&&(err_pan_no==true)&&(err_address==true)&&(err_pin_code==true)&&(err_opening_balance)&&(account_no))
         {
             return true;
         }

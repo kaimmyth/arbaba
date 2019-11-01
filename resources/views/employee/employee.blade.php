@@ -37,8 +37,7 @@
                             <div class="col-lg-12">
                                 <div class="card card-border card-primary">
                                     <div class="card-header"> 
-                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addEmployee();" data-toggle="modal" style="float:right;">Add an Employee</button>
-                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addAccount();" data-toggle="modal" style="float:right;">Account</button>
+                                        <button type="button" class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5" onclick="addEmployee();" data-toggle="modal" data-target=".employee" style="float:right;">Add an Employee</button>
                                     </div> 
                                     <div class="card-body"> 
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -348,137 +347,6 @@
 <!-- end model -->
 
 
-<div class="modal account fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
-   <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title mt-0" id="myLargeModalLabel"><i class="fa fa-users"></i>&nbsp;&nbsp;Bank</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="padding: 0px 0;">
-                <form action="{{url('accounting/add')}}" method="post">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Account type:</label>
-                                <select class="form-control" placeholder="account type" name="account_type" id="account_type" required>
-                                    <option>Bank</option>
-                                    <option>Current assets</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="text">Detail type:</label>
-                               <select class="form-control" placeholder="" name="detail_type" id="detail_type" required>
-                                    <option>cash and cash equivalent</option>
-                                    <option>cash on hand</option>
-                                    <option>client trust account</option>
-                                    <option>current</option>
-                                    <option>Money marcket</option>
-                                    <option>other ermarked bank accounts</option>
-                                    <option>rents held in trust</option>
-                                    <option>savings</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-
-                                <div style="padding:60px; background-color:lightgrey;"><p>ohh yeahhhhh</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                  <label for="pwd">Name:</label>
-                                  <input type="text" class="form-control" id="name" placeholder="name" name="name">
-                            </div> 
-                            <h6 id="name_val"></h6>
-                            <div class="form-group"> 
-                                  <label for="text">Discription:</label>
-                                  <input type="text" class="form-control" id="discription" placeholder="discription" name="discription">
-                            </div>   
-                            <h6 id="discription_val"></h6>
-                             <div class="form-group">
-                                    <label for="">Default tax code</label>
-                                    <select class="form-control" placeholder="default tax code" name="default_tax_code" id="default_tax_code" required>
-                                            <option>18% IGST</option>
-                                            <option> 18% IGST</option>
-                                            <option>29.00% ST</option>
-                                            <option>00% IGST</option>
-                                            <option>OPT OF SCOPE</option>
-                                            <option>00% GST</option>
-                                            <option>14.5% </option>
-                                            <option>14.00% VAT</option>
-                                            <option>6.00% IGST</option>
-                                            <option>28.00% IGST</option>
-                                            <option>15.005 ST</option>
-                                            <option>28.00% GST</option>
-                                            <option>12.0% GST</option>
-                                            <option>18.00% GST</option>
-                                            <option>3.0% GST</option>
-                                            <option>0.28% GST</option>
-                                            <option>5.0% GST</option>
-                                            <option>6.0% GST</option>
-                                            <option>0.28% GST</option>
-                                            <option>exempt IGST</option>
-                                            <option>3.0% IGST</option>
-                                            <option>4.0% VAT</option>
-                                            <option>3.05 IGST</option>
-                                            <option>12.36% ST</option>
-                                            <option>5.0% VAT</option>
-                                            <option>exempt GST</option>
-
-                                           
-                                        </select>
-
-                             </div> 
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="">Balance:</label>
-                                        <input type="text" class="form-control" id="balance" placeholder="" name="balance">
-                                        <h6 id="balance_val"></h6>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <label for="">As of:</label>
-                                        <input type="text" class="form-control" id="as_of" placeholder="" name="as_of">
-                                    </div>
-                                    <h6 id="as_of_val"></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                        <div style="width:100%; padding: 0.5px;background: #6f6f6f;"></div><br>
-                             <div class="d-print-none">
-                                 <div class="pull-left">
-                                <!-- hidden inputs -->
-                                <input type="text" name="hidden_input_id" value="NA" hidden>
-                                <input type="text" name="hidden_input_purpose" value="add" hidden>
-                                <!-- hidden inputs -->
-                                <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit1">Save</a>
-                                </div>
-                            <div class="pull-right">
-                                <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Cancel</button>
-                        </div>
-                                  </div>
-                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <script>
         $(document).ready(function () {
             $('#first_name').keyup(function () {
@@ -558,7 +426,7 @@ $(document).ready(function()
              else
             {
               err_pin_code=true;
-              $("#pin_code_check").hide();
+              $("#billing_pin_check").hide();
             }
         }
 
@@ -637,29 +505,29 @@ $(document).ready(function()
           }
         }
 
-        // $("#mobile_no").keyup(function(){
+        $("#mobile_no").keyup(function(){
 
-        //     username5();
-        // });
-        // function username5(){
+            username5();
+        });
+        function username5(){
 
-        //   var q = $("#mobile_no").val();
+          var q = $("#mobile_no").val();
 
-        //   var regexOnlyNumbers=/^[0-9]+$/;
-        //   if((q=="")|| regexOnlyNumbers.test(q)!=true){
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
 
-        //     $("#mobile_no_val").show();
-        //     $("#mobile_no_val").html("**please input numbers between 0-9 ");
-        //     $("#mobile_no_val").focus();
-        //     $("#mobile_no_val").css("color","red");
+            $("#mobile_no_val").show();
+            $("#mobile_no_val").html("**please input numbers between 0-9 ");
+            $("#mobile_no_val").focus();
+            $("#mobile_no_val").css("color","red");
 
-        //       err_mobile_no=false;
-        //       return false;
-        //   }else{
-        //     err_mobile_no=true;
-        //     $("#mobile_no_val").hide();
-        //   }
-        // }
+              err_mobile_no=false;
+              return false;
+          }else{
+            err_mobile_no=true;
+            $("#mobile_no_val").hide();
+          }
+        }
 
 
          $("#address").blur(function(){
@@ -735,9 +603,9 @@ $(document).ready(function()
 
              $("#employee_id").blur(function(){
 
-            username9();
+            username8();
         });
-        function username9(){
+        function username8(){
 
           var p = $("#employee_id").val();
 
@@ -778,11 +646,10 @@ $(document).ready(function()
       username6();
       username7();
       username8();
-      username9();
      
 
 
-     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_address==true)&&(err_billing_rate==true)&&(err_employee_id_no==true)&&(err_employee_id==true))
+     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_address==true)&&(err_billing_rate==true)&&(err_employee_id_no==true)&&(err_employee_id==true))
         {
             return true;
         }
@@ -803,11 +670,8 @@ $(document).ready(function()
 
 <script>
 // to get employee details from controller through ajax, purpose = edit & view
-function addAccount(){
-    $(".account").modal('show');
-}
 //add employees
-function addEmployee(){
+function addExpenses(){
     resetEmployeeForms();
     $(".employee").modal('show');
 }
@@ -889,108 +753,4 @@ function viewEditEmployee(purpose, id){
         }
     });
 }
-</script>
-    <script>
-$(document).ready(function(){
-    $("#name_val").hide();
-    $("#discription_val").hide();
-    $("#balance_val").hide();
-   
-
-    var err_name=true;
-    var err_discription=true;
-    var err_balance=true;
-    
-
-
-   
-
-    $("#name").blur(function(){
-        name_f();
-    });
-    function name_f(){
-
-        var d = $("#name").val();
-
-        if(d.length==""){
-            $("#name_val").show();
-            $("#name_val").html("**please insert your name ");
-            $("#name_val").focus();
-            $("#name_val").css("color","red");
-
-            err_name=false;
-            return false;
-        }
-        else{
-            err_name=true;
-            $("#name_val").hide();
-        }
-    }
-
-    $("#discription").blur(function(){
-        discription_f();
-    });
-    function discription_f(){
-
-        var v = $("#discription").val();
-
-        if(v.length==""){
-            $("#discription_val").show();
-            $("#discription_val").html("**please insert discription ");
-            $("#discription_val").focus();
-            $("#discription_val").css("color","red");
-
-            err_discription=false;
-            return false;
-        }
-        else{
-            err_discription=true;
-            $("#discription_val").hide();
-        }
-    }
-
-  $('#balance').blur(function () {
-        balance_f();
-    });
-    function balance_f()
-    {
-        
-        var balance_val_chk=$("#balance").val();
-        var regexOnlyNumbers=/^[0-9]+$/;
-        if(balance_val=="" || regexOnlyNumbers.test(balance_val) != true)
-        {
-            
-            $("#balance_val").show();
-            $("#balance_val").html("Please enter a valid number");
-            $("#balance_val").focus();
-            $("#balance_val").css("color","red");
-            err_balance=false;
-        }
-        else
-        {
-            err_balance=true;
-            $("#balance_val").hide();
-        }  
-    }
-
-   
-
-    $("#btnSubmit1").click(function(){
-        err_name = true;
-        err_discription = true;
-        err_balance=true;
-        
-        name_f();
-        discription_f();
-        balance_f();
-
-        if((err_name==true)&&(err_discription==true)&&(err_balance==true))
-        {
-            return true;
-        }
-        else{
-            return false;
-        }
-    });
-});
 </script>

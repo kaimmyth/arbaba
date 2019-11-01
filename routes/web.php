@@ -53,17 +53,20 @@ Route::get('sale/all-sale','SalesController@view_all_sales');
 
 // Invoices
 Route::get('sale/invoice','SalesController@view_invoices');
-Route::post('sale/invoice/add','SalesController@insert_invoice');
+Route::post('sale/invoice/add-edit','SalesController@add_edit_invoice');
 Route::get('sale/invoice/email/{id}','SalesController@invoice_mail');
 Route::get('sale/invoice/print/{id}','SalesController@print_invoice');
 Route::get('sale/invoice/delivery_challan/{id}','SalesController@invoice_delivery_challan');
 Route::get('sale/invoice/delete/{id}','SalesController@invoice_delete');
+Route::get('sale/invoice/get-invoice-details/{id}','SalesController@get_invoice_details');
 Route::post('sale/invoice/remainder_mail/{id}','SalesController@invoice_remainder_email');
 
+//Customer
 Route::get('sale/customers','SalesController@view_customers');
 Route::post('sale/customers/add','SalesController@add_customers');
 Route::get('sale/customer/delete/{id}','SalesController@delete_customer');
 
+//Product & Services
 Route::get('sale/products-and-services','SalesController@view_products_and_services');
 Route::POST('sale/products-and-services/add-edit','SalesController@add_edit_products_and_services');
 Route::get('sale/products-and-services/delete/{id}','SalesController@delete_products_and_services');
@@ -123,4 +126,3 @@ Route::get('tax/payment-history/delete/{id}','TaxesController@payment_history_de
 
 
 
-Route::POST('accounting/add','AccountingController@add_account');
