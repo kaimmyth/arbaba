@@ -116,7 +116,7 @@
                             <div class="form-group display-detail">
                                 <label for="">Display Name as</label>
                                     <div class="input-group">
-                                        <input type="" class="form-control" id="display_name_as" name="display_name_as" placeholder="" disabled>
+                                        <input type="" class="form-control" id="display_name_as" name="display_name_as" placeholder="" readonly>
                                     </div>
                                 </div><!--form-group-->
 
