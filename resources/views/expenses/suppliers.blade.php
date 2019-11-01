@@ -85,7 +85,7 @@ input[type=text]:focus {
                             <div class="form-group">
                                 <label for="">Title</label>
                                     <div class="input-group">
-                                        <input type="text" id="title" name="title" class="form-control" placeholder="Title">
+                                        <input type="text" id="title" name="title" class="form-control" placeholder="Title" required>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
@@ -106,6 +106,7 @@ input[type=text]:focus {
                                     <div class="input-group">
                                         <input type="text" id="company" name="company" class="form-control" placeholder="Company">
                                 </div><!--input group-->
+                                <h6 id="company_val"></h6>
                             </div><!--end of from group-->
 
                             <div class="form-group">
@@ -117,10 +118,10 @@ input[type=text]:focus {
                             </div><!--end of from group-->
 
                             <div class="form-group"style="width:49%;float:left;">
-                                <input type="text" id="city" name="city" class="form-control" placeholder="City/Town">
+                                <input type="text" id="city" name="city" class="form-control" placeholder="City/Town" required>
                             </div>
                             <div class="form-group"style="width:49%; float:left; margin-left:2%;">
-                                <input type="text" id="state" name="state" class="form-control" placeholder="State">
+                                <input type="text" id="state" name="state" class="form-control" placeholder="State" required>
                             </div>
 
                             <div class="form-group"style="width:49%;float:left;">
@@ -129,7 +130,7 @@ input[type=text]:focus {
                         </div>
                             
                             <div class="form-group"style="width:49%; float:left; margin-left:2%;">
-                                <input type="text" id="country" name="country" class="form-control" placeholder="Country">
+                                <input type="text" id="country" name="country" class="form-control" placeholder="Country" required>
                             </div>
                         </div><!--col-->
 
@@ -147,7 +148,7 @@ input[type=text]:focus {
                             <div class="form-group">
                                 <label for="">Middle Name</label>
                                     <div class="input-group">
-                                        <input type="text" id="middle_name" name="middle_name" class="form-control" placeholder="Middle Name">
+                                        <input type="text" id="middle_name" name="middle_name" class="form-control" placeholder="Middle Name" required>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
@@ -169,7 +170,7 @@ input[type=text]:focus {
 
 
                             <div class="form-group">
-                                <input type="checkbox" id="myCheck" class="checkbox checkbox-success" onclick="myFunction()">&nbsp;&nbsp;<b>Apply TDS for this supplier</b><br>
+                                <input type="checkbox" id="myCheck" class="checkbox checkbox-success" onclick="myFunction()" required>&nbsp;&nbsp;<b>Apply TDS for this supplier</b><br>
                                     <div id="options" style="display:none;">
                                         <div class="form-group"style="width:49%;float:left;">
                                             <label for="">Entity</label>  <br> 
@@ -195,7 +196,7 @@ input[type=text]:focus {
                                                     </select>
                                             </div><!--input group-->
                                     </div>
-                                 <input type="checkbox" id="check1"><b>&nbsp;&nbsp;Override calculation threshold</b>
+                                 <input type="checkbox" id="check1" required><b>&nbsp;&nbsp;Override calculation threshold</b>
                             </div>
                         </div><!--end of p-->
                     </div><!--col-->
@@ -216,17 +217,17 @@ input[type=text]:focus {
                             <div class="form-group">
                                 <label for="">Company</label>
                                     <div class="input-group">
-                                        <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Company Name">
+                                        <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Company Name" required>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-building-o"></i></span>
                                     </div>
                                 </div><!--input group-->
-                                <h6 id="company_val"></h6>
+                                
                             </div><!--end of from group-->
                             <div class="form-group">
                                 <label for="">Website</label>
                                     <div class="input-group">
-                                        <input type="text" id="website" name="website" class="form-control" placeholder="eg.www.example.com">
+                                        <input type="text" id="website" name="website" class="form-control" placeholder="eg.www.example.com" required>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-globe" aria-hidden="true"></i></span>
                                     </div>
@@ -236,7 +237,7 @@ input[type=text]:focus {
                         <div class="form-group">
                              <label for="">Terms</label>
                                 <div class="input-group">
-                                    <select class="form-control" name="terms" id="terms">
+                                    <select class="form-control" name="terms" id="terms" required>
                                         <option value="">--select--</option>
                                         <option>Due On receipt</option>
                                         <option>Net 15</option>
@@ -255,7 +256,7 @@ input[type=text]:focus {
                                 <div class="form-group">
                                     <label for="">GSTIN</label>
                                         <div class="input-group">
-                                            <input type="text" id="gstin" name="gstin" class="form-control" placeholder="For eg. 29KHIT67895"> 
+                                            <input type="text" id="gstin" name="gstin" class="form-control" placeholder="For eg. 29KHIT67895" required> 
                                     </div><!--input group-->
                                 </div><!--end of from group-->
                             </div>
@@ -274,13 +275,13 @@ input[type=text]:focus {
                         <div class="form-group">
                             <label for="">Other</label>
                                 <div class="input-group">
-                                    <input type="text" placeholder="" class="form-control" name="other" id="other">
+                                    <input type="text" placeholder="" class="form-control" name="other" id="other" required>
                             </div><!--input group-->
                         </div><!--end of fron group-->
                         <div class="form-group">
                             <label for="">Billing Rate(/hr)</label>
                                 <div class="input-group">
-                                <input type="text" id="billing_rate" name="billing_rate" class="form-control" placeholder="">
+                                <input type="text" id="billing_rate" name="billing_rate" class="form-control" placeholder="" required>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                 </div>
@@ -291,7 +292,7 @@ input[type=text]:focus {
                         <div class="form-group" style="width:49%;float:left;">
                             <label for="">Opening Balance</label>
                                 <div class="input-group">
-                                <input type="text" id="opening_balance" name="opening_balance" class="form-control" placeholder="">
+                                <input type="text" id="opening_balance" name="opening_balance" class="form-control" placeholder="" required>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                 </div>
@@ -301,7 +302,7 @@ input[type=text]:focus {
                         <div class="form-group" style="width:49%; float:left; margin-left:2%;">
                             <label for="">as of</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="datepicker" placeholder="mm/dd/yyyy" name="as_of" autocomplete="off">
+                                <input type="text" class="form-control" id="datepicker" placeholder="mm/dd/yyyy" name="as_of" autocomplete="off" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="md md-event"></i></span>
                                 </div>
@@ -311,7 +312,7 @@ input[type=text]:focus {
                         <div class="form-group">
                             <label for="">GST registration type</label>
                                 <div class="input-group">
-                                <select class="form-control" name="gst_reg_type" id="gst_reg_type">
+                                <select class="form-control" name="gst_reg_type" id="gst_reg_type" required>
                                     <option>--select--</option>
                                     <option>GST Registered Regular</option>
                                     <option>GST Registered Composition</option>
@@ -323,7 +324,7 @@ input[type=text]:focus {
                          <div class="form-group" style="width:49%;float:left;">
                             <label for="">Tax Registration Number</label>
                                 <div class="input-group">
-                                <input type="text" id="tax_reg_no" name="tax_reg_no" class="form-control" placeholder="">
+                                <input type="text" id="tax_reg_no" name="tax_reg_no" class="form-control" placeholder="" required>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                 </div>
@@ -332,7 +333,7 @@ input[type=text]:focus {
                         <div class="form-group" style="width:49%; float:left; margin-left:2%;">
                             <label for="">Effective<br/>Date</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="effective_date" autocomplete="off">
+                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="effective_date" autocomplete="off" required> 
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="md md-event"></i></span>
                                 </div>
@@ -345,7 +346,7 @@ input[type=text]:focus {
                         <div class="form-group">
                             <label for="">Notes</label>
                                 <div class="input-group">
-                                <textarea class="form-control" rows="3" id="notes" name="notes"></textarea>
+                                <textarea class="form-control" rows="3" id="notes" name="notes" required></textarea>
                             </div><!--input group-->
                         </div><!--end of from group-->
                     </div>
@@ -355,7 +356,7 @@ input[type=text]:focus {
                                     <div class="m-b-30">
                                         <div class="dropzone" id="dropzone" style="min-height: 80px;">
                                             <div class="fallback">
-                                                <input  type="file" name="attachment" id="attachment">
+                                                <input  type="file" name="attachment" id="attachment" required>
                                             </div>
                                         </div>
                                         <span id="e_supplier_attachment"></span>
