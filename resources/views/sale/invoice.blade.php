@@ -152,7 +152,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
 <div class="row">
  <div class="col-md-12">
   <div class="col-md-12" style="text-align: right; margin-bottom: 4px; margin-top: 4px;">
-    <button class="btn btn-primary" onclick="addInvoice();" >New transaction</button>
+    <button class="btn btn-primary" onclick="addInvoice();" >Add New Invoice</button>
  </div>
  <div class="tab-content colm">
    <div class="tab-pane show active" id="home-2" role="tabpanel" aria-labelledby="home-tab-2" style="">
@@ -211,17 +211,18 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
       </td>
        
         <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
-         <label data-target="#paymentModal"  data-toggle="modal">Receive Payment</label><i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-         <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
-         <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
-         <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send remainder</a>
-         <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a>
-         <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
-         <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', {{$value['id']}});">View</a>
-         <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', {{$value['id']}});">Edit</a>
-         <a class="dropdown-item" href="#">Copy</a>
-         <a class="dropdown-item" href="{{url('sale/invoice/delete/'.$value['id'])}}">Delete</a>
+         {{-- <label data-target="#paymentModal"  data-toggle="modal">Receive Payment</label> --}}
+         <button class="btn btn-secondary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select&nbsp;<i class="fa fa-caret-down"></i></button>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
+            <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
+            <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send remainder</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a>
+            <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
+            <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', {{$value['id']}});">View</a>
+            <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', {{$value['id']}});">Edit</a>
+            {{-- <a class="dropdown-item" href="#">Copy</a> --}}
+            <a class="dropdown-item" href="{{url('sale/invoice/delete/'.$value['id'])}}" onclick="return confirm('Do you want to delete this data?')">Delete</a>
         </div>
       </td> 
       </tr>
@@ -992,6 +993,22 @@ function viewEditInvoice(purpose, id){
         }
     });
 }
+
+// yo open invoice form/ modal form if GET to open invoice
+var modalOpen="";
+modalOpen='{{$invoice}}';
+$(document).ready(function(){
+    if(modalOpen=="yes"){
+        // to remove query from url i.e. invoice=yes
+        var uri = window.location.toString();
+        if (uri.indexOf("?") > 0) {
+            var clean_uri = uri.substring(0, uri.indexOf("?"));
+            window.history.replaceState({}, document.title, clean_uri);
+        }
+        // call addInvoice to open invoice modal
+        setInterval(addInvoice(), 3000);
+    }
+});
 </script>
 
 <script>

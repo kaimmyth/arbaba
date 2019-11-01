@@ -27,14 +27,22 @@ class SalesController extends Controller
     }
 
    
-    public function view_invoices()
+    public function view_invoices(Request $request)
     {
+        // to open invoice form/ modal form
+        $invoice="no";
+        if($request->invoice){
+            if($request->invoice=="yes"){
+                $invoice="yes";
+                // session(['invoice' => 'yes']);
+            }
+        }
 
         $toReturn=array();
         $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
 
         $data['content'] ='sale.invoice';
-        return view('layouts.content',compact('data'))->with('toReturn', $toReturn);
+        return view('layouts.content',compact('data'))->with(compact('toReturn','invoice'));
     }
 
     public function add_edit_invoice(Request $request)
