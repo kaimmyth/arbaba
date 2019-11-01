@@ -224,6 +224,7 @@ class SalesController extends Controller
         
 
         $product->save();
+        Session::flash('success', 'New customer details has been updated successfully');
 
          // return $product;
         
@@ -246,7 +247,7 @@ class SalesController extends Controller
     public function delete_customer($id="")
     {
         $del=sales_customers::where('id',$id)->delete();
-        Session::flash('success', 'Products details has been deleted successfully');
+        Session::flash('success', 'Customer details has been deleted successfully');
       
         return redirect('sale/customers'); 
     }
@@ -348,7 +349,8 @@ class SalesController extends Controller
     {
         $toReturn=array();
         $toReturn=sales_invoice::where('id',$id)->delete();
-            
+
+        Session::flash('success', 'Invoice details has been deleted successfully');
         return redirect('sale/invoice')->with('toReturn',$toReturn);
     }
 

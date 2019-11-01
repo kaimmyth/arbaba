@@ -212,8 +212,8 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
        
         <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
          {{-- <label data-target="#paymentModal"  data-toggle="modal">Receive Payment</label> --}}
-         <button class="btn btn-secondary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select&nbsp;<i class="fa fa-caret-down"></i></button>
-         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+         <button class="btn btn-secondary btn-sm" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select&nbsp;<i class="fa fa-caret-down"></i></button>
+         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
             <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
             <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send remainder</a>
@@ -395,7 +395,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
      <td><input type="text" class="form-control" name="description[]" required></td>
      <td><input type="text" class="form-control" name="qty[]" required></td>
      <td><input type="text" class="form-control"  name="rate[]" required></td>
-     <td><input class="form-control" type="text" name="amt[]"></td>
+     <td><input class="form-control" type="text" name="amt[]" readonly></td>
      
             <td >
                     <select class="form-control input-sm" name="tax[]" required>
@@ -797,6 +797,16 @@ $("#subject").val(subject);
 </script>
 
 <script>
+    // not accepting other than numbers
+    $("#mytable").delegate("input[name='qty[]']", "keyup", function (){
+        $(this).val($(this).val().replace(/\D/g, ""));
+    });
+    $("#mytable").delegate("input[name='rate[]']", "keyup", function (){
+        $(this).val($(this).val().replace(/\D/g, ""));
+    });
+    $("#mytable").delegate("input[name='rate[]']", "keyup", function (){
+        $(this).val($(this).val().replace(/\D/g, ""));
+    });
     function appendFormContents()
     {
         var data='<tr>'+
@@ -814,7 +824,7 @@ $("#subject").val(subject);
         '<td><input type="text" class="form-control" name="description[]"></td>'+
         '<td><input type="text" class="form-control" name="qty[]" required></td>'+
         '<td><input type="text" class="form-control"  name="rate[]" required></td>'+
-        '<td><input class="form-control" type="text" name="amt[]" ></td>'+
+        '<td><input class="form-control" type="text" name="amt[]" readonly></td>'+
         
                 '<td>'+
                     ' <select class="form-control input-sm" name="tax[]">'+
