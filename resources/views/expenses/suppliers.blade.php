@@ -156,7 +156,7 @@ input[type=text]:focus {
 
                             <div class="form-group">
                                 <label for="">Display Name as</label>
-                                <input type="text" id="display_name_as" name="display_name_as" class="form-control" placeholder="Middle Name">
+                                <input type="text" id="display_name_as" name="display_name_as" class="form-control" placeholder="" readonly>
 
                             </div><!--end of from group-->
                             <div class="form-group">
@@ -938,4 +938,19 @@ input[type=text]:focus {
 
   });
 
+</script>
+<script>
+    $("#title").keyup(function(){
+
+display_name_as_append();
+
+});
+$("#first_name").keyup(function(){
+
+display_name_as_append();
+
+});
+function display_name_as_append(){
+$("#display_name_as").val($("#title").val()+" "+$("#first_name").val());
+}
 </script>
