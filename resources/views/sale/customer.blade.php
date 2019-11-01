@@ -287,7 +287,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Phone</label>
-                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no" data-mask="(999) 999-9999" reqired>
+                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no" data-mask="(999) 999-9999" required>
                     </div>
                     <h6 id="phone_val"></h6>
                   </div>
@@ -295,7 +295,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Mobile</label>
-                      <input type="text" class="form-control" value="" id="mobile_no" name="mobile_no" data-mask="(999) 999-9999">
+                      <input type="text" class="form-control" value="" id="mobile_no" name="mobile_no" data-mask="(999) 999-9999" required>
                     </div>
                     <h6 id="mobile_no_val"></h6>
                   </div>
@@ -303,7 +303,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Fax</label>
-                      <input type="text" class="form-control" value="" id="fax" name="fax" data-mask="99-999-9999999">
+                      <input type="text" class="form-control" value="" id="fax" name="fax" data-mask="99-999-9999999" required>
                     </div>
                   </div>
 
@@ -356,7 +356,7 @@
             <div class="col-md-12">
               <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false" required>
                     <span class="d-block d-sm-none"><i class="fa fa-home"></i></span>
                     <span class="d-none d-sm-block">Address</span>
                   </a>
@@ -374,13 +374,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="setting-tab" data-toggle="tab" href="#setting" role="tab" aria-controls="setting" aria-selected="false">
+                  <a class="nav-link" id="setting-tab" data-toggle="tab" href="#setting" role="tab" aria-controls="setting" aria-selected="false" required>
                     <span class="d-block d-sm-none"><i class="fa fa-cog"></i></span>
                     <span class="d-none d-sm-block">Payment and Billing</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="note-tab" data-toggle="tab" href="#note" role="tab" aria-controls="note" aria-selected="false">
+                  <a class="nav-link" id="note-tab" data-toggle="tab" href="#note" role="tab" aria-controls="note" aria-selected="false" required>
                     <span class="d-block d-sm-none"><i class="fa fa-cog"></i></span>
                     <span class="d-none d-sm-block">Attachments</span>
                   </a>
@@ -393,7 +393,7 @@
                       <h5>Billing Address</h5>
                       <div class="row">
                         <div class="col-md-12">
-                          <textarea class="form-control" rows="2" id="billing_address" name="billing_address"></textarea>
+                          <textarea class="form-control" rows="2" id="billing_address" name="billing_address" required></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="city_town "name="city_town" placeholder="City/Town" required>
@@ -419,7 +419,7 @@
                       <h5>Shipping Address &nbsp; &nbsp;   <input id="checkbox1" type="checkbox"> Same as billing address</h5>
                       <div class="row">
                         <div class="col-md-12">
-                          <textarea class="form-control" rows="2" id="shipping_address" name="shipping_address"></textarea>
+                          <textarea class="form-control" rows="2" id="shipping_address" name="shipping_address" required></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
                           <input type="text" class="form-control" id="city_town_shipping" name="city_town_shipping" placeholder="City/Town" required>
@@ -444,7 +444,7 @@
                 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                   <h5>Notes</h5>
                   <div class="col-md-12">
-                    <textarea class="form-control" rows="3" id="notes" name="notes"></textarea>
+                    <textarea class="form-control" rows="3" id="notes" name="notes" required></textarea>
                   </div>
 
                 </div>
@@ -453,7 +453,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tax Reg. No.</label>
-                        <input type="text" class="form-control" id="tax_reg_no" name="tax_reg_no" placeholder="">
+                        <input type="text" class="form-control" id="tax_reg_no" name="tax_reg_no" placeholder="" required>
                       </div>
                       <h6 id="tax_reg_no_val"></h6>
                     </div>
@@ -461,7 +461,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">CST reg. no.</label>
-                        <input type="text" class="form-control" id="cst_reg_no" name="cst_reg_no" placeholder="">
+                        <input type="text" class="form-control" id="cst_reg_no" name="cst_reg_no" placeholder="" required>
                       </div>
                       <h6 id="cst_reg_no_val"></h6>
                     </div>
@@ -469,7 +469,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">PAN No.</label>
-                        <input type="text" class="form-control" id="pan_no" name="pan_no" placeholder="">
+                        <input type="text" class="form-control" id="pan_no" name="pan_no" placeholder="" required>
                       </div>
                             <h6 id="pan_no_val"></h6>
                     </div>
@@ -489,8 +489,8 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Preferred payment method</label>
-                        <select class="form-control" id="=preferred_payment_method" name="preferred_payment_method">
-                          <option>-Select-</option>
+                        <select class="form-control" id="=preferred_payment_method" name="preferred_payment_method" required>
+                          <option value="0">-Select-</option>
                           <option>Cash</option>
                           <option>Cheque</option>
                           <option>Credit Card</option>
@@ -501,7 +501,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Preferred delivery method</label>
-                        <select class="form-control" id="=preferred_delivery_method" name="preferred_delivery_method" >
+                        <select class="form-control" id="=preferred_delivery_method" name="preferred_delivery_method" required>
                           <option>-Select-</option>
                           <option>Print Later</option>
                           <option>Send Later</option>
@@ -513,7 +513,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Terms</label>
-                        <select class="form-control" id="terms" name="terms">
+                        <select class="form-control" id="terms" name="terms" required>
                           <option>-Select Customer-</option>
                           <option style="color: green;">Add New +</option>
                           <option>Due on receipt</option>
@@ -527,7 +527,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Opening balance</label>
-                        <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="">
+                        <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="" required>
                       </div>
                       <h6 id="opening_balance_val"></h6>
                     </div>
@@ -536,7 +536,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">as of</label>
                         <div class="input-group">
-                          <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy" id="as_of" name="as_of">
+                          <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy" id="as_of" name="as_of" required autocomplete="off">
                           <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                           </div>
