@@ -217,7 +217,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
             <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
             <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
             <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send remainder</a>
-            <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a>
+            {{-- <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a> --}}
             <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
             <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', {{$value['id']}});">View</a>
             <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', {{$value['id']}});">Edit</a>
