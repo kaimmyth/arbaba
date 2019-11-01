@@ -63,6 +63,7 @@ Route::post('sale/invoice/remainder_mail/{id}','SalesController@invoice_remainde
 Route::get('sale/customers','SalesController@view_customers');
 Route::post('sale/customers/add','SalesController@add_customers');
 Route::get('sale/customer/delete/{id}','SalesController@delete_customer');
+
 Route::get('sale/products-and-services','SalesController@view_products_and_services');
 Route::POST('sale/products-and-services/add-edit','SalesController@add_edit_products_and_services');
 Route::get('sale/products-and-services/delete/{id}','SalesController@delete_products_and_services');

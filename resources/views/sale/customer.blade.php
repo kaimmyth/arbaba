@@ -97,7 +97,10 @@
                         <a class="dropdown-item" href="#">Create Invoice</a>
                         <a class="dropdown-item" href="#">Create Sales Receipt</a>
                         <a class="dropdown-item" href="#">Create Estimate</a>
+<<<<<<< HEAD
                         <a class="dropdown-item" href="{{url('sale/customer/delete/'.$items1['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+=======
+>>>>>>> parent of a7fc019... customer_delete
                       </div></td>
 
                     </tr>
