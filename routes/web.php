@@ -124,5 +124,5 @@ Route::get('tax/payment-history','TaxesController@tax_payment_history_view');
 Route::get('tax/return','TaxesController@tax_return_view');
 Route::get('tax/payment-history/delete/{id}','TaxesController@payment_history_del');
 
-
+Route::get('tax/payment-history/get-payment-details/{id}','TaxesController@get_payment_details');
 

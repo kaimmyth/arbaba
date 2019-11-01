@@ -39,7 +39,7 @@
         </div>
         <div class="row"><br><br><br>
           <div class="col-md-12 col-sm-12 col-12">
-           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#custom-width-modal" style="float:right;margin-top: 1%;" >Record Payment</button>  
+           <button type="button" class="btn btn-primary" data-toggle="modal" onclick="addEmployee();" style="float:right;margin-top: 1%;" >Record Payment</button>  
            <br>
            <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
             <thead>
@@ -62,9 +62,11 @@
                 <td>{{$value['payment_date']}}</td> 
                 <td>Payment</td>
                 <td>01/01/2019 - 31/01/2019</td>
-                <td>{{$value['payment_amount']}}&nbsp;Rs.</td>
+                <td>Rs.&nbsp;{{$value['payment_amount']}}</td>
                 <td>{{$value['pay_memo']}}</td>
-                <td><i class="fas fa-eye"></i> &nbsp; <a href="{{url('tax/payment-history/delete/'.$value['id'])}}"><i class="fas fa-trash" title="delete"></i></a></td>
+                {{-- <td><i class="fas fa-eye"></i> &nbsp; <a href="{{url('tax/payment-history/delete/'.$value['id'])}}"><i class="fas fa-trash" title="delete"></i></a></td> --}}
+                <td><a href="javascript:void();" onclick="viewEditEmployee('view', {{$value['id']}});"><i class="fas fa-eye"></i></a> &nbsp; <a href="javascript:void();" onclick="viewEditEmployee('edit', {{$value['id']}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; <a href="{{url('tax/payment-history/delete/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a></td>
+      
               </tr>
             </tbody>
             @endforeach
@@ -439,8 +441,7 @@
 
 
 <!-- Custom Modals -->
-<form action="{{url('tax/payment-history/add')}}" method="POST">
-	@csrf
+
 	<div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none">
 	<div class="modal-dialog" style="width:55%">
 		<div class="modal-content">
@@ -451,6 +452,8 @@
 			</button>
 		</div>
 		<div class="modal-body">
+        <form action="{{url('tax/payment-history/add')}}" method="POST" id="form-payment-history">
+          @csrf
 			<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
@@ -512,15 +515,69 @@
 
 		</div>
 		<div class="modal-footer">
+       <!-- hidden inputs -->
+       <input type="text" name="hidden_input_id" value="NA" hidden>
+       <input type="text" name="hidden_input_purpose" value="add" hidden>
+       <!-- hidden inputs -->
 			<button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
 			<button type="submit" class="btn btn-primary waves-effect waves-light" id="rec_cst_pay_submit">Save changes</button>
-		</div>
+    </div>
+  </form>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-</form>
+  
+</div><!-- /.modal -->
 
 
+<!-- view model start -->
+<div class="modal employee-details-model fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myLargeModalLabel">Payment Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0px 0;">
+                <table class="table table-bordered table-striped" border="0">
+                    <tbody>
+                        <tr style="border: none;">
+                            <td><p><strong>ID</strong></p></td>
+                            <td><p id="v_id"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Purpose</strong></p></td>
+                            <td><p id="v_purpose"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Period</strong></p></td>
+                            <td><p id="v_period"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Payment Date</strong></p></td>
+                            <td><p id="v_payment_date"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Payment Amount</strong></p></td>
+                            <td><p id="v_payment_amount"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Memo</strong></p></td>
+                            <td><p id="v_memo"></p></td>
+                        </tr>
+                       
+                        <tr style="border: none;">
+                            <td><p><strong>Created At</strong></p></td>
+                            <td><p id="v_created_at"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- end model -->
 
 
 <script type="text/javascript">
@@ -565,12 +622,17 @@
 </script>
 
 <script>
+    
+  function changeAmount(){
+    var tmp = $("#rec_cst_pay_payment_amount").val();
+    //$("#rec_cst_pay_payment_amount").val(tmp.replace(/[^\d]/g, ""));
+    $("#rec_cst_pay_payment_amount").val(tmp.replace(/[^0-9]/g, ''));
+    $("#rec_cst_pay_payment_amount_span").html($("#rec_cst_pay_payment_amount").val());
+  }
+
 	$(document).ready(function(){
 		$("#rec_cst_pay_payment_amount").keyup(function(){
-			var tmp = $("#rec_cst_pay_payment_amount").val();
-			//$("#rec_cst_pay_payment_amount").val(tmp.replace(/[^\d]/g, ""));
-			$("#rec_cst_pay_payment_amount").val(tmp.replace(/[^0-9]/g, ''));
-			$("#rec_cst_pay_payment_amount_span").html($("#rec_cst_pay_payment_amount").val());
+      changeAmount();
 		});
 
 		$("#rec_cst_pay_payment_amount_check").hide();
@@ -627,3 +689,74 @@
 
 	});
 </script>
+
+
+
+<script>
+    // to get employee details from controller through ajax, purpose = edit & view
+    
+    //add employees
+    function addEmployee(){
+        resetEmployeeForms();
+        $("#custom-width-modal").modal('show');
+    }
+    // reset expensess form fields
+    function resetEmployeeForms(){
+        // reset all fileds in employee form model
+        document.getElementById("form-payment-history").reset();
+        // assigning hidden inputs
+        $("input[name='hidden_input_id'").val("NA");
+        $("input[name='hidden_input_purpose'").val("add");
+    }
+    function viewEditEmployee(purpose, id){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{url('tax/payment-history/get-payment-details')}}" + "/" + id,
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            beforeSend: function(data){
+                $("#loader1").css("display","block");
+            },
+            error: function(xhr){
+                alert("error"+xhr.status+", "+xhr.statusText);
+            },
+            success: function (data) {
+                if(purpose=="view")
+                { 
+                    document.getElementById("v_id").innerHTML = data.id;
+                    document.getElementById("v_purpose").innerHTML = data.purpose;
+                    document.getElementById("v_period").innerHTML = data.period;
+                    document.getElementById("v_payment_date").innerHTML = data.payment_date;
+                    document.getElementById("v_payment_amount").innerHTML = data.payment_amount;
+                    document.getElementById("v_memo").innerHTML = data.pay_memo;
+                    
+                    document.getElementById("v_created_at").innerHTML = data.created_at;
+                    $('.employee-details-model').modal('show');
+                }
+                else if(purpose=="edit"){
+                    resetEmployeeForms(); // reseting forms
+                    $("#rec_cst_pay_purpose").val(data.purpose);
+                    $("#rec_cst_pay_cst_period").val(data.period);
+                    $("input[name='rec_cst_pay_payment_date']").datepicker('setDate', data.payment_date);
+                    
+                    $("#rec_cst_pay_payment_amount").val(data.payment_amount);
+                    $("#rec_cst_pay_memo").val(data.pay_memo);
+                   
+                  
+                    // assigning hidden inputs
+                    $("input[name='hidden_input_id'").val(data.id);
+                    $("input[name='hidden_input_purpose'").val("edit");
+                    
+                    changeAmount(); // assign amount
+                    $('#custom-width-modal').modal('show'); // expense insert form model
+                }
+                $("#loader1").css("display","none");
+            }
+        });
+    }
+    </script>

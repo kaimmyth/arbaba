@@ -211,7 +211,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
       </td>
        
         <td style="color: #0077C5; font-weight: 600; cursor: pointer;">
-         Receive payment<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+         <label data-target="#paymentModal"  data-toggle="modal">Receive Payment</label><i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
          <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
          <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
          <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
@@ -631,6 +631,129 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
             </div>
         </div>
     </div>
+</div>
+
+{{-- ------------------------------------Payment Received Model---------------------------------------- --}}
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentModalLabel">Receive Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="">
+         <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+            <label for="customer" class="col-form-label">Customer</label>
+            <input type="text" class="form-control" id="customer">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Email</label>
+            <input type="text" class="form-control" id="email">
+          </div>
+        </div>
+        <div class="col-md-4">
+<span></span>
+          <button type="button" class="btn btn-primary">Find by invoice no.</button>
+        </div>
+    </div>
+    <div class="row">
+          <div class="col-md-3">
+          <div class="form-group">
+                <label for="payment-date" class="col-form-label">Payment Date</label>
+                <input type="date" class="form-control" id="datepicker">
+              </div>
+            </div>
+        </div>
+        <div class="row">
+              <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="payment-method">Payment method</label>
+                        <select class="form-control" name="payment-method" id="payment-method" required>
+                            <option value="0" selected>---Select---</option>
+                            <option value="">Cash</option>
+                            <option value="">Cheque</option>
+                            <option value="">Credit Card</option>
+                            <option value="">Debit Card</option>
+                            <option value="">Net Banking</option>
+                           
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                        <div class="form-group">
+                              <label for="reference-no" class="col-form-label">Reference No.</label>
+                              <input type="text" class="form-control" id="reference-no">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="deposited-to">Deposited To</label>
+                                    <select class="form-control" name="deposited-to" id="deposited-to" required>
+                                        <option value="0" selected>---Select---</option>
+                                        <option value="">Axis Bank</option>
+                                        <option value="">ICICI</option>
+                                        
+                                       
+                                    </select>
+                                </div>
+                            </div> 
+                            <div class="col-md-3">
+                                    <div class="form-group">
+                                          <label for="amount-received" class="col-form-label">Amount Received</label>
+                                          <input type="text" class="form-control" id="amount-received">
+                                        </div>
+                                      </div>  
+
+        </div>
+<br><br><br>
+        <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>DESCRIPTION</th>
+                    <th>DUE DATE</th>
+                    <th>ORIGINAL AMOUNT</th>
+                    <th>OPENING BALANCE</th>
+                    <th>PAYMENT</th>
+                   
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input  type="checkbox" name="ids[]" value="" /></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row" >
+            <div class="col-md-3">
+                    <div class="form-group">
+                          <label for="amount-to-apply" class="col-form-label">Amount to Apply</label>
+                          <input type="text" class="form-control" id="amount-to-apply" >
+                    </div>
+            </div> 
+            </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Clear Payment</button>
+      </div>
+    </form>
+    </div>
+  </div>
 </div>
 
 

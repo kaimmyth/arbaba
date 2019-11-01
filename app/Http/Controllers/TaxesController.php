@@ -61,9 +61,29 @@ class TaxesController extends Controller
       $record_payment->payment_date=date("Y-m-d", strtotime($Request->rec_cst_pay_payment_date));
       $record_payment->payment_amount=$Request->rec_cst_pay_payment_amount;
       $record_payment->pay_memo=$Request->rec_cst_pay_memo;
-      $record_payment->save();
-    	return  redirect('/tax/payment-history');
+
+      // finall query create, edit
+      if($Request->hidden_input_purpose=="edit")
+      {
+         $update_values_array = json_decode(json_encode($record_payment), true);
+         $update_query = record_payment::where('id', $Request->hidden_input_id)->update($update_values_array);
+      }
+      else if($Request->hidden_input_purpose=="add")
+      {
+         $record_payment->save();
+      }
+
+      return  redirect('/tax/payment-history');
    }
+   
+// get employee details -> for -> view and edit -> in jquery ajax
+public function get_payment_details($id=""){
+$data = record_payment::where('id', $id)->first();
+$data->payment_date = date("d-m-Y", strtotime($data->rec_cst_pay_payment_date));
+
+return $data;
+}
+
 
    function tax_return_view()
    {

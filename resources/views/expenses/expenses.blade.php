@@ -185,7 +185,7 @@
                                     </thead>
                                     <tbody id="expenses-details-expand">
                                         <tr>
-                                            <td>1</td>
+                                            <td><input  type="checkbox" name="ids[]" value="" /></td>
                                             {{-- <td><input type="text" name="expenses_details_tax_category" class="form-control input-sm" placeholder="Tax Category?"></td> --}}
                                             <td>
                                                 <select class="form-control input-sm" name="expenses_details_tax_category[]">
@@ -393,7 +393,7 @@
 
 <script>
 // dynamically add fileds
-var expensesFormAppendData='<tr><td>2</td><td><select class="form-control input-sm" name="expenses_details_tax_category[]"><option value="" disabled selected>-Select-</option><option value="Advertisement">Advertisement</option><option value="Office Supplies">Office Supplies</option><option value="Bank Deposit">Bank Deposit</option></select></td><td><input type="text" name="expenses_details_description[]" class="form-control input-sm" placeholder="What did you pay for?"></td><td><input type="text" name="expenses_details_amount[]" class="form-control input-sm" placeholder="Enter Amount"></td><td style="cursor: pointer;width: 14%;"><select class="form-control input-sm" name="expenses_details_tax[]"><option value="0" selected>0% IGST</option><option value="5">5% IGST</option><option value="10">10% IGST</option><option value="18">18% IGST</option></select></td><td><a href="javascript:void();" class="expenses-details-expand-dlt-btn"><i class="fas fa-trash-alt"></i></a></td></tr>';
+var expensesFormAppendData='<tr><td><input  type="checkbox" name="ids[]" value="" /></td><td><select class="form-control input-sm" name="expenses_details_tax_category[]"><option value="" disabled selected>-Select-</option><option value="Advertisement">Advertisement</option><option value="Office Supplies">Office Supplies</option><option value="Bank Deposit">Bank Deposit</option></select></td><td><input type="text" name="expenses_details_description[]" class="form-control input-sm" placeholder="What did you pay for?"></td><td><input type="text" name="expenses_details_amount[]" class="form-control input-sm" placeholder="Enter Amount"></td><td style="cursor: pointer;width: 14%;"><select class="form-control input-sm" name="expenses_details_tax[]"><option value="0" selected>0% IGST</option><option value="5">5% IGST</option><option value="10">10% IGST</option><option value="18">18% IGST</option></select></td><td><a href="javascript:void();" class="expenses-details-expand-dlt-btn"><i class="fas fa-trash-alt"></i></a></td></tr>';
 function expensesDetailsExpand(){
     $("#expenses-details-expand").append(expensesFormAppendData);
 }
@@ -501,7 +501,7 @@ function viewEditExpenses(purpose, id){
 
                 // view expenses details
                 for(var i=0; i<data.no_of_rows; i++){
-                    var e_expenses_details='<tr style="border: none; background:white !important;"><td>1</td><td>'+data.expenses_details_tax_category[i]+'</td><td>'+data.expenses_details_description[i]+'</td><td>'+data.expenses_details_amount[i]+'</td><td>'+data.expenses_details_tax[i]+' ('+data.expenses_details_tax_percent[i]+'%)'+'</td><td>'+parseFloat(parseFloat(data.expenses_details_amount[i])+parseFloat(data.expenses_details_tax[i]))+'</td></tr>';
+                    var e_expenses_details='<tr style="border: none; background:white !important;"><td><input  type="checkbox" name="ids[]" value="" /></td><td>'+data.expenses_details_tax_category[i]+'</td><td>'+data.expenses_details_description[i]+'</td><td>'+data.expenses_details_amount[i]+'</td><td>'+data.expenses_details_tax[i]+' ('+data.expenses_details_tax_percent[i]+'%)'+'</td><td>'+parseFloat(parseFloat(data.expenses_details_amount[i])+parseFloat(data.expenses_details_tax[i]))+'</td></tr>';
                     $("#v_expenses_details tbody").append(e_expenses_details);
                 }
                 $("#v_expenses_details_amounts").html('<div style="text-align:right;padding:5px;"><p><b>Subtotal: ₹</b>'+data.subtotal+'</p><p><b>Taxes: ₹</b>'+data.total_tax+'</p><p><b>Total: ₹</b>'+data.total+'</p></div>');
