@@ -659,7 +659,7 @@ input[type=text]:focus {
               $("#first_name_val").hide();
           }
 
-            if((k.length<3)||(k.length>15)){
+            if((k.length<2)||(k.length>20)){
 
             $("#first_name_val").show();
             $("#first_name_val").html("User name must be between 3 to 10");
@@ -735,7 +735,7 @@ input[type=text]:focus {
 
           var q = $("#mobile_no").val();
 
-          var regexOnlyNumbers=/^[0-9]+$/;
+          var regexOnlyNumbers=/^[0-9() -]+$/;
           if((q=="")|| regexOnlyNumbers.test(q)!=true){
 
             $("#mobile_no_val").show();
@@ -781,13 +781,13 @@ input[type=text]:focus {
             username6();
         });
         function username6(){
-
+            var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
           var b = $("#pan_no").val();
 
-          if(b.length==""){
+          if((b=="")|| regexOnlyNumbers.test(b)!=true){
 
             $("#pan_no_val").show();
-            $("#pan_no_val").html("Please input pan no ");
+            $("#pan_no_val").html("Please insert pan number ");
             $("#pan_no_val").focus();
             $("#pan_no_val").css("color","red");
 
