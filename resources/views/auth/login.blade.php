@@ -6,6 +6,8 @@
     <title>{{ config('app.name','Admin Login') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{{asset('public/assets/images/favicon_1.ico')}}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Custom Files -->
     <link href="{{asset('public/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('public/assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
