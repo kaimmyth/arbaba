@@ -140,7 +140,7 @@
          <th>Tax</th>
          <th>Total</th>
          <th>Status</th>
-         
+         <th>Action</th>
      </tr>
  </thead>
  <tbody>
@@ -190,7 +190,20 @@
             }
           ?>
      </td>
+     <td onclick="receivePayment(<?php echo e($value['id']); ?>)" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive Payment&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+
      
+      <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
+       <a class="dropdown-item" href="#">Print</a>
+       <a class="dropdown-item" href="#">Send</a>
+       <a class="dropdown-item" href="#">Send remainder</a>
+       <a class="dropdown-item" href="#">Share Invoice Link</a>
+       <a class="dropdown-item" href="#">Print Delivery Challan</a>
+       <a class="dropdown-item" href="#">View/Edit</a>
+       <a class="dropdown-item" href="#">Copy</a>
+       <a class="dropdown-item" href="#">Delete</a>
+   </div>
+   </td>
    </tr>
   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
 
@@ -418,6 +431,195 @@
 <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="paymentModalLabel">Receive Payment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                
+            <form action="<?php echo e(url('sale/invoice/payment_received')); ?>" method="post" enctype="multipart/form-data">
+                 <?php echo csrf_field(); ?>
+                  <div class="row">
+                         
+                  <div class="col-md-4">
+                    <div class="form-group">
+                  <label for="customer" class="col-form-label">Customer</label>
+                    <input type="text" class="form-control" id="payment_received_customer" name="payment_received_customer">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="email" class="col-form-label">Email</label>
+                <input type="text" class="form-control" id="payment_received_email" name="payment_received_email">
+                </div>
+              </div>
+              
+          </div>
+          <div class="row">
+                <div class="col-md-3">
+                <div class="form-group">
+                      <label for="payment-date" class="col-form-label">Payment Date</label>
+                      <input type="text" id="datepicker3" name="payment_received_payment_date" class="form-control">
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                    <div class="col-md-3">
+                          <div class="form-group">
+                              <label for="payment-method">Payment method</label>
+                              <select class="form-control" name="payment_received_method" id="payment_received_method">
+                                  <option value="0" selected>---Select---</option>
+                                  <option value="Cash">Cash</option>
+                                  <option value="Cheque">Cheque</option>
+                                  <option value="Credit Card">Credit Card</option>
+                                  <option value="Debit Card">Debit Card</option>
+                                  <option value="Net Banking">Net Banking</option>
+                                 
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                              <div class="form-group">
+                                    <label for="reference-no" class="col-form-label">Reference No.</label>
+                                    <input type="text" class="form-control" id="payment_received_reference_no" name="payment_received_reference_no">
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                      <div class="form-group">
+                                          <label for="deposited-to">Deposited To</label>
+                                          <select class="form-control" name="payment_received_deposited_to" id="payment_received_deposited_to">
+                                              <option value="0" selected>---Select---</option>
+                                              <option value="Axis Bank">Axis Bank</option>
+                                              <option value="ICICI">ICICI</option>
+                                              
+                                             
+                                          </select>
+                                      </div>
+                                  </div> 
+                                  <div class="col-md-3">
+                                          <div class="form-group">
+                                                <label for="amount-received" class="col-form-label">Amount Received</label>
+                                                <input type="text" class="form-control" id="payment_received_amount" name="payment_received_amount">
+                                              </div>
+                                            </div>  
+      
+              </div>
+               <br><br><br>
+              <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                      <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>DESCRIPTION</th>
+                          <th>DUE DATE</th>
+                          <th>AMOUNT</th>
+                          <th>TAX</th>
+                          <th>TOTAL</th>
+                         
+                          </tr>
+                      </thead>
+                      <tbody id="receive_payment_details">
+                          
+                      </tbody>
+                  </table>
+                 
+                  <div style="float:right;">
+                                     <div class="form-group">
+                                <label for="amount-to-apply" class="col-form-label">Total Payable Amount&nbsp;:<i class="fa fa-rupee-sign sz" aria-hidden="true"></i></label>
+                                <span id="payment_received_amount_to_apply" name="payment_received_amount_to_apply"></span>
+                          </div>
+                  
+                 
+                     
+                 
+              </div>
+                  
+            </div>
+      
+           
+              <div class="form-group">
+                    <label for="memo" class="col-form-label">Memo</label>
+                    <input type="text" class="form-control" id="payment_received_memo" name="payment_received_memo">
+              </div>
+      
+              <div class="col-md-4">
+                  <div class="form-group">
+                     <label for="attachment">Attachments</label>
+                     <div class="dropzone" id="dropzone" style="min-height: 55px">
+                         <div class="fallback">
+                           <input  type="file"  name="payment_received_attachment" id="payment_received_attachment">
+                         </div>
+                     </div>
+                 </div>
+                 </div>
+      
+      
+            <div class="modal-footer">
+                <!-- hidden fields -->
+                <input type="hidden" name="payment_received_invoice_id" id="payment_received_invoice_id">
+                <input type="hidden" name="payment_received_description" id="payment_received_description">
+                <input type="hidden" name="payment_received_due_date" id="payment_received_due_date">
+                <input type="hidden" name="payment_received_subtotal" id="payment_received_subtotal">
+                <input type="hidden" name="payment_received_tax" id="payment_received_tax"> 
+                <input type="hidden" name="payment_received_total_amount" id="payment_received_total_amount">
+                
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Clear Payment</button>
+            </div>
+           
+          </form>
+          
+          </div>
+        </div>
+      </div>
+     <script> 
+      function receivePayment(id){
+        $("#receive_payment_details").html("");
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "<?php echo e(url('sale/invoice/get-invoice-details')); ?>" + "/" + id,
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            beforeSend: function(data){
+                $("#loader1").css("display","block");
+            },
+            error: function(xhr){
+                alert("error"+xhr.status+", "+xhr.statusText);
+            },
+            success: function (data) {
+                $("#payment_received_customer").val(data.customer);
+                $("input[name='payment_received_payment_date']").datepicker('setDate', '<?php echo date('d-m-Y'); ?>');
+                $("#payment_received_email").val(data.customer_email);
+                $("#payment_received_amount_to_apply").html(data.total);
+                $("#payment_received_invoice_id").val(id);
+                $("#paymentModal").modal("show");
+    
+                var payment_receive_invoice_details='<tr style="border: none; background:white !important;"><td><input  type="checkbox" name="ids[]" value="" /></td><td>Invoice#'+data.invoice_no+'</td><td>'+data.due_date+'</td><td>'+data.subtotal+'</td><td>'+data.total_tax+'</td><td>'+data.total+'</td></tr>';
+                $("#receive_payment_details").html(payment_receive_invoice_details);
+                $("#payment_received_amount").val(data.total);
+                $("#payment_received_description").val('Invoice#'+data.invoice_no);
+                $("#payment_received_due_date").val(data.due_date);
+                $("#payment_received_subtotal").val(data.subtotal);
+                $("#payment_received_tax").val(data.total_tax);
+                $("#payment_received_total_amount").val(data.total);
+    
+                $("#loader1").css("display","none");
+            }
+        });
+    }
+    </script>
 <script> 
 
   $(document).ready(function(){

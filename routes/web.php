@@ -60,6 +60,7 @@ Route::get('sale/invoice/delivery_challan/{id}','SalesController@invoice_deliver
 Route::get('sale/invoice/delete/{id}','SalesController@invoice_delete');
 Route::get('sale/invoice/get-invoice-details/{id}','SalesController@get_invoice_details');
 Route::post('sale/invoice/remainder_mail/{id}','SalesController@invoice_remainder_email');
+Route::post('sale/invoice/payment_received','SalesController@receive_payment');
 
 //Customer
 Route::get('sale/customers','SalesController@view_customers');
@@ -71,6 +72,9 @@ Route::get('sale/products-and-services','SalesController@view_products_and_servi
 Route::POST('sale/products-and-services/add-edit','SalesController@add_edit_products_and_services');
 Route::get('sale/products-and-services/delete/{id}','SalesController@delete_products_and_services');
 Route::get('sale/products-and-services/get_products_and_services_details/{id}','SalesController@get_products_and_services_details');
+
+
+
 
 
 /* Taxes */
@@ -125,4 +129,3 @@ Route::get('tax/return','TaxesController@tax_return_view');
 Route::get('tax/payment-history/delete/{id}','TaxesController@payment_history_del');
 
 Route::get('tax/payment-history/get-payment-details/{id}','TaxesController@get_payment_details');
-

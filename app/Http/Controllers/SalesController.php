@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\sales_invoice;
 use App\products_and_services;
 use App\sales_customers;
+use App\PaymentReceived;
 use Mail;
 use Session;
 
@@ -371,5 +373,49 @@ class SalesController extends Controller
     
     }
     
-      
+      public function receive_payment(Request $request)
+      {
+          
+     $payment_received = new PaymentReceived();
+     $payment_received->invoice_id = $request->payment_received_invoice_id;
+     $payment_received->payment_received_customer = $request->payment_received_customer; 
+     $payment_received->payment_received_email = $request->payment_received_email;
+     $payment_received->payment_received_payment_date  =date("Y-m-d",strtotime($request->payment_received_payment_date));
+     $payment_received->payment_received_method = $request->payment_received_method;
+     $payment_received->payment_received_reference_no = $request->payment_received_reference_no;
+     $payment_received->payment_received_deposited_to = $request->payment_received_deposited_to;
+     $payment_received->payment_received_description = $request->payment_received_description;
+     $payment_received->payment_received_due_date = date("Y-m-d",strtotime($request->due_date));
+     $payment_received->payment_received_subtotal = $request->payment_received_subtotal;
+     $payment_received->payment_received_tax = $request->payment_received_tax;
+     $payment_received->payment_received_total_amount = $request->payment_received_total_amount;
+     
+     $payment_received->payment_received_memo  = $request->payment_received_memo;
+     
+     $payment_received->payment_received_status  = 2;
+
+     // for attachment
+     $payment_received->payment_received_attachment = "";
+     if($request->hasFile('attachment'))
+     {
+         
+         $file = $request->file('attachment');
+
+         $payment_received->payment_received_attachment = $file->getClientOriginalName();
+         $destinationPath = 'public/images/sales';
+         $file->move($destinationPath, $file->getClientOriginalName()); 
+     }
+    
+     if($payment_received->save())
+     {
+        $invoice_update_tmp = new sales_invoice;
+        $invoice_update_tmp = $invoice_update_tmp->find($request->payment_received_invoice_id);
+
+        $invoice_update_tmp->status = "2"; // paid
+        $invoice_update_tmp->save();
+     }
+     Session::flash('success', 'Payment has been send successfully');
+
+     return redirect('sale/invoice');
+      }
 }

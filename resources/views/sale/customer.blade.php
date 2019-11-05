@@ -159,7 +159,7 @@
                       <td>{{$items1['gst_in']}}</td>
                       <td>{{$items1['phone_no']}}</td>
                       <td>{{$items1['opening_balance']}}</td>
-                      <td style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment <i class="fa fa-caret-down" id="receive_payment" name="receive_payment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+                      <td style="color: #0077C5; font-weight: 600; cursor: pointer;" onclick="myFun()">Receive payment <i class="fa fa-caret-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
 
                       <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Send reminder</a>
@@ -168,8 +168,9 @@
                         <a class="dropdown-item" href="#">Create Sales Receipt</a>
                         <a class="dropdown-item" href="#">Create Estimate</a>
                       <a class="dropdown-item" href="{{url('sale/customer/delete/'.$items1['id'])}}">Delete</a>
-                      </div></td>
-
+                      </div>
+                    </td>
+                    
                     </tr>
                      @endforeach
 
@@ -193,8 +194,7 @@
 
 
 <!--  Modal content for the above example -->
-<form action="{{url('sale/customers/add')}}" method="POST">
-  @csrf
+
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -205,6 +205,8 @@
             </button>
           </div>
           <div class="modal-body">
+              <form action="{{url('sale/customers/add')}}" method="POST">
+                @csrf
             <div class="row">
               <div class="col-md-6">
                 <div class="row">
@@ -567,15 +569,170 @@
         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary waves-effect waves-light" id="save" name="save">Save</button>
       </div>
+    </form>
     </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 
-</form>
+
+
+{{-- ------------------------------------Payment Received Model---------------------------------------- --}}
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentModalLabel">Receive Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="">
+         <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+            <label for="customer" class="col-form-label">Customer</label>
+            <input type="text" class="form-control" id="customer">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Email</label>
+            <input type="text" class="form-control" id="email">
+          </div>
+        </div>
+        
+    </div>
+    <div class="row">
+          <div class="col-md-3">
+          <div class="form-group">
+                <label for="payment-date" class="col-form-label">Payment Date</label>
+                <input type="date" class="form-control" id="datepicker">
+              </div>
+            </div>
+        </div>
+        <div class="row">
+              <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="payment-method">Payment method</label>
+                        <select class="form-control" name="payment-method" id="payment-method" required>
+                            <option value="0" selected>---Select---</option>
+                            <option value="">Cash</option>
+                            <option value="">Cheque</option>
+                            <option value="">Credit Card</option>
+                            <option value="">Debit Card</option>
+                            <option value="">Net Banking</option>
+                           
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                        <div class="form-group">
+                              <label for="reference-no" class="col-form-label">Reference No.</label>
+                              <input type="text" class="form-control" id="reference-no">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="deposited-to">Deposited To</label>
+                                    <select class="form-control" name="deposited-to" id="deposited-to" required>
+                                        <option value="0" selected>---Select---</option>
+                                        <option value="">Axis Bank</option>
+                                        <option value="">ICICI</option>
+                                        
+                                       
+                                    </select>
+                                </div>
+                            </div> 
+                            <div class="col-md-3">
+                                    <div class="form-group">
+                                          <label for="amount-received" class="col-form-label">Amount Received</label>
+                                          <input type="text" class="form-control" id="amount-received">
+                                        </div>
+                                      </div>  
+
+        </div>
+         <br><br><br>
+        <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>DESCRIPTION</th>
+                    <th>DUE DATE</th>
+                    <th>ORIGINAL AMOUNT</th>
+                    <th>OPENING BALANCE</th>
+                    <th>PAYMENT</th>
+                   
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input  type="checkbox" name="ids[]" value="" /></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text" class="form-control"></td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+           
+            <div class="col-md-3">
+                    <div class="form-group">
+                          <label for="amount-to-apply" class="col-form-label">Amount to Apply</label>
+                          <input type="text" class="form-control" id="amount-to-apply" >
+                    </div>
+            </div> 
+            <div class="col-md-3">
+                <div class="form-group">
+                      <label for="amount-to-credit" class="col-form-label">Amount to Credit</label>
+                      <input type="text" class="form-control" id="amount-to-credit" >
+                </div>
+        </div> 
+            
+     
+
+     
+        <div class="form-group">
+              <label for="memo" class="col-form-label">Memo</label>
+              <input type="text" class="form-control" id="memo" >
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+               <label for="attachment">Attachments</label>
+               <div class="dropzone" id="dropzone" style="min-height: 55px">
+                   <div class="fallback">
+                     <input  type="file"  name="attachment" id="attachment">
+                   </div>
+               </div>
+           </div>
+           </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Clear Payment</button>
+      </div>
+    </form>
+  </div>
+    </div>
+  </div>
+</div>
 
 <script>
-  
+  function myFun()
+  {
+    $('#paymentModal').modal('show');
+    
+  }
+</script>
 
-$("document").ready(function(){
+
+
+<script>
+  $("document").ready(function(){
 
         
         $("#first_name_val").hide();
@@ -946,4 +1103,3 @@ $("document").ready(function(){
 </script>
 
 
-</script>
