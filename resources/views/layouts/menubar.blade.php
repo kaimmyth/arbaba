@@ -67,6 +67,13 @@
      <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Purchases</span><span class="pull-right"><i class="md md-add"></i></span></a>
      <ul class="list-unstyled">
       <li><a href="{{url('update-site')}}">Candidates</a></li>
+      <li><a href="{{url('purchases/vender')}}">Vender</a></li>
+      <li><a href="{{url('purchases/recurring-expenses')}}">Recurring Expenses</a></li>
+      <li><a href="{{url('purchases/purchase-order')}}">Purchase Order</a></li>
+      <li><a href="{{url('purchases/bill')}}">Bill</a></li>
+      <li><a href="{{url('purchases/payments-made')}}">Payments Made</a></li>
+      <li><a href="{{url('purchases/vendor-credits')}}">Vendor Credits</a></li>
+
     </ul>
   </li>
   <li class="has_sub">
@@ -86,12 +93,9 @@
   <li>
     <a href="{{url('employee')}}" class="waves-effect"><i class="fa fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Employee</span></a>
   </li>
-  <li class="has_sub">
-   <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Accountant</span><span class="pull-right"><i class="md md-add"></i></span></a>
-   <ul class="list-unstyled">
-    <li><a href="{{url('update-site')}}">Candidates</a></li>
-  </ul>
-</li>
+  <li>
+    <a href="{{url('accounting')}}" class="waves-effect"><i class="fa fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Accounting</span></a>
+  </li>
 <li class="has_sub">
   <a href="#" class="waves-effect"><i class="fas fa-tools"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Tools/Master </span><span class="pull-right"><i class="md md-add"></i></span></a>
   <ul class="list-unstyled">

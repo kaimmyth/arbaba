@@ -60,7 +60,7 @@
                                     <td>
                                         <a href="javascript:void();" onclick="viewEditProductsAndServices('view', {{$items['id']}});"><i class="fas fa-eye"></i></a> &nbsp; 
                                         <a href="javascript:void();" onclick="viewEditProductsAndServices('edit', {{$items['id']}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
-                                        <a href="{{url('sale/products-and-services/delete/'.$items['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                        <a href="{{url('sale/products-and-services/delete/'.$items['id'])}}" onclick=""><i class="fas fa-trash"></i></a>
                                     </td>
 
                                     </tr>

@@ -60,7 +60,6 @@ Route::get('sale/invoice/delivery_challan/{id}','SalesController@invoice_deliver
 Route::get('sale/invoice/delete/{id}','SalesController@invoice_delete');
 Route::get('sale/invoice/get-invoice-details/{id}','SalesController@get_invoice_details');
 Route::post('sale/invoice/remainder_mail/{id}','SalesController@invoice_remainder_email');
-Route::post('sale/invoice/payment_received','SalesController@receive_payment');
 
 //Customer
 Route::get('sale/customers','SalesController@view_customers');
@@ -72,9 +71,6 @@ Route::get('sale/products-and-services','SalesController@view_products_and_servi
 Route::POST('sale/products-and-services/add-edit','SalesController@add_edit_products_and_services');
 Route::get('sale/products-and-services/delete/{id}','SalesController@delete_products_and_services');
 Route::get('sale/products-and-services/get_products_and_services_details/{id}','SalesController@get_products_and_services_details');
-
-
-
 
 
 /* Taxes */
@@ -117,8 +113,17 @@ Route::post('employee/add-edit-employee','EmployeesController@add_edit_employee'
 Route::get('employee/delete/{id}','EmployeesController@delete_employee');
 Route::get('employee/get-employee-details/{id}','EmployeesController@get_employee_details');
 
-	
 
+/* accounting */
+// Route::get('accounting', function () {
+// 	$data['content'] ='accounting.accounting';
+// 	return view('layouts.content',compact('data'));
+// });
+Route::get('accounting','AccountingController@view_accounting');
+Route::post('accounting/add','AccountingController@add_account');
+Route::get('accounting/delete/{id}','AccountingController@delete_account');
+Route::get('accounting/get_account_details/{id}','AccountingController@get_account_details');
+Route::get('accounting/view_accounts','AccountingController@view_accounts');
 
 /* taxes */
 Route::post('tax/return/add','TaxesController@insert_tax_return');
@@ -129,3 +134,44 @@ Route::get('tax/return','TaxesController@tax_return_view');
 Route::get('tax/payment-history/delete/{id}','TaxesController@payment_history_del');
 
 Route::get('tax/payment-history/get-payment-details/{id}','TaxesController@get_payment_details');
+
+// purchases
+Route::get('purchases/vender', function () {
+	$data['content'] = 'purchases.vender';
+	return view('layouts.content', compact('data'));
+});
+
+//recurring expanses
+
+Route::get('purchases/recurring-expenses', function () {
+	$data['content'] = 'purchases.recurring-expenses';
+	return view('layouts.content', compact('data'));
+});
+
+//purchase order
+
+Route::get('purchases/purchase-order', function () {
+	$data['content'] = 'purchases.purchase-order';
+	return view('layouts.content', compact('data'));
+});
+
+//bill
+
+Route::get('purchases/bill', function () {
+	$data['content'] = 'purchases.bill';
+	return view('layouts.content', compact('data'));
+});
+
+//payments made
+
+Route::get('purchases/payments-made', function () {
+	$data['content'] = 'purchases.payments-made';
+	return view('layouts.content', compact('data'));
+});
+
+//vendor credits
+
+Route::get('purchases/vendor-credits', function () {
+	$data['content'] = 'purchases.vendor-credits';
+	return view('layouts.content', compact('data'));
+});
