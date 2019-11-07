@@ -80,24 +80,25 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
-                <label for="exampleInputEmail1">Vender Name</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
-                <h6 id="name_val"></h6>
+                <label for="exampleInputEmail1">Vendor Name</label>
+                <input type="text" name="vendor_name" class="form-control" value="" id="vendor_name" maxlength="25">
+                <h6 id="vendor_name_val"></h6>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Bill</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
+                <input type="text" name="bill" class="form-control" value="" id="bill" maxlength="18">
               </div>
+                <h6 id="bill_val"></h6>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Order Number</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
-                <h6 id="name_val"></h6>
+                <input type="text" name="order_number" class="form-control" value="" id="order_number" maxlength="18">
+                <h6 id="order_number_val"></h6>
               </div>
             </div>
 
@@ -105,17 +106,19 @@
            <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Bill Date</label>
-                <input type="date" name="" class="form-control" value="" id="" placeholder="dd/mm/yyyy">
+                <input type="date" name="bill_date" class="form-control" value="" id="bill_date" placeholder="dd/mm/yyyy">
                 
               </div>
+                  <h6 id="bill_date_val"></h6>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Due Date</label>
-                <input type="date" name="" class="form-control" value="" id="" placeholder="dd/mm/yyyy">
+                <input type="date" name="due_date" class="form-control" value="" id="due_date" placeholder="dd/mm/yyyy">
                  
               </div>
+                <h6 id="due_date_val"></h6>
             </div>
 
             <div class="col-md-4">
@@ -223,3 +226,174 @@
     </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
 </div>
+
+
+
+<script>
+$(document).ready(function(){
+   
+    $("#vendor_name_val").hide();
+    $("#bill_val").hide();
+    $("#order-number_val").hide();
+    $("#bill_date_val").hide();
+    $("#due_date_val").hide();
+
+
+    
+    var err_vendor_name_val=true;
+    var err_bill_val=true;
+    var err_order_number_val=true;
+    var err_bill_date_val=true;
+    var err_due_date_val=true;
+
+
+
+
+    $("#vendor_name").blur(function(){
+        vendor_name_f();
+    });
+    function  vendor_name_f(){
+
+        var d = $("#vendor_name").val();
+
+        if(d.length==""){
+            $("#vendor_name_val").show();
+            $("#vendor_name_val").html("This field is required ");
+            $("#vendor_name_val").focus();
+            $("#vendor_name_val").css("color","red");
+
+            err_vendor_name_val=false;
+            return false;
+        }
+        else{
+           err_vendor_name_val=true;
+            $("#vendor_name_val").hide();
+        }
+    }
+
+   
+    $('#bill').blur(function () {
+        bill_f();
+    });
+    function bill_f()
+    {
+        
+        var z=$("#bill").val();
+        var regexOnlyNumbers=/^[0-9]+$/;
+        if(z=="" || regexOnlyNumbers.test(z) != true)
+        {
+            
+            $("#bill_val").show();
+            $("#bill_val").html("Please enter a valid number");
+            $("#bill_val").focus();
+            $("#bill_val").css("color","red");
+            err_bill_val=false;
+        }
+        else
+        {
+            err_bill_val=true;
+            $("#bill_val").hide();
+        }  
+    }
+ $('#order_number').blur(function () {
+        order_number_f();
+    });
+    function order_number_f()
+    {
+        
+        var l=$("#order_number").val();
+        var regexOnlyNumbers=/^[0-9]+$/;
+        if(l=="" || regexOnlyNumbers.test(l) != true)
+        {
+            
+            $("#order_numberorder_number_val").show();
+            $("#order_number_val").html("Please enter a valid number");
+            $("#order_number_val").focus();
+            $("#order_number_val").css("color","red");
+            err_order_number_val=false;
+        }
+        else
+        {
+            err_order_number_val=true;
+            $("#order_number_val").hide();
+        }  
+    }
+
+
+     $('#bill_date').blur(function () {
+        bill_date_f();
+    });
+    function bill_date_f()
+    {
+        
+        var b=$("#bill_date").val();
+       
+        if(b.length=="")
+        {
+            
+            $("#bill_date_val").show();
+            $("#bill_date_val").html("This field is required");
+            $("#bill_date_val").focus();
+            $("#bill_date_val").css("color","red");
+            err_bill_date_val=false;
+        }
+        else
+        {
+            err_bill_date_val=true;
+            $("#bill_date_val").hide();
+        }  
+    }
+
+     $('#due_date').blur(function () {
+        due_date_f();
+    });
+    function due_date_f()
+    {
+        
+        var b=$("#due_date").val();
+       
+        if(b.length=="")
+        {
+            
+            $("#due_date_val").show();
+            $("#due_date_val").html("This field is required");
+            $("#due_date_val").focus();
+            $("#due_date_val").css("color","red");
+            err_due_date_val=false;
+        }
+        else
+        {
+            err_due_date_val=true;
+            $("#due_date_val").hide();
+        }  
+    }
+
+
+
+    $("#btn").click(function(){
+    
+     err_vendor_name_val=true;
+     err_bill_val=true;
+     err_order_number_val=true;
+     err_bill_date_val=true;
+     err_due_date_val=true;
+
+
+        
+        
+        vendor_name_f();
+        bill_f();
+        order_number_f();
+        bill_date_f();
+        due_date_f();
+
+        if((err_vendor_name_val==true)&&(err_bill_val==true)&&(err_order_number_val==true)&&(err_bill_date_val==true)&&(err_due_date_val==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+});
+</script>

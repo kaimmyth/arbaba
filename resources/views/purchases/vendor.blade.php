@@ -28,40 +28,16 @@
           <ol class="breadcrumb pull-right">
             <li><a href="#">Home </a></li>
             <li><a href="#">purchase </a></li>
-            <li class="active">vender</li>
+            <li class="active">vendor</li>
             
           </ol>
         </div>
       </div>
 
 
- <div class="row">
-        <div class="col-lg-12">
-         <div class="card">
-          <div class="row">
-           <div class="col-md-3 dv" style="background-color: #21ABF6;">
-            <i class="fa fa-calculator sz" aria-hidden="true"></i> 0.00
-            <p style="font-size: 15px; font-weight: 600;">ESTIMATE</p>
-          </div>
-          <div class="col-md-3 dv" style="background-color: #0077C5;">
-            <i class="fa fa-file sz" aria-hidden="true"></i> 0.00  
-            <p style="font-size: 15px; font-weight: 600;">ESTIMATE</p>
-          </div>
-          <div class="col-md-3 dv" style="background-color: #FF8000;">
-            <i class="fa fa-clock sz" aria-hidden="true"></i> 0.00 
-            <p style="font-size: 15px; font-weight: 600;">ESTIMATE</p>
-          </div>
-          <div class="col-md-3 dv" style="background-color: #BABEC5;">
-            <i class="fa fa-address-book sz" aria-hidden="true"></i> 0.00
-            <p style="font-size: 15px; font-weight: 600;">ESTIMATE</p>
-          </div>
-          <div class="col-md-3 dv" style="background-color: #7FD000;">
-            <i class="fa fa-rupee-sign sz" aria-hidden="true"></i> 0.00 
-            <p style="font-size: 15px; font-weight: 600;">ESTIMATE</p>
-          </div>
           <div class="col-md-12">
             <div class="col-md-12" style="text-align: right; margin-bottom: 4px;">
-              <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">New Vender</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">New Vendor</button>
             </div>
 
             <div class="tab-content colm">
@@ -124,7 +100,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title mt-0" id="myLargeModalLabel">Vender information</h4>
+            <h4 class="modal-title mt-0" id="myLargeModalLabel">Vendor information</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -168,7 +144,7 @@
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleInputEmail1"> Vender Display name </label>
+                      <label for="exampleInputEmail1"> Vendor Display name </label>
                       <input type="text" class="form-control" value="" id="display_name_as" name="display_name_as" readonly>
                     </div>
                   </div>
@@ -421,4 +397,377 @@
 
 </form>
 
+
+<!--jquery validation-->
+
+
 <script>
+  $("document").ready(function(){
+
+        
+        $("#first_name_val").hide();
+        $("#last_name_val").hide();
+        $("#company_val").hide();
+        $("#email_id_val").hide();
+        $("#mobile_no_val").hide();
+        $("#pin_code_val").hide();
+        $("#pin_code_shipping_val").hide();
+        $("#tax_reg_no_val").hide();
+        $("#cst_reg_no_val").hide();
+        $("#pan_no_val").hide();
+         $("#opening_balance_val").hide();
+ 
+        var err_first_name =true;
+        var err_last_name =true;
+        var err_company =true;
+        var err_email_id =true;
+        var err_mobile_no = true;
+        var err_pin_code=true;
+        var err_pin_code_shipping=true;
+        var err_tax_reg_no=true;
+        var err_cst_reg_no=true;
+        var err_pan_no=true;
+        var err_opening_balance=true;
+
+
+        $("#first_name").blur(function(){
+
+            first_name_f();
+
+        });
+        function first_name_f(){
+
+          var c = $("#first_name").val();
+          
+          var regexOnlyText = /^[a-zA-Z]+$/;
+          if (c==""||regexOnlyText.test(c) != true){
+            $("#first_name_val").show();
+            $("#first_name_val").html("This field is required");
+            $("#first_name_val").focus();
+            $("#first_name_val").css("color","red");
+            err_first_name=false;
+            return false;
+          }
+          else{
+            err_first_name=true;
+            $("#first_name_val").hide();
+          }
+
+     
+        }
+
+         
+         $("#last_name").blur(function(){
+
+            last_name_f();
+
+        });
+        function last_name_f(){
+
+          var j = $("#last_name").val();
+           var regexOnlyText = /^[a-zA-Z]+$/;
+          if (j==""||regexOnlyText.test(j) != true){
+            $("#last_name_val").show();
+            $("#last_name_val").html("This field is required");
+            $("#last_name_val").focus();
+            $("#last_name_val").css("color","red");
+            err_last_name=false;
+            return false;
+          }else{
+            err_last_name=true;
+            $("#last_name_val").hide();
+          }
+
+     
+        }
+
+
+        $("#first_name").keyup(function(){
+
+            display_name_as_append();
+
+        });
+        $("#last_name").keyup(function(){
+
+            display_name_as_append();
+
+        });
+        function display_name_as_append(){
+          $("#display_name_as").val($("#first_name").val()+" "+$("#last_name").val());
+        }
+
+        $("#company").blur(function(){
+
+            company_f();
+        });
+
+        
+        function company_f(){
+
+          var f = $("#company").val();
+
+          if(f.length==""){
+
+            $("#company_val").show();
+            $("#company_val").html("This field is required");
+            $("#company_val").focus();
+            $("#company_val").css("color","red");
+
+              err_company=false;
+              return false;
+          }else{
+            err_company=true;
+            $("#company_val").hide();
+          }
+        }
+
+
+             $("#email_id").blur(function(){
+
+            email_id_f();
+        });
+        function email_id_f(){
+
+          var m = $("#email_id").val();
+           var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+           var result = m.match(v); 
+
+          if((m.length=="")||(result == null)){
+
+            $("#email_id_val").show();
+            $("#email_id_val").html("Please insert valid email ");
+            $("#email_id_val").focus();
+            $("#email_id_val").css("color","red");
+
+              err_email_id=false;
+              return false;
+          }else{
+            err_email_id=true;
+            $("#email_id_val").hide();
+          }
+        }
+
+
+         $("#mobile_no").blur(function(){
+
+            mobile_no_f();
+        });
+        function mobile_no_f(){
+
+          var q = $("#mobile_no").val();
+
+          var regexOnlyNumbers=/^[0-9() -]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+            $("#mobile_no_val").show();
+            $("#mobile_no_val").html("Please input numbers between 0-9 ");
+            $("#mobile_no_val").focus();
+            $("#mobile_no_val").css("color","red");
+
+              err_mobile_no=false;
+              return false;
+          }else{
+            err_mobile_no=true;
+            $("#mobile_no_val").hide();
+          }
+        }
+
+
+
+
+         $("#pin_code").blur(function(){
+
+            pin_code_f();
+        });
+        function pin_code_f(){
+           var regexOnlyNumbers=/^[0-9]+$/;
+          var c = $("#pin_code").val();
+
+         if((c=="")|| regexOnlyNumbers.test(c)!=true){
+
+            $("#pin_code_val").show();
+            $("#pin_code_val").html("Please input pin code ");
+            $("#pin_code_val").focus();
+            $("#pin_code_val").css("color","red");
+
+              err_pin_code=false;
+              return false;
+          }else{
+            err_pin_code=true;
+            $("#pin_code_val").hide();
+          }
+        }
+       
+
+           $("#pin_code_shipping").blur(function(){
+
+            pin_code_shipping_f();
+        });
+        function pin_code_shipping_f(){
+          var regexOnlyNumbers=/^[0-9]+$/;
+          var w = $("#pin_code_shipping").val();
+
+          if((w=="")|| regexOnlyNumbers.test(w)!=true){
+
+            $("#pin_code_shipping_val").show();
+            $("#pin_code_shipping_val").html("Please insert pin code ");
+            $("#pin_code_shipping_val").focus();
+            $("#pin_code_shipping_val").css("color","red");
+
+              err_pin_code_shipping=false;
+              return false;
+          }else{
+            err_pin_code_shipping=true;
+            $("#pin_code_shipping_val").hide();
+          }
+        }
+
+
+
+
+         $("#tax_reg_no").blur(function(){
+
+            tax_reg_f();
+        });
+        function tax_reg_f(){
+          var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
+          var z = $("#tax_reg_no").val();
+
+             if((z=="")|| regexOnlyNumbers.test(z)!=true){
+
+            $("#tax_reg_no_val").show();
+            $("#tax_reg_no_val").html("This field is required ");
+            $("#tax_reg_no_val").focus();
+            $("#tax_reg_no_val").css("color","red");
+
+              err_tax_reg_no=false;
+              return false;
+          }else{
+            err_tax_reg_no=true;
+            $("#tax_reg_no_val").hide();
+          }
+        }
+                
+
+         $("#cst_reg_no").blur(function(){
+             cst_reg_no_f();
+           });
+        function cst_reg_no_f(){
+
+          var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
+          var u = $("#cst_reg_no").val();
+
+          if((u=="")|| regexOnlyNumbers.test(u)!=true){
+
+            $("#cst_reg_no_val").show();
+            $("#cst_reg_no_val").html("This field is required ");
+            $("#cst_reg_no_val").focus();
+            $("#cst_reg_no_val").css("color","red");
+
+              err_cst_reg_no=false;
+              return false;
+          }
+           else {
+            err_cst_reg_no = true;
+            $("#cst_reg_no_val").hide();
+
+          }
+        }
+
+
+
+         $("#pan_no").blur(function(){
+             pan_no_f();
+           });
+        function pan_no_f(){
+          var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
+          var r = $("#pan_no").val();
+
+          if((r=="")|| regexOnlyNumbers.test(r)!=true){
+
+            $("#pan_no_val").show();
+            $("#pan_no_val").html("Please enter pan no ");
+            $("#pan_no_val").focus();
+            $("#pan_no_val").css("color","red");
+
+              err_pan_no=false;
+              return false;
+          }
+           else {
+            err_pan_no=true;
+            $("#pan_no_val").hide();
+          }
+
+          }
+
+           $("#opening_balance").blur(function(){
+             opening_balance_f();
+           });
+        function opening_balance_f(){
+          var regexOnlyNumbers=/^[0-9]+$/;
+          var op_bal = $("#opening_balance").val();
+
+          if((op_bal=="")|| regexOnlyNumbers.test(op_bal)!=true){
+
+            $("#opening_balance_val").show();
+            $("#opening_balance_val").html("This field is required");
+            $("#opening_balance_val").focus();
+            $("#opening_balance_val").css("color","red");
+
+              err_opening_balance=false;
+              return false;
+          }
+           else {
+            err_opening_balance=true;
+            $("#opening_balance_val").hide();
+          }
+
+          }
+
+     $("#save").click(function(){
+
+      
+      err_first_name=true;
+      err_company=true;
+      err_email_id=true;
+      err_mobile_no=true;
+      err_pin_code=true;
+      err_pin_code_shipping=true;
+      err_tax_reg_no=true;
+      err_cst_reg_no=true;
+      err_pan_no=true;
+      err_opening_balance=true;
+
+
+     
+
+
+    
+      first_name_f();
+      company_f();
+      email_id_f();
+      mobile_no_f();
+      pin_code_f();
+      pin_code_shipping();
+      tax_reg_no_f();
+      cst_reg_no_f();
+      pan_no_f();
+      opening_balance_f();
+      
+
+     if((err_first_name==true)&&(err_company==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_pin_code==true)&&(err_pin_code_shipping==true)&&(err_tax_reg_no=true)&&(err_cst_reg_no=true)&&(err_pan_no=true)&&(err_opening_balance=true))
+     {
+        return true;
+     }else{
+        return false;
+
+     }
+
+     });
+         
+
+
+
+
+  });
+</script>

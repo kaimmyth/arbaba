@@ -1,4 +1,3 @@
-
 <?php
 Route::get('clear-cache', function () {
 	$exitCode = Artisan::call('config:clear');
@@ -136,8 +135,8 @@ Route::get('tax/payment-history/delete/{id}','TaxesController@payment_history_de
 Route::get('tax/payment-history/get-payment-details/{id}','TaxesController@get_payment_details');
 
 // purchases
-Route::get('purchases/vender', function () {
-	$data['content'] = 'purchases.vender';
+Route::get('purchases/vendor', function () {
+	$data['content'] = 'purchases.vendor';
 	return view('layouts.content', compact('data'));
 });
 
@@ -175,3 +174,16 @@ Route::get('purchases/vendor-credits', function () {
 	$data['content'] = 'purchases.vendor-credits';
 	return view('layouts.content', compact('data'));
 });
+
+//tax rate
+Route::get('tools-master/tax_rate', function () {
+	$data['content'] = 'tools-master.tax_rate';
+	return view('layouts.content', compact('data'));
+});
+
+
+Route::get('tools-master/currency', function () {
+	$data['content'] = 'tools-master.currency';
+	return view('layouts.content', compact('data'));
+});
+

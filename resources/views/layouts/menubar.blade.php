@@ -67,7 +67,7 @@
      <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Purchases</span><span class="pull-right"><i class="md md-add"></i></span></a>
      <ul class="list-unstyled">
       <li><a href="{{url('update-site')}}">Candidates</a></li>
-      <li><a href="{{url('purchases/vender')}}">Vender</a></li>
+      <li><a href="{{url('purchases/vendor')}}">Vendor</a></li>
       <li><a href="{{url('purchases/recurring-expenses')}}">Recurring Expenses</a></li>
       <li><a href="{{url('purchases/purchase-order')}}">Purchase Order</a></li>
       <li><a href="{{url('purchases/bill')}}">Bill</a></li>
@@ -88,6 +88,7 @@
     <ul class="list-unstyled">
       <li><a href="{{url('expenses')}}">Expenses</a></li>
       <li><a href="{{url('expenses/suppliers')}}">Suppliers</a></li>
+
     </ul>
   </li>
   <li>
@@ -98,8 +99,10 @@
   </li>
 <li class="has_sub">
   <a href="#" class="waves-effect"><i class="fas fa-tools"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Tools/Master </span><span class="pull-right"><i class="md md-add"></i></span></a>
+    
   <ul class="list-unstyled">
-
+    <li><a href="{{url('tools-master/tax_rate')}}">Tax Rate</a></li>
+    <li><a href="{{url('tools-master/currency')}}">Currency</a></li>
   </ul>
 </li>
 <li class="has_sub">

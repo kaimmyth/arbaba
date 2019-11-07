@@ -80,24 +80,25 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
-                <label for="exampleInputEmail1">Vender Name</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
-                <h6 id="name_val"></h6>
+                <label for="exampleInputEmail1">Vendor Name</label>
+                <input type="text" name="vendor_name" class="form-control" value="" id="vendor_name" maxlength="20">
+                <h6 id="vendor_name_val"></h6>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Amount</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
+                <input type="text" name="amount" class="form-control" value="" id="amount" maxlength="18">
               </div>
+                <h6 id="amount_val"></h6>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Payment Date</label>
-                <input type="date" name="name" class="form-control" value="" id="name" placeholder="dd/mm/yyyy">
-                <h6 id="name_val"></h6>
+                <input type="date" name="payment_date" class="form-control" value="" id="payment_date" placeholder="dd/mm/yyyy">
+                <h6 id="payment_date_val"></h6>
               </div>
             </div>
 
@@ -105,20 +106,21 @@
          <div class="col-md-4">
             <div class="form-group row">
               <label class="exampleInputEmail1">Payment Mode</label>
-                <select class="form-control" name="product_type" id="product_type">
-                  <option>-Select-</option>
+                <select class="form-control" name="payment_mode" id="payment_mode">
                   <option></option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
+                  <option>xyz</option>
+                  <option>abc</option>
+                  <option>abhh</option>
+                  <option>areg</option>
                 </select>  
             </div>
+              <h6 id="payment_mode_val"></h6>
           </div>
 
             <div class="col-md-4">
             <div class="form-group row">
               <label class="exampleInputEmail1">Paid Through</label>
-                <select class="form-control" name="product_type" id="product_type">
+                <select class="form-control" name="paid_through" id="paid_through">
                   <option>-Select-</option>
                   <option></option>
                   <option></option>
@@ -126,6 +128,7 @@
                   <option></option>
                 </select>  
             </div>
+              <h6 id="paid_thgough_val"></h6>
           </div>
 
              <div class="col-md-4">
@@ -218,3 +221,146 @@
     </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
 </div>
+
+
+
+<script>
+$(document).ready(function(){
+   
+    $("#vendor_name_val").hide();
+    $("#amount_val").hide();
+    $("#payment_date_val").hide();
+    $("#payment_mode_val").hide();
+
+
+    
+    var err_vendor_name_val=true;
+    var err_amount_val=true;
+    var err_payment_date_val=true;
+    var err_payment_mode_val=true;
+
+
+
+
+    $("#vendor_name").blur(function(){
+        vendor_name_f();
+    });
+    function  vendor_name_f(){
+
+        var d = $("#vendor_name").val();
+
+        if(d.length==""){
+            $("#vendor_name_val").show();
+            $("#vendor_name_val").html("This field is required ");
+            $("#vendor_name_val").focus();
+            $("#vendor_name_val").css("color","red");
+
+            err_vendor_name_val=false;
+            return false;
+    
+    }
+        else{
+           err_vendor_name_val=true;
+            $("#vendor_name_val").hide();
+        }
+    }
+
+    $("#amount").blur(function () {
+        amount_f();
+    });
+    function amount_f()
+    {
+         var c=$("#amount").val();
+        var regexOnlyNumbers=/^[0-9]+$/;
+        if(c=="" || regexOnlyNumbers.test(c) != true)
+        {
+      
+            
+            $("#amount_val").show();
+            $("#amount_val").html("This field is required");
+            $("#amount_val").focus();
+            $("#amount_val").css("color","red");
+            err_amount_val=false;
+        }
+        else
+        {
+            err_amount_val=true;
+            $("#amount_val").hide();
+        }  
+    }
+
+     $('#payment_date').blur(function () {
+        payment_date_f();
+    });
+    function payment_date_f()
+    {
+        
+        var o=$("#payment_date").val();
+       
+        if(o.length=="")
+        {
+            
+            $("#payment_date_val").show();
+            $("#payment_date_val").html("This field is required");
+            $("#payment_date_val").focus();
+            $("#payment_date_val").css("color","red");
+            err_payment_date_val=false;
+        }
+        else
+        {
+            err_payment_date_val=true;
+            $("#payment_date_val").hide();
+        }  
+    }
+
+
+     $('#payment_mode').blur(function () {
+        payment_mode_f();
+    });
+    function payment_mode_f()
+    {
+        
+        var p=$("#payment_mode").val();
+       
+        if(p.length=="")
+        {
+            
+            $("#payment_mode_val").show();
+            $("#payment_mode_val").html("This field is required");
+            $("#payment_mode_val").focus();
+            $("#payment_mode_val").css("color","red");
+            err_payment_mode_val=false;
+        }
+        else
+        {
+            err_payment_mode_val=true;
+            $("#payment_mode_val").hide();
+        }  
+    }
+
+
+
+    $("#btn").click(function(){
+    
+     err_vendor_name_val=true;
+     err_amount_val=true;
+     err_payment_date_val=true;
+     err_payment_mode_val=true;
+
+        
+        
+        vendor_name_f();
+        amount_f();
+        payment_mode_f();
+        payment_date_f();
+
+        if((err_vendor_name_val==true)&&(err_amount_val==true)&&(err_payment_date_val==true)&&(err_payment_mode_val==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+});
+</script>

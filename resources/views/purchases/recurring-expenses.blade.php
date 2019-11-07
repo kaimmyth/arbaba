@@ -37,7 +37,7 @@
                                     <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
                                     <th>Profile Name</th>
                                     <th>Expense Account</th>
-                                    <th>Vender Name</th>
+                                    <th>Vendor Name</th>
                                     <th>Frequency</th>
                                     <th>Last Expense Date</th>
                                     <th>Next Expense Date</th>
@@ -90,7 +90,7 @@
             <div class="col-md-4">
             <div class="form-group row">
               <label class="exampleInputEmail1">Repeat every</label>
-                <select class="form-control" name="product_type" id="product_type">
+                <select class="form-control" name="" id="">
                   <option>Week</option>
                   <option>2 Week </option>
                   <option>2 Month</option>
@@ -103,16 +103,16 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Start Date</label>
-                <input type="date" name="" class="form-control" value="" id="" placeholder="dd/mm/yyyy">
-                 <h6 id="hsn_val"></h6>
+                <input type="date" name="start_date" class="form-control" value="" id="start_date" placeholder="dd/mm/yyyy">
+                 <h6 id="start_date_val"></h6>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Ends On</label>
-                <input type="date" name="" class="form-control" value="" id="" placeholder="dd/mm/yyyy">
-                 <h6 id="sac_val"></h6>
+                <input type="date" name="ends_on" class="form-control" value="" id="ends_on" placeholder="dd/mm/yyyy">
+                 <h6 id="ends_on_val"></h6>
               </div>
             </div>
 
@@ -133,8 +133,9 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Amount</label>
-                <input type="text" name="category" class="form-control" value="" id="category">   
+                <input type="text" name="amount" class="form-control" value="" id="amount">   
               </div>
+                <h6 id="amount_val"></h6>
             </div>
 
            <div class="col-md-4">
@@ -153,15 +154,16 @@
 
            <div class="col-md-4">
             <div class="form-group row">
-              <label class="exampleInputEmail1">Vender Name</label>
-                <select class="form-control" name="product_type" id="product_type">
-                  <option>-Select-</option>
+              <label class="exampleInputEmail1">Vendor Name</label>
+                <select class="form-control" name="vendor_name" id="vendor_name">
+                  
                   <option></option>
                   <option></option>
                   <option></option>
                   <option></option>
                 </select>  
             </div>
+              <h6 id="vendor_name_val"></h6>
           </div>
 
 
@@ -195,3 +197,167 @@
         </div>
     </div><!-- /.modal-dialog -->    
 </div><!-- /.modal -->
+
+
+
+<script>
+$(document).ready(function(){
+    $("#name_val").hide();
+    $("#vendor_name_val").hide();
+    $("#start_date_val").hide();
+    $("#ends_on_val").hide();
+    $("#amount_val").hide();
+
+
+    var err_name_val=true;
+    var err_vendor_name_val=true;
+    var err_start_date_val=true;
+    var err_amount_val=true;
+    var err_ends_on_val=true;
+
+
+    $("#name").blur(function(){
+        name_f();
+    });
+    function name_f(){
+        var m = $("#name").val();
+        
+
+        if(m.length==""){
+
+        $("#name_val").show();
+        $("#name_val").html("This field is required ");
+        $("#name_val").focus();
+        $("#name_val").css("color","red");
+
+        err_name_val=false;
+            return false;
+        }
+        else{
+            err_name_val=true;
+            $("#email_val").hide();
+        }
+    }
+
+
+    $("#vendor_name").blur(function(){
+        vendor_name_f();
+    });
+    function  vendor_name_f(){
+
+        var d = $("#vendor_name").val();
+
+        if(d.length==""){
+            $("#vendor_name_val").show();
+            $("#vendor_name_val").html("This field is required ");
+            $("#vendor_name_val").focus();
+            $("#vendor_name_val").css("color","red");
+
+            err_vendor_name_val=false;
+            return false;
+        }
+        else{
+           err_vendor_name_val=true;
+            $("#vendor_name_val").hide();
+        }
+    }
+
+    $('#start_date').blur(function () {
+        start_date_f();
+    });
+    function start_date_f()
+    {
+        
+        var k=$("#start_date").val();
+       
+        if(k.length=="")
+        {
+            
+            $("#start_date_val").show();
+            $("#start_date_val").html("This field is required");
+            $("#start_date_val").focus();
+            $("#start_date_val").css("color","red");
+            err_start_date_val=false;
+        }
+        else
+        {
+            err_start_date_val=true;
+            $("#start_date_val").hide();
+        }  
+    }
+
+     $('#ends_on').blur(function () {
+        ends_on_f();
+    });
+    function ends_on_f()
+    {
+        
+        var o=$("#ends_on").val();
+       
+        if(o.length=="")
+        {
+            
+            $("#ends_on_val").show();
+            $("#ends_on_val").html("This field is required");
+            $("#ends_on_val").focus();
+            $("#ends_on_val").css("color","red");
+            err_ends_on_val=false;
+        }
+        else
+        {
+            err_ends_on_val=true;
+            $("#ends_on_val").hide();
+        }  
+    }
+
+
+     $('#amount').blur(function () {
+        amount_f();
+    });
+    function amount_f()
+    {
+        
+        var b=$("#amount").val();
+        var regexOnlyNumbers=/^[0-9]+$/;
+        if(b=="" || regexOnlyNumbers.test(b) != true)
+        {
+            
+            $("#amount_val").show();
+            $("#amount_val").html("Please enter a valid number");
+            $("#amount_val").focus();
+            $("#amount_val").css("color","red");
+            err_amount_val=false;
+        }
+        else
+        {
+            err_amount_val=true;
+            $("#amount_val").hide();
+        }  
+    }
+
+
+
+    $("#btn").click(function(){
+     err_name_val=true;
+     err_vendor_name_val=true;
+     err_start_date_val=true;
+     err_amount_val=true;
+     err_ends_on_val=true;
+
+        
+        name_f();
+        vendor_name_f();
+        start_date_f();
+        ends_on_f();
+        amount_f();
+
+        if((err_name_val==true)&&(err_vendor_name_va==true)&&(err_start_date_val==true)&&(err_amount_val==true)&&(err_ends_on_val==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+});
+</script>

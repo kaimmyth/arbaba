@@ -243,7 +243,7 @@ class SalesController extends Controller
     $toReturn=sales_customers::get()->toArray();
     
     $data['content'] ='sale.customer';
-    return view('layouts.content',compact('data','product'))->with(compact('toReturn', 'toReturnInvoice'));
+    return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturnInvoice'));
     }
 
     public function delete_customer($id="")

@@ -79,10 +79,11 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="exampleInputEmail1">Vender Name</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
-                <h6 id="name_val"></h6>
+                <label for="exampleInputEmail1">Vendor Name</label>
+                <input type="text" name="vendor_name" class="form-control" value="" id="vendor_name" maxlength="20">
+               
               </div>
+               <h6 id="name_val"></h6>
             </div>
 
             <div class="col-md-6">
@@ -95,18 +96,20 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="exampleInputEmail1">Order Number</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
-                <h6 id="name_val"></h6>
+                <input type="text" name="order_number" class="form-control" value="" id="order_number" maxlength="20">
+               
               </div>
+               <h6 id="order_number_val"></h6>
             </div>
 
 
            <div class="col-md-6">
               <div class="form-group">
                 <label for="exampleInputEmail1">Vendor Credit Date</label>
-                <input type="date" name="" class="form-control" value="" id="" placeholder="dd/mm/yyyy">
+                <input type="date" name="credit_date" class="form-control" value="" id="credit_date" placeholder="dd/mm/yyyy">
                 
               </div>
+              <h6 id="credit_date_val"></h6>
             </div>
 
            
@@ -199,3 +202,124 @@
     </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
 </div>
+
+
+
+<!--jquery validation-->
+
+<script> 
+
+  $(document).ready(function(){
+
+    $("#name_val").hide();
+    $("#order_number_val").hide();
+     $("#credit_date_val").hide();
+
+
+    err_name_val = true;
+    err_order_number=true;
+    err_credit_date = true;
+
+      $("#vendor_name").blur(function(){
+
+            name_f();
+         });
+                 function name_f(){
+
+              var m = $("#vendor_name").val();
+             
+            if(m.length==""){
+
+                $("#name_val").show();
+                $("#name_val").html("This field is required ");
+                $("#name_val").focus();
+                $("#name_val").css("color","red");
+
+                  err_name_val=false;
+                        return false;
+                }else{
+                  err_name_val=true;
+                  $("#name_val").hide();
+                }
+        }
+
+
+
+
+             $("#order_number").blur(function(){
+
+            order_number_f();
+        });
+        function order_number_f(){
+
+          var d = $("#order_number").val();
+
+          if(d.length==""){
+
+            $("#order_number_val").show();
+            $("#order_number_val").html("This field is required");
+            $("#order_number_val").focus();
+            $("#order_number_val").css("color","red");
+
+              err_order_number=false;
+              return false;
+          }else{
+            err_order_number=true;
+            $("#order_number_val").hide();
+          }
+        }
+
+          $("#credit_date").blur(function(){
+
+            credit_date_f();
+        });
+        function credit_date_f(){
+
+          var p = $("#credit_date").val();
+
+          
+          if(p==""){
+
+            $("#credit_date_val").show();
+            $("#credit_date_val").html("This field is required ");
+            $("#credit_date_val").focus();
+            $("#credit_date_val").css("color","red");
+
+              err_credit_date=false;
+              return false;
+          }else{
+            err_credit_date=true;
+            $("#credit_date_val").hide();
+          }
+        }
+
+            $("#btn").click(function(){
+
+      
+       err_name_val = true;
+       err_order_number=true;
+       err_credit_date = true;
+
+     
+
+
+    
+      name_f();
+      order_number_f();
+      credit_date_f();
+      
+
+     if((err_name_val==true)&&(err_order_number==true)&&(err_credit_date==true))
+     {
+        return true;
+     }else{
+        return false;
+
+     }
+
+     });
+         
+
+  });
+
+</script>

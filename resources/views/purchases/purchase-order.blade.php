@@ -80,10 +80,11 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
-                <label for="exampleInputEmail1">Vender Name</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
-                <h6 id="name_val"></h6>
+                <label for="exampleInputEmail1">Vendor Name</label>
+                <input type="text" name="vendor_name" class="form-control" value="" id="vendor_name">
+               
               </div>
+                 <h6 id="vendor_name_val"></h6>
             </div>
 
 
@@ -105,8 +106,9 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Purchase Order</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
+                <input type="text" name="purchase_order" class="form-control" value="" id="purchase_order">
               </div>
+                <h6 id="purchase_order_val"></h6>
             </div>
 
 
@@ -121,41 +123,31 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Start Date</label>
-                <input type="date" name="" class="form-control" value="" id="" placeholder="dd/mm/yyyy">
-                 <h6 id="hsn_val"></h6>
+                <input type="date" name="start_date" class="form-control" value="" id="start_date" placeholder="dd/mm/yyyy">
+                 
               </div>
+              <h6 id="start_date_val"></h6>
             </div>
 
            <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Expected Delivery Date</label>
-                <input type="date" name="" class="form-control" value="" id="" placeholder="dd/mm/yyyy">
-                 <h6 id="hsn_val"></h6>
+                <input type="date" name="delivery_date" class="form-control" value="" id="delivery_date" placeholder="dd/mm/yyyy">
+                 
               </div>
+                 <h6 id="delivery_date_val"></h6>
             </div>
 
 
           <div class="col-md-4">
               <div class="form-group">
-                <label for="exampleInputEmail1">Reference</label>
+                <label for="exampleInputEmail1">Shipment Preference</label>
                 <input type="text" name="name" class="form-control" value="" id="name">
               </div>
             </div>
 
 
-            <div class="col-md-4">
-            <div class="form-group row">
-              <label class="exampleInputEmail1">Customer Name</label>
-                <select class="form-control" name="product_type" id="product_type">
-                  <option>-Select-</option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
-                </select>  
-            </div>
-          </div>
-
+           
          
        
             
@@ -244,3 +236,146 @@
     </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
 </div>
+
+
+
+<script>
+$(document).ready(function(){
+   
+    $("#vendor_name_val").hide();
+    $("#start_date_val").hide();
+    $("#delivery_date_val").hide();
+    $("#purchase_order_val").hide();
+
+
+    
+    var err_vendor_name_val=true;
+    var err_start_date_val=true;
+    var err_delivery_date_val=true;
+    var err_purchase_order_val=true;
+
+
+
+
+    $("#vendor_name").blur(function(){
+        vendor_name_f();
+    });
+    function  vendor_name_f(){
+
+        var d = $("#vendor_name").val();
+
+        if(d.length==""){
+            $("#vendor_name_val").show();
+            $("#vendor_name_val").html("This field is required ");
+            $("#vendor_name_val").focus();
+            $("#vendor_name_val").css("color","red");
+
+            err_vendor_name_val=false;
+            return false;
+    
+    }
+        else{
+           err_vendor_name_val=true;
+            $("#vendor_name_val").hide();
+        }
+    }
+
+    $('#start_date').blur(function () {
+        start_date_f();
+    });
+    function start_date_f()
+    {
+        
+        var k=$("#start_date").val();
+       
+        if(k.length=="")
+        {
+            
+            $("#start_date_val").show();
+            $("#start_date_val").html("This field is required");
+            $("#start_date_val").focus();
+            $("#start_date_val").css("color","red");
+            err_start_date_val=false;
+        }
+        else
+        {
+            err_start_date_val=true;
+            $("#start_date_val").hide();
+        }  
+    }
+
+     $('#delivery_date').blur(function () {
+        delivery_date_f();
+    });
+    function delivery_date_f()
+    {
+        
+        var o=$("#delivery_date").val();
+       
+        if(o.length=="")
+        {
+            
+            $("#delivery_date_val").show();
+            $("#delivery_date_val").html("This field is required");
+            $("#delivery_date_val").focus();
+            $("#delivery_date_val").css("color","red");
+            err_delivery_date_val=false;
+        }
+        else
+        {
+            err_delivery_date_val=true;
+            $("#delivery_date_val").hide();
+        }  
+    }
+
+
+     $('#purchase_order').blur(function () {
+        purchase_order_f();
+    });
+    function purchase_order_f()
+    {
+        
+        var b=$("#purchase_order").val();
+       
+        if(b.length=="")
+        {
+            
+            $("#purchase_order_val").show();
+            $("#purchase_order_val").html("This field is required");
+            $("#purchase_order_val").focus();
+            $("#purchase_order_val").css("color","red");
+            err_purchase_order_val=false;
+        }
+        else
+        {
+            err_purchase_order_val=true;
+            $("#purchase_order_val").hide();
+        }  
+    }
+
+
+
+    $("#btn").click(function(){
+    
+     err_vendor_name_val=true;
+     err_start_date_val=true;
+     err_purchase_order_val=true;
+     err_delivery_date_val=true;
+
+        
+        
+        vendor_name_f();
+        start_date_f();
+        purchase_order_f();
+        delivery_date_f();
+
+        if((err_vendor_name_val==true)&&(err_start_date_val==true)&&(err_purchase_order_val==true)&&(err_delivery_date_val==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+});
+</script>
