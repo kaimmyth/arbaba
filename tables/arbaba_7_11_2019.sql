@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2019 at 12:51 PM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.1.32
+-- Generation Time: Nov 07, 2019 at 11:50 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,38 @@ SET time_zone = "+00:00";
 --
 -- Database: `arbaba`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ar_accounting`
+--
+
+CREATE TABLE `ar_accounting` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `account_type` varchar(50) NOT NULL,
+  `detail_type` varchar(50) NOT NULL,
+  `discription` varchar(50) NOT NULL,
+  `default_tax_code` varchar(50) NOT NULL,
+  `balance` int(50) NOT NULL,
+  `as_of` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ar_accounting`
+--
+
+INSERT INTO `ar_accounting` (`id`, `name`, `account_type`, `detail_type`, `discription`, `default_tax_code`, `balance`, `as_of`, `created_at`, `updated_at`) VALUES
+(7, 'kkrfgbfbf', 'Current assets', 'Money marcket', 'cbhbyr', '28.00% IGST', 52000, '27-10-2019', '2019-11-04 09:42:41', '2019-11-05 04:37:22'),
+(9, 'Abhinav roy', 'Current assets', 'Money marcket', 'cbhbyr', '28.00% IGST', 52000, '27-10-2019', '2019-11-04 10:43:12', '2019-11-04 10:43:12'),
+(10, 'Abhinav cvghfdx', 'Current assets', 'Money marcket', 'cbhbyr', '28.00% IGST', 52000, '27-10-2019', '2019-11-04 10:43:58', '2019-11-04 10:43:58'),
+(11, 'kkruhbhubvh', 'Current assets', 'Money marcket', 'cbhbyr', '28.00% IGST', 52000, '27-10-2019', '2019-11-05 04:33:46', '2019-11-05 04:33:46'),
+(13, 'kkrfgbfbf', 'Current assets', 'Money marcket', 'cbhbyr', '28.00% IGST', 52000, '27-10-2019', '2019-11-05 04:35:15', '2019-11-05 04:35:15'),
+(14, 'mhima', 'Current assets', 'cash and cash equivalent', 'bhweifb efuiwbui', '14.00% VAT', 5000, '27-10-2019', '2019-11-05 04:38:09', '2019-11-05 04:38:16'),
+(15, 'Abhinav', 'Current assets', 'cash on hand', 'cbhbyr', '00% IGST', 5000, '27-10-2019', '2019-11-05 06:44:42', '2019-11-05 06:44:42');
 
 -- --------------------------------------------------------
 
@@ -2580,8 +2612,8 @@ CREATE TABLE `ar_employees` (
   `hire_date` date NOT NULL,
   `release_date` date NOT NULL,
   `dob` date NOT NULL,
-  `created_at` datetime(6) NOT NULL,
-  `updated_at` datetime(6) NOT NULL
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -2589,8 +2621,7 @@ CREATE TABLE `ar_employees` (
 --
 
 INSERT INTO `ar_employees` (`id`, `title`, `first_name`, `last_name`, `display_name_as`, `email_id`, `phone_no`, `mobile_no`, `address`, `city`, `state`, `pin_code`, `country`, `billing_rate`, `employee_id_no`, `employee_id`, `gender`, `hire_date`, `release_date`, `dob`, `created_at`, `updated_at`) VALUES
-(4, 'Mr', 'Sachin Updated Yo', 'Pramanik', 'MrSachin Updated Yo', 'sumit.m@itscient.com', '(111) 111-1111', '(111) 111-1111', 'My Addresss', 'Jamshedpur', 'Wabash', 12412, 'dsgsdgs', '455', 'sdgwegw', 'rger', 'Male', '2019-10-08', '2019-10-14', '2019-10-16', '2019-10-25 15:57:09.000000', '2019-10-28 14:37:53.000000'),
-(7, 'Mr', 'Sachin', 'New Details updated', 'Mr Sachin New Details updated', 'sumit.m@itscient.com', '(222) 222-2222', '(222) 222-2222', 'My Address', 'Jamshedpur', 'Wabash', 1111111, 'India Updated', '1111', 'sdgwegw', 'rger', 'Male', '2019-11-12', '2019-11-12', '2019-11-13', '2019-11-01 16:30:48.000000', '2019-11-01 16:30:57.000000');
+(7, 'mr', 'Abhinav', 'roy', 'mr Abhinav roy', 'cahahgmhgmg@GMAIL.COM', '(111) 111-1111', '(111) 111-1111', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', 52543245, 'United Arab Emirates', '5353', '78686', '543453', 'Female', '2019-11-22', '2019-11-20', '2019-11-19', '2019-11-01 17:03:46', '2019-11-01 17:03:46');
 
 -- --------------------------------------------------------
 
@@ -2617,7 +2648,10 @@ CREATE TABLE `ar_expenses` (
 --
 
 INSERT INTO `ar_expenses` (`id`, `payee_id`, `payment_account`, `payment_date`, `payment_method`, `ref_no`, `memo`, `attachment`, `expenses_details`, `created_at`, `updated_at`) VALUES
-(19, 'Sachin', 'Balance-2', '2019-10-24', 'Cheque', '12120', 'My Memo', 'logo.png', 'Advertisement,newspaper,25000,0:Office Supplies,A4 pages,1200,10:Bank Deposit,deposited in bank,1000000,18', '2019-10-23 09:20:51', '2019-10-28 07:12:09');
+(19, 'Sachin', 'Balance-2', '2019-10-24', 'Cheque', '12120', 'My Memo', 'logo.png', 'Advertisement,newspaper,25000,0:Office Supplies,A4 pages,1200,10:Bank Deposit,deposited in bank,1000000,18', '2019-10-23 09:20:51', '2019-10-28 07:12:09'),
+(24, 'tulip', 'Balance-2', '2019-10-30', 'Cheque', '1005', 'abc', 'New DOC Document.doc', 'Office Supplies,htfh,1000,5:Bank Deposit,htfh,200,0', '2019-10-31 05:05:57', '2019-10-31 05:05:57'),
+(25, 'tulip', 'Balance-2', '2019-12-07', 'Cheque', '456', 'hghj', 'New DOC Document.doc', 'Office Supplies,htfh,1000,5:Bank Deposit,htfh,1000,18', '2019-10-31 05:40:22', '2019-10-31 05:40:22'),
+(27, 'sdgbvdfb', 'Balance-1', '2019-10-08', 'Cash', '12346', 'ascsadvsd', 'expenses.PNG', 'Advertisement,js,566,5', '2019-11-01 11:27:45', '2019-11-01 11:27:45');
 
 -- --------------------------------------------------------
 
@@ -2719,6 +2753,19 @@ CREATE TABLE `ar_expenses_supplier` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ar_expenses_supplier`
+--
+
+INSERT INTO `ar_expenses_supplier` (`id`, `title`, `first_name`, `email_id`, `mobile_no`, `last_name`, `middle_name`, `company_name`, `other`, `company`, `display_name_as`, `website`, `billing_rate`, `address`, `city`, `state`, `pin_code`, `country`, `pan_no`, `terms`, `opening_balance`, `as_of`, `account_no`, `gst_reg_type`, `gstin`, `tax_reg_no`, `effective_date`, `notes`, `attachment`, `created_at`, `updated_at`) VALUES
+(3, 'dada', 'Rahul', 'sumit.m@itscient.com', '(111) 111-1111', 'Dutta', 'KUMAR', 'ITSCIENT-LLC', 'hgfhdgf', 'gfdgf', 'dadaRahul', 'gfhgfh', 'hgnhgn', 'thrtht', 'hazaribagh', 'kokra', '5433', 'India', 'xdgfdghfdh', 'Due On receipt', '23512', '2019-10-16', '427845754577', 'GST Registered Composition', '15771ht', 'hfdhdh', '6786-10-26', 'notes', 'invoice_link.PNG', '2019-10-26 10:20:30', '2019-10-26 10:20:30'),
+(4, 'Mr', 'Sachin', 'sachin@itscient.com', '(111) 111-1111', 'New Details', 'Kr', 'ITSCIENT', 'eherhteh', 'Company Name', 'Mr Sachin', 'dfgdfg.vcb', 'etheheheh', 'Address', 'vxdvds', 'vsdvsdv', 'vsdvsdvsd', 'sdvsdvsd', '1234567859', 'Nwt 30', 'herher', '2019-12-10', 'fhdfnhdg', 'GST Registered Regular', 'dthdfhgthe', 'eherher', '2019-12-10', 'sdvsdvsdvsdv', 'simon-migaj-Utvwp12891U-unsplash.jpg', '2019-10-28 04:58:33', '2019-10-28 09:40:46'),
+(5, 'fgs', 'fdhf', 'dhd', '(111) 111-1111', '11111111', 'dfhd1', '11111', '11111', '111111111', 'fgs fdhf', '111111', '1111', '11111111', '11111', '1111111', '1111111', '111111', '111111111', 'Net 15', '1', '2019-10-29', 'fhdfnhdg', 'GST Registered Composition', '11111', '111', '2019-10-29', '1111111111', 'unnamed.jpg', '2019-10-28 09:41:58', '2019-10-28 09:41:58'),
+(6, 'adaf', 'Rahul', 'thebigcompany@itscient.com', '(432) 423-4234', 'Patel', 'KUMAR', 'IT - SCIENT LLC', 'hgfhdgf', 'gfdgf', 'adaf Rahul', 'gdghfghgghjg', 'hgnhgn', 'grg', 'hazaribagh', 'kokra', '5433', 'India', 'xdgfdghfdh', 'Net 15', '23512', '2019-11-07', '427845754577', 'GST Registered Composition', '15771ht', '435435', '2019-11-07', 'rtrtret', 'New DOC Document.doc', '2019-10-31 05:38:22', '2019-10-31 05:38:43'),
+(7, 'mr', 'Abhinav', 'cahahgmhgmg@GMAIL.COM', '(111) 111-1111', 'roy', 'cgbfv', '1982', 'cbcv', '1982', 'mr Abhinav', 'sdvsdv', '5354', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', '45242', 'United Arab Emirates', '4\\75457', 'Due On receipt', '42', '1970-01-01', '75527', '--select--', '534543', '455555', '2019-11-18', 'ibupbujp;\\', 'expenses.PNG', '2019-11-01 11:44:24', '2019-11-01 11:44:24'),
+(8, 'gf', 'svd', 'cahahgmhgmg@GMAIL.COM', '(111) 111-1111', 'roy', 'cgbfv', 'hghghgh', 'qwerty', '1982', 'gf svd', 'asfasf@qwer', '5353', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', '41', 'United Arab Emirates', '12', 'Due On receipt', '873573', '2019-11-25', '4524524', '--select--', '534543', '455555', '2019-11-22', 'ssdf', 'mng job .PNG', '2019-11-01 12:22:26', '2019-11-01 12:22:26'),
+(9, 'mr', 'Abhinav', 'cahahgmhgmg@GMAIL.COM', '(111) 111-1111', 'roy', 'cgbfv', 'hghghgh', 'qwerty', '1982', 'mr Abhinav', 'asfasf@qwer', '5353', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', '4741', 'United Arab Emirates', '12742', 'Due On receipt', '873573', '2019-11-25', '4747474', 'GST Registered Regular', '534543', '455555', '2019-11-18', 'esefsedc', 'employee.PNG', '2019-11-01 12:25:59', '2019-11-01 12:25:59');
 
 -- --------------------------------------------------------
 
@@ -2842,7 +2889,8 @@ CREATE TABLE `ar_products_and_services` (
 INSERT INTO `ar_products_and_services` (`id`, `product_type`, `name`, `sku`, `hsn_code`, `sac_code`, `unit`, `category`, `sale_price`, `income_account`, `inclusive_tax`, `tax`, `description`, `purchasing_information`, `cost`, `expense_account`, `purchase_tax`, `reverse_change`, `preferred_supplier`, `created_at`, `updated_at`) VALUES
 (9, 'Inventory', 'Abhinav', 'zdgd', 'fhgb', 'gfhb', 'qefde', 'hfybjn', '123456', 'fgjnfgn', 'on', '28.0% GST', 'wtfgedfgewg', 'sadfvwdgdg', '123456', 'Rent Expense', '28.0% GST', 'thfyjn', '-Select-', '2019-10-28 12:04:53', '2019-10-28 12:10:18'),
 (10, 'Service', 'Sachin', 'gvsfgn', '634256', 'jhsefgh', '65', 'jhsfhsdfh', '67532', 'fgjnfgn', 'on', '14.00% GST', 'descriptuhomnyhuj', 'Informatuygyfuwge', '423', 'Small Tools and Equipment', '18.0% GST', '3325', '-Select-', '2019-10-28 12:06:49', '2019-10-28 12:10:34'),
-(12, 'Service', 'Rahu', '45454', '45454', '4545', '4554', '45', '454545', 'fgjnfgn', 'on', '15.0% GST', 'gfdg', 'gfd', '45454545454545', 'Swachh Bharat Cess Expense', '15.0% GST', '45454', '-Select-', '2019-11-01 09:12:09', '2019-11-01 09:12:09');
+(12, 'Service', 'Rahu', '45454', '45454', '4545', '4554', '45', '454545', 'fgjnfgn', 'on', '15.0% GST', 'gfdg', 'gfd', '45454545454545', 'Swachh Bharat Cess Expense', '15.0% GST', '45454', '-Select-', '2019-11-01 09:12:09', '2019-11-01 09:12:09'),
+(13, '-Select-', 'Abhinav cgbfv roy', 'bch', '6345312', '23213', '7654', 'dsgf', '654', 'cgjngn', 'on', '15.0% GST', '54jklbjhm', '53543', '441', 'Purchases', '18.0% GST', '32', '-Select-', '2019-11-01 11:04:04', '2019-11-01 11:04:04');
 
 -- --------------------------------------------------------
 
@@ -2920,6 +2968,15 @@ CREATE TABLE `ar_sales_customers` (
   `updated_by` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ar_sales_customers`
+--
+
+INSERT INTO `ar_sales_customers` (`id`, `title`, `first_name`, `last_name`, `email_id`, `company`, `mobile_no`, `phone_no`, `fax`, `display_name_as`, `other`, `website`, `gst_reg_type`, `gst_in`, `bill_with_partner`, `billing_address`, `city_town`, `state`, `pin_code`, `country`, `shipping_address`, `city_town_shipping`, `state_shipping`, `pin_code_shipping`, `country_shipping`, `notes`, `tax_reg_no`, `cst_reg_no`, `pan_no`, `preferred_payment_method`, `preferred_delivery_method`, `terms`, `opening_balance`, `as_of`, `attachment`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+(7, 'gd', 'yrey', 'trf', 'dfdf@gfgfg.fgf', 'hghghgh', '(111) 111-1111', '(567) 575-6765', '76-576-5757567', 'yrey trf', 'ngn', 'nnv', 'Overseas', '35AABCS1429B1ZX', 'Bill With Partner', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', '7567756756', 'United Arab Emirates', 'hgfhfg', 'fhfh', 'hff', '65765756765657567567567657567567567567567', 'hfhf', 'bvb', 'gfhg', 'hgfhfgh', 'gfhfgh', 'Cheque', 'Print Later', 'Net 15', 'hgfhgfh', '2019-11-29', 'NA', '2019-11-01 10:39:30', '2019-11-01 10:39:30', '2019-11-01 10:39:30', '2019-11-01 10:39:30'),
+(8, 'cvnb', 'yrey', 'trf', 'dfdf@gfgfg.fgf', 'hghghgh', '(111) 111-1111', '(111) 111-1111', '42-042-4242424', 'yrey trf', 'vbmvbm', 'vmhnm', 'GST registered- Composition', '35AABCS1429B1ZX', 'Bill With Customer', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', '7567756756', 'United Arab Emirates', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', '56546', 'United Arab Emirates', 'dsgvbdsgb', '455555', '75742', '12', 'Cash', 'Print Later', 'Due on receipt', '53', '2019-11-15', 'NA', '2019-11-01 10:51:00', '2019-11-01 10:51:00', '2019-11-01 10:51:00', '2019-11-01 10:51:00'),
+(9, 'gf', 'Abhinav', 'roy', 'cahahgmhgmg@GMAIL.COM', '1982', '(111) 111-1111', '(111) 111-1111', '33-333-3333333', 'Abhinav roy', '35435', 'asfasf@qwer', 'Overseas', '35AABCS1429B1ZX', 'Bill With Customer', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', '4536543', 'United Arab Emirates', 'WWEFCERVE VERVE DB', 'al-Ayn', 'Abu Dhabi', '45151', 'United Arab Emirates', 'bhmbn', '455555', '1221', '47646', 'Cheque', 'Print Later', 'Due on receipt', '873573', '2019-11-01', 'NA', '2019-11-01 10:57:49', '2019-11-01 10:57:49', '2019-11-01 10:57:49', '2019-11-01 10:57:49');
+
 -- --------------------------------------------------------
 
 --
@@ -2950,8 +3007,13 @@ CREATE TABLE `ar_sales_invoice` (
 --
 
 INSERT INTO `ar_sales_invoice` (`id`, `invoice_no`, `customer`, `customer_email`, `billing_address`, `terms`, `invoice_date`, `due_date`, `place_of_supply`, `msg_on_invoice`, `msg_on_statement`, `attachment`, `invoice_details`, `status`, `created_at`, `updated_at`) VALUES
+(2, 1001, 'Add New +', 'hfgh@df.cvb', 'dsdsa', '30', '2019-11-07', '2019-11-09', 'Chandigarh', 'sada', 'dsad', 'New DOC Document.doc', 'hours,gddf,gfdg,10,25,250,0.25', 1, '2019-10-23 06:52:13', '2019-10-30 09:57:12'),
+(3, 1001, 'Add New +', 'hfgh@df.cvb', 'hfhfd', 'Net 30', '2019-10-31', '2019-11-08', 'Delhi', 'gdgd', 'gdg', 'New DOC Document.doc', 'hours,gddf,gfdg,2,500,1000,10', 1, '2019-10-23 11:27:42', '2019-10-23 11:27:42'),
+(4, 3252352, 'Add New +', 'a@d.com', 'My Billing Address', 'Net 15', '2019-10-23', '2019-10-29', 'Arunachal Pradesh', 'My Invoice', 'My Statement', 'simon-migaj-Utvwp12891U-unsplash.jpg', 'hours,rfwefwef,wefwef,1,1000,1000,10:services,rfwefwef,wefwef,2,2000,4000,2', 1, '2019-10-25 09:16:57', '2019-10-25 09:16:57'),
 (5, 1005, 'tulsi', 'tulsi@gmail.com', 'jsr', '30', '2019-11-07', '2019-11-08', 'Chandigarh', 'gfg', 'gfg', 'New DOC Document.doc', 'services,2453,gfdg,10,25,250,5', 2, '2019-10-30 07:02:37', '2019-10-30 07:02:37'),
-(7, 1001, 'Rahul KUMAR Patel', 'thebigcompany@itscient.com', 'grg', '15', '2019-11-07', '2019-11-12', 'Arunachal Pradesh', 'fdsdfdss', 'dffsddsffsdfd', 'New DOC Document.doc', 'services,2453,btrbrtb,10,25,250,10', 1, '2019-11-01 08:57:16', '2019-11-01 08:57:16');
+(6, 1001, 'Rahul KUMAR Patel', 'thebigcompany@itscient.com', 'grg', '30', '2019-10-29', '2019-11-09', 'Chandigarh', 'ghgfh', 'hfgh', 'New DOC Document.doc', 'hours,gddf,gfdg,10,25,250,0.25:services,2453,gfdg,20,787,15740,5', 1, '2019-10-31 05:47:44', '2019-10-31 05:49:01'),
+(7, 1001, 'Rahul KUMAR Patel', 'thebigcompany@itscient.com', 'grg', '15', '2019-11-07', '2019-11-12', 'Arunachal Pradesh', 'fdsdfdss', 'dffsddsffsdfd', 'New DOC Document.doc', 'services,2453,btrbrtb,10,25,250,10', 1, '2019-11-01 08:57:16', '2019-11-01 08:57:16'),
+(8, 1223, 'wewe', 'dwd@dfdf.fd', 'dfdf', '0', '2019-12-04', '2019-12-05', 'Chandigarh', 'fdfd', 'dxfd', '', 'hours,dfsfds,dsfdsfdf,10,400,4000,0.25', 1, '2019-11-01 11:55:18', '2019-11-01 11:55:18');
 
 -- --------------------------------------------------------
 
@@ -3112,6 +3174,12 @@ INSERT INTO `ar_users` (`id`, `users_role`, `users_type`, `parent_id`, `emp_id`,
 --
 
 --
+-- Indexes for table `ar_accounting`
+--
+ALTER TABLE `ar_accounting`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ar_cities`
 --
 ALTER TABLE `ar_cities`
@@ -3218,6 +3286,12 @@ ALTER TABLE `ar_users`
 --
 
 --
+-- AUTO_INCREMENT for table `ar_accounting`
+--
+ALTER TABLE `ar_accounting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `ar_cities`
 --
 ALTER TABLE `ar_cities`
@@ -3245,7 +3319,7 @@ ALTER TABLE `ar_employees`
 -- AUTO_INCREMENT for table `ar_expenses`
 --
 ALTER TABLE `ar_expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `ar_expenses_customer`
@@ -3257,7 +3331,7 @@ ALTER TABLE `ar_expenses_customer`
 -- AUTO_INCREMENT for table `ar_expenses_supplier`
 --
 ALTER TABLE `ar_expenses_supplier`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ar_migrations`
@@ -3275,7 +3349,7 @@ ALTER TABLE `ar_org`
 -- AUTO_INCREMENT for table `ar_products_and_services`
 --
 ALTER TABLE `ar_products_and_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `ar_record_payment`
@@ -3287,13 +3361,13 @@ ALTER TABLE `ar_record_payment`
 -- AUTO_INCREMENT for table `ar_sales_customers`
 --
 ALTER TABLE `ar_sales_customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ar_sales_invoice`
 --
 ALTER TABLE `ar_sales_invoice`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ar_state`
