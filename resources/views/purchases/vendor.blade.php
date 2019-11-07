@@ -52,32 +52,10 @@
                       <th>Mobile</th>
                       <th>Phone</th>
                       <th>Action</th>
-
                     </tr>
                   </thead>
                   <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment <i class="fa fa-caret-down" id="receive_payment" name="receive_payment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-                      </td>
-                      <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Send reminder</a>
-                        <a class="dropdown-item" href="#">Create Customer Statement</a>
-                        <a class="dropdown-item" href="#">Create Invoice</a>
-                        <a class="dropdown-item" href="#">Create Sales Receipt</a>
-                        <a class="dropdown-item" href="#">Create Estimate</a>
-                      <a class="dropdown-item" href="#">Delete</a>
-                      </div></td>
-
-                    </tr>
-                   
-
-
-
+                    
                   </tbody>
                 </table>
               </div>

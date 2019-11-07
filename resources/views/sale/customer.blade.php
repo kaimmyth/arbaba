@@ -159,7 +159,9 @@
                       <td>{{$items1['gst_in']}}</td>
                       <td>{{$items1['phone_no']}}</td>
                       <td>{{$items1['opening_balance']}}</td>
-                      <td style="color: #0077C5; font-weight: 600; cursor: pointer;" onclick="myFun()">Receive payment <i class="fa fa-caret-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+                      <td></td>
+                      <!-- <td>
+                      <span style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment</span>&nbsp;&nbsp; <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
 
                       <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Send reminder</a>
@@ -169,7 +171,7 @@
                         <a class="dropdown-item" href="#">Create Estimate</a>
                       <a class="dropdown-item" href="{{url('sale/customer/delete/'.$items1['id'])}}">Delete</a>
                       </div>
-                    </td>
+                    </td> -->
                     
                     </tr>
                      @endforeach

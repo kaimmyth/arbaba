@@ -216,21 +216,19 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
 
 
       </td>
-      <td onclick="receivePayment({{$value['id']}})" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive Payment&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-
-        {{-- <td style="color: #0077C5; font-weight: 600; cursor: pointer;" >
-         Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i> --}}
-         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
-          <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
-          <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send remainder</a>
-        {{-- <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a> --}}
-         <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
-        <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', {{$value['id']}});">View</a>
-        <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', {{$value['id']}});">Edit</a>
-        {{-- <a class="dropdown-item" href="#">Copy</a> --}}
-        <a class="dropdown-item" href="{{url('sale/invoice/delete/'.$value['id'])}}" onclick="return confirm('Do you want to delete this data?')">Delete</a>
-         </div>
+        <td style="color: #0077C5; font-weight: 600; cursor: pointer;" >
+            <span  onclick="receivePayment({{$value['id']}})" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment</span>&nbsp;&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+            <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{url('sale/invoice/print/'.$value['id'])}}">Print</a>
+                <a class="dropdown-item" href="{{url('sale/invoice/email/'.$value['id'])}}">Send</a>
+                <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send remainder</a>
+                <!-- <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a> -->
+                <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
+                <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', {{$value['id']}});">View</a>
+                <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', {{$value['id']}});">Edit</a>
+                <!-- <a class="dropdown-item" href="#">Copy</a> -->
+                <a class="dropdown-item" href="{{url('sale/invoice/delete/'.$value['id'])}}" onclick="return confirm('Do you want to delete this data?')">Delete</a>
+            </div>
       </td>
       </tr>
       @endforeach

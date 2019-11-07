@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2019 at 11:50 AM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.7
+-- Generation Time: Nov 07, 2019 at 12:31 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -2855,6 +2855,41 @@ CREATE TABLE `ar_password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ar_payment_received`
+--
+
+CREATE TABLE `ar_payment_received` (
+  `id` int(100) NOT NULL,
+  `invoice_id` int(100) NOT NULL,
+  `payment_received_customer` varchar(100) NOT NULL,
+  `payment_received_email` varchar(100) NOT NULL,
+  `payment_received_payment_date` date NOT NULL,
+  `payment_received_method` varchar(100) NOT NULL,
+  `payment_received_reference_no` varchar(100) NOT NULL,
+  `payment_received_deposited_to` varchar(100) NOT NULL,
+  `payment_received_description` varchar(100) NOT NULL,
+  `payment_received_subtotal` varchar(100) NOT NULL,
+  `payment_received_tax` varchar(100) NOT NULL,
+  `payment_received_total_amount` varchar(100) NOT NULL,
+  `payment_received_due_date` date NOT NULL,
+  `payment_received_memo` varchar(100) NOT NULL,
+  `payment_received_attachment` varchar(100) NOT NULL,
+  `payment_received_status` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ar_payment_received`
+--
+
+INSERT INTO `ar_payment_received` (`id`, `invoice_id`, `payment_received_customer`, `payment_received_email`, `payment_received_payment_date`, `payment_received_method`, `payment_received_reference_no`, `payment_received_deposited_to`, `payment_received_description`, `payment_received_subtotal`, `payment_received_tax`, `payment_received_total_amount`, `payment_received_due_date`, `payment_received_memo`, `payment_received_attachment`, `payment_received_status`, `created_at`, `updated_at`) VALUES
+(1, 11, 'fhfgh', 'thebig@itscient.com', '2019-11-05', 'Debit Card', '123', 'Axis Bank', 'Invoice#4645645', '482620', '10911.6', '969749.2', '1970-01-01', 'fdsf', '', '2', '2019-11-05 06:06:50', '2019-11-05 06:06:50'),
+(2, 9, 'Rahul KUMAR Patel', 'thebigcompany@itscient.com', '2019-11-05', 'Cash', '2345235', 'Axis Bank', 'Invoice#1001', '20', '0', '20', '1970-01-01', 'Memo', '', '2', '2019-11-05 06:17:07', '2019-11-05 06:17:07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ar_products_and_services`
 --
 
@@ -3240,6 +3275,12 @@ ALTER TABLE `ar_password_resets`
   ADD KEY `its_password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `ar_payment_received`
+--
+ALTER TABLE `ar_payment_received`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ar_products_and_services`
 --
 ALTER TABLE `ar_products_and_services`
@@ -3344,6 +3385,12 @@ ALTER TABLE `ar_migrations`
 --
 ALTER TABLE `ar_org`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `ar_payment_received`
+--
+ALTER TABLE `ar_payment_received`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ar_products_and_services`
