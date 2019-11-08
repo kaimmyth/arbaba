@@ -114,16 +114,16 @@
             <p style="font-size: 15px; font-weight: 600;">{{$estimate_count}} ESTIMATE</p>
           </div>
           <div class="col-md-3 dv" style="background-color: #0077C5;">
-            <i class="fa fa-file sz" aria-hidden="true"></i>  {{$total}}
-            <p style="font-size: 15px; font-weight: 600;">{{$open_invoice_count}} UNBILLED ACTIVITY</p>
+            <i class="fa fa-file sz" aria-hidden="true"></i>  NA
+            <p style="font-size: 15px; font-weight: 600;">NA UNBILLED ACTIVITY</p>
           </div>
           <div class="col-md-3 dv" style="background-color: #FF8000;">
             <i class="fa fa-clock sz" aria-hidden="true"></i>  {{$overdue_amount}}
             <p style="font-size: 15px; font-weight: 600;">{{$overdue_count}} OVERDUE</p>
           </div>
           <div class="col-md-3 dv" style="background-color: #BABEC5;">
-            <i class="fa fa-address-book sz" aria-hidden="true"></i>  {{$total}}
-            <p style="font-size: 15px; font-weight: 600;">{{$open_invoice_count}} Open Invoice</p>
+            <i class="fa fa-address-book sz" aria-hidden="true"></i> NA
+            <p style="font-size: 15px; font-weight: 600;">NA Open Invoice</p>
           </div>
           <div class="col-md-3 dv" style="background-color: #7FD000;">
             <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  {{$paid_amount}}
@@ -159,9 +159,7 @@
                       <td>{{$items1['gst_in']}}</td>
                       <td>{{$items1['phone_no']}}</td>
                       <td>{{$items1['opening_balance']}}</td>
-                      <td></td>
-                      <!-- <td>
-                      <span style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment</span>&nbsp;&nbsp; <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+                      <td style="color: #0077C5; font-weight: 600; cursor: pointer;" onclick="myFun()">Receive payment <i class="fa fa-caret-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
 
                       <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Send reminder</a>
@@ -171,7 +169,7 @@
                         <a class="dropdown-item" href="#">Create Estimate</a>
                       <a class="dropdown-item" href="{{url('sale/customer/delete/'.$items1['id'])}}">Delete</a>
                       </div>
-                    </td> -->
+                    </td>
                     
                     </tr>
                      @endforeach

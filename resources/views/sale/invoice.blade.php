@@ -613,7 +613,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr style="border: none; background:white !important;">
-                                                <th><input  type="checkbox" name="ids[]" value="" /></th>
+                                                <!--<th><input  type="checkbox" name="ids[]" value="" /></th>-->
                                                 <th>Product/Services</th>
                                                 <th>Description</th>
                                                 <th>Qty</th>
@@ -982,7 +982,7 @@ function viewEditInvoice(purpose, id){
 
                 // view invoice details
                 for(var i=0; i<data.no_of_rows; i++){
-                    var v_invoice_details='<tr style="border: none; background:white !important;"><td><input  type="checkbox" name="ids[]" value="" /></td><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
+                    var v_invoice_details='<tr style="border: none; background:white !important;"><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
                     $("#v_invoice_details tbody").append(v_invoice_details);
                 }
                 $("#v_invoice_details_amounts").html('<div style="text-align:right;padding:5px;"><p><b>Subtotal: ₹</b>'+data.subtotal+'</p><p><b>Taxes: ₹</b>'+data.total_tax+'</p><p><b>Total: ₹</b>'+data.total+'</p></div>');

@@ -175,8 +175,8 @@
                 <select name="income_account" class="form-control" id="income_account">
 
                   <option>-Select-</option>
-                   <option>fgjnfgn</option>
-                    <option>cgjngn</option>
+                   <option>Sales - Hardware</option>
+                    <option>Sales - Software</option>
                 </select>
               </div>
             </div>
@@ -321,7 +321,7 @@
             <div class="modal-body" style="padding: 0px 0;">
                 <table class="table table-bordered table-striped" border="0">
                     <tbody>
-                        <tr style="border: none;">
+                        <tr style="border: none; display:none;">
                             <td><p><strong>ID</strong></p></td>
                             <td><p id="v_id"></p></td>
                         </tr>
@@ -770,6 +770,7 @@
                 else if(purpose=="edit"){
                     resetProductsAndServicesForms(); // reseting forms
                     $("#title").val(data.title);
+                    $("#product_type").val(data.product_type);
                     $("#name").val(data.name);
                     $("#sku").val(data.sku);
                     $("#hsn_code").val(data.hsn_code);
