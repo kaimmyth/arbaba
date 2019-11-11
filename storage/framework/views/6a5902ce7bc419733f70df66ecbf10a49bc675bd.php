@@ -105,9 +105,8 @@
       <p style="font-size: 15px; font-weight: 600;"><?php echo e($estimate_count); ?> ESTIMATE</p>
       </div>
       <div class="col-md-3 dv" style="background-color: #0077C5;">
-          <i class="fa fa-file sz" aria-hidden="true"></i> <?php echo e($total); ?>
-
-          <p style="font-size: 15px; font-weight: 600;"><?php echo e($open_invoice_count); ?> UNBILLED ACTIVITY</p>
+          <i class="fa fa-file sz" aria-hidden="true"></i> NA
+          <p style="font-size: 15px; font-weight: 600;">NA UNBILLED ACTIVITY</p>
       </div>
       <div class="col-md-3 dv" style="background-color: #FF8000;">
           <i class="fa fa-clock sz" aria-hidden="true"></i>  <?php echo e($overdue_amount); ?>
@@ -115,9 +114,8 @@
           <p style="font-size: 15px; font-weight: 600;"><?php echo e($overdue_count); ?> OVERDUE</p>
       </div>
       <div class="col-md-3 dv" style="background-color: #BABEC5;">
-          <i class="fa fa-address-book sz" aria-hidden="true"></i>  <?php echo e($total); ?>
-
-      <p style="font-size: 15px; font-weight: 600;"><?php echo e($open_invoice_count); ?>&nbsp;Open Invoice</p>
+          <i class="fa fa-address-book sz" aria-hidden="true"></i> NA
+      <p style="font-size: 15px; font-weight: 600;">NA&nbsp;Open Invoice</p>
       </div>
       <div class="col-md-3 dv" style="background-color: #7FD000;">
           <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  <?php echo e($paid_amount); ?>

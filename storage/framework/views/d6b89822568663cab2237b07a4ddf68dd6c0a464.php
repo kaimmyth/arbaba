@@ -60,7 +60,7 @@
                                     <td>
                                         <a href="javascript:void();" onclick="viewEditProductsAndServices('view', <?php echo e($items['id']); ?>);"><i class="fas fa-eye"></i></a> &nbsp; 
                                         <a href="javascript:void();" onclick="viewEditProductsAndServices('edit', <?php echo e($items['id']); ?>);"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
-                                        <a href="<?php echo e(url('sale/products-and-services/delete/'.$items['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                        <a href="<?php echo e(url('sale/products-and-services/delete/'.$items['id'])); ?>" onclick=""><i class="fas fa-trash"></i></a>
                                     </td>
 
                                     </tr>
@@ -175,8 +175,8 @@
                 <select name="income_account" class="form-control" id="income_account">
 
                   <option>-Select-</option>
-                   <option>fgjnfgn</option>
-                    <option>cgjngn</option>
+                   <option>Sales - Hardware</option>
+                    <option>Sales - Software</option>
                 </select>
               </div>
             </div>
@@ -321,7 +321,7 @@
             <div class="modal-body" style="padding: 0px 0;">
                 <table class="table table-bordered table-striped" border="0">
                     <tbody>
-                        <tr style="border: none;">
+                        <tr style="border: none; display:none;">
                             <td><p><strong>ID</strong></p></td>
                             <td><p id="v_id"></p></td>
                         </tr>
@@ -770,6 +770,7 @@
                 else if(purpose=="edit"){
                     resetProductsAndServicesForms(); // reseting forms
                     $("#title").val(data.title);
+                    $("#product_type").val(data.product_type);
                     $("#name").val(data.name);
                     $("#sku").val(data.sku);
                     $("#hsn_code").val(data.hsn_code);

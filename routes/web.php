@@ -65,6 +65,7 @@ Route::post('sale/invoice/payment_received','SalesController@receive_payment');
 Route::get('sale/customers','SalesController@view_customers');
 Route::post('sale/customers/add','SalesController@add_customers');
 Route::get('sale/customer/delete/{id}','SalesController@delete_customer');
+Route::get('sale/customer/view/{id}','SalesController@view_customer');
 
 //Product & Services
 Route::get('sale/products-and-services','SalesController@view_products_and_services');
@@ -185,6 +186,14 @@ Route::get('tools-master/tax_rate', function () {
 
 Route::get('tools-master/currency', function () {
 	$data['content'] = 'tools-master.currency';
+	return view('layouts.content', compact('data'));
+});
+
+//customer2
+
+
+Route::get('sale/customer2', function () {
+	$data['content'] = 'sale.customer2';
 	return view('layouts.content', compact('data'));
 });
 

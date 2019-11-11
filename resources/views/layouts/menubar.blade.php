@@ -71,7 +71,7 @@
       <li><a href="{{url('purchases/recurring-expenses')}}">Recurring Expenses</a></li>
       <li><a href="{{url('purchases/purchase-order')}}">Purchase Order</a></li>
       <li><a href="{{url('purchases/bill')}}">Bill</a></li>
-      <li><a href="{{url('purchases/payments-made')}}">Payments Made</a></li>
+      <li><a href="{{url('purchases/payments-made')}}">Payments Mode</a></li>
       <li><a href="{{url('purchases/vendor-credits')}}">Vendor Credits</a></li>
 
     </ul>

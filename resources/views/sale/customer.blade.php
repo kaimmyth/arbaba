@@ -154,13 +154,14 @@
                      @foreach ($toReturn as $items1)
                      <tr>
                       <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-                      <td>{{$items1['company']}}</td>
+                      <td><a href="{{url('sale/customer/view')}}/{{$items1['id']}}">{{$items1['first_name']}} / {{$items1['company']}}</td>
                       <td>{{$items1['gst_reg_type']}}</td>
                       <td>{{$items1['gst_in']}}</td>
                       <td>{{$items1['phone_no']}}</td>
                       <td>{{$items1['opening_balance']}}</td>
-                      <td style="color: #0077C5; font-weight: 600; cursor: pointer;" onclick="myFun()">Receive payment <i class="fa fa-caret-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-
+                      <td>
+                        <span style="color: #0077C5; font-weight: 600; cursor: pointer;" onclick="myFun()">Receive payment</span>
+                       <i class="fa fa-caret-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
                       <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Send reminder</a>
                         <a class="dropdown-item" href="#">Create Customer Statement</a>
@@ -213,15 +214,16 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Title</label>
-                      <input type="text" class="form-control" value="" id="title" name="title" required>
+                      <input type="text" class="form-control" value="" id="title" name="title" >
                       <h6 id="title_val"></h6>
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">First Name</label>
-                      <input type="text" class="form-control" value="" id="first_name" name="first_name" maxlength="20" required>
+                     <label for="exampleInputEmail1">First Name</label>
+                     <span style="color:red">*</span>
+                      <input type="text" class="form-control" value="" id="first_name" name="first_name" maxlength="20" >
                       <h6 id="first_name_val"></h6>
                     </div>
                   </div>
@@ -229,7 +231,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Last Name</label>
-                      <input type="text" class="form-control" value="" id="last_name" name="last_name" required  maxlength="20">
+                      <input type="text" class="form-control" value="" id="last_name" name="last_name"  maxlength="20">
                     </div>
                     <h6 id="last_name_val"></h6>
                   </div>
@@ -237,8 +239,8 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Company</label>
-                      <input type="text" class="form-control" value="" id="company" name="company">
-                      
+                      <span style="color:red">*</span>
+                      <input type="text" class="form-control" value="" id="company" name="company"> 
                     </div>
                     <h6 id="company_val"></h6>
                   </div>
@@ -254,6 +256,7 @@
                     <div class="form-group">
                       <label for="exampleInputEmail1" name="  gst_reg_type">GST registration type</label>
                       <select class="form-control" id="gst_reg_type" name="gst_reg_type">
+                        <option value="">--Select--</option>
                         <option>Consumer</option>
                         <option>GST registered- Regular</option>
                         <option>GST registered- Composition</option>
@@ -269,8 +272,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">GSTIN</label>
-                      <input type="text" class="form-control" value="35AABCS1429B1ZX" id="gst_in" name="gst_in" readonly >
+                      <input type="text" class="form-control" value="" id="gst_in" name="gst_in" placeholder="35AABCS1429B1ZX">
                     </div>
+                      <h6 id="gst_in_val"></h6>
                   </div>
                 </div>
               </div>
@@ -281,7 +285,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Email</label>
-                      <input type="email" required pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control" id="email_id" name="email_id" placeholder="Enter email" >
+                      <input type="email" class="form-control" id="email_id" name="email_id" placeholder="Enter email" >
                     </div>
                     <h6 id="email_id_val"></h6>
                   </div>
@@ -289,7 +293,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Phone</label>
-                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no" data-mask="(999) 999-9999" required>
+                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no" data-mask="(999) 999-9999" >
                     </div>
                     <h6 id="phone_val"></h6>
                   </div>
@@ -297,7 +301,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Mobile</label>
-                      <input type="text" class="form-control" value="" id="mobile_no" name="mobile_no" data-mask="(999) 999-9999" required>
+                      <input type="text" class="form-control" value="" id="mobile_no" name="mobile_no" data-mask="(999) 999-9999" >
                     </div>
                     <h6 id="mobile_no_val"></h6>
                   </div>
@@ -305,21 +309,21 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Fax</label>
-                      <input type="text" class="form-control" value="" id="fax" name="fax" data-mask="99-999-9999999" required>
+                      <input type="text" class="form-control" value="" id="fax" name="fax" data-mask="99-999-9999999" >
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Other</label>
-                      <input type="text" class="form-control" value="" id="other" name="other" required>
+                      <input type="text" class="form-control" value="" id="other" name="other" >
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Website</label>
-                      <input type="text" class="form-control" value="" id="website" name="website" required>
+                      <input type="text" class="form-control" value="" id="website" name="website" >
                     </div>
                   </div>
 
@@ -334,15 +338,18 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                     <select class="form-control" id="enter_parent_cutomer" name="enter_parent_customer">
-                      <option>Enter Parent Customer</option>
+                     <select class="form-control" id="enter_parent_customer" name="enter_parent_customer" disabled >
+                        <option value="">Enter Parent customer</option>
+                      @foreach ($toReturn as $items1)
+                        <option value="{{$items1['id']}}">{{$items1['first_name']}} / {{$items1['company']}}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <select class="form-control" id="bill_with_partener" name="bill_with_partner">
+                    <select class="form-control" id="bill_with_partener" name="bill_with_partner" disabled>
                       <option>Bill With Partner</option>
                       <option>Bill With Customer</option>
                     </select>
@@ -395,14 +402,14 @@
                       <h5>Billing Address</h5>
                       <div class="row">
                         <div class="col-md-12">
-                          <textarea class="form-control" rows="2" id="billing_address" name="billing_address" required></textarea>
+                          <textarea class="form-control" rows="2" id="billing_address" name="billing_address" ></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="city_town "name="city_town" placeholder="City/Town" required>
+                          <input type="text" class="form-control" id="city_town "name="city_town" placeholder="City/Town" >
                         </div>
                         <h6 id="city_town_val"></h6>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="state" name="state" placeholder="State" required>
+                          <input type="text" class="form-control" id="state" name="state" placeholder="State" >
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
@@ -411,7 +418,7 @@
                         </div>
                         
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
+                          <input type="text" class="form-control" id="country" name="country" placeholder="Country" >
                         </div>
                         <h6 id="country_val"></h6>
                       </div>
@@ -421,23 +428,23 @@
                       <h5>Shipping Address &nbsp; &nbsp;   <input id="checkbox1" type="checkbox"> Same as billing address</h5>
                       <div class="row">
                         <div class="col-md-12">
-                          <textarea class="form-control" rows="2" id="shipping_address" name="shipping_address" required></textarea>
+                          <textarea class="form-control" rows="2" id="shipping_address" name="shipping_address" ></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="city_town_shipping" name="city_town_shipping" placeholder="City/Town" required>
-                        </div>
-
-                        <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="state_shipping" name="state_shipping" placeholder="State" required>
+                          <input type="text" class="form-control" id="city_town_shipping" name="city_town_shipping" placeholder="City/Town" >
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="pin_code_shipping" name="pin_code_shipping" placeholder="Pincode" required>
+                          <input type="text" class="form-control" id="state_shipping" name="state_shipping" placeholder="State">
+                        </div>
+
+                        <div class="col-md-6" style="margin-top: 6px;">
+                          <input type="text" class="form-control" id="pin_code_shipping" name="pin_code_shipping" placeholder="Pincode">
                         <h6 id="pin_code_shipping_val"></h6>
                       </div>
                         
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="country_shipping" name="country_shipping" placeholder="Country" required>
+                          <input type="text" class="form-control" id="country_shipping" name="country_shipping" placeholder="Country">
                         </div>
                       </div>
                     </div>
@@ -446,7 +453,7 @@
                 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                   <h5>Notes</h5>
                   <div class="col-md-12">
-                    <textarea class="form-control" rows="3" id="notes" name="notes" required></textarea>
+                    <textarea class="form-control" rows="3" id="notes" name="notes"></textarea>
                   </div>
 
                 </div>
@@ -455,7 +462,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tax Reg. No.</label>
-                        <input type="text" class="form-control" id="tax_reg_no" name="tax_reg_no" placeholder="" required>
+                        <input type="text" class="form-control" id="tax_reg_no" name="tax_reg_no" placeholder="">
                       </div>
                       <h6 id="tax_reg_no_val"></h6>
                     </div>
@@ -463,7 +470,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">CST reg. no.</label>
-                        <input type="text" class="form-control" id="cst_reg_no" name="cst_reg_no" placeholder="" required>
+                        <input type="text" class="form-control" id="cst_reg_no" name="cst_reg_no" placeholder="">
                       </div>
                       <h6 id="cst_reg_no_val"></h6>
                     </div>
@@ -471,7 +478,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">PAN No.</label>
-                        <input type="text" class="form-control" id="pan_no" name="pan_no" placeholder="" required>
+                        <input type="text" class="form-control" id="pan_no" name="pan_no" placeholder="">
                       </div>
                             <h6 id="pan_no_val"></h6>
                     </div>
@@ -491,7 +498,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Preferred payment method</label>
-                        <select class="form-control" id="=preferred_payment_method" name="preferred_payment_method" required>
+                        <select class="form-control" id="=preferred_payment_method" name="preferred_payment_method">
                           <option value="0">-Select-</option>
                           <option>Cash</option>
                           <option>Cheque</option>
@@ -503,7 +510,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Preferred delivery method</label>
-                        <select class="form-control" id="=preferred_delivery_method" name="preferred_delivery_method" required>
+                        <select class="form-control" id="=preferred_delivery_method" name="preferred_delivery_method">
                           <option>-Select-</option>
                           <option>Print Later</option>
                           <option>Send Later</option>
@@ -529,7 +536,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Opening balance</label>
-                        <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="" required>
+                        <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="">
                       </div>
                       <h6 id="opening_balance_val"></h6>
                     </div>
@@ -550,6 +557,7 @@
 
                 <div class="tab-pane" id="note" role="tabpanel" aria-labelledby="note-tab">
                  <div class="col-md-12">
+                  <div class="row">
                    <div class="form-group">
                     <label for="exampleInputEmail1">Attachments</label>
                     <div class="dropzone" id="dropzone" style="min-height: 55px">
@@ -558,13 +566,25 @@
                       </div>
                     </div>
                   </div>
+               
+                   <div class="col-md-6">
+                     <div class="form-group">
+                      <label for="exampleInputEmail1">Contact Attachments</label>
+                      <div class="dropzone" id="dropzone" style="min-height: 55px">
+                        <div class="fallback">
+                          <input name="attachment" type="file" id="attachments">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
+
       </div>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary waves-effect waves-light" id="save" name="save">Save</button>
@@ -717,8 +737,9 @@
       </div>
     </form>
   </div>
-    </div>
   </div>
+  </div>
+</div>
 </div>
 
 <script>
@@ -745,7 +766,9 @@
         $("#tax_reg_no_val").hide();
         $("#cst_reg_no_val").hide();
         $("#pan_no_val").hide();
-         $("#opening_balance_val").hide();
+        $("#opening_balance_val").hide();
+        $("#gst_in_val").hide();
+
  
         var err_first_name =true;
         var err_last_name =true;
@@ -758,6 +781,7 @@
         var err_cst_reg_no=true;
         var err_pan_no=true;
         var err_opening_balance=true;
+        var err_gst_in=true;
 
 
         $("#first_name").blur(function(){
@@ -769,10 +793,10 @@
 
           var c = $("#first_name").val();
           
-          var regexOnlyText = /^[a-zA-Z]+$/;
+          var regexOnlyText = /^[a-z A-Z]+$/;
           if (c==""||regexOnlyText.test(c) != true){
             $("#first_name_val").show();
-            $("#first_name_val").html("Please input alphabets");
+            $("#first_name_val").html("This field is required");
             $("#first_name_val").focus();
             $("#first_name_val").css("color","red");
             err_first_name=false;
@@ -787,7 +811,7 @@
         }
 
          
-         $("#last_name").blur(function(){
+         $("#last_name").keyup(function(){
 
             last_name_f();
 
@@ -826,7 +850,7 @@
           $("#display_name_as").val($("#first_name").val()+" "+$("#last_name").val());
         }
 
-        $("#company").blur(function(){
+        $("#company").keyup(function(){
 
             company_f();
         });
@@ -852,7 +876,7 @@
         }
 
 
-             $("#email_id").blur(function(){
+             $("#email_id").keyup(function(){
 
             email_id_f();
         });
@@ -862,7 +886,7 @@
            var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
            var result = m.match(v); 
 
-          if((m.length=="")||(result == null)){
+          if(result == null){
 
             $("#email_id_val").show();
             $("#email_id_val").html("Please insert valid email ");
@@ -878,7 +902,7 @@
         }
 
 
-         $("#mobile_no").blur(function(){
+         $("#mobile_no").keyup(function(){
 
             mobile_no_f();
         });
@@ -887,7 +911,7 @@
           var q = $("#mobile_no").val();
 
           var regexOnlyNumbers=/^[0-9() -]+$/;
-          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+          if(regexOnlyNumbers.test(q)!=true){
 
             $("#mobile_no_val").show();
             $("#mobile_no_val").html("Please input numbers between 0-9 ");
@@ -904,8 +928,32 @@
 
 
 
+        //  $("#gst_in").keyup(function(){
 
-         $("#pin_code").blur(function(){
+        //     gst_in_f();
+        // });
+        // function gst_in_f(){
+        //   var regex = /[a-zA-Z]{3}[PCHFATBLJG]{1}[a-zA-Z]{1}[0-9]{4}[a-zA-Z]{1}$/;
+        //   var b = $("#gst_in").val();
+
+        //      if( regex.test(b)!=true){
+
+        //     $("#gst_in_val").show();
+        //     $("#gst_in_val").html("This field is required ");
+        //     $("#gst_in_val").focus();
+        //     $("#gst_in_val").css("color","red");
+
+        //       err_gst_in=false;
+        //       return false;
+        //   }else{
+        //     err_gst_in=true;
+        //     $("#gst_in_val").hide();
+        //   }
+        // }
+
+
+
+         $("#pin_code").keyup(function(){
 
             pin_code_f();
         });
@@ -913,7 +961,7 @@
            var regexOnlyNumbers=/^[0-9]+$/;
           var c = $("#pin_code").val();
 
-         if((c=="")|| regexOnlyNumbers.test(c)!=true){
+         if(regexOnlyNumbers.test(c)!=true){
 
             $("#pin_code_val").show();
             $("#pin_code_val").html("Please input pin code ");
@@ -929,7 +977,7 @@
         }
        
 
-           $("#pin_code_shipping").blur(function(){
+           $("#pin_code_shipping").keyup(function(){
 
             pin_code_shipping_f();
         });
@@ -937,7 +985,7 @@
           var regexOnlyNumbers=/^[0-9]+$/;
           var w = $("#pin_code_shipping").val();
 
-          if((w=="")|| regexOnlyNumbers.test(w)!=true){
+          if(regexOnlyNumbers.test(w)!=true){
 
             $("#pin_code_shipping_val").show();
             $("#pin_code_shipping_val").html("Please insert pin code ");
@@ -955,7 +1003,7 @@
 
 
 
-         $("#tax_reg_no").blur(function(){
+         $("#tax_reg_no").keyup(function(){
 
             tax_reg_f();
         });
@@ -963,7 +1011,7 @@
           var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
           var z = $("#tax_reg_no").val();
 
-             if((z=="")|| regexOnlyNumbers.test(z)!=true){
+             if( regexOnlyNumbers.test(z)!=true){
 
             $("#tax_reg_no_val").show();
             $("#tax_reg_no_val").html("This field is required ");
@@ -979,7 +1027,7 @@
         }
                 
 
-         $("#cst_reg_no").blur(function(){
+         $("#cst_reg_no").keyup(function(){
              cst_reg_no_f();
            });
         function cst_reg_no_f(){
@@ -987,7 +1035,7 @@
           var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
           var u = $("#cst_reg_no").val();
 
-          if((u=="")|| regexOnlyNumbers.test(u)!=true){
+          if(regexOnlyNumbers.test(u)!=true){
 
             $("#cst_reg_no_val").show();
             $("#cst_reg_no_val").html("Plesee insert cst reg no ");
@@ -1006,14 +1054,14 @@
 
 
 
-         $("#pan_no").blur(function(){
+         $("#pan_no").keyup(function(){
              pan_no_f();
            });
         function pan_no_f(){
           var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
           var r = $("#pan_no").val();
 
-          if((r=="")|| regexOnlyNumbers.test(r)!=true){
+          if(regexOnlyNumbers.test(r)!=true){
 
             $("#pan_no_val").show();
             $("#pan_no_val").html("Please enter pan no ");
@@ -1030,14 +1078,14 @@
 
           }
 
-           $("#opening_balance").blur(function(){
+           $("#opening_balance").keyup(function(){
              opening_balance_f();
            });
         function opening_balance_f(){
           var regexOnlyNumbers=/^[0-9]+$/;
           var op_bal = $("#opening_balance").val();
 
-          if((op_bal=="")|| regexOnlyNumbers.test(op_bal)!=true){
+          if( regexOnlyNumbers.test(op_bal)!=true){
 
             $("#opening_balance_val").show();
             $("#opening_balance_val").html("Please insert numbers only ");
@@ -1054,19 +1102,33 @@
 
           }
 
+
+          $("#checkbox1"). click(function(){
+              var radioValue = $("#checkbox1:checked").val();
+              if(radioValue){
+                $("#enter_parent_customer").prop('disabled', false);
+                $("#bill_with_partener").prop('disabled', false);
+              }
+              else{
+                $("#enter_parent_customer").prop('disabled', true);
+                $("#bill_with_partener").prop('disabled', true);
+
+              }
+            });
+
      $("#save").click(function(){
 
       
       err_first_name=true;
-      err_company=true;
-      err_email_id=true;
-      err_mobile_no=true;
-      err_pin_code=true;
-      err_pin_code_shipping=true;
-      err_tax_reg_no=true;
-      err_cst_reg_no=true;
-      err_pan_no=true;
-      err_opening_balance=true;
+       err_company=true;
+      // err_email_id=true;
+      // err_mobile_no=true;
+      // err_pin_code=true;
+      // err_pin_code_shipping=true;
+      // err_tax_reg_no=true;
+      // err_cst_reg_no=true;
+      // err_pan_no=true;
+      // err_opening_balance=true;
 
 
      
@@ -1074,18 +1136,18 @@
 
     
       first_name_f();
-      company_f();
-      email_id_f();
-      mobile_no_f();
-      pin_code_f();
-      pin_code_shipping();
-      tax_reg_no_f();
-      cst_reg_no_f();
-      pan_no_f();
-      opening_balance_f();
+       company_f();
+      // email_id_f();
+      // mobile_no_f();
+      // pin_code_f();
+      // pin_code_shipping();
+      // tax_reg_no_f();
+      // cst_reg_no_f();
+      // pan_no_f();
+      // opening_balance_f();
       
 
-     if((err_first_name==true)&&(err_company==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_pin_code==true)&&(err_pin_code_shipping==true)&&(err_tax_reg_no=true)&&(err_cst_reg_no=true)&&(err_pan_no=true)&&(err_opening_balance=true))
+     if((err_first_name==true)&&(err_company==true))
      {
         return true;
      }else{

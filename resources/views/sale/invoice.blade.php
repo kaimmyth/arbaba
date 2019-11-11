@@ -177,7 +177,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
         <tr>
         <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
         <td>{{$value['invoice_no']}}</td>
-        <td>{{$value['customer']}}</td>
+        <td>{{$value['first_name']}}</td>
         <td>{{$value['invoice_date']}}</td>
         <td>{{$value['due_date']}}</td>
         <?php
@@ -264,7 +264,13 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Customer</label>
-                        <input type="text" class="form-control" id="customer" name="customer" placeholder="">
+                        <select class="form-control" id="customer" name="customer">
+                        
+                              
+                           @foreach ($customers as $customer)
+                              <option value="{{$customer['id']}}">{{$customer['display_name_as']}}</option>
+                           @endforeach
+                        </select>
                     </div>
                 </div>
 
@@ -401,7 +407,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
      <td><input class="form-control" type="text" name="amt[]" readonly></td>
      
             <td >
-                    <select class="form-control input-sm" name="tax[]" required>
+                    <select class="form-control input-sm" name="tax[]" required id="tax">
                         <option value="0" disabled selected>-Select-</option>
                         <option value="0.25">0.25% IGST</option>
                         <option value="5">5% IGST</option>

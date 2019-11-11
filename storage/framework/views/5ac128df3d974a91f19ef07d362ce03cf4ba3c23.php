@@ -177,7 +177,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
         <tr>
         <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
         <td><?php echo e($value['invoice_no']); ?></td>
-        <td><?php echo e($value['customer']); ?></td>
+        <td><?php echo e($value['first_name']); ?></td>
         <td><?php echo e($value['invoice_date']); ?></td>
         <td><?php echo e($value['due_date']); ?></td>
         <?php
@@ -216,20 +216,19 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
 
 
       </td>
-      <td onclick="receivePayment(<?php echo e($value['id']); ?>)" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive Payment&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-
-        
-         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="<?php echo e(url('sale/invoice/print/'.$value['id'])); ?>">Print</a>
-          <a class="dropdown-item" href="<?php echo e(url('sale/invoice/email/'.$value['id'])); ?>">Send</a>
-          <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('<?php echo e($value['customer_email']); ?>','<?php echo e($value['invoice_no']); ?>','<?php echo e($value['customer']); ?>');">Send remainder</a>
-        
-         <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delivery_challan/'.$value['id'])); ?>">Print Delivery Challan</a>
-        <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', <?php echo e($value['id']); ?>);">View</a>
-        <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', <?php echo e($value['id']); ?>);">Edit</a>
-        
-        <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delete/'.$value['id'])); ?>" onclick="return confirm('Do you want to delete this data?')">Delete</a>
-         </div>
+        <td style="color: #0077C5; font-weight: 600; cursor: pointer;" >
+            <span  onclick="receivePayment(<?php echo e($value['id']); ?>)" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment</span>&nbsp;&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+            <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="<?php echo e(url('sale/invoice/print/'.$value['id'])); ?>">Print</a>
+                <a class="dropdown-item" href="<?php echo e(url('sale/invoice/email/'.$value['id'])); ?>">Send</a>
+                <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('<?php echo e($value['customer_email']); ?>','<?php echo e($value['invoice_no']); ?>','<?php echo e($value['customer']); ?>');">Send remainder</a>
+                <!-- <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a> -->
+                <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delivery_challan/'.$value['id'])); ?>">Print Delivery Challan</a>
+                <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', <?php echo e($value['id']); ?>);">View</a>
+                <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', <?php echo e($value['id']); ?>);">Edit</a>
+                <!-- <a class="dropdown-item" href="#">Copy</a> -->
+                <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delete/'.$value['id'])); ?>" onclick="return confirm('Do you want to delete this data?')">Delete</a>
+            </div>
       </td>
       </tr>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -265,7 +264,13 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Customer</label>
-                        <input type="text" class="form-control" id="customer" name="customer" placeholder="">
+                        <select class="form-control" id="customer" name="customer">
+                        
+                              
+                           <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                              <option value="<?php echo e($customer['id']); ?>"><?php echo e($customer['display_name_as']); ?></option>
+                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
                     </div>
                 </div>
 
@@ -402,7 +407,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
      <td><input class="form-control" type="text" name="amt[]" readonly></td>
      
             <td >
-                    <select class="form-control input-sm" name="tax[]" required>
+                    <select class="form-control input-sm" name="tax[]" required id="tax">
                         <option value="0" disabled selected>-Select-</option>
                         <option value="0.25">0.25% IGST</option>
                         <option value="5">5% IGST</option>
@@ -614,7 +619,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr style="border: none; background:white !important;">
-                                                <th><input  type="checkbox" name="ids[]" value="" /></th>
+                                                <!--<th><input  type="checkbox" name="ids[]" value="" /></th>-->
                                                 <th>Product/Services</th>
                                                 <th>Description</th>
                                                 <th>Qty</th>
@@ -983,7 +988,7 @@ function viewEditInvoice(purpose, id){
 
                 // view invoice details
                 for(var i=0; i<data.no_of_rows; i++){
-                    var v_invoice_details='<tr style="border: none; background:white !important;"><td><input  type="checkbox" name="ids[]" value="" /></td><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
+                    var v_invoice_details='<tr style="border: none; background:white !important;"><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
                     $("#v_invoice_details tbody").append(v_invoice_details);
                 }
                 $("#v_invoice_details_amounts").html('<div style="text-align:right;padding:5px;"><p><b>Subtotal: ₹</b>'+data.subtotal+'</p><p><b>Taxes: ₹</b>'+data.total_tax+'</p><p><b>Total: ₹</b>'+data.total+'</p></div>');

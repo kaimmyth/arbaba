@@ -67,6 +67,13 @@
      <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Purchases</span><span class="pull-right"><i class="md md-add"></i></span></a>
      <ul class="list-unstyled">
       <li><a href="<?php echo e(url('update-site')); ?>">Candidates</a></li>
+      <li><a href="<?php echo e(url('purchases/vendor')); ?>">Vendor</a></li>
+      <li><a href="<?php echo e(url('purchases/recurring-expenses')); ?>">Recurring Expenses</a></li>
+      <li><a href="<?php echo e(url('purchases/purchase-order')); ?>">Purchase Order</a></li>
+      <li><a href="<?php echo e(url('purchases/bill')); ?>">Bill</a></li>
+      <li><a href="<?php echo e(url('purchases/payments-made')); ?>">Payments Mode</a></li>
+      <li><a href="<?php echo e(url('purchases/vendor-credits')); ?>">Vendor Credits</a></li>
+
     </ul>
   </li>
   <li class="has_sub">
@@ -81,21 +88,21 @@
     <ul class="list-unstyled">
       <li><a href="<?php echo e(url('expenses')); ?>">Expenses</a></li>
       <li><a href="<?php echo e(url('expenses/suppliers')); ?>">Suppliers</a></li>
+
     </ul>
   </li>
   <li>
     <a href="<?php echo e(url('employee')); ?>" class="waves-effect"><i class="fa fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Employee</span></a>
   </li>
-  <li class="has_sub">
-   <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Accountant</span><span class="pull-right"><i class="md md-add"></i></span></a>
-   <ul class="list-unstyled">
-    <li><a href="<?php echo e(url('update-site')); ?>">Candidates</a></li>
-  </ul>
-</li>
+  <li>
+    <a href="<?php echo e(url('accounting')); ?>" class="waves-effect"><i class="fa fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Accounting</span></a>
+  </li>
 <li class="has_sub">
   <a href="#" class="waves-effect"><i class="fas fa-tools"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Tools/Master </span><span class="pull-right"><i class="md md-add"></i></span></a>
+    
   <ul class="list-unstyled">
-
+    <li><a href="<?php echo e(url('tools-master/tax_rate')); ?>">Tax Rate</a></li>
+    <li><a href="<?php echo e(url('tools-master/currency')); ?>">Currency</a></li>
   </ul>
 </li>
 <li class="has_sub">

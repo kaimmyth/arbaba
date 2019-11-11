@@ -11,6 +11,7 @@ use App\sales_customers;
 use App\PaymentReceived;
 use Mail;
 use Session;
+use DB;
 
 class SalesController extends Controller
 {
@@ -41,10 +42,18 @@ class SalesController extends Controller
         }
 
         $toReturn=array();
-        $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
+        $toReturn = sales_invoice::leftJoin('sales_customers', 'sales_invoice.customer', '=', 'sales_customers.id')
+            ->select('sales_invoice.*','sales_customers.first_name')
+            ->orderBy('sales_invoice.id','desc')
+            ->get()->toArray();
+        // $toReturn=array();
+        // $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
+
+        // for dropdown
+        $customers=sales_customers::orderBy('id','desc')->get();
 
         $data['content'] ='sale.invoice';
-        return view('layouts.content',compact('data'))->with(compact('toReturn','invoice'));
+        return view('layouts.content',compact('data'))->with(compact('toReturn','invoice','customers'));
     }
 
     public function add_edit_invoice(Request $request)
@@ -223,10 +232,8 @@ class SalesController extends Controller
         $product->opening_balance=$request->opening_balance;
         $product->as_of=date("Y-m-d",strtotime($request->as_of));
         $product->attachment="NA";
-        
-
         $product->save();
-        Session::flash('success', 'New customer details has been updated successfully');
+        Session::flash('success', 'New customer  has been Created successfully');
 
          // return $product;
         
@@ -252,6 +259,13 @@ class SalesController extends Controller
         Session::flash('success', 'Customer details has been deleted successfully');
       
         return redirect('sale/customers'); 
+    }
+
+    public function view_customer($id){
+        $details = sales_customers::find($id);
+        $invoices = sales_invoice::where("customer",$id)->get();
+        $data['content'] ='sale.customer_view';
+        return view('layouts.content',compact('data'))->with(compact('details','invoices'));
     }
 
     public function view_products_and_services()
