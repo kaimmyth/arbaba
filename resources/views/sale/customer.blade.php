@@ -109,31 +109,14 @@
         <div class="col-lg-12">
          <div class="card">
           <div class="row">
-           <div class="col-md-3 dv" style="background-color: #21ABF6;">
-            <i class="fa fa-calculator sz" aria-hidden="true"></i>  {{$estimate_amount}}
-            <p style="font-size: 15px; font-weight: 600;">{{$estimate_count}} ESTIMATE</p>
-          </div>
-          <div class="col-md-3 dv" style="background-color: #0077C5;">
-            <i class="fa fa-file sz" aria-hidden="true"></i>  NA
-            <p style="font-size: 15px; font-weight: 600;">NA UNBILLED ACTIVITY</p>
-          </div>
-          <div class="col-md-3 dv" style="background-color: #FF8000;">
-            <i class="fa fa-clock sz" aria-hidden="true"></i>  {{$overdue_amount}}
-            <p style="font-size: 15px; font-weight: 600;">{{$overdue_count}} OVERDUE</p>
-          </div>
-          <div class="col-md-3 dv" style="background-color: #BABEC5;">
-            <i class="fa fa-address-book sz" aria-hidden="true"></i> NA
-            <p style="font-size: 15px; font-weight: 600;">NA Open Invoice</p>
-          </div>
-          <div class="col-md-3 dv" style="background-color: #7FD000;">
-            <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  {{$paid_amount}}
-            <p style="font-size: 15px; font-weight: 600;">{{$paid_count}} PAID LAST 30 DAYS</p>
-          </div>
+           
           <div class="col-md-12">
+            <br>
             <div class="col-md-12" style="text-align: right; margin-bottom: 4px;">
-              <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">New Customer</button>
+              <button class="btn btn-primary" onclick="addCustomer();">New Customer</button>
             </div>
-
+            <br>
+            <br>
             <div class="tab-content colm">
               <div class="tab-pane show active" id="home-2" role="tabpanel" aria-labelledby="home-tab-2" style="">
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -169,6 +152,7 @@
                         <a class="dropdown-item" href="#">Create Sales Receipt</a>
                         <a class="dropdown-item" href="#">Create Estimate</a>
                       <a class="dropdown-item" href="{{url('sale/customer/delete/'.$items1['id'])}}">Delete</a>
+                       <a class="dropdown-item"  onclick="editCustomer({{$items1['id']}});" href="javascript:void();">Edit</a>
                       </div>
                     </td>
                     
@@ -196,9 +180,11 @@
 
 <!--  Modal content for the above example -->
 
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal fade bs-example-modal-lg customer-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
+          <form action="{{url('sale/customers/add')}}" method="POST" enctype="multipart/form-data" id="customer-form">
+          @csrf
           <div class="modal-header">
             <h4 class="modal-title mt-0" id="myLargeModalLabel">Customer information</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -206,8 +192,6 @@
             </button>
           </div>
           <div class="modal-body">
-              <form action="{{url('sale/customers/add')}}" method="POST">
-                @csrf
             <div class="row">
               <div class="col-md-6">
                 <div class="row">
@@ -365,31 +349,31 @@
             <div class="col-md-12">
               <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false" required>
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false" >
                     <span class="d-block d-sm-none"><i class="fa fa-home"></i></span>
                     <span class="d-none d-sm-block">Address</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true" required>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true" >
                     <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
                     <span class="d-none d-sm-block">Notes</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="message-tab" data-toggle="tab" href="#message" role="tab" aria-controls="message" aria-selected="false" required>
+                  <a class="nav-link" id="message-tab" data-toggle="tab" href="#message" role="tab" aria-controls="message" aria-selected="false" >
                     <span class="d-block d-sm-none"><i class="fa fa-envelope-o"></i></span>
                     <span class="d-none d-sm-block">Tax Info</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="setting-tab" data-toggle="tab" href="#setting" role="tab" aria-controls="setting" aria-selected="false" required>
+                  <a class="nav-link" id="setting-tab" data-toggle="tab" href="#setting" role="tab" aria-controls="setting" aria-selected="false">
                     <span class="d-block d-sm-none"><i class="fa fa-cog"></i></span>
                     <span class="d-none d-sm-block">Payment and Billing</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="note-tab" data-toggle="tab" href="#note" role="tab" aria-controls="note" aria-selected="false" required>
+                  <a class="nav-link" id="note-tab" data-toggle="tab" href="#note" role="tab" aria-controls="note" aria-selected="false" >
                     <span class="d-block d-sm-none"><i class="fa fa-cog"></i></span>
                     <span class="d-none d-sm-block">Attachments</span>
                   </a>
@@ -405,7 +389,7 @@
                           <textarea class="form-control" rows="2" id="billing_address" name="billing_address" ></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="city_town "name="city_town" placeholder="City/Town" >
+                          <input type="text" class="form-control" id="city_town" name="city_town" placeholder="City/Town" >
                         </div>
                         <h6 id="city_town_val"></h6>
                         <div class="col-md-6" style="margin-top: 6px;">
@@ -425,7 +409,7 @@
                     </div>
 
                     <div class="col-md-6">
-                      <h5>Shipping Address &nbsp; &nbsp;   <input id="checkbox1" type="checkbox"> Same as billing address</h5>
+                      <h5>Shipping Address &nbsp; &nbsp;   <input id="checkbox2" type="checkbox"> Same as billing address</h5>
                       <div class="row">
                         <div class="col-md-12">
                           <textarea class="form-control" rows="2" id="shipping_address" name="shipping_address" ></textarea>
@@ -482,15 +466,6 @@
                       </div>
                             <h6 id="pan_no_val"></h6>
                     </div>
-
-                    <div class="col-md-4">
-                      <div class="checkbox checkbox-primary">
-                        <input id="checkbox1" type="checkbox">
-                        <label for="checkbox1">
-                          Apply TDS for this customer
-                        </label>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div class="tab-pane" id="setting"  role="tabpanel" aria-labelledby="setting-tab">
@@ -522,7 +497,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Terms</label>
-                        <select class="form-control" id="terms" name="terms" required>
+                        <select class="form-control" id="terms" name="terms" >
                           <option>-Select Customer-</option>
                           <option style="color: green;">Add New +</option>
                           <option>Due on receipt</option>
@@ -545,7 +520,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">as of</label>
                         <div class="input-group">
-                          <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy" id="as_of" name="as_of" required autocomplete="off">
+                          <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy" id="as_of" name="as_of"  autocomplete="off">
                           <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                           </div>
@@ -565,6 +540,7 @@
                         <input name="attachment" type="file" id="attachments">
                       </div>
                     </div>
+                    <span id="e_attachment"></span>
                   </div>
                
                    <div class="col-md-6">
@@ -572,9 +548,10 @@
                       <label for="exampleInputEmail1">Contact Attachments</label>
                       <div class="dropzone" id="dropzone" style="min-height: 55px">
                         <div class="fallback">
-                          <input name="attachment" type="file" id="attachments">
+                          <input name="contact_attachment" type="file" id="contact_attachment">
                         </div>
                       </div>
+                      <span id="e_contact_attachment"></span>
                     </div>
                   </div>
                 </div>
@@ -586,8 +563,14 @@
       </div>
     </div>
       <div class="modal-footer">
+        <!-- hidden inputs -->
+        <input type="text" name="hidden_input_id" value="NA" hidden>
+        <input type="text" name="hidden_input_purpose" value="add" hidden>
+        <input type="text" name="hidden_input_attachment" value="NA" hidden>
+        <input type="text" name="hidden_input_contact_attachment" value="NA" hidden>
+        <!-- hidden inputs -->
         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary waves-effect waves-light" id="save" name="save">Save</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light" id="save">Save</button>
       </div>
     </form>
     </div><!-- /.modal-content -->
@@ -624,8 +607,8 @@
         
     </div>
     <div class="row">
-          <div class="col-md-3">
-          <div class="form-group">
+            <div class="col-md-3">
+              <div class="form-group">
                 <label for="payment-date" class="col-form-label">Payment Date</label>
                 <input type="date" class="form-control" id="datepicker">
               </div>
@@ -635,7 +618,7 @@
               <div class="col-md-3">
                     <div class="form-group">
                         <label for="payment-method">Payment method</label>
-                        <select class="form-control" name="payment-method" id="payment-method" required>
+                        <select class="form-control" name="payment-method" id="payment-method" >
                             <option value="0" selected>---Select---</option>
                             <option value="">Cash</option>
                             <option value="">Cheque</option>
@@ -655,7 +638,7 @@
                           <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="deposited-to">Deposited To</label>
-                                    <select class="form-control" name="deposited-to" id="deposited-to" required>
+                                    <select class="form-control" name="deposited-to" id="deposited-to" >
                                         <option value="0" selected>---Select---</option>
                                         <option value="">Axis Bank</option>
                                         <option value="">ICICI</option>
@@ -800,7 +783,7 @@
             $("#first_name_val").focus();
             $("#first_name_val").css("color","red");
             err_first_name=false;
-            return false;
+            
           }
           else{
             err_first_name=true;
@@ -826,7 +809,7 @@
             $("#last_name_val").focus();
             $("#last_name_val").css("color","red");
             err_last_name=false;
-            return false;
+           
           }else{
             err_last_name=true;
             $("#last_name_val").hide();
@@ -868,7 +851,7 @@
             $("#company_val").css("color","red");
 
               err_company=false;
-              return false;
+              
           }else{
             err_company=true;
             $("#company_val").hide();
@@ -894,7 +877,7 @@
             $("#email_id_val").css("color","red");
 
               err_email_id=false;
-              return false;
+              
           }else{
             err_email_id=true;
             $("#email_id_val").hide();
@@ -919,37 +902,12 @@
             $("#mobile_no_val").css("color","red");
 
               err_mobile_no=false;
-              return false;
+              
           }else{
             err_mobile_no=true;
             $("#mobile_no_val").hide();
           }
         }
-
-
-
-        //  $("#gst_in").keyup(function(){
-
-        //     gst_in_f();
-        // });
-        // function gst_in_f(){
-        //   var regex = /[a-zA-Z]{3}[PCHFATBLJG]{1}[a-zA-Z]{1}[0-9]{4}[a-zA-Z]{1}$/;
-        //   var b = $("#gst_in").val();
-
-        //      if( regex.test(b)!=true){
-
-        //     $("#gst_in_val").show();
-        //     $("#gst_in_val").html("This field is required ");
-        //     $("#gst_in_val").focus();
-        //     $("#gst_in_val").css("color","red");
-
-        //       err_gst_in=false;
-        //       return false;
-        //   }else{
-        //     err_gst_in=true;
-        //     $("#gst_in_val").hide();
-        //   }
-        // }
 
 
 
@@ -969,7 +927,7 @@
             $("#pin_code_val").css("color","red");
 
               err_pin_code=false;
-              return false;
+              
           }else{
             err_pin_code=true;
             $("#pin_code_val").hide();
@@ -993,7 +951,7 @@
             $("#pin_code_shipping_val").css("color","red");
 
               err_pin_code_shipping=false;
-              return false;
+              
           }else{
             err_pin_code_shipping=true;
             $("#pin_code_shipping_val").hide();
@@ -1019,7 +977,7 @@
             $("#tax_reg_no_val").css("color","red");
 
               err_tax_reg_no=false;
-              return false;
+             
           }else{
             err_tax_reg_no=true;
             $("#tax_reg_no_val").hide();
@@ -1043,7 +1001,7 @@
             $("#cst_reg_no_val").css("color","red");
 
               err_cst_reg_no=false;
-              return false;
+              
           }
            else {
             err_cst_reg_no = true;
@@ -1069,7 +1027,7 @@
             $("#pan_no_val").css("color","red");
 
               err_pan_no=false;
-              return false;
+              
           }
            else {
             err_pan_no=true;
@@ -1093,7 +1051,7 @@
             $("#opening_balance_val").css("color","red");
 
               err_opening_balance=false;
-              return false;
+              
           }
            else {
             err_opening_balance=true;
@@ -1116,44 +1074,45 @@
               }
             });
 
+
+
+          $("#checkbox2").click(function(){
+              var radioValue1 = $("#checkbox2:checked").val();
+              if(radioValue1){
+                $("#city_town_shipping").val($("#city_town").val());
+                $("#state_shipping").val($("#state").val());
+                $("#pin_code_shipping").val($("#pin_code").val());
+                $("#country_shipping").val($("#country").val());
+                $("#shipping_address").val($("#billing_address").val());
+
+                }
+               else{
+                 $("#city_town_shipping").val("");
+                 $("#state_shipping").val("");
+                 $("#pin_code_shipping").val("");
+                 $("#country_shipping").val("");
+                 $("#shipping_address").val("");
+              
+               }
+            });
+
      $("#save").click(function(){
 
       
-      err_first_name=true;
-       err_company=true;
-      // err_email_id=true;
-      // err_mobile_no=true;
-      // err_pin_code=true;
-      // err_pin_code_shipping=true;
-      // err_tax_reg_no=true;
-      // err_cst_reg_no=true;
-      // err_pan_no=true;
-      // err_opening_balance=true;
+        err_first_name=true;
+        err_company=true;
 
-
+        first_name_f();
+        company_f();
      
 
-
-    
-      first_name_f();
-       company_f();
-      // email_id_f();
-      // mobile_no_f();
-      // pin_code_f();
-      // pin_code_shipping();
-      // tax_reg_no_f();
-      // cst_reg_no_f();
-      // pan_no_f();
-      // opening_balance_f();
-      
-
-     if((err_first_name==true)&&(err_company==true))
-     {
-        return true;
-     }else{
-        return false;
-
-     }
+        if((err_first_name==true)&&(err_company==true))
+        {
+          return true;
+        }else{
+          return false;
+        }
+        
 
      });
          
@@ -1162,6 +1121,95 @@
 
 
   });
+</script>
+
+
+<script>
+  //add expanses
+function addCustomer(){
+    $(".customer-modal").modal('show');
+    resetCustomerForms();
+}
+// reset expensess form fields
+function resetCustomerForms(){
+    // reset all fileds in expenses form model
+    document.getElementById("customer-form").reset();
+    // assigning hidden inputs
+    $("input[name='hidden_input_id'").val("NA");
+    $("input[name='hidden_input_purpose'").val("add");
+    $("input[name='hidden_input_attachment'").val("NA");
+    $("input[name='hidden_input_contact_attachment'").val("NA");
+    //remove old attachment span (link)
+    $("#e_attachment").html("");
+    $("#e_contact_attachment").html("");
+}
+function editCustomer(id){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{url('sale/customer/get_customer_details')}}" + "/" + id,
+        method: "GET",
+        contentType: 'application/json',
+        dataType: "json",
+        beforeSend: function(data){
+            $("#loader1").css("display","block");
+        },
+        error: function(xhr){
+            alert("error"+xhr.status+", "+xhr.statusText);
+        },
+        success: function (data) {
+            resetCustomerForms(); // reseting forms
+            $("#title").val(data.title);
+            $("#first_name").val(data.first_name);
+            $("#last_name").datepicker( data.last_name);
+            $("#email_id").val(data.email_id);
+            $("#company").val(data.company);
+            $("#mobile_no").val(data.mobile_no);
+            $("#phone_no").val(data.phone_no);
+            $("#display_name_as ").val(data.display_name_as );
+            $("#other ").val(data.website  );
+            $("#website  ").val(data.fax );
+            $("#gst_reg_type ").val(data.gst_reg_type );
+            $("#gst_in ").val(data.gst_in );
+            $("#bill_with_partner ").val(data.bill_with_partner );
+            $("#billing_address ").val(data.billing_address );
+            $("#city_town ").val(data.city_town );
+            $("#state  ").val(data.state   );
+            $("#pin_code ").val(data.pin_code );
+            $("#country ").val(data.country );
+            $("#shipping_address ").val(data.shipping_address );
+            $("#city_town_shipping ").val(data.city_town_shipping );
+            $("#state_shipping ").val(data.state_shipping );
+            $("#pin_code_shipping ").val(data.pin_code_shipping );
+            $("#country_shipping ").val(data.country_shipping );
+            $("#notes ").val(data.notes );
+            $("#tax_reg_no ").val(data.tax_reg_no );
+            $("#cst_reg_no ").val(data.cst_reg_no );
+            $("#pan_no ").val(data.pan_no );
+            $("#preferred_payment_method ").val(data.preferred_payment_method );
+            $("#preferred_delivery_method ").val(data.preferred_delivery_method );
+            $("#terms ").val(data.terms );
+            $("#opening_balance ").val(data.opening_balance );
+            $("#as_of ").val(data.as_of );
+
+
+            $("#e_attachment").html("<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Previous Attachment</a>");
+            $("#e_contact_attachment").html("<a target='_blank' href='{{url('public/images')}}"+"/"+data.contact_attachment+"'>View Previous Attachment</a>");
+            
+            // assigning hidden inputs
+            $("input[name='hidden_input_id'").val(data.id);
+            $("input[name='hidden_input_purpose'").val("edit");
+            $("input[name='hidden_input_attachment'").val(data.attachment);
+            $("input[name='hidden_input_contact_attachment'").val(data.contact_attachment);
+            
+            $('.customer-modal').modal('show'); // expense insert form model
+            $("#loader1").css("display","none");
+        }
+    });
+}
 </script>
 
 

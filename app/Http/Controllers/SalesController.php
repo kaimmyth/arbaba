@@ -193,7 +193,7 @@ class SalesController extends Controller
 
         return $data;
     }
-
+    
     public function add_customers(Request $request)
     {
         $product = new sales_customers();
@@ -231,26 +231,78 @@ class SalesController extends Controller
         $product->terms=$request->terms;
         $product->opening_balance=$request->opening_balance;
         $product->as_of=date("Y-m-d",strtotime($request->as_of));
-        $product->attachment="NA";
-        $product->save();
-        Session::flash('success', 'New customer  has been Created successfully');
-
-         // return $product;
         
+        // for attachment
+        $product->attachment = "";
+        if($request->hasFile('attachment'))
+        {
+            //
+            $file = $request->file('attachment');
+
+            $product->attachment = $file->getClientOriginalName();
+            $destinationPath = 'public/images';
+            $file->move($destinationPath, $file->getClientOriginalName()); 
+        }
+        else{
+            if($request->hidden_input_purpose=="edit")
+            {
+                $product->attachment = $request->hidden_input_attachment;
+            }
+            else if($request->hidden_input_purpose=="add")
+            {
+                // error has to return
+            }
+        }
+
+        // for contact attachment
+        $product->contact_attachment = "";
+        if($request->hasFile('contact_attachment'))
+        {
+            //
+            $file = $request->file('contact_attachment');
+
+            $product->contact_attachment = $file->getClientOriginalName();
+            $destinationPath = 'public/images';
+            $file->move($destinationPath, $file->getClientOriginalName()); 
+        }
+        else{
+            if($request->hidden_input_purpose=="edit")
+            {
+                $product->contact_attachment = $request->hidden_input_contact_attachment;
+            }
+            else if($request->hidden_input_purpose=="add")
+            {
+                // error has to return
+            }
+        }
+        
+        // finall query create, edit
+        if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($product), true);
+            $update_query = sales_customers::where('id', $request->hidden_input_id)->update($update_values_array);
+            Session::flash('success', 'Customers details has been updated successfully');
+        }
+        else if($request->hidden_input_purpose=="add")
+        {
+            $product->save();
+            Session::flash('success', 'Customers details has been saved successfully');
+        }
+
         return redirect('sale/customers');
     }
    
 
     public function view_customers()
     {
-    $toReturnInvoice=array();
-    $toReturnInvoice=sales_invoice::get()->toArray();
-    
-    $toReturn=array();
-    $toReturn=sales_customers::get()->toArray();
-    
-    $data['content'] ='sale.customer';
-    return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturnInvoice'));
+        $toReturnInvoice=array();
+        $toReturnInvoice=sales_invoice::get()->toArray();
+        
+        $toReturn=array();
+        $toReturn=sales_customers::orderBy('id','desc')->get()->toArray();
+        
+        $data['content'] ='sale.customer';
+        return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturnInvoice'));
     }
 
     public function delete_customer($id="")
@@ -266,6 +318,11 @@ class SalesController extends Controller
         $invoices = sales_invoice::where("customer",$id)->get();
         $data['content'] ='sale.customer_view';
         return view('layouts.content',compact('data'))->with(compact('details','invoices'));
+    }
+
+    public function get_customer_details($id=""){
+        $data = sales_customers::where('id', $id)->first();
+        return $data;
     }
 
     public function view_products_and_services()

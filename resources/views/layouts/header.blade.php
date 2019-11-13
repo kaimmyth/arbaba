@@ -54,6 +54,11 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- typeahead -->
+  <script type="text/javascript" src="{{asset('public/assets/plugins/typeahead/typeahead.bundle.js')}}"></script>
+  <link rel="stylesheet" type="text/css" href="{{asset('public/assets/plugins/typeahead/typeahead.css')}}">
+
   <style type="text/css">
     body{
      /* background: #FFF url("https://i.imgur.com/KheAuef.png") top left repeat-x;*/
