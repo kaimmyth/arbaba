@@ -17,8 +17,6 @@ class AccountingController extends Controller
     {
         $toReturn=array();
         $toReturn=accounting::get()->toArray();
-
-       
         $data['content'] = 'accounting.accounting';
         return view('layouts.content', compact('data'))->with('toReturn', $toReturn);
     }
@@ -50,14 +48,12 @@ class AccountingController extends Controller
             $product->save();
             Session::flash('success', 'Account details has been saved successfully');
         }
-       
-        
         return redirect('accounting');
-
     }
-     public function delete_account($id=""){
 
-
+    
+     public function delete_account($id="")
+     {
         $del=accounting::where('id',$id)->delete();
         Session::flash('success', 'Products details has been deleted successfully');
         return redirect('accounting');

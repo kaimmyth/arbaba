@@ -102,6 +102,7 @@
     
   <ul class="list-unstyled">
     <li><a href="<?php echo e(url('tools-master/tax_rate')); ?>">Tax Rate</a></li>
+    <li><a href="<?php echo e(url('tools-master/terms')); ?>">Tearms</a></li>
     <li><a href="<?php echo e(url('tools-master/currency')); ?>">Currency</a></li>
   </ul>
 </li>

@@ -197,3 +197,8 @@ Route::get('sale/customer2', function () {
 	return view('layouts.content', compact('data'));
 });
 
+// customer terms 
+Route::post('terms/add_new_terms','termsController@add_new_terms');
+Route::get('tools-master/terms','termsController@view_terms');
+Route::post('terms/update','termsController@update');
+Route::get('terms/delete/{id}','termsController@delete_expenses');
