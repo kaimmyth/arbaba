@@ -247,87 +247,103 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
 
 
 <div id="full-width-modal" class="modal fade invoice-form-modal" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none">
-<div class="modal-dialog modal-xl">
-  <div class="modal-content">
-   <div class="modal-header">
-    <h4 class="modal-title mt-0" id="full-width-modalLabel">Invoice no.<span id="check_invoice_no"></span></h4>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="modal-body">
-<form action="<?php echo e(url('sale/invoice/add-edit')); ?>" method="post" enctype="multipart/form-data" id="form-invoice">
-    <?php echo csrf_field(); ?>
-    <div class="row">
-        <div class="col-md-6">
+    <div class="modal-dialog modal-xl">
+     <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title mt-0" id="full-width-modalLabel">Invoice no.<span id="check_invoice_no"></span></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+             </div>
+         <div class="modal-body">
+            <form action="<?php echo e(url('sale/invoice/add-edit')); ?>" method="post" enctype="multipart/form-data" id="form-invoice">
+                 <?php echo csrf_field(); ?>
+                 <div class="row">
+         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-6">
+
+                  <!-- modal -->
+
+            <form action="#" method="POST">
+              
+              <!--  Modal content for the above example -->
+              <div class="modal fade bs-example-modal-sm new_customer_add" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none" data-backdrop="static">
+                <div class="modal-dialog modal-md">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title mt-0" id="myLargeModalLabel">New Customer</h4>
+                      <button type="button" class="close" onclick="closeNewCustomermodal()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                             
+
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Customer Name</label>
+                            <input type="text" name="name" class="form-control" value="" id="customer_name">
+                          </div>
+                        </div>
+                    
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Company</label>
+                            <input type="text" name="name" class="form-control" value="" id="name">
+                            <h6 id="name_val"></h6>
+                          </div>
+                            <br>
+                           <hr/>
+                        </div>
+
+                    <div class="col-md-12" style="text-align: right;">
+                        <button type="button" class="btn btn-primary waves-effect"  onclick="submitNewCustomermodal()">Save</button>
+                        <button type="button" class="btn btn-secondary waves-effect" onclick="closeNewCustomermodal()">Close</button>
+                    </div>
+
+                  </div><!-- /.modal-content -->
+
+                </div><!-- /.modal-dialog -->
+             </div><!-- /.modal -->
+            </div>
+
+                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Customer</label>
-                        <select class="form-control" id="customer" name="customer">
-                        
-                              
-                           <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                              <option value="<?php echo e($customer['id']); ?>"><?php echo e($customer['display_name_as']); ?></option>
-                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </select>
+
+                            <input type="text" name="customer_id" id="customer_id" >
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="customer" name="customer">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button" id="button-addon2" data-toggle="modal"  data-target=".new_customer_add">Add New +</button>
+                            </div>
+                        </div>
                     </div>
+                 </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Customer Email</label>
+                    <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Enter email" >
+                  </div>
+                    <h6 id="email_val"></h6>
                 </div>
 
-                <div class="col-md-6">
-                 <div class="form-group">
-                    <label for="exampleInputEmail1">Customer Email</label>
-                    <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Enter email" required>
+                <div class="col-md-4" style="text-align: right;">
+                        <h4>BALANCE DUE</h4>
+                        <h2><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span-h">0.00</span></h2>
                 </div>
-                <h6 id="email_val"></h6>
-            </div>
+
         </div>
 
     </div>
 
-    <div class="col-md-6" style="text-align: right;">
-        <h4>BALANCE DUE</h4>
-        <h2><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span-h">0.00</span></h2>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-9">
+
+    <div class="col-md-12">
         <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Billing address</label>
-                    <textarea class="form-control" rows="2" id="billing_address" name="billing_address" style="margin-top: 0px; margin-bottom: 0px; height: 87px;" required></textarea>
-                </div>
-                <h6 id="billing_address_val"></h6>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Terms</label>
-                    <select class="form-control" name="terms" id="terms" required>
-                        <option value="0" selected>Due on receipt</option>
-                        <option value="15">Net 15</option>
-                        <option value="30">Net 30</option>
-                        <option value="60">Net 60</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Invoice date</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="invoice_date" id="datepicker" required autocomplete="off">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="md md-event"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Due date</label>
                     <div class="input-group">
@@ -339,36 +355,72 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                 </div>
             </div>
 
-        </div>
-    </div>
 
-    <div class="col-md-3">
-        <div class="col"  style="float: right;">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Invoice no.</label>
-                <input type="text" class="form-control" value="" id="invoice_no" name="invoice_no" required>
-                <span id="invoice_check"></span>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Invoice date</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="invoice_date" id="datepicker" required autocomplete="off">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="md md-event"></i></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h6 id="invoice_no_val"></h6>
+
+             <div class="col-md-4">
+               <div class="col"  style="float: right;">
+                 <div class="form-group">
+                   <label for="exampleInputEmail1">Invoice no.</label>
+                   <input type="text" class="form-control" value="" id="invoice_no" name="invoice_no" required>
+                   <span id="invoice_check"></span>
+                 </div>
+                  <h6 id="invoice_no_val"></h6>
+               </div> 
+             </div>
+       
+             <div class="col-md-4">
+                  <div class="form-group">
+
+                          <label for="exampleInputEmail1">Terms</label>
+                            <select class="form-control" name="terms" id="terms" required>
+                                <option value="0" selected>Due on receipt</option>
+                                <option value="15">Net 15</option>
+                                <option value="30">Net 30</option>
+                                <option value="60">Net 60</option>
+                            </select>
+                  </div>
+             </div>
+             <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Place of Supply</label>
+                <select class="form-control" name="place_of_supply" id="place_of_supply" required>
+                    <option value="">-Please Select a Location-</option>
+                    <option>Andhra Pradesh</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Chandigarh</option>
+                    <option>Delhi</option>
+                    <option>Goa</option>
+                </select>
+            </div>
+            </div>  
+
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Billing address</label>
+                    <textarea class="form-control" rows="2" id="billing_address" name="billing_address" style="margin-top: 0px; margin-bottom: 0px; height: 87px;" required></textarea>
+                </div>
+                <h6 id="billing_address_val"></h6>
+            </div>
+
         </div>
+        <hr>
+ </div>
 
-    </div>
-</div>
 
 
-<div class="col-md-3">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Place of Supply</label>
-    <select class="form-control" name="place_of_supply" id="place_of_supply" required>
-        <option value="">-Please Select a Location-</option>
-        <option>Andhra Pradesh</option>
-        <option>Arunachal Pradesh</option>
-        <option>Chandigarh</option>
-        <option>Delhi</option>
-        <option>Goa</option>
-    </select>
-</div>
-</div>
 <hr>
 
 <div class="col-md-12">
@@ -433,34 +485,39 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
 </table>
 </div>
 </div>
-</div>
+<br>
 <br>
 
-<div class="row">
-    <div class="col-md-6">
+
+</div>
+
+
+
+
+    
         <div class="col-md-6">
             <div class="form-group">
                 <label for="exampleInputEmail1">Message on invoice</label>
                 <textarea class="form-control" rows="2" id="msg_on_invoice" name="msg_on_invoice" required></textarea>
             </div>
         </div>
-
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Message on statement</label>
-                <textarea class="form-control" rows="2" id="msg_on_statement" name="msg_on_statement" required></textarea>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6" style="text-align: right;">
+         <div class="col-md-6" style="text-align: right;">
         <h4>Subtotal  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="subtotal-span">0.00</span></h4>
         <h4>Taxes  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="taxes-span"><span>0.00</h4>
         <h4>Balance Due  &nbsp; &nbsp;<i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span">0.00</span></h4>
-    </div>
-</div>
+        </div>
+         <div class="col-md-6">
+         <div class="form-group">
+                <label for="exampleInputEmail1">Message on Statement</label>
+                <textarea class="form-control" rows="2" id="msg_on_invoice" name="msg_on_invoice" required></textarea>
+            </div>
+       </div>
+    
 
-<div class="col-md-4">
+   
+
+
+<div class="col-md-6">
  <div class="form-group">
     <label for="exampleInputEmail1">Attachments</label>
     <div class="dropzone" id="dropzone" style="min-height: 55px">
@@ -470,8 +527,10 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
     </div>
     <span id="e_invoice_attachment"></span>
 </div>
-</div>
 
+<br>
+<br>
+</div>
 
 
 </div>
@@ -485,6 +544,10 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
     <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit">Save changes</button>
 </div>
 </form>
+</div>
+ </div>
+     </div>
+
 </div>
 <!-- /.modal-content -->
 </div>
@@ -790,6 +853,11 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
     </div>
   </div>
 </div>
+
+
+
+          
+
 
 <script>
     $(document).ready(function() {
@@ -1204,6 +1272,58 @@ $(document).ready(function(){
 });
 </script>
 
-   
+
+<script>
+    function submitNewCustomermodal(){
+      var radioValue2 = $("#cust_btn").val();
+      $("#customer").val($("#customer_name").val());
+      closeNewCustomermodal();
+    }
+    function closeNewCustomermodal(){
+      $(".new_customer_add").modal('hide');
+    }
+</script>
+<script type="text/javascript">
+  <?php
+    //[{"id":"1","name":"Ben"},{"id":"1","name":"Ben"}]
+    $tmp= "";
+    foreach ($customers as $customer){
+      $tmp.=  "{'id':'".$customer['id']."','name':'".$customer['display_name_as']."'},";
+    }
+    $tmp = rtrim($tmp,',');
+  ?>
+  var typeaheadCustomer = [<?php echo $tmp; ?>];
+  console.log(typeaheadCustomer);
+  var typeaheadCustomer = new Bloodhound({
+    datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.name); },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    // `states` is an array of state names defined in "The Basics"
+    local: typeaheadCustomer
+  });
+
+  typeaheadCustomer.initialize();
+  $('#customer').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1,
+    templates: {
+      empty: [
+        '<div style="padding: 5px 10px;text-align: center;">',
+          'unable to find any Best Picture winners that match the current query',
+        '</div>'
+        ].join('\n'),
+        suggestion: Handlebars.compile('<div><strong>Yo</strong> – Yo</div>')
+    }
+  },
+  {
+    displayKey: 'name',
+    source: typeaheadCustomer.ttAdapter()
+  });
+
+  $('#customer').on('typeahead:select', function(evt, item) {
+      // item.id
+      $("#customer_id").val(item.id);
+  });
+</script>
 
    <?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/invoice.blade.php ENDPATH**/ ?>

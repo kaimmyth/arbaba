@@ -390,12 +390,14 @@ class SalesController extends Controller
     {
         $toReturn=array();
         $toReturn=sales_invoice::where('id',$id)->get()->toArray();
-   
-        // Mail::send('emails.sales_invoice_mail',['toReturn'=>$toReturn[0]],function($message)use($toReturn){
-        //     $message->to($toReturn[0]['customer_email'])
-        //             ->subject('Tax Invoice');
-        //     $message->from('tax_invoice@arbaba.com','AR BABA');
-        // });
+        
+        // return $toReturn;
+        
+        Mail::send('emails.sales_invoice_mail',['toReturn'=>$toReturn],function($message)use($toReturn){
+            $message->to($toReturn[0]['customer_email'])
+                    ->subject('Tax Invoice');
+            $message->from('tax_invoice@arbaba.com','AR BABA');
+        });
         Session::flash('success', 'Mail has been sent successfully');
         
         return view('emails.sales_invoice_mail')->with('toReturn',$toReturn);
