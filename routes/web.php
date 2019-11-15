@@ -60,6 +60,9 @@ Route::get('sale/invoice/delete/{id}','SalesController@invoice_delete');
 Route::get('sale/invoice/get-invoice-details/{id}','SalesController@get_invoice_details');
 Route::post('sale/invoice/remainder_mail/{id}','SalesController@invoice_remainder_email');
 Route::post('sale/invoice/payment_received','SalesController@receive_payment');
+// abhishek 
+Route::get('sale/invoice/get-invoice-details_bill/{id}','SalesController@get_invoice_details_bill');
+
 
 //Customer
 Route::get('sale/customers','SalesController@view_customers');

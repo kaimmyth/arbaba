@@ -97,6 +97,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
             
          ?>
       @endforeach
+      <!-- top headder  -->
 <div class="row">
   <div class="col-lg-12">
    <div class="card">
@@ -177,7 +178,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
         <tr>
         <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
         <td>{{$value['invoice_no']}}</td>
-        <td>{{$value['first_name']}}</td>
+        <td>{{$value['customer']}}</td>
         <td>{{$value['invoice_date']}}</td>
         <td>{{$value['due_date']}}</td>
         <?php
@@ -240,12 +241,12 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
 </div>
 </div>
 </div>
-</div>
+</div> 
 </div>
 </div>
 </div>
 
-
+<!-- model  -->
 <div id="full-width-modal" class="modal fade invoice-form-modal" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog modal-xl">
      <div class="modal-content">
@@ -306,10 +307,25 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                 </div><!-- /.modal-dialog -->
              </div><!-- /.modal -->
             </div>
-
+            
                  <div class="col-md-4">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Customer</label>
+                    <label for="exampleInputEmail1">Customer</label>
+                           
+                            <div class="input-group">
+                            <select class="form-control"  onchange="invoice_details_show(this.value)"  name="terms" id="terms"  required>
+                            <option>-Select-</option>
+                                @foreach($customers as $customer)
+
+                                <option value="{{$customer['id']}}">{{$customer['first_name']}} </option>
+                                @endforeach
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button" id="button-addon2" data-toggle="modal"  data-target=".new_customer_add">Add New +</button>
+                            </div>
+                        </div>
+                       
+                        <!-- <label for="exampleInputEmail1">Customer</label>
 
                             <input type="text" name="customer_id" id="customer_id" >
                         <div class="input-group">
@@ -317,7 +333,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button" id="button-addon2" data-toggle="modal"  data-target=".new_customer_add">Add New +</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                  </div>
                 <div class="col-md-4">
@@ -1113,6 +1129,9 @@ function viewEditInvoice(purpose, id){
     });
 }
 
+
+
+
 function receivePayment(id){
     $("#receive_payment_details").html("");
     $.ajaxSetup({
@@ -1326,4 +1345,139 @@ $(document).ready(function(){
   });
 </script>
 
-   
+
+<!-- abhishek  -->
+<script>
+function invoice_details_show(id) {
+    alert(id);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{url('sale/invoice/get-invoice-details_bill')}}" + "/" + id,
+        method: "GET",
+        contentType: 'application/json',
+        dataType: "json",
+        success: function (data) {
+          
+                $("#v_invoice_details tbody").html("");
+                document.getElementById("v_invoice_no").innerHTML = data.id;
+                document.getElementById("v_customer").innerHTML = data.customer;
+                document.getElementById("v_customer_email").innerHTML = data.customer_email;
+               
+        }
+    });
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function viewEditInvoice(purpose, id){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "{{url('sale/invoice/get-invoice-details')}}" + "/" + id,
+        method: "GET",
+        contentType: 'application/json',
+        dataType: "json",
+        beforeSend: function(data){
+            $("#loader1").css("display","block");
+        },
+        error: function(xhr){
+            alert("error"+xhr.status+", "+xhr.statusText);
+        },
+        success: function (data) {
+            if(purpose=="view")
+            {  
+                $("#v_invoice_details tbody").html("");
+                document.getElementById("v_invoice_no").innerHTML = data.id;
+                document.getElementById("v_customer").innerHTML = data.customer;
+                document.getElementById("v_customer_email").innerHTML = data.customer_email;
+                document.getElementById("v_billing_address").innerHTML = data.billing_address;
+                document.getElementById("v_terms").innerHTML = data.terms;
+                document.getElementById("v_invoice_date").innerHTML = data.invoice_date;
+                document.getElementById("v_due_date").innerHTML = data.due_date;
+                document.getElementById("v_place_of_supply").innerHTML = data.place_of_supply;
+                document.getElementById("v_msg_on_invoice").innerHTML = data.msg_on_invoice;
+                document.getElementById("v_msg_on_statement").innerHTML = data.msg_on_statement;
+                document.getElementById("v_attachment").innerHTML = "<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Attachment</a>";
+                
+
+                // view invoice details
+                for(var i=0; i<data.no_of_rows; i++){
+                    var v_invoice_details='<tr style="border: none; background:white !important;"><td>'+data.invoice_details_product_services[i]+'</td><td>'+data.invoice_details_description[i]+'</td><td>'+data.invoice_details_qty[i]+'</td><td>'+data.invoice_details_rate[i]+'</td><td>'+data.invoice_details_amount[i]+'</td><td>'+data.invoice_details_tax[i]+'</td></tr>';
+                    $("#v_invoice_details tbody").append(v_invoice_details);
+                }
+                $("#v_invoice_details_amounts").html('<div style="text-align:right;padding:5px;"><p><b>Subtotal: ₹</b>'+data.subtotal+'</p><p><b>Taxes: ₹</b>'+data.total_tax+'</p><p><b>Total: ₹</b>'+data.total+'</p></div>');
+                
+                $('.invoice-details-model').modal('show');
+            }
+            else if(purpose=="edit"){
+                resetInvoiceForms(); // reseting forms
+                $("#invoice_no").val(data.invoice_no);
+                $("#customer").val(data.customer);
+                $("#customer_email").val(data.customer_email);
+                $("#customer_details").val(data.customer_details);
+                $("#billing_address").val(data.billing_address);
+                $("#terms").val(data.terms);
+                $("input[name='invoice_date']").datepicker('setDate', data.invoice_date);
+                $("input[name='due_date']").datepicker('setDate', data.due_date);
+                $("#place_of_supply").val(data.place_of_supply);
+                $("#msg_on_invoice").val(data.msg_on_invoice);
+                $("#msg_on_statement").val(data.msg_on_statement);
+
+                $("#e_invoice_attachment").html("<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Previous Attachment</a>");
+                
+                // get form elements details
+                var product_service_fields = document.getElementsByName("product_service[]");
+                var hsn_sac_fields = document.getElementsByName("hsn_sac[]");
+                var description_fields = document.getElementsByName("description[]");
+                var qty_fields = document.getElementsByName("qty[]");
+                var rate_fields = document.getElementsByName("rate[]");
+                var amount_fields = document.getElementsByName("amt[]");
+                var tax_fields = document.getElementsByName("tax[]");
+                for(var i=0; i<data.no_of_rows; i++){
+                    if(i!=0){
+                        appendFormContents();
+                    }
+                    product_service_fields[i].value = data.invoice_details_product_services[i];
+                    hsn_sac_fields[i].value = data.invoice_details_hac_sac[i];
+                    description_fields[i].value = data.invoice_details_description[i];
+                    qty_fields[i].value = data.invoice_details_qty[i];
+                    rate_fields[i].value = data.invoice_details_rate[i];
+                    amount_fields[i].value = data.invoice_details_amount[i];
+                    tax_fields[i].value = data.invoice_details_tax[i];
+                }
+
+                // assigning hidden inputs
+                $("input[name='hidden_input_id'").val(data.id);
+                $("input[name='hidden_input_purpose'").val("edit");
+                $("input[name='hidden_input_attachment'").val(data.attachment);
+                
+                getInvoiceDetailsValues(); // calculating all values, taxes, amount, total etc
+                $('.invoice-form-modal').modal('show'); // expense insert form model
+            }
+            $("#loader1").css("display","none");
+        }
+    });
+}
+
+</script>

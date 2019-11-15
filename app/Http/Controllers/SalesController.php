@@ -42,16 +42,10 @@ class SalesController extends Controller
         }
 
         $toReturn=array();
-        $toReturn = sales_invoice::leftJoin('sales_customers', 'sales_invoice.customer', '=', 'sales_customers.id')
-            ->select('sales_invoice.*','sales_customers.first_name')
-            ->orderBy('sales_invoice.id','desc')
-            ->get()->toArray();
-        // $toReturn=array();
-        // $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
-
+        $toReturn = sales_invoice::orderBy('sales_invoice.id','desc')->get()->toArray();
+        
         // for dropdown
         $customers=sales_customers::orderBy('id','desc')->get();
-
         $data['content'] ='sale.invoice';
         return view('layouts.content',compact('data'))->with(compact('toReturn','invoice','customers'));
     }
@@ -491,4 +485,12 @@ class SalesController extends Controller
 
      return redirect('sale/invoice');
       }
+
+
+    //   abhishek 
+     public function get_invoice_details_bill($id=""){
+        $data = sales_customers::where('id', $id)->first();
+        return $data;
+
+    }
 }
