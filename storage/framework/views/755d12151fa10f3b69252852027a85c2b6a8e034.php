@@ -172,12 +172,7 @@ background-position: center;
                 <i class="fa fa-bars"></i>
               </a>
             </li>
-            <li class="hide-phone float-left">
-              <form role="search" class="navbar-form">
-                <input type="text" placeholder="Type here for search..." class="form-control search-bar">
-                <a href="#" class="btn btn-search"><i class="fa fa-search"></i></a>
-              </form>
-            </li>
+            
           </ul>
           <ul class="nav navbar-left float-center list-inline" >
             <li style="color: white; font-size: 20px;" >Welcome <?php echo e(Auth::user()->name ?? ""); ?></li>
