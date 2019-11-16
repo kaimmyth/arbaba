@@ -263,51 +263,11 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
          <div class="col-md-12">
             <div class="row">
 
-                  <!-- modal -->
+                
 
-            <form action="#" method="POST">
               
-              <!--  Modal content for the above example -->
-              <div class="modal fade bs-example-modal-sm new_customer_add" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none" data-backdrop="static">
-                <div class="modal-dialog modal-md">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title mt-0" id="myLargeModalLabel">New Customer</h4>
-                      <button type="button" class="close" onclick="closeNewCustomermodal()">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                             
-
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Customer Name</label>
-                            <input type="text" name="name" class="form-control" value="" id="customer_name">
-                          </div>
-                        </div>
-                    
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Company</label>
-                            <input type="text" name="name" class="form-control" value="" id="name">
-                            <h6 id="name_val"></h6>
-                          </div>
-                            <br>
-                           <hr/>
-                        </div>
-
-                    <div class="col-md-12" style="text-align: right;">
-                        <button type="button" class="btn btn-primary waves-effect"  onclick="submitNewCustomermodal()">Save</button>
-                        <button type="button" class="btn btn-secondary waves-effect" onclick="closeNewCustomermodal()">Close</button>
-                    </div>
-
-                  </div><!-- /.modal-content -->
-
-                </div><!-- /.modal-dialog -->
-             </div><!-- /.modal -->
-            </div>
             
+           
                  <div class="col-md-4">
                     <div class="form-group">
                     <label for="exampleInputEmail1">Customer</label>
@@ -315,6 +275,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                             <div class="input-group">
                             <select class="form-control"  onchange="invoice_details_show(this.value)"  name="terms" id="terms"  required>
                             <option>-Select-</option>
+                            <option id="selected_customer_name"></option>
                                 <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                                 <option value="<?php echo e($customer['id']); ?>"><?php echo e($customer['first_name']); ?> </option>
@@ -325,21 +286,13 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                             </div>
                         </div>
                        
-                        <!-- <label for="exampleInputEmail1">Customer</label>
-
-                            <input type="text" name="customer_id" id="customer_id" >
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="customer" name="customer">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button" id="button-addon2" data-toggle="modal"  data-target=".new_customer_add">Add New +</button>
-                            </div>
-                        </div> -->
+                       
                     </div>
                  </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Customer Email</label>
-                    <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Enter email" >
+                    <input type="email" class="form-control"  id="selected_customer_eamil" name="customer_email" placeholder="Enter email" >
                   </div>
                     <h6 id="email_val"></h6>
                 </div>
@@ -348,7 +301,7 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                         <h4>BALANCE DUE</h4>
                         <h2><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><span id="total-span-h">0.00</span></h2>
                 </div>
-
+               
         </div>
 
     </div>
@@ -394,19 +347,27 @@ if($value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strto
                   <h6 id="invoice_no_val"></h6>
                </div> 
              </div>
-       
+             
              <div class="col-md-4">
                   <div class="form-group">
-
                           <label for="exampleInputEmail1">Terms</label>
-                            <select class="form-control" name="terms" id="terms" required>
-                                <option value="0" selected>Due on receipt</option>
-                                <option value="15">Net 15</option>
-                                <option value="30">Net 30</option>
-                                <option value="60">Net 60</option>
+                          <div class="input-group">
+                            <select class="form-control" onchange="terms_details_show(this.value)"  name="terms" id="terms"  required>
+                            <option>-Select-</option>
+                            <option id="selected_customer_terms"></option>
+                                <?php $__currentLoopData = $terms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $terms): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($terms['id']); ?>" ><?php echo e($terms['terms']); ?> </option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button" id="button-addon2" data-toggle="modal"  data-target=".new_terms_add">Add New +</button>
+                            </div>
+                        </div>
                   </div>
              </div>
+           
+           
+
              <div class="col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Place of Supply</label>
@@ -1292,16 +1253,7 @@ $(document).ready(function(){
 </script>
 
 
-<script>
-    function submitNewCustomermodal(){
-      var radioValue2 = $("#cust_btn").val();
-      $("#customer").val($("#customer_name").val());
-      closeNewCustomermodal();
-    }
-    function closeNewCustomermodal(){
-      $(".new_customer_add").modal('hide');
-    }
-</script>
+
 <script type="text/javascript">
   <?php
     //[{"id":"1","name":"Ben"},{"id":"1","name":"Ben"}]
@@ -1344,47 +1296,6 @@ $(document).ready(function(){
       $("#customer_id").val(item.id);
   });
 </script>
-
-
-<!-- abhishek  -->
-<script>
-function invoice_details_show(id) {
-    alert(id);
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        url: "<?php echo e(url('sale/invoice/get-invoice-details_bill')); ?>" + "/" + id,
-        method: "GET",
-        contentType: 'application/json',
-        dataType: "json",
-        success: function (data) {
-          
-                $("#v_invoice_details tbody").html("");
-                document.getElementById("v_invoice_no").innerHTML = data.id;
-                document.getElementById("v_customer").innerHTML = data.customer;
-                document.getElementById("v_customer_email").innerHTML = data.customer_email;
-               
-        }
-    });
-}
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script>
 function viewEditInvoice(purpose, id){
@@ -1480,4 +1391,213 @@ function viewEditInvoice(purpose, id){
     });
 }
 
-</script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/invoice.blade.php ENDPATH**/ ?>
+</script>
+
+<!-- abhishek  -->
+<!-- model for add new customer  -->
+  <div class="modal fade bs-example-modal-sm new_customer_add" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none" data-backdrop="static">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myLargeModalLabel">New Customer</h4>
+                <button type="button" class="close" onclick="closeNewCustomermodal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Customer Name</label>
+                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" id="token">
+                        <input type="text" name="customer_name" class="form-control" value="" id="customer_name">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Company</label>
+                        <input type="text" name="company_name" class="form-control" id="company_name">
+                    </div>
+                    <br>
+                    <hr/>
+                </div>
+
+                <div class="col-md-12" style="text-align: right;">
+                    <button type="submit" class="btn btn-primary waves-effect" onclick="closeNewCustomermodal()" id="new_customer_insert">Save</button>
+                    <button type="button" class="btn btn-secondary waves-effect" onclick="closeNewCustomermodal()">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of model for add new customer  -->
+
+<!-- for close modele for add customer  -->
+        <script>
+            function submitNewCustomermodal(){
+            var radioValue2 = $("#cust_btn").val();
+            $("#customer").val($("#customer_name").val());
+            closeNewCustomermodal();
+            }
+            function closeNewCustomermodal(){
+            $(".new_customer_add").modal('hide');
+            }
+        </script>
+<!-- end of close modle for add customer  -->
+
+<!-- abhishek for fetch details of customer -->
+<script>
+function invoice_details_show(id) {
+    // alert(id);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "<?php echo e(url('sale/invoice/get-invoice-details_bill')); ?>" + "/" + id,
+        method: "GET",
+        contentType: 'application/json',
+        dataType: "json",
+        success: function (data) {
+                console.log(data);
+                $("#selected_customer_eamil").val(data.email_id);
+                $("#billing_address").val(data.billing_address);
+               
+        }
+    });
+}
+</script>
+
+<!-- abhishek FOR new customer add -->
+<script>
+        $(document).ready(function() {
+            $("#new_customer_insert").click(function(e) {
+                // alert("hello");
+                e.preventDefault();
+                var customer_name = $("#customer_name").val();
+                var company_name = $("#company_name").val();
+                var token = $("#token").val();
+               
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "<?php echo e(url('sale/invoice/add_new_customer')); ?>",
+                    type: 'POST',
+
+                    data: {
+                        customer_name: customer_name,
+                        company_name: company_name
+
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                    console.log(data);
+                        $("#selected_customer_name").html(data.first_name);
+                        // $("#selected_customer_details").html(data.email_id);
+                    }
+                });
+            });
+        });
+</script>
+
+
+
+
+
+
+<!-- 16/11/19 -->
+ <!-- model for add terms  -->              
+ <div class="modal fade bs-example-modal-sm new_terms_add" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none" data-backdrop="static">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myLargeModalLabel">New Terms</h4>
+                <button type="button" class="close" onclick="close_New_terms_modal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Terms</label>
+                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" id="token">
+                        <input type="text" name="terms_name" class="form-control" value="" id="terms_name">
+                    </div>
+                </div>
+                <div class="col-md-12" style="text-align: right;">
+                    <button type="submit" class="btn btn-primary waves-effect" onclick="close_New_terms_modal()" id="new_terms_insert">Save</button>
+                    <button type="button" class="btn btn-secondary waves-effect" onclick="close_New_terms_modal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of add terms model  -->
+<!-- for close of model  -->
+<script>
+    function close_New_terms_modal(){
+      $(".new_terms_add").modal('hide');
+    }
+</script>
+<!-- end of close model  -->
+
+<!-- abhishek FOR new terms add -->
+<script>
+        $(document).ready(function() {
+            $("#new_terms_insert").click(function(e) {
+                // alert("hello");
+                e.preventDefault();
+                var terms_name = $("#terms_name").val();
+                var token = $("#token").val();
+               
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "<?php echo e(url('sale/invoice/add_new_terms')); ?>",
+                    type: 'POST',
+
+                    data: {
+                        terms_name: terms_name
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                    console.log(data);
+                        $("#selected_customer_terms").html(data.terms);
+                    }
+                });
+            });
+        });
+</script>
+
+
+    <!-- abhishek for fetch details of terms -->
+<script>
+        function terms_details_show(id) {
+        // alert(id);
+        $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+
+        $.ajax({
+            url: "<?php echo e(url('sale/invoice/get-invoice-details_terms')); ?>" + "/" + id,
+                method: "GET",
+                contentType: 'application/json',
+                dataType: "json",
+                success: function (data) {
+                console.log(data);
+                 }
+        });
+}
+</script>
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/invoice.blade.php ENDPATH**/ ?>

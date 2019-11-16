@@ -84,8 +84,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" style="padding: 0px 0;">
-                    <form action=<?php echo e(url('employee/add-edit-employee')); ?> method="post" id="form-employee">
+                <div class="modal-body">
+                    <form action="<?php echo e(url('employee/add-edit-employee')); ?>" method="post" id="form-employee">
                     <?php echo csrf_field(); ?>
                     <div class="row">
                         <div class="col-md-12"><br>

@@ -585,7 +585,7 @@ function viewEditExpenses(purpose, id){
 
         if(d.length==""){
             $("#payee_val").show();
-            $("#payee_val").html("**please insert payee ");
+            $("#payee_val").html("Please insert payee ");
             $("#payee_val").focus();
             $("#payee_val").css("color","red");
 
@@ -607,7 +607,7 @@ function viewEditExpenses(purpose, id){
 
         if(t.length==""){
             $("#payment_date_val").show();
-            $("#payment_date_val").html("**please insert payment data ");
+            $("#payment_date_val").html("Please insert payment data ");
             $("#payment_date_val").focus();
             $("#payment_date_val").css("color","red");
 
@@ -629,7 +629,7 @@ function viewEditExpenses(purpose, id){
 
         if(!y){
             $("#payment_account_val").show();
-            $("#payment_account_val").html("**please insert payment account ");
+            $("#payment_account_val").html("Please insert payment account ");
             $("#payment_account_val").focus();
             $("#payment_account_val").css("color","red");
 
@@ -651,7 +651,7 @@ function viewEditExpenses(purpose, id){
 
         if(!v){
             $("#payment_method_val").show();
-            $("#payment_method_val").html("**please insert payment method ");
+            $("#payment_method_val").html("Please insert payment method ");
             $("#payment_method_val").focus();
             $("#payment_method_val").css("color","red");
 
@@ -668,12 +668,12 @@ function viewEditExpenses(purpose, id){
         ref_no_f();
     });
     function ref_no_f(){
-
+         var regexOnlyNumbers=/^[0-9]+$/;
         var p = $("#expenses_ref_no").val();
 
-        if(p.length==""){
+        if((p=="")|| regexOnlyNumbers.test(p)!=true){
             $("#ref_no_val").show();
-            $("#ref_no_val").html("**please insert ref no ");
+            $("#ref_no_val").html("Please insert reference number");
             $("#ref_no_val").focus();
             $("#ref_no_val").css("color","red");
 

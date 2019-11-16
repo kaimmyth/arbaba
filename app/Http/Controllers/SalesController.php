@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\sales_invoice;
 use App\products_and_services;
 use App\sales_customers;
+use App\terms;
 use App\PaymentReceived;
 use Mail;
 use Session;
@@ -46,8 +47,9 @@ class SalesController extends Controller
         
         // for dropdown
         $customers=sales_customers::orderBy('id','desc')->get();
+        $terms=terms::orderBy('id','desc')->get();
         $data['content'] ='sale.invoice';
-        return view('layouts.content',compact('data'))->with(compact('toReturn','invoice','customers'));
+        return view('layouts.content',compact('data'))->with(compact('toReturn','invoice','customers','terms'));
     }
 
     public function add_edit_invoice(Request $request)
@@ -492,5 +494,28 @@ class SalesController extends Controller
         $data = sales_customers::where('id', $id)->first();
         return $data;
 
+    }
+
+    public function add_new_customer(Request $request)
+    {
+        $employee = new sales_customers();
+        $employee->first_name = $request->customer_name;
+        $employee->company = $request->company_name;
+        $employee->save();
+       
+        return $employee;
+    }
+
+    // 16/11/19
+    public function add_new_terms(Request $request)
+    {
+        $new_terms = new terms();
+        $new_terms->terms = $request->terms_name;
+        $new_terms->save();
+        return $new_terms;
+    }
+    public function get_terms_details($id=""){
+        $data = terms::where('id', $id)->first();
+        return $data;
     }
 }

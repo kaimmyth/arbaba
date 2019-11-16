@@ -62,7 +62,9 @@ Route::post('sale/invoice/remainder_mail/{id}','SalesController@invoice_remainde
 Route::post('sale/invoice/payment_received','SalesController@receive_payment');
 // abhishek 
 Route::get('sale/invoice/get-invoice-details_bill/{id}','SalesController@get_invoice_details_bill');
-
+Route::post('sale/invoice/add_new_customer','SalesController@add_new_customer');
+Route::post('sale/invoice/add_new_terms','SalesController@add_new_terms');
+Route::get('sale/invoice/get-invoice-details_terms/{id}','SalesController@get_terms_details');
 
 //Customer
 Route::get('sale/customers','SalesController@view_customers');
