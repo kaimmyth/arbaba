@@ -16,7 +16,9 @@ class CheckRole
         $authID = Auth::user()->id;
         $odata = Company::where('users_id',$authID)->first();
         if ($odata) {
+            
             Session::put('gorgID',$odata->id);
+
         }else{
             Session::put('gorgID',1);
         }       

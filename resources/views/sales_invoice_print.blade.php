@@ -14,7 +14,7 @@
         <div class="container" id="printable-area">
             <div  style="border-style: solid;background-color:#e6f2ff; padding: 20px; !important">
                 @foreach ($toReturn as $value)
-                <div><h4><b>Billing Address</b></h4><br>{{$value['billing_address']}}</div>
+                <div><h4><b>Billing Address</b></h4>{{$value['billing_address']}}</div>
                     <br>
                     
                     <h1 style="color:cornflowerblue">Tax Invoice</h1>

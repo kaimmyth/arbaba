@@ -185,20 +185,22 @@
             }
           ?>
      </td>
-     <td onclick="receivePayment({{$value['id']}})" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive Payment&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
-
+     <td><span  onclick="receivePayment({{$value['id']}})" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive Payment</span>&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+      
      {{-- <td style="color: #0077C5; font-weight: 600; cursor: pointer;" >
       Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i> --}}
-      <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-       <a class="dropdown-item" href="#">Print</a>
-       <a class="dropdown-item" href="#">Send</a>
-       <a class="dropdown-item" href="#">Send remainder</a>
-       <a class="dropdown-item" href="#">Share Invoice Link</a>
-       <a class="dropdown-item" href="#">Print Delivery Challan</a>
-       <a class="dropdown-item" href="#">View/Edit</a>
-       <a class="dropdown-item" href="#">Copy</a>
-       <a class="dropdown-item" href="#">Delete</a>
-   </div>
+     
+        <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
+         <a class="dropdown-item" href="{{url('sale/all-sale/print')}}/{{$value['id']}}">Print</a>
+         <a class="dropdown-item" href="#">Send</a>
+         <a class="dropdown-item" href="#">Send remainder</a>
+         <a class="dropdown-item" href="#">Share Invoice Link</a>
+         <a class="dropdown-item" href="#">Print Delivery Challan</a>
+         <a class="dropdown-item" href="#">View/Edit</a>
+         <a class="dropdown-item" href="#">Copy</a>
+         <a class="dropdown-item" href="#">Delete</a>
+        </div>  
+          
    </td>
    </tr>
   @endforeach   

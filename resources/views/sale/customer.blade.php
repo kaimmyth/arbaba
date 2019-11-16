@@ -147,7 +147,7 @@
                        <i class="fa fa-caret-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
                       <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Send reminder</a>
-                        <a class="dropdown-item" href="#">Create Customer Statement</a>
+                        <a class="dropdown-item" href="{{url('sale/customer_estimate/'.$items1['id'])}}">Create Customer Statement</a>
                         <a class="dropdown-item" href="#">Create Invoice</a>
                         <a class="dropdown-item" href="#">Create Sales Receipt</a>
                         <a class="dropdown-item" href="#">Create Estimate</a>
