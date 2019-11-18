@@ -101,6 +101,9 @@ class CompanyController extends Controller
             $orgData['status'] =  $request->company_status;
             $orgData['ip_address'] =  $request->ip();
             $orgData['created_at'] =  date('Y-m-d H:i:s');
+            $orgData->currency=Session::get('currency');
+            $orgData->time_zone=Session::get('time_zone');
+
             if ($request->ids != '') {
                $id = $request->ids;
                Company::where('id', $id)->update($orgData);

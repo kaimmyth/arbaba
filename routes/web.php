@@ -49,6 +49,7 @@ Route::get('dashboard', 'HomeController@Dashboard');
 
 // All Sales
 Route::get('sale/all-sale','SalesController@view_all_sales');
+Route::get('sale/all-sale/print/{id}','SalesController@print_all_sales');
 
 // Invoices
 Route::get('sale/invoice','SalesController@view_invoices');
@@ -71,6 +72,7 @@ Route::get('sale/customers','SalesController@view_customers');
 Route::post('sale/customers/add','SalesController@add_customers');
 Route::get('sale/customer/delete/{id}','SalesController@delete_customer');
 Route::get('sale/customer/view/{id}','SalesController@view_customer');
+
 
 //Product & Services
 Route::get('sale/products-and-services','SalesController@view_products_and_services');
@@ -207,3 +209,6 @@ Route::post('terms/add_new_terms','termsController@add_new_terms');
 Route::get('tools-master/terms','termsController@view_terms');
 Route::post('terms/update','termsController@update');
 Route::get('terms/delete/{id}','termsController@delete_expenses');
+
+//sales/customewr/customer_estimate
+Route::get('sale/customer_estimate/{id}', 'SalesController@view_customer_statement');

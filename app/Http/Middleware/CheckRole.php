@@ -18,9 +18,12 @@ class CheckRole
         if ($odata) {
             
             Session::put('gorgID',$odata->id);
+            Session::put('org_id',Auth::user()->org_id);
 
         }else{
             Session::put('gorgID',1);
+            Session::put('org_id',Auth::user()->org_id);
+
         }       
 
         return $next($request);
@@ -29,6 +32,7 @@ class CheckRole
         $authID = Auth::user()->id;
         $odata = Company::where('users_id',$authID)->first();
         Session::put('gorgID',$odata->id);
+        Session::put('org_id',Auth::user()->org_id);
         return $next($request);
     }
     else {
