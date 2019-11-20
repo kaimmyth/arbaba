@@ -551,6 +551,28 @@
           onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" aria-required="true" placeholder="ESCI No.">
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="field-2" class="control-label">Currency<font color="red">*</font></label>
+                  <select class="select2 form-control" id="currencies" name="currencies" required="" aria-required="true" data-placeholder="Choose a Country...">
+                    <option value="">Choose a Currency...</option>
+                    <?php $__currentLoopData = $currencies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $currency): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($currency->id); ?>"><?php echo e($currency->symbol); ?> - <?php echo e($currency->code); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  </select>
+        </div>
+      </div>
+        <div class="col-md-4">
+        <div class="form-group">
+          <label for="field-2" class="control-label">Time zone<font color="red">*</font></label>
+                  <select class="select2 form-control" id="time_zone" name="time_zone"  data-placeholder="Choose a Time zone...">
+                    <option value="">Choose a Time zone...</option>
+                    <?php $__currentLoopData = $time_zone; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $time_zone): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($time_zone->id); ?>"><?php echo e($time_zone->time_zone_name); ?> - <?php echo e($time_zone->change_time); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  </select>
+        </div>
+      </div>
     </div>
     <hr>
     <h4 class="modal-title mt-0">User Login Details</h4>

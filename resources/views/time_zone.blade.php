@@ -93,7 +93,7 @@
                             <div class="form-group">
                                 <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
                                     <label for="field-1" class="control-label">Time Zone</label> 
-                                        <input type="text" id="time_zone_id" name="time_zone_id"> 
+                                        <input type="hidden" id="time_zone_id" name="time_zone_id"> 
                                         <input type="text" class="form-control"  name="time_zone_name" id="time_zone_name"  required placeholder="enter here...about"> 
                             </div> 
                             <div class="form-group">

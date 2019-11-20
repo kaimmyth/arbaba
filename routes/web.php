@@ -238,3 +238,9 @@ Route::get('tools-master/show_time_zone','settingController@view_time_zone');
 Route::post('tools-master/add_time_zone','settingController@add_time_zone');
 Route::post('tools-master/update_time_zone','settingController@update_time_zone');
 Route::get('tools-master/delete_time_zone/{id}','settingController@delete_time_zone');
+
+// currency 
+Route::get('tools-master/currency','settingController@view_currency');
+Route::post('tools-master/add_currency','settingController@add_currency');
+Route::post('tools-master/update_currency','settingController@update_currency');
+Route::get('tools-master/delete_currency/{id}','settingController@delete_currency');

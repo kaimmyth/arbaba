@@ -8,6 +8,7 @@ use App\country;
 use App\state;
 use App\cities;
 use App\time_zone;
+use App\currencies;
 
 class settingController extends Controller
 {
@@ -171,5 +172,49 @@ class settingController extends Controller
         return redirect('tools-master/show_time_zone');
     }
 
+     // ==================================== Currency ================================================
+
+     public function view_currency()
+     {
+         $toReturn=array();
+         $toReturn=currencies::get()->toArray();
+         $data['content'] ='currency';
+         return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+     }
+ 
+     public function add_currency(Request $request)
+     {
+         $employee = new currencies();
+         $employee->name = $request->currency_name;
+         $employee->code = $request->currency_code;
+         $employee->symbol = $request->currency_symbol;
+         $employee->format = $request->currency_formate;
+         $employee->exchange_rate = $request->currency_exchange_rate;
+         $employee->save();
+ 
+         return redirect('tools-master/currency');
+     }
+ 
+ 
+ 
+     public function  update_currency(Request $Request)
+     {
+         
+         $update_about=currencies::where('id',$Request->currency_id)->update(array(
+             'name'=>$Request->currency_name,
+             'code' => $Request->currency_code,
+             'symbol' => $Request->currency_symbol,
+             'format' => $Request->currency_formate,
+             'exchange_rate' => $Request->currency_exchange_rate
+         ));
+ 
+         return redirect('tools-master/currency');
+     }
+ 
+     public function delete_currency($id="")
+     {
+         $del=currencies::where('id',$id)->delete();
+         return redirect('tools-master/currency');
+     }
 
 }
