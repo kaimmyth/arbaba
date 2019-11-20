@@ -172,7 +172,6 @@
 
 <script>
         function terms_details_show(id) {
-
         $('#state_id').empty();
         // alert(id);
         $.ajaxSetup({
@@ -195,26 +194,6 @@
 }
 </script>
 
-
-<!-- $("#content").empty();
-    $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-                });
-                $.ajax({
-                    url: "{{url('employer/marketing/listtemplate')}}",
-                    type: 'get',
-                    dataType: "json",
-
-                    success: function(data) {
-                            $.each(data,function(i,content){
-                            $("#content").append("<option>"+content.et_sender_name+"</option>");
-                        });
-                        console.log(data);
-
-                    }
-                }); -->
 
 
 

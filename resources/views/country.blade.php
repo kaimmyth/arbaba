@@ -17,8 +17,8 @@
 
                     <ol class="breadcrumb pull-right">
                         <li><a href="#">Home </a></li>
-                        <li><a href="#">tools/master </a></li>
-                        <li class="active">country</li>
+                        <li><a href="#">Tools/master </a></li>
+                        <li class="active">Country</li>
                     </ol>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>country_name</th>
+                                        <th>Country Name</th>
                                         <th>ACTION</th>
                                     </tr>
                                 </thead>

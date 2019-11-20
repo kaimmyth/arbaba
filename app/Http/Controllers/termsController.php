@@ -8,8 +8,15 @@ use App\terms;
 
 class termsController extends Controller
 {
-    // employee home
+   
     
+    public function view_terms()
+    {
+        $toReturn=array();
+        $toReturn=terms::get()->toArray();
+        $data['content'] ='terms';
+	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+    }
     
     public function add_new_terms(Request $request)
     {
@@ -20,14 +27,7 @@ class termsController extends Controller
         return redirect('tools-master/terms');
     }
     
-    public function view_terms()
-    {
-        $toReturn=array();
-        $toReturn=terms::get()->toArray();
-        $data['content'] ='terms';
-	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
-    }
-
+  
     public function  update(Request $Request)
     {
         $update_about=terms::where('id',$Request->terms_id)->update(array(

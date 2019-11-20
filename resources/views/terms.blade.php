@@ -17,8 +17,8 @@
 
                     <ol class="breadcrumb pull-right">
                         <li><a href="#">Home </a></li>
-                        <li><a href="#">tools/master </a></li>
-                        <li class="active">curencies</li>
+                        <li><a href="#">Tools/master </a></li>
+                        <li class="active">Terms</li>
                     </ol>
                 </div>
             </div>

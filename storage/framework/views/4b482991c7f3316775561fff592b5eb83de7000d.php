@@ -102,6 +102,7 @@
     
   <ul class="list-unstyled">
     <li><a href="<?php echo e(url('tools-master/tax_rate')); ?>">Tax Rate</a></li>
+    <li><a href="<?php echo e(url('tools-master/show_time_zone')); ?>">Time-Zone</a></li>
     <li><a href="<?php echo e(url('tools-master/show_country')); ?>">Country</a></li>
     <li><a href="<?php echo e(url('tools-master/state')); ?>">State</a></li>
     <li><a href="<?php echo e(url('tools-master/city')); ?>">City</a></li>

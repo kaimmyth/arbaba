@@ -72,6 +72,7 @@ Route::get('sale/customers','SalesController@view_customers');
 Route::post('sale/customers/add','SalesController@add_customers');
 Route::get('sale/customer/delete/{id}','SalesController@delete_customer');
 Route::get('sale/customer/view/{id}','SalesController@view_customer');
+Route::get('sale/customer_estimate/{id}', 'SalesController@view_customer_statement');
 
 
 //Product & Services
@@ -229,6 +230,11 @@ Route::get('tools-master/city','settingController@view_city');
 Route::post('tools-master/add_new_city','settingController@add_new_city');
 Route::post('tools-master/update_city','settingController@update_city');
 Route::get('tools-master/delete_city/{id}','settingController@delete_city');
-
 Route::get('tools-master/fetch_according_to_country/{id}','settingController@fetch_according_to_country');
-Route::get('sale/customer_estimate/{id}', 'SalesController@view_customer_statement');
+
+
+// time zone 
+Route::get('tools-master/show_time_zone','settingController@view_time_zone');
+Route::post('tools-master/add_time_zone','settingController@add_time_zone');
+Route::post('tools-master/update_time_zone','settingController@update_time_zone');
+Route::get('tools-master/delete_time_zone/{id}','settingController@delete_time_zone');

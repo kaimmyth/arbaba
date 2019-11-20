@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\country;
 use App\state;
 use App\cities;
+use App\time_zone;
 
 class settingController extends Controller
 {
@@ -125,6 +126,50 @@ class settingController extends Controller
    public function fetch_according_to_country($id=""){
     $data = state::where('country_id', $id)->get()->toArray();
     return $data;
-}
+    }
+
+    // ==================================== time zone ================================================
+
+    public function view_time_zone()
+    {
+        $toReturn=array();
+        $toReturn=time_zone::get()->toArray();
+        $data['content'] ='time_zone';
+        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+    }
+
+    public function add_time_zone(Request $request)
+    {
+        $employee = new time_zone();
+        $employee->time_zone_name = $request->time_zone_name;
+        $employee->short_name = $request->time_zone_short_name;
+        $employee->change_time = $request->time_zone_change_time;
+        $employee->cal_value = $request->time_zone_value;
+        $employee->save();
+
+        return redirect('tools-master/show_time_zone');
+    }
+
+
+
+    public function  update_time_zone(Request $Request)
+    {
+        
+        $update_about=time_zone::where('id',$Request->time_zone_id)->update(array(
+            'time_zone_name'=>$Request->time_zone_name,
+            'short_name' => $Request->time_zone_short_name,
+            'change_time' => $Request->time_zone_change_time,
+            'cal_value' => $Request->time_zone_value
+        ));
+
+        return redirect('tools-master/show_time_zone');
+    }
+
+    public function delete_time_zone($id="")
+    {
+        $del=time_zone::where('id',$id)->delete();
+        return redirect('tools-master/show_time_zone');
+    }
+
 
 }
