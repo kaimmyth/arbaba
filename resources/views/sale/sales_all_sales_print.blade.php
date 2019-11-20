@@ -115,7 +115,7 @@
                         <div class="col-md-12">
                             <center>
                                 <br/><br/><br/><br/>
-                                <input name="" id="" class="btn btn-primary"  type="button" onclick="printDiv('printable-area');" value="Print">
+                                <input name="" id="print_btn" class="btn btn-primary"  type="button" onclick="printDiv('printable-area');" value="Print">
                                 <script>
                                     function printDiv(divName) {
                                             var printContents = document.getElementById(divName).innerHTML;

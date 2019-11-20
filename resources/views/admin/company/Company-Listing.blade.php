@@ -551,6 +551,28 @@
           onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" aria-required="true" placeholder="ESCI No.">
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="field-2" class="control-label">Currency<font color="red">*</font></label>
+                  <select class="select2 form-control" id="currencies" name="currencies" required="" aria-required="true" data-placeholder="Choose a Country...">
+                    <option value="">Choose a Currency...</option>
+                    @foreach($currencies as $currency)
+                    <option value="{{$currency->id}}">{{$currency->symbol}} - {{$currency->code}}</option>
+                    @endforeach
+                  </select>
+        </div>
+      </div>
+        <div class="col-md-4">
+        <div class="form-group">
+          <label for="field-2" class="control-label">Time zone<font color="red">*</font></label>
+                  <select class="select2 form-control" id="time_zone" name="time_zone"  data-placeholder="Choose a Time zone...">
+                    <option value="">Choose a Time zone...</option>
+                    @foreach($time_zone as $time_zone)
+                    <option value="{{$time_zone->id}}">{{$time_zone->time_zone_name}} - {{$time_zone->change_time}}</option>
+                    @endforeach
+                  </select>
+        </div>
+      </div>
     </div>
     <hr>
     <h4 class="modal-title mt-0">User Login Details</h4>
