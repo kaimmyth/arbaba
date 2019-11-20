@@ -94,33 +94,29 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="col-md-5">
-            <div class="form-group row">
-              <label class="col-sm-3 control-label">Type</label>
-              <div class="col-sm-9">
+          <div class="col-md-6">
+                <label class="">Type</label>
                 <select class="form-control" name="product_type" id="product_type">
-                  <option>-Select-</option>
-                  <option>Non-inventory</option>
-                  <option>Service</option>
-                  <option>Bundle</option>
-                  <option>Inventory</option>
-                </select>
-              </div>
+                  <option disabled>-Select-</option>
+                  <option value="inventory">Inventory</option>
+                  <option value="non_inventory">Non-inventory</option>
+                  <option value="services">Service</option>
+                  <option value="bundle">Bundle</option>  
+                </select>    
             </div>
-          </div>       
-
-
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>
-                <input type="text" name="name" class="form-control" value="" id="name">
-                <h6 id="name_val"></h6>
+            <br>
+            <br>
+             <div class="row">
+              <div class="col-md-4">
+                <div class="form-group" id="name_hide">
+                  <label for="exampleInputEmail1">Name</label>
+                  <input type="text" name="name" class="form-control" value="" id="name">
+                  <h6 id="name_val"></h6>
+                </div>
               </div>
-            </div>
 
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="sku_hide">
                 <label for="exampleInputEmail1">SKU</label>
                 <input type="text" name="sku" class="form-control" value="" id="sku">
                  <h6 id="sku_val"></h6>
@@ -128,7 +124,7 @@
             </div>
 
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="hsn_code_hide">
                 <label for="exampleInputEmail1">HSN code</label>
                 <input type="text" name="hsn_code" class="form-control" value="" id="hsn_code">
                  <h6 id="hsn_val"></h6>
@@ -136,7 +132,7 @@
             </div>
 
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="sac_code_hide">
                 <label for="exampleInputEmail1">SAC code</label>
                 <input type="text" name="sac_code" class="form-control" value="" id="sac_code">
                  <h6 id="sac_val"></h6>
@@ -144,7 +140,7 @@
             </div>
 
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="unit_hide">
                 <label for="exampleInputEmail1">Unit</label>
                 <input type="text" name="unit" class="form-control" value="" id="unit">
                  <h6 id="unit_val"></h6>
@@ -153,36 +149,54 @@
 
 
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="category_hide">
                 <label for="exampleInputEmail1">Category</label>
                 <input type="text" name="category" class="form-control" value="" id="category">
                  <h6 id="category_val"></h6>
               </div>
             </div>
+          
+            
+              <div class="col-md-4">
+                <div class="form-group" id="initial_quantity_on_hand_hide">
+                  <label for="exampleInputEmail1">Initial quantity on hand</label>
+                  <input type="text" class="form-control" value="" id="initial_quantity_on_hand" name="initial_quantity_on_hand">
+                </div>
+              </div>
 
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Sale price/Rate</label>
-                <input type="text" name="sale_price" class="form-control" value="" id="sale_price">
-                 <h6 id="sale_price_val"></h6>
+             <div class="col-md-4">
+              <div class="form-group" id="low_stock_alert_hide">
+                <label for="exampleInputEmail1">Low stock alert</label>
+                <input type="text" class="form-control" value="" id="low_stock_alert" name="low_stock_alert">
               </div>
             </div>
-
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Income Account</label>
-                <select name="income_account" class="form-control" id="income_account">
-
+             <div class="col-md-4">
+              <div class="form-group" id="inventory_asset_account_hide">
+                <label for="exampleInputEmail1">Inventory asset account </label>
+                <select  class="form-control" id="inventory_asset_account" name="inventory_asset_account">
                   <option>-Select-</option>
                    <option>Sales - Hardware</option>
                     <option>Sales - Software</option>
                 </select>
+               </div>
+              </div>
+            <div class="col-md-4">
+              <div class="form-group" id="discription_hide">
+                 <input id="discription_chk" type="checkbox" name="discription_chk">
+                <label for="exampleInputEmail1">Description</label>
+                <textarea name="description" class="form-control" rows="2" id="description"></textarea>
+                <h6 id="description_val"></h6>
               </div>
             </div>
-
-
-            <div class="col-md-4">
+             <div class="col-md-4">
+              <div class="form-group" id="purchase_information_hide">
+                <input id="purchase_information_chk" type="checkbox" name="purchase_information_chk">
+                <label for="exampleInputEmail1">Purchasing information</label>
+                <textarea name="purchasing_information" class="form-control" rows="2" id="purchasing_information"></textarea>
+                 <h6 id="purchasing_information_val"></h6>
+              </div>
+            </div>
+            <div class="col-md-4" id="inclusive_tax_hide">
               <div class="checkbox checkbox-primary">
                 <input id="inclusive_tax" type="checkbox" name="inclusive_tax">
                 <label for="checkbox1">
@@ -191,10 +205,8 @@
                 <h6 id="inclusive_tax_val"></h6>
               </div>
             </div>
-
-
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="tax_hide">
                 <label for="exampleInputEmail1">Tax</label>
                 <select class="form-control" name="tax" id="tax">
                   <option>-Select-</option>
@@ -207,39 +219,33 @@
                   <option>12.36% GST</option>
                 </select>
               </div>
-            </div>
-
-
+            </div> 
             <div class="col-md-4">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Description</label>
-                <textarea name="description" class="form-control" rows="2" id="description"></textarea>
-                <h6 id="description_val"></h6>
+              <div class="form-group" id="sale_price_rate">
+                <label for="exampleInputEmail1">Sale price/Rate</label>
+                <input type="text" name="sale_price" class="form-control" value="" id="sale_price">
+                 <h6 id="sale_price_val"></h6>
               </div>
             </div>
-
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Purchasing information</label>
-                <textarea name="purchasing_information" class="form-control" rows="2" id="purchasing_information"></textarea>
-                 <h6 id="purchasing_information_val"></h6>
+             <div class="col-md-4">
+              <div class="form-group" id="income_account_hide">
+                <label for="exampleInputEmail1">Income Account</label>
+                <select name="income_account" class="form-control" id="income_account">
+                  <option>-Select-</option>
+                   <option>Sales - Hardware</option>
+                    <option>Sales - Software</option>
+                </select>
               </div>
             </div>
-
-
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="cost_hide">
                 <label for="exampleInputEmail1">Cost</label>
                 <input type="text" name="cost" class="form-control" value="" id="cost">
                 <h6 id="cost_val"></h6>
               </div>
             </div>
-
-
-
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="expanse_account_hide">
                 <label for="exampleInputEmail1">Expense account</label>
                 <select name="expense_account" class="form-control" id="expense_account">
                   <option>-Select-</option>
@@ -252,10 +258,8 @@
                 </select>
               </div>
             </div>
-
-
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="purchase_tax_hide">
                 <label for="exampleInputEmail1">Purchase tax</label>
                 <select class="form-control" name="purchase_tax" id="purchase_tax">
                   <option>-Select-</option>
@@ -269,31 +273,60 @@
                 </select>
               </div>
             </div>
-
-
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="reverse_charge_hide">
                 <label for="exampleInputEmail1">Reverse charge %</label>
                 <input type="text" class="form-control" value="" id="reverse_change" name="reverse_change">
                 <h6 id="reverse_change_val"></h6>
               </div>
             </div>
-
-
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" id="preferred_supplier_hide">
                 <label for="exampleInputEmail1">Preferred Supplier</label>
                 <select class="form-control" name="preferred_supplier" id="preferred_supplier">
                   <option>-Select-</option>
                 </select>
               </div>
-            </div>
-
-          </div>
-
-
-
+            </div>     
         </div>
+        
+                        <div class="tab-content colm" id="table_hide">
+                            <div class="tab-pane show active" id="home-2" role="tabpanel" aria-labelledby="home-tab-2" style="">
+                                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>PRODUCT/SERVICE</th>
+                                            <th>QUANTITY</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expenses-details-expand">
+                                        <tr>
+                                            <td><input  type="checkbox" name="ids[]" value="" /></td>
+                                           <!--   -->
+                                            <td>
+                                                <input type="text" name="bundle_product_details" class="form-control input-sm" placeholder="Product&Services" id="bundle_product_details">
+                                                  
+                                            </td>
+                                            <td><input type="text" name="bundle_quantity" class="form-control input-sm" placeholder="Quantity" id="bundle_quantity"></td>
+                                                                               
+                                            <td>
+                                                <a href="javascript:void();" class="expenses-details-expand-dlt-btn"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                        <!-- dynammically insert <tr> expenses details form -->
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3"></td>
+                                            <td><a href="javascript:void();" onclick="expensesDetailsExpand();"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
         <div class="col-md-12" style="text-align: right;">
             <!-- hidden inputs -->
             <input type="text" name="hidden_input_id" value="NA" hidden>
@@ -302,8 +335,12 @@
             <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
             <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
         </div>
-      </div><!-- /.modal-content -->
 
+
+
+         </div>
+      </div><!-- /.modal-content -->
+    </div>
     </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
@@ -449,7 +486,7 @@
           if(k.length==""){
 
             $("#name_val").show();
-            $("#name_val").html("please input the user name");
+            $("#name_val").html("Please input the user name");
             $("#name_val").focus();
             $("#name_val").css("color","red");
 
@@ -476,7 +513,7 @@
         }
        
 
-        $("#sku").blur(function(){
+        $("#sku").keyup(function(){
 
             username2();
         });
@@ -536,7 +573,7 @@
           if(j.length==""){
 
             $("#sac_val").show();
-            $("#sac_val").html("Please input sac code ");
+            $("#sac_val").html("Please input SAC code ");
             $("#sac_val").focus();
             $("#sac_val").css("color","red");
 
@@ -560,7 +597,7 @@
          if((l=="")|| regexOnlyNumbers.test(l)!=true){
 
             $("#unit_val").show();
-            $("#unit_val").html("Please input numbers  ");
+            $("#unit_val").html("Input valid unit ");
             $("#unit_val").focus();
             $("#unit_val").css("color","red");
 
@@ -646,51 +683,37 @@
         }
                 
 
-         $("#inclusive_tax").change(function(){
-             username9();
-        });
-        function username9(){
+        //  $("#inclusive_tax").change(function(){
+        //      username9();
+        // });
+        // function username9(){
           
-          if($("#inclusive_tax").prop("checked") == false){
+        //   if($("#inclusive_tax").prop("checked") == false){
 
-            $("#inclusive_tax_val").show();
-            $("#inclusive_tax_val").html("Plesee check the button ");
-            $("#inclusive_tax_val").focus();
-            $("#inclusive_tax_val").css("color","red");
+        //     $("#inclusive_tax_val").show();
+        //     $("#inclusive_tax_val").html("Plesee check the button ");
+        //     $("#inclusive_tax_val").focus();
+        //     $("#inclusive_tax_val").css("color","red");
 
-              err_sale_price=false;
-              return false;
-          }
-           else if($("#inclusive_tax").prop("checked") == true){
-            $("#inclusive_tax_val").hide();
+        //       err_sale_price=false;
+        //       return false;
+        //   }
+        //    else if($("#inclusive_tax").prop("checked") == true){
+        //     $("#inclusive_tax_val").hide();
 
-          }
-        }
+        //   }
+        // }
 
 
      $("#btn").click(function(){
 
       err_name=true;
-      err_sku=true;
-      err_hsn=true;
-      err_sac=true;
-      err_unit=true;
-      err_category=true;
-      err_cost=true;
-      err_sale_price=true;
-
+     
 
       username1();
-      username2();
-      username3();
-      username4();
-      username5();
-      username6();
-      username7();
-      username8();
-      username9();
+    
 
-     if((err_name==true)&&(err_sku==true)&&(err_hsn==true)&&(err_sac==true)&&(err_unit==true)&&(err_category==true)&&(err_cost==true)&&(err_sale_price==true))
+     if(err_name==true)
      {
         return true;
      }else{
@@ -799,4 +822,175 @@
             }
         });
     }
+</script>
+
+<script>
+        $(document).ready(function(){
+
+             $("#table_hide").hide(300);
+
+
+            $("#product_type").change(function(){
+           changeSelect();
+          
+        });
+        
+            function changeSelect(){
+       
+        level = $("#product_type").val();
+        if(level=="non_inventory"){
+
+            $("#name_hide").show(300);
+            $("#hsn_code_hide").show(300);
+            $("#sac_code_hide").show(300);
+            $("#unit_hide").show(300);
+            $("#category_hide").show(300);
+            $("#inclusive_tax_hide").show(300);
+            $("#discription_hide").show(300);
+            $("#prchase_information_hide").show(300);
+            $("#sku_hide").show(300);
+            
+
+            $("#initial_quantity_on_hand_hide").hide(300);
+            $("#low_stock_alert_hide").hide(300);
+            $("#inventory_asset_account_hide").hide(300);
+            $("#sale_price_rate").hide(300);   
+            $("#income_account_hide").hide(300);
+            $("#tax_hide").hide(300);
+            $("#cost_hide").hide(300);
+            $("#purchase_tax_hide").hide(300);
+            $("#reverse_charge_hide").hide(300);
+            $("#preferred_supplier_hide").hide(300);
+            $("#expanse_account_hide").hide(300);
+            $("#table_hide").hide(300);
+       
+          $("#discription_chk").click(function(){
+              description_chk_process();
+          });
+          function description_chk_process(){
+              if($("#discription_chk").is(':checked')){   
+                 // $("#expanse_account_hide").hide(300);
+                $("#sale_price_rate").show(300);
+                $("#income_account_hide").show(300);
+                $("#tax_hide").show(300);
+              }
+              else{
+                $("#sale_price_rate").hide(300);
+                $("#income_account_hide").hide(300);
+                $("#tax_hide").hide(300);
+                
+
+              }
+          }
+          $("#purchase_information_chk").click(function(){
+              purchase_information_chk_process();
+          });
+          function purchase_information_chk_process(){
+              if($("#purchase_information_chk").is(':checked')){
+
+                $("#cost_hide").show(300);
+                $("#purchase_tax_hide").show(300);
+                $("#reverse_charge_hide").show(300);
+                $("#preferred_supplier_hide").show(300);
+                $("#expanse_account_hide").show(300);
+              }
+              else{
+                $("#cost_hide").hide(300);
+                $("#purchase_tax_hide").hide(300);
+                $("#reverse_charge_hide").hide(300);
+                $("#preferred_supplier_hide").hide(300);
+                $("#expanse_account_hide").hide(300);
+              }
+           }   
+         }
+                 if(level=="services"){
+                    $("#sku_hide").show(300);
+
+                    $("#hsn_code_hide").hide(300);
+                    $("#sale_price_rate").show(300);
+                    $("#income_account_hide").show(300);
+                    $("#tax_hide").show(300);
+                    $("#unit_hide").show(300);
+                    $("#cost_hide").show(300);
+                    $("#purchase_information_hide").show(300);
+                    $("#category_hide").show(300);
+                    $("#purchase_tax_hide").show(300);
+                    $("#reverse_charge_hide").show(300);
+                    $("#preferred_supplier_hide").show(300);
+                    $("#expanse_account_hide").show(300);
+                    $("#table_hide").hide(300);
+                 }
+
+                 if(level=="inventory"){
+
+                    $("#prchase_information_hide").show(300);
+                    $("#sku_hide").show(300);
+                    $("#initial_quantity_on_hand_hide").show(300);
+                    $("#low_stock_alert_hide").show(300);
+                    $("#inventory_asset_account_hide").show(300);
+                    $("#sale_price_rate").show(300);   
+                    $("#income_account_hide").show(300);
+                    $("#tax_hide").show(300);
+                    $("#cost_hide").show(300);
+                    $("#purchase_tax_hide").show(300);
+                    $("#reverse_charge_hide").show(300);
+                    $("#preferred_supplier_hide").show(300);
+                    $("#expanse_account_hide").show(300);
+                    $("#hsn_code_hide").show(300);
+                    $("#sac_code_hide").show(300);
+                    $("#unit_hide").show(300);
+                    $("#category_hide").show(300);
+                    $("#discription_hide").show(300);
+                    $("#purchase_information_hide").show(300);
+                    $("#inclusive_of_tax_hide").show(300);
+                    $("#name_hide").show(300);
+                    $("#table_hide").hide(300);
+                 }
+                  if(level=="bundle"){
+                    
+                    $("#initial_quantity_on_hand_hide").hide(300);
+                    $("#low_stock_alert_hide").hide(300);
+                    $("#inventory_asset_account_hide").hide(300);
+                    $("#sale_price_rate").hide(300);   
+                    $("#income_account_hide").hide(300);
+                    $("#tax_hide").hide(300);
+                    $("#cost_hide").hide(300);
+                    $("#purchase_tax_hide").hide(300);
+                    $("#reverse_charge_hide").hide(300);
+                    $("#preferred_supplier_hide").hide(300);
+                    $("#expanse_account_hide").hide(300);
+                    $("#hsn_code_hide").hide(300);
+                    $("#sac_code_hide").show(300);
+                    $("#unit_hide").hide(300);
+                    $("#category_hide").hide(300);
+                    $("#discription_hide").show(300);
+                    $("#purchase_information_hide").hide(300);
+                    $("#inclusive_of_tax_hide").hide(300);
+                    $("#sku_hide").hide(300);
+                    $("#prchase_information_hide").hide(300);
+                    $("#inclusive_tax_hide").hide(300);
+                    $("#name_hide").show(300);
+                    $("#table_hide").show(300);
+                  }
+
+
+  }
+
+
+
+
+});
+</script>
+<script>
+
+
+// dynamically add fileds
+var expensesFormAppendData='<tr><td><input  type="checkbox" name="ids[]" value="" /></td><td><input type="text" name="bundle_product_details" class="form-control input-sm" placeholder="Product&Servicews"></td><td><input type="text" name="_bundle_quantity" class="form-control input-sm" placeholder="Quantity"></td><td><a href="javascript:void();" class="expenses-details-expand-dlt-btn"><i class="fas fa-trash-alt"></i></a></td></tr>';
+function expensesDetailsExpand(){
+    $("#expenses-details-expand").append(expensesFormAppendData);
+}
+$("#expenses-details-expand").delegate(".expenses-details-expand-dlt-btn", "click", function (){
+    $(this).closest("tr").remove();
+    getExpensesDetailsValues();
+});
 </script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/products-services.blade.php ENDPATH**/ ?>

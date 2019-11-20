@@ -102,6 +102,9 @@
     
   <ul class="list-unstyled">
     <li><a href="{{url('tools-master/tax_rate')}}">Tax Rate</a></li>
+    <li><a href="{{url('tools-master/show_country')}}">Country</a></li>
+    <li><a href="{{url('tools-master/state')}}">State</a></li>
+    <li><a href="{{url('tools-master/city')}}">City</a></li>
     <li><a href="{{url('tools-master/terms')}}">Tearms</a></li>
     <li><a href="{{url('tools-master/currency')}}">Currency</a></li>
   </ul>

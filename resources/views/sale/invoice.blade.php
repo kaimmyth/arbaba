@@ -1475,6 +1475,7 @@ function invoice_details_show(id) {
 <script>
         $(document).ready(function() {
             $("#new_customer_insert").click(function(e) {
+            alert("hello");
                 // alert("hello");
                 e.preventDefault();
                 var customer_name = $("#customer_name").val();

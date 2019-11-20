@@ -207,3 +207,25 @@ Route::post('terms/add_new_terms','termsController@add_new_terms');
 Route::get('tools-master/terms','termsController@view_terms');
 Route::post('terms/update','termsController@update');
 Route::get('terms/delete/{id}','termsController@delete_expenses');
+
+// ================================= 18/11/19 abhishek anand ===========================================
+Route::get('tools-master/show_country','settingController@view_country');
+Route::post('tools-master/add_country','settingController@add_new_country');
+Route::post('tools-master/update_country','settingController@update');
+Route::get('tools-master/delete_country/{id}','settingController@delete_country');
+
+
+// state 
+Route::get('tools-master/state','settingController@view_state');
+Route::post('tools-master/add_new_state','settingController@add_new_state');
+Route::post('tools-master/update_state','settingController@update_state');
+Route::get('tools-master/delete_state/{id}','settingController@delete_state');
+
+
+// city
+Route::get('tools-master/city','settingController@view_city');
+Route::post('tools-master/add_new_city','settingController@add_new_city');
+Route::post('tools-master/update_city','settingController@update_city');
+Route::get('tools-master/delete_city/{id}','settingController@delete_city');
+
+Route::get('tools-master/fetch_according_to_country/{id}','settingController@fetch_according_to_country');
