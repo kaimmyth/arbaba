@@ -5,7 +5,7 @@
   }
 
   .nav.nav-tabs > li > a.active {
-    background-color: #dcdcdc !important;
+    background-color: #dcdcdc !important;              
     border: 1px solid black !important;
   }
 
@@ -152,7 +152,7 @@
                         <a class="dropdown-item" href="#">Create Sales Receipt</a>
                         <a class="dropdown-item" href="#">Create Estimate</a>
                       <a class="dropdown-item" href="{{url('sale/customer/delete/'.$items1['id'])}}">Delete</a>
-                       <a class="dropdown-item"  onclick="editCustomer({{$items1['id']}});" href="javascript:void();">Edit</a>
+                       <a class="dropdown-item"  onclick="editCustomer({{$items1['id']}});" href="{{url('sale/customer/edit/'.$items1['id'])}}">Edit</a>
                       </div>
                     </td>
                     

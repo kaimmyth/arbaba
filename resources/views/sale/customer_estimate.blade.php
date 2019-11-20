@@ -46,7 +46,6 @@
                             </div> 
                         </div>
                           <form>  
-
                              <div class="col-md-12">
                                   <div style="float:right;">    
                                     <div class="form-group" id="total">
@@ -55,7 +54,7 @@
                                     </div>
                                   </div>
                                 </div>
-                            <div class="col-md-12">
+                             <div class="col-md-12">
                                   <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="statement_date">Statement Type</label>  
@@ -80,7 +79,6 @@
                                             <input type="date" class="form-control" placeholder="Start Date">    
                                         </div>
                                     </div> 
-                                
                                     <div class="col-md-3">
                                         <div class="form-group" id="end_date">
                                             <label for="statrt_date">End Date</label> 
@@ -93,11 +91,8 @@
                                                 <button type="button" class="btn btn-primary" id="apply_btn">Apply</button>
                                             </div>
                                           </div>
-                                       </div>
-                               
-                            </div>
-
-
+                                       </div>   
+                                </div>
                         </form>
                          <nav id="table_details">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist" >

@@ -35,20 +35,20 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <h4><b>INVOICE TO</b></h4>{{$value['customer']}}
+                            <h4><b>INVOICE TO</b></h4>{{@$customer_details->billing_address}}
                         </div>
                     </div>  
                     <div class="col-md-4">
                         <div class="form-group">
-                            <h4><b>SHIPPED TO</b></h4>{{$value['customer']}}
+                            <h4><b>SHIPPED TO</b></h4>{{@$customer_details->shipping_address}}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                                <h5><b>INVOICE NO :</b>&nbsp;&nbsp;{{$value['invoice_no']}}</h5>
-                                <h5><b>DATE :</b>&nbsp;&nbsp;{{$value['invoice_date']}}</h5>
-                                <h5><b>DUE DATE :</b>&nbsp;&nbsp;{{$value['due_date']}}</h5>
-                                <h5><b>TERMS :</b>&nbsp;&nbsp;{{$value['terms']}}</h5>   
+                                <h5><b>INVOICE NO :</b>&nbsp;&nbsp;{{@$customer_details->invoice_no}}</h5>
+                                <h5><b>DATE :</b>&nbsp;&nbsp;{{@$customer_details->due_date}}</h5>
+                                <h5><b>DUE DATE :</b>&nbsp;&nbsp;{{@$customer_details->due_date}}</h5>
+                                <h5><b>TERMS :</b>&nbsp;&nbsp;{{@$customer_details->terms}}</h5>   
                          </div>  
                           
                     </div>

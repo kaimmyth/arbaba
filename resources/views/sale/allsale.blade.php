@@ -7,7 +7,7 @@
 <!-- Start content -->
 <div class="content-page" >
  <div class="content">
-  <div class="container-fluid">
+  <div class="container-fluid">                       ALL SALES
    <!-- Page-Title -->
    <div class="row">
     <div class="col-sm-12">
@@ -217,11 +217,6 @@
 </div>
 </div>
 </div>
-
-
-
-
-
 <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none">
  <div class="modal-dialog modal-full">
   <div class="modal-content">

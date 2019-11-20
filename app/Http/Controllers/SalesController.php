@@ -9,15 +9,22 @@ use App\sales_invoice;
 use App\products_and_services;
 use App\sales_customers;
 use App\terms;
+use App\customer_statement_table;
 use App\PaymentReceived;
-use Mail;
 use Session;
+use Mail;
+
 use DB;
 
 class SalesController extends Controller
 {
     //All Sales
+  
+    
+
     public function view_all_sales()
+
+
     {
         $toReturn=array();
         $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
@@ -29,10 +36,19 @@ class SalesController extends Controller
         return view('layouts.content',compact('data'))->with(compact('toReturn'));
        
     }
+     public function print_all_sales($id="")
+    {
+        $toReturn=array();
+        $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
+
+               
+        return view('sale.sales_all_sales_print')->with('toReturn',$toReturn);
+    }
 
    
     public function view_invoices(Request $request)
     {
+        $org = $request->session()->get('organization_id');
         // to open invoice form/ modal form
         $invoice="no";
         if($request->invoice){
@@ -43,7 +59,7 @@ class SalesController extends Controller
         }
 
         $toReturn=array();
-        $toReturn = sales_invoice::orderBy('sales_invoice.id','desc')->get()->toArray();
+        $toReturn = sales_invoice::orderBy('sales_invoice.id','desc')->get()->where('status',1)->toArray();
         
         // for dropdown
         $customers=sales_customers::orderBy('id','desc')->get();
@@ -54,7 +70,7 @@ class SalesController extends Controller
 
     public function add_edit_invoice(Request $request)
     {
-       
+       $org = $request->session()->get('organization_id');
         //return $request;
         $invoice = new sales_invoice();
         $invoice->invoice_no=$request->invoice_no;
@@ -67,6 +83,7 @@ class SalesController extends Controller
         $invoice->place_of_supply =$request->place_of_supply ; 
         $invoice->msg_on_invoice = $request->msg_on_invoice; 
         $invoice->msg_on_statement=$request->msg_on_statement;
+        $invoice->org_id=Session::get('org_id');
         $invoice->status=1;
         
         // for attachment
@@ -137,7 +154,7 @@ class SalesController extends Controller
 
     public function get_invoice_details($id=""){
         $data = sales_invoice::where('id', $id)->first();
-
+        $org = $request->session()->get('organization_id');
         // for expenses_details
         $no_of_rows=0;
         $product_services=[];
@@ -227,7 +244,7 @@ class SalesController extends Controller
         $product->terms=$request->terms;
         $product->opening_balance=$request->opening_balance;
         $product->as_of=date("Y-m-d",strtotime($request->as_of));
-        
+        $product->org_id=Session::get('org_id');
         // for attachment
         $product->attachment = "";
         if($request->hasFile('attachment'))
@@ -268,7 +285,7 @@ class SalesController extends Controller
             }
             else if($request->hidden_input_purpose=="add")
             {
-                // error has to return
+               
             }
         }
         
@@ -291,11 +308,12 @@ class SalesController extends Controller
 
     public function view_customers()
     {
+        
         $toReturnInvoice=array();
         $toReturnInvoice=sales_invoice::get()->toArray();
         
         $toReturn=array();
-        $toReturn=sales_customers::orderBy('id','desc')->get()->toArray();
+        $toReturn=sales_customers::orderBy('id','desc')->get()->where('status',1)->toArray();
         
         $data['content'] ='sale.customer';
         return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturnInvoice'));
@@ -310,6 +328,7 @@ class SalesController extends Controller
     }
 
     public function view_customer($id){
+        $org = $request->session()->get('organization_id');
         $details = sales_customers::find($id);
         $invoices = sales_invoice::where("customer",$id)->get();
         $data['content'] ='sale.customer_view';
@@ -317,8 +336,15 @@ class SalesController extends Controller
     }
 
     public function get_customer_details($id=""){
+        $org = $request->session()->get('organization_id');
         $data = sales_customers::where('id', $id)->first();
         return $data;
+    }
+     public function view_customer_statement($id=""){
+        $toReturn['customer_statement']=customer_statement_table::where('customer_name',$id)->get()->where('status',1)->toArray();
+         $data['content'] ='sale.customer_estimate';
+        return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturn'));
+        // return view('sale.customer_estimate')->with('toReturn',$toReturn);
     }
 
     public function view_products_and_services()
@@ -333,6 +359,7 @@ class SalesController extends Controller
 
     public function add_edit_products_and_services(Request $request)
     {
+        $org = $request->session()->get('organization_id');
         $products = new products_and_services();
         $products->product_type=$request->product_type;
         $products->name=$request->name;
@@ -352,7 +379,7 @@ class SalesController extends Controller
         $products->purchase_tax=$request->purchase_tax;
         $products->reverse_change=$request->reverse_change;
         $products->preferred_supplier=$request->preferred_supplier;
-
+        $products->org_id=Session::get('org_id');
         // finall query create, edit
         if($request->hidden_input_purpose=="edit")
         {
@@ -385,7 +412,7 @@ class SalesController extends Controller
     public function invoice_mail($id="")
     {
         $toReturn=array();
-        $toReturn=sales_invoice::where('id',$id)->get()->toArray();
+        $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
         
         // return $toReturn;
         
@@ -404,14 +431,14 @@ class SalesController extends Controller
     public function print_invoice($id="")
     {
         $toReturn=array();
-        $toReturn=sales_invoice::where('id',$id)->get()->toArray();
+        $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
                
         return view('sales_invoice_print')->with('toReturn',$toReturn);
     }
     public function invoice_delivery_challan($id="")
     {
         $toReturn=array();
-        $toReturn=sales_invoice::where('id',$id)->get()->toArray();
+        $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
             
         return view('sales_invoice_delivery_challan')->with('toReturn',$toReturn);
     }
@@ -493,8 +520,8 @@ class SalesController extends Controller
      public function get_invoice_details_bill($id=""){
         $data = sales_customers::where('id', $id)->first();
         return $data;
-
     }
+
 
     public function add_new_customer(Request $request)
     {
