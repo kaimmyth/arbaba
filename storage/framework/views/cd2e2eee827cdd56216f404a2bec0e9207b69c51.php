@@ -277,4 +277,4 @@
 
 
 
-<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/tools-master/tax_rate.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/tax_rate.blade.php ENDPATH**/ ?>

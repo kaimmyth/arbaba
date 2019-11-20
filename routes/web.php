@@ -206,10 +206,10 @@ Route::get('sale/customer2', function () {
 });
 
 // customer terms 
-Route::post('terms/add_new_terms','termsController@add_new_terms');
-Route::get('tools-master/terms','termsController@view_terms');
-Route::post('terms/update','termsController@update');
-Route::get('terms/delete/{id}','termsController@delete_expenses');
+Route::get('tools-master/terms','settingController@view_terms');
+Route::post('terms/add_new_terms','settingController@add_new_terms');
+Route::post('terms/update_terms','settingController@update_terms');
+Route::get('terms/delete_terms/{id}','settingController@delete_terms');
 
 // ================================= 18/11/19 abhishek anand ===========================================
 Route::get('tools-master/show_country','settingController@view_country');
@@ -244,3 +244,9 @@ Route::get('tools-master/currency','settingController@view_currency');
 Route::post('tools-master/add_currency','settingController@add_currency');
 Route::post('tools-master/update_currency','settingController@update_currency');
 Route::get('tools-master/delete_currency/{id}','settingController@delete_currency');
+
+// tax Rate
+Route::get('tools-master/tax_rate','settingController@view_tax_rate');
+Route::post('tools-master/add_tax_rate','settingController@add_tax_rate');
+Route::post('tools-master/update_tax_rate','settingController@update_tax_rate');
+Route::get('tools-master/delete_tax_rate/{id}','settingController@delete_tax_rate');
