@@ -8,35 +8,109 @@ use App\country;
 use App\state;
 use App\cities;
 use App\time_zone;
-use App\user;
-use DB;
+use App\currencies;
+use App\tax;
+use App\terms;
 
 class settingController extends Controller
 {
 
-   public function index()
-   {
+    // ==================================== Tax Rate ================================================
+
+    public function view_tax_rate()
+    {
+        $toReturn=array();
+        $toReturn=tax::get()->toArray();
+        $data['content'] ='tools-master/tax_rate';
+        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+    }
+
+    public function add_tax_rate(Request $request)
+    {
+        $employee = new tax();
+        $employee->tax_name = $request->tax_name;
+        $employee->tax_type = $request->tax_type;
+        $employee->tax_discription = $request->tax_discription;
+        $employee->tax_validity = $request->tax_validity;
+        $employee->tax_rate = $request->tax_rate;
+        $employee->save();
+
+        return redirect('tools-master/tax_rate');
+    }
+
+
+
+    public function  update_tax_rate(Request $Request)
+    {
+        
+        $update_about=tax::where('id',$Request->tax_id)->update(array(
+            'tax_name'=>$Request->tax_name,
+            'tax_type' => $Request->tax_type,
+            'tax_discription' => $Request->tax_discription,
+            'tax_validity' => $Request->tax_validity,
+            'tax_rate' => $Request->tax_rate
+        ));
+
+        return redirect('tools-master/tax_rate');
+    }
+
+    public function delete_tax_rate($id="")
+    {
+        $del=tax::where('id',$id)->delete();
+        return redirect('tools-master/tax_rate');
+    }
+
+     // ==================================== time zone ================================================
+
+     public function view_time_zone()
+     {
+         $toReturn=array();
+         $toReturn=time_zone::get()->toArray();
+         $data['content'] ='tools-master/time_zone';
+         return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+     }
+ 
+     public function add_time_zone(Request $request)
+     {
+         $employee = new time_zone();
+         $employee->time_zone_name = $request->time_zone_name;
+         $employee->short_name = $request->time_zone_short_name;
+         $employee->change_time = $request->time_zone_change_time;
+         $employee->cal_value = $request->time_zone_value;
+         $employee->save();
+ 
+         return redirect('tools-master/show_time_zone');
+     }
+ 
+ 
+ 
+     public function  update_time_zone(Request $Request)
+     {
+         
+         $update_about=time_zone::where('id',$Request->time_zone_id)->update(array(
+             'time_zone_name'=>$Request->time_zone_name,
+             'short_name' => $Request->time_zone_short_name,
+             'change_time' => $Request->time_zone_change_time,
+             'cal_value' => $Request->time_zone_value
+         ));
+ 
+         return redirect('tools-master/show_time_zone');
+     }
+ 
+     public function delete_time_zone($id="")
+     {
+         $del=time_zone::where('id',$id)->delete();
+         return redirect('tools-master/show_time_zone');
+     }
      
-      $countries = DB::table('countries')->where('is_deleted', '=', 0)->get();
-     
-  
-   
-   
-     $data['content'] ='setting.user';
-      return view('layouts.content', compact('data'))->with(['countries' => $countries]);
-   }
-
-
-
-
-    // ========================================== country ======================================
+      // ========================================== country ======================================
     
 
     public function view_country()
     {
         $toReturn=array();
         $toReturn=country::get()->toArray();
-        $data['content'] ='country';
+        $data['content'] ='tools-master/country';
 	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
     
@@ -74,7 +148,7 @@ class settingController extends Controller
         $toReturn=array();
         $toReturn['state']=state::get()->toArray();
         $toReturn['country']=country::get()->toArray();
-        $data['content'] ='state';
+        $data['content'] ='tools-master/state';
         return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
         
     }
@@ -112,7 +186,7 @@ class settingController extends Controller
        $toReturn['country']=country::get()->toArray();
        $toReturn['state']=state::get()->toArray();
        $toReturn['cities']=cities::get()->toArray();
-       $data['content'] ='city';
+       $data['content'] ='tools-master/city';
        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
    }
 
@@ -146,83 +220,89 @@ class settingController extends Controller
     return $data;
     }
 
-    // ==================================== time zone ================================================
+    // ============================================= terms =====================================
 
-    public function view_time_zone()
+    public function view_terms()
     {
         $toReturn=array();
-        $toReturn=time_zone::get()->toArray();
-        $data['content'] ='time_zone';
-        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+        $toReturn=terms::get()->toArray();
+        $data['content'] ='tools-master/terms';
+	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
-
-    public function add_time_zone(Request $request)
+    
+    public function add_new_terms(Request $request)
     {
-        $employee = new time_zone();
-        $employee->time_zone_name = $request->time_zone_name;
-        $employee->short_name = $request->time_zone_short_name;
-        $employee->change_time = $request->time_zone_change_time;
-        $employee->cal_value = $request->time_zone_value;
+        $employee = new terms();
+        $employee->terms = $request->new_terms;
         $employee->save();
-
-        return redirect('tools-master/show_time_zone');
-    }
-
-
-
-    public function  update_time_zone(Request $Request)
-    {
-        
-        $update_about=time_zone::where('id',$Request->time_zone_id)->update(array(
-            'time_zone_name'=>$Request->time_zone_name,
-            'short_name' => $Request->time_zone_short_name,
-            'change_time' => $Request->time_zone_change_time,
-            'cal_value' => $Request->time_zone_value
-        ));
-
-        return redirect('tools-master/show_time_zone');
-    }
-
-    public function delete_time_zone($id="")
-    {
-        $del=time_zone::where('id',$id)->delete();
-        return redirect('tools-master/show_time_zone');
-    }
-
-// ===================================================== nikhil users ===================================================
-
-    public function add_user(Request $request)
-   {
-     // $users = DB::table('users')->where('id', '=', 1)->get();
-     // return view('layouts.content', compact('data'))->with(['name' => $name, 'role' => $role, 'city_district' => $city_district, 'state_provider' => $state_provider ,'phone' => $phone]);
-        $product = new user();
-        $product->name=$request->name;
-        $product->role=$request->role;
-        $product->phone=$request->phone;
-        $product->email=$request->email;
-        $product->gender=$request->gender;
-        $product->address_line1=$request->address;
-        $product->city_district=$request->city_district;
-        $product->state_provider=$request->state_provider;
-        $product->pin_code=$request->country;
-        $product->username=$request->username;
-        $product->password =$request->password;
        
-        // for attachment
-        // $product->attachment = "";
-        // if($request->hasFile('attachment'))
-        // {
-        //     //
-        //     $file = $request->file('attachment');
-
-        //     $product->attachment = $file->getClientOriginalName();
-        //     $destinationPath = 'public/images';
-        //     $file->move($destinationPath, $file->getClientOriginalName()); 
-        // }
-        $product -> save();
-        return redirect("setting/user");
+        return redirect('tools-master/terms');
+    }
+    
+  
+    public function  update_terms(Request $Request)
+    {
+        $update_about=terms::where('id',$Request->terms_id)->update(array(
+            'terms'=>$Request->terms_terms
+           
+        ));
+        return redirect('tools-master/terms');
     }
 
-    // ============================================================= code end nikhil =================================
+    public function delete_terms($id="")
+    {
+        $del=terms::where('id',$id)->delete();
+        return redirect('tools-master/terms');
+    }
+
+   
+
+   
+     // ==================================== Currency ================================================
+
+     public function view_currency()
+     {
+         $toReturn=array();
+         $toReturn=currencies::get()->toArray();
+         $data['content'] ='tools-master/currency';
+         return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+     }
+ 
+     public function add_currency(Request $request)
+     {
+         $employee = new currencies();
+         $employee->name = $request->currency_name;
+         $employee->code = $request->currency_code;
+         $employee->symbol = $request->currency_symbol;
+         $employee->format = $request->currency_formate;
+         $employee->exchange_rate = $request->currency_exchange_rate;
+         $employee->save();
+ 
+         return redirect('tools-master/currency');
+     }
+ 
+ 
+ 
+     public function  update_currency(Request $Request)
+     {
+         
+         $update_about=currencies::where('id',$Request->currency_id)->update(array(
+             'name'=>$Request->currency_name,
+             'code' => $Request->currency_code,
+             'symbol' => $Request->currency_symbol,
+             'format' => $Request->currency_formate,
+             'exchange_rate' => $Request->currency_exchange_rate
+         ));
+ 
+         return redirect('tools-master/currency');
+     }
+ 
+     public function delete_currency($id="")
+     {
+         $del=currencies::where('id',$id)->delete();
+         return redirect('tools-master/currency');
+     }
+
+      
 
 }

@@ -119,7 +119,6 @@
     </li>
     <?php endif; ?>
     <li><a href="<?php echo e(url('update-site')); ?>"><span>Organization structure</span></a></li>
-     <li><a href="<?php echo e(url('setting/user')); ?>"><span>Users</span></a></li>
   </ul>
 </li>
 </ul>

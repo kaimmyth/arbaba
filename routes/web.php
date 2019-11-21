@@ -1,5 +1,3 @@
-
-
 <?php
 Route::get('clear-cache', function () {
 	$exitCode = Artisan::call('config:clear');
@@ -52,10 +50,6 @@ Route::get('dashboard', 'HomeController@Dashboard');
 // All Sales
 Route::get('sale/all-sale','SalesController@view_all_sales');
 Route::get('sale/all-sale/print/{id}','SalesController@print_all_sales');
-Route::post('sale/all-sale/remainder_mail/{id}','SalesController@all_sales_remainder_email');
-
-Route::get('sale/allsales/delivery_challan/{id}','SalesController@all_sales_delivery_challan');
-
 
 // Invoices
 Route::get('sale/invoice','SalesController@view_invoices');
@@ -78,6 +72,7 @@ Route::get('sale/customers','SalesController@view_customers');
 Route::post('sale/customers/add','SalesController@add_customers');
 Route::get('sale/customer/delete/{id}','SalesController@delete_customer');
 Route::get('sale/customer/view/{id}','SalesController@view_customer');
+Route::get('sale/customer_estimate/{id}', 'SalesController@view_customer_statement');
 
 
 //Product & Services
@@ -146,7 +141,6 @@ Route::post('tax/payment-history/add','TaxesController@record_cst_payment');
 Route::get('tax/payment-history','TaxesController@tax_payment_history_view');
 Route::get('tax/return','TaxesController@tax_return_view');
 Route::get('tax/payment-history/delete/{id}','TaxesController@payment_history_del');
-Route::post('tax/return/add','TaxesController@insert_tax_return');
 
 Route::get('tax/payment-history/get-payment-details/{id}','TaxesController@get_payment_details');
 
@@ -212,10 +206,10 @@ Route::get('sale/customer2', function () {
 });
 
 // customer terms 
-Route::post('terms/add_new_terms','termsController@add_new_terms');
-Route::get('tools-master/terms','termsController@view_terms');
-Route::post('terms/update','termsController@update');
-Route::get('terms/delete/{id}','termsController@delete_expenses');
+Route::get('tools-master/terms','settingController@view_terms');
+Route::post('terms/add_new_terms','settingController@add_new_terms');
+Route::post('terms/update_terms','settingController@update_terms');
+Route::get('terms/delete_terms/{id}','settingController@delete_terms');
 
 // ================================= 18/11/19 abhishek anand ===========================================
 Route::get('tools-master/show_country','settingController@view_country');
@@ -236,9 +230,7 @@ Route::get('tools-master/city','settingController@view_city');
 Route::post('tools-master/add_new_city','settingController@add_new_city');
 Route::post('tools-master/update_city','settingController@update_city');
 Route::get('tools-master/delete_city/{id}','settingController@delete_city');
-
 Route::get('tools-master/fetch_according_to_country/{id}','settingController@fetch_according_to_country');
-Route::get('sale/customer_estimate/{id}', 'SalesController@view_customer_statement');
 
 
 // time zone 
@@ -247,9 +239,14 @@ Route::post('tools-master/add_time_zone','settingController@add_time_zone');
 Route::post('tools-master/update_time_zone','settingController@update_time_zone');
 Route::get('tools-master/delete_time_zone/{id}','settingController@delete_time_zone');
 
-Route::post('setting/user/add','settingController@add_user');
+// currency 
+Route::get('tools-master/currency','settingController@view_currency');
+Route::post('tools-master/add_currency','settingController@add_currency');
+Route::post('tools-master/update_currency','settingController@update_currency');
+Route::get('tools-master/delete_currency/{id}','settingController@delete_currency');
 
-
-//========================================================= nikhil setting/user ===============================================
-
-Route::get('setting/user', "settingController@index");
+// tax Rate
+Route::get('tools-master/tax_rate','settingController@view_tax_rate');
+Route::post('tools-master/add_tax_rate','settingController@add_tax_rate');
+Route::post('tools-master/update_tax_rate','settingController@update_tax_rate');
+Route::get('tools-master/delete_tax_rate/{id}','settingController@delete_tax_rate');

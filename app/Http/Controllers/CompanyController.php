@@ -28,10 +28,8 @@ class CompanyController extends Controller
       $countries = DB::table('countries')->where('is_deleted', '=', 0)->get();
       $state = DB::table('state')->orderBy('state','ASC')->where('is_deleted', '=', 0)->get();
       $cmpnydata = DB::table('org')->where('is_deleted', '=', 0)->get();
-      $currencies = DB::table('currencies')->where('active', '=', 1)->get();
-      $time_zone = DB::table('time_zone')->where('status', '=', 1)->get();
       $data['content'] = 'admin.company.Company-Listing';
-      return view('layouts.content', compact('data'))->with(['cities' => $cities, 'countries' => $countries, 'state' => $state, 'cmpnydata' => $cmpnydata ,'currencies' => $currencies,'time_zone' => $time_zone]);
+      return view('layouts.content', compact('data'))->with(['cities' => $cities, 'countries' => $countries, 'state' => $state, 'cmpnydata' => $cmpnydata]);
    }
 
    public function store(Request $request)
@@ -103,8 +101,8 @@ class CompanyController extends Controller
             $orgData['status'] =  $request->company_status;
             $orgData['ip_address'] =  $request->ip();
             $orgData['created_at'] =  date('Y-m-d H:i:s');
-            $orgData['currencies']=$request->currencies;
-            $orgData['time_zone']=$request->time_zone;
+            $orgData->currency=Session::get('currency');
+            $orgData->time_zone=Session::get('time_zone');
 
             if ($request->ids != '') {
                $id = $request->ids;

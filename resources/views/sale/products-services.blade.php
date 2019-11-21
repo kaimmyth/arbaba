@@ -513,7 +513,7 @@
         }
        
 
-        $("#sku").keyup(function(){
+        $("#sku").blur(function(){
 
             username2();
         });
@@ -683,37 +683,51 @@
         }
                 
 
-        //  $("#inclusive_tax").change(function(){
-        //      username9();
-        // });
-        // function username9(){
+         $("#inclusive_tax").change(function(){
+             username9();
+        });
+        function username9(){
           
-        //   if($("#inclusive_tax").prop("checked") == false){
+          if($("#inclusive_tax").prop("checked") == false){
 
-        //     $("#inclusive_tax_val").show();
-        //     $("#inclusive_tax_val").html("Plesee check the button ");
-        //     $("#inclusive_tax_val").focus();
-        //     $("#inclusive_tax_val").css("color","red");
+            $("#inclusive_tax_val").show();
+            $("#inclusive_tax_val").html("Plesee check the button ");
+            $("#inclusive_tax_val").focus();
+            $("#inclusive_tax_val").css("color","red");
 
-        //       err_sale_price=false;
-        //       return false;
-        //   }
-        //    else if($("#inclusive_tax").prop("checked") == true){
-        //     $("#inclusive_tax_val").hide();
+              err_sale_price=false;
+              return false;
+          }
+           else if($("#inclusive_tax").prop("checked") == true){
+            $("#inclusive_tax_val").hide();
 
-        //   }
-        // }
+          }
+        }
 
 
      $("#btn").click(function(){
 
       err_name=true;
-     
+      err_sku=true;
+      err_hsn=true;
+      err_sac=true;
+      err_unit=true;
+      err_category=true;
+      err_cost=true;
+      err_sale_price=true;
+
 
       username1();
-    
+      username2();
+      username3();
+      username4();
+      username5();
+      username6();
+      username7();
+      username8();
+      username9();
 
-     if(err_name==true)
+     if((err_name==true)&&(err_sku==true)&&(err_hsn==true)&&(err_sac==true)&&(err_unit==true)&&(err_category==true)&&(err_cost==true)&&(err_sale_price==true))
      {
         return true;
      }else{
