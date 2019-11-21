@@ -136,8 +136,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Terms</label>
-                            <input type="text" name="new_terms" class="form-control" value="" id="new_terms">
+                            <input type="text" name="new_terms" class="form-control" value="" id="new_terms" required>
                         </div>
+                        <!-- <h6 id="new_terms_val"></h6> -->
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
@@ -153,6 +154,31 @@
 
 
 
+
+
+
+<!-- for validation  -->
+
+<!-- <script>
+$(document).ready(function()
+ {
+   $("#new_terms_val").hide();
+    var err_first_name =true;
+        $("#new_terms").blur(function(){
+            username2();
+        });
+        function username2(){
+          var k = $("#new_terms").val();
+          if(k.length==""){
+            $("#new_terms_val").show();
+            $("#new_terms_val").html("Please input the Terms");
+            $("#new_terms_val").focus();
+            $("#new_terms_val").css("color","red");
+          }
+        }
+
+  });
+    </script> -->
 
 
 

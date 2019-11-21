@@ -169,23 +169,23 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Currency Name</label>
-                            <input type="text" name="currency_name" class="form-control" value="" id="currency_name">
+                            <input type="text" name="currency_name" class="form-control" value="" id="currency_name" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Currency Code</label>
-                            <input type="text" name="currency_code" class="form-control" value="" id="currency_code">
+                            <input type="text" name="currency_code" class="form-control" value="" id="currency_code" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Syamboll</label>
-                            <input type="text" name="currency_symbol" class="form-control" value="" id="currency_symbol">
+                            <input type="text" name="currency_symbol" class="form-control" value="" id="currency_symbol" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Formate</label>
-                            <input type="text" name="currency_formate" class="form-control" value="" id="currency_formate">
+                            <input type="text" name="currency_formate" class="form-control" value="" id="currency_formate" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Exchange Rate</label>
-                            <input type="text" name="currency_exchange_rate" class="form-control" value="" id="currency_exchange_rate">
+                            <input type="text" name="currency_exchange_rate" class="form-control" value="" id="currency_exchange_rate" required>
                         </div>
                     </div>
 

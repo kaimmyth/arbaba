@@ -145,7 +145,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter State</label>
-                            <input type="text" name="state_name" class="form-control" value="" id="state_name">
+                            <input type="text" name="state_name" class="form-control" value="" id="state_name" required>
                         </div>
                     </div>
 

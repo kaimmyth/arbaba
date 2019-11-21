@@ -94,19 +94,19 @@
                                 <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
                                     <label for="field-1" class="control-label">Time Zone</label> 
                                         <input type="hidden" id="time_zone_id" name="time_zone_id"> 
-                                        <input type="text" class="form-control"  name="time_zone_name" id="time_zone_name"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="time_zone_name" id="time_zone_name"  required placeholder="enter here...about" required> 
                             </div> 
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Country Short Name</label> 
-                                        <input type="text" class="form-control"  name="time_zone_short_name" id="time_zone_short_name"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="time_zone_short_name" id="time_zone_short_name"  required placeholder="enter here...about" required> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Change Time</label> 
-                                        <input type="text" class="form-control"  name="time_zone_change_time" id="time_zone_change_time"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="time_zone_change_time" id="time_zone_change_time"  required placeholder="enter here...about" required> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Value</label> 
-                                        <input type="text" class="form-control"  name="time_zone_value" id="time_zone_value"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="time_zone_value" id="time_zone_value"  required placeholder="enter here...about" required> 
                             </div>
                         </div> 
                     </div> 
@@ -163,19 +163,19 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Country Short Name</label>
-                            <input type="text" name="time_zone_short_name" class="form-control" value="" id="time_zone_short_name">
+                            <input type="text" name="time_zone_short_name" class="form-control" value="" id="time_zone_short_name" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Time Zone Name</label>
-                            <input type="text" name="time_zone_name" class="form-control" value="" id="time_zone_name">
+                            <input type="text" name="time_zone_name" class="form-control" value="" id="time_zone_name" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Change Time</label>
-                            <input type="text" name="time_zone_change_time" class="form-control" value="" id="time_zone_change_time">
+                            <input type="text" name="time_zone_change_time" class="form-control" value="" id="time_zone_change_time" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Value</label>
-                            <input type="text" name="time_zone_value" class="form-control" value="" id="time_zone_value">
+                            <input type="text" name="time_zone_value" class="form-control" value="" id="time_zone_value" required>
                         </div>
                     </div>
 

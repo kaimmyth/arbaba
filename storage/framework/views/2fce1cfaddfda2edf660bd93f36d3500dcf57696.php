@@ -136,7 +136,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Country</label>
-                            <input type="text" name="country_name" class="form-control" value="" id="country_name">
+                            <input type="text" name="country_name" class="form-control" value="" id="country_name" required>
                         </div>
                     </div>
 

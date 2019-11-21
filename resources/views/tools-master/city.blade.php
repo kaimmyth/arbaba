@@ -153,7 +153,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter City</label>
-                            <input type="text" name="city_name" class="form-control" value="" id="city_name">
+                            <input type="text" name="city_name" class="form-control" value="" id="city_name" required>
                         </div>
                     </div>
 

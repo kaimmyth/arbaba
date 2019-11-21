@@ -96,23 +96,23 @@
                                 <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
                                     <label for="field-1" class="control-label">Tax  Name</label> 
                                         <input type="hidden" id="tax_id" name="tax_id"> 
-                                        <input type="text" class="form-control"  name="tax_name" id="tax_name"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="tax_name" id="tax_name"  required placeholder="enter here...about" required> 
                             </div> 
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Tax Type</label> 
-                                        <input type="text" class="form-control"  name="tax_type" id="tax_type"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="tax_type" id="tax_type"  required placeholder="enter here...about" required> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Tax Discription</label> 
-                                        <input type="text" class="form-control"  name="tax_discription" id="tax_discription"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="tax_discription" id="tax_discription"  required placeholder="enter here...about" required> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Tax Validity</label> 
-                                        <input type="text" class="form-control"  name="tax_validity" id="tax_validity"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="tax_validity" id="tax_validity"  required placeholder="enter here...about" required> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Tax Rate</label> 
-                                        <input type="text" class="form-control"  name="tax_rate" id="tax_rate"  required placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="tax_rate" id="tax_rate"  required placeholder="enter here...about" required> 
                             </div>
                         </div> 
                     </div> 
@@ -169,24 +169,28 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Name</label>
-                            <input type="text" name="tax_name" class="form-control" value="" id="tax_name">
+                            <input type="text" name="tax_name" class="form-control" value="" id="tax_name" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Type</label>
-                            <input type="text" name="tax_type" class="form-control" value="" id="tax_type">
+                            <input type="text" name="tax_type" class="form-control" value="" id="tax_type" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Discription</label>
-                            <input type="text" name="tax_discription" class="form-control" value="" id="tax_discription">
+                            <input type="text" name="tax_discription" class="form-control" value="" id="tax_discription" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Validity</label>
-                            <input type="text" name="tax_validity" class="form-control" value="" id="tax_validity">
+                            <input type="text" name="tax_validity" class="form-control" value="" id="tax_validity" required>
                         </div>
+
+                        
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Rate</label>
-                            <input type="text" name="tax_rate" class="form-control" value="" id="tax_rate">
+                            <input type="text" name="tax_rate" class="form-control" value="" id="tax_rate" required>
                         </div>
+                       
+                        
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
@@ -199,7 +203,6 @@
         </div>
     </div>
 <!-- end of model  -->
-
 
 
 
