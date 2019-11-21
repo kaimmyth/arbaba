@@ -16,16 +16,14 @@ class CheckRole
         $authID = Auth::user()->id;
         $odata = Company::where('users_id',$authID)->first();
         if ($odata) {
-            
             Session::put('gorgID',$odata->id);
             Session::put('org_id',Auth::user()->org_id);
-
+            Session::put('currency',$odata->currencies);
+            Session::put('time_zone',$odata->time_zone);
         }else{
             Session::put('gorgID',1);
             Session::put('org_id',Auth::user()->org_id);
-
         }       
-
         return $next($request);
     }
     elseif (Auth::check() && Auth::user()->users_role == 2) {
