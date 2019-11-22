@@ -169,28 +169,33 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Currency Name</label>
-                            <input type="text" name="currency_name" class="form-control" value="" id="currency_name" required>
+                            <input type="text" name="currency_name" class="form-control" value="" id="currency_name_add" >
                         </div>
+                        <h6 id="currency_name_val"></h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Currency Code</label>
-                            <input type="text" name="currency_code" class="form-control" value="" id="currency_code" required>
+                            <input type="text" name="currency_code" class="form-control" value="" id="currency_code_add" >
                         </div>
+                        <h6 id="currency_code_val"></h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Syamboll</label>
-                            <input type="text" name="currency_symbol" class="form-control" value="" id="currency_symbol" required>
+                            <input type="text" name="currency_symbol" class="form-control" value="" id="currency_symbol_add" >
                         </div>
+                        <h6 id="currency_symbol_val"></h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Formate</label>
-                            <input type="text" name="currency_formate" class="form-control" value="" id="currency_formate" required>
+                            <input type="text" name="currency_formate" class="form-control" value="" id="currency_formate_add" >
                         </div>
+                        <h6 id="currency_formate_val"></h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Exchange Rate</label>
-                            <input type="text" name="currency_exchange_rate" class="form-control" value="" id="currency_exchange_rate" required>
+                            <input type="text" name="currency_exchange_rate" class="form-control" value="" id="currency_exchange_rate_add" >
                         </div>
+                        <h6 id="currency_exchange_rate_val"></h6>
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
-                        <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
+                        <button type="submit" class="btn btn-primary waves-effect" id="btnSubmit">Save</button>
                         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -199,6 +204,164 @@
         </div>
     </div>
 <!-- end of model  -->
+
+
+
+
+
+<!-- for validation  -->
+
+<script>
+$(document).ready(function()
+ {
+  
+   $("#currency_name_val").hide();
+   $("#currency_code_val").hide();
+   $("#currency_symbol_val").hide();
+   $("#currency_formate_val").hide();
+   $("#currency_exchange_rate_val").hide();
+
+
+
+   
+
+        $("#currency_name_add").blur(function(){
+            username1();
+        });
+        $("#currency_code_add").blur(function(){
+            username2();
+        });
+        $("#currency_symbol_add").blur(function(){
+            username3();
+        });
+        $("#currency_formate_add").blur(function(){
+            username4();
+        });
+        $("#currency_exchange_rate_add").blur(function(){
+            username5();
+        });
+
+
+
+        
+        function username1(){
+          var p = $("#currency_name_add").val();
+          if(p.length==""){
+            $("#currency_name_val").show();
+            $("#currency_name_val").html("Please input Currency Name");
+            $("#currency_name_val").focus();
+            $("#currency_name_val").css("color","red");
+
+                err_add_currency_name=false;
+                    return false;
+          }
+          else{
+                err_add_currency_name=true;
+              $("#currency_name_val").hide();
+              
+          }
+        }
+
+        function username2(){
+          var p = $("#currency_code_add").val();
+          if(p.length==""){
+            $("#currency_code_val").show();
+            $("#currency_code_val").html("Please input Currency Code");
+            $("#currency_code_val").focus();
+            $("#currency_code_val").css("color","red");
+
+                err_add_currency_code=false;
+                    return false;
+          }
+          else{
+                err_add_currency_code=true;
+              $("#currency_code_val").hide();
+              
+          }
+        }
+
+        function username3(){
+          var p = $("#currency_symbol_add").val();
+          if(p.length==""){
+            $("#currency_symbol_val").show();
+            $("#currency_symbol_val").html("Please input Syamboll");
+            $("#currency_symbol_val").focus();
+            $("#currency_symbol_val").css("color","red");
+
+                err_add_currency_symbol=false;
+                    return false;
+          }
+          else{
+                err_add_currency_symbol=true;
+              $("#currency_symbol_val").hide();
+              
+          }
+        }
+
+        function username4(){
+          var p = $("#currency_formate_add").val();
+          if(p.length==""){
+            $("#currency_formate_val").show();
+            $("#currency_formate_val").html("Please input  Formate");
+            $("#currency_formate_val").focus();
+            $("#currency_formate_val").css("color","red");
+
+                err_add_currency_formate=false;
+                    return false;
+          }
+          else{
+                err_add_currency_formate=true;
+              $("#currency_formate_val").hide();
+              
+          }
+        }
+
+        function username5(){
+          var p = $("#currency_exchange_rate_add").val();
+          if(p.length==""){
+            $("#currency_exchange_rate_val").show();
+            $("#currency_exchange_rate_val").html("Please input Exchange Rate");
+            $("#currency_exchange_rate_val").focus();
+            $("#currency_exchange_rate_val").css("color","red");
+
+                err_add_currency_exchange_rate=false;
+                    return false;
+          }
+          else{
+                err_add_currency_exchange_rate=true;
+              $("#currency_exchange_rate_val").hide();
+              
+          }
+        }
+
+
+
+        $("#btnSubmit").click(function(){
+        err_add_currency_name=true;
+        err_add_currency_code=true;
+        err_add_currency_symbol=true;
+        err_add_currency_formate=true;
+        err_add_currency_exchange_rate=true;
+        username1();
+        username2();
+        username3();
+        username4();
+        username5();
+        if((err_add_currency_name==true)&&(err_add_currency_code==true)&&(err_add_currency_symbol==true)&&(err_add_currency_formate==true)&&(err_add_currency_exchange_rate==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+        });
+
+       
+
+
+  });
+    </script>
+
 
 
 
