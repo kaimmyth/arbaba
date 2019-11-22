@@ -44,12 +44,12 @@
 
                                         <?php $__currentLoopData = $toReturn['cities']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <?php $id=$value['city_id']; ?>
+                                            <?php $id=$value['id']; ?>
                                                 <td><?php echo e($sl_no++); ?></td>
                                                 <td><?php echo e($value['city']); ?></td>
                                                 <td class="actions">
                                                     <a href="#" class="on-default edit-row" data-city_id="<?php echo e($id); ?>"  data-city_name="<?php echo e($value['city']); ?>" data-toggle="modal" data-target="#edit_model_city" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="<?php echo e(url('tools-master/delete_city/'.$value['city_id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="<?php echo e(url('tools-master/delete_city/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
 
                                         </tr>
@@ -138,7 +138,7 @@
                             <select class="form-control" onchange="terms_details_show(this.value)"  name="country_id" id="country_id"  required>
                             <option>-Select-</option>
                                 <?php $__currentLoopData = $toReturn['country']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($value['country_id']); ?>" ><?php echo e($value['country_name']); ?> </option>
+                                <option value="<?php echo e($value['id']); ?>" ><?php echo e($value['country_name']); ?> </option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
@@ -153,14 +153,12 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter City</label>
-                            <input type="text" name="city_name" class="form-control" value="" id="city_name_add" >
+                            <input type="text" name="city_name" class="form-control" value="" id="city_name" required>
                         </div>
-                        <h6 id="city_name_val"></h6>
-
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
-                        <button type="submit" id="btnSubmit" class="btn btn-primary waves-effect" id="btn">Save</button>
+                        <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
                         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -187,7 +185,7 @@
                 method: "GET",
                 success: function (data) {
                             $.each(data,function(i,content){
-                            $("#state_id").append("<option value='"+content.state_id+"'>"+content.state_name+"</option>");
+                            $("#state_id").append("<option value='"+content.id+"'>"+content.state+"</option>");
                         });
                         console.log(data);
 
@@ -196,73 +194,6 @@
 }
 </script>
 
-
-
-
-
-
-<!-- for validation  -->
-
-<script>
-$(document).ready(function()
- {
- 
-   $("#city_name_val").hide();
-   
-   
-
-      
-        $("#city_name_add").blur(function(){
-            username3();
-        });
-        
-        
-       
-
-        function username3(){
-          var p = $("#city_name_add").val();
-          if(p.length==""){
-            $("#city_name_val").show();
-            $("#city_name_val").html("Please input the city");
-            $("#city_name_val").focus();
-            $("#city_name_val").css("color","red");
-
-                err_city_name=false;
-                    return false;
-          }
-          else{
-                err_city_name=true;
-              $("#city_name_val").hide();
-              
-          }
-        }
-
-       
-
-        $("#btnSubmit").click(function(){
-
-            err_city_name=true;
-        
-
-      
-        username3();
-
-        if(err_city_name==true)
-        {
-            return true;
-        }
-        else{
-            return false;
-            
-        }
-
-        });
-
-       
-
-
-  });
-    </script>
 
 
 

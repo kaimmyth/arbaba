@@ -46,23 +46,23 @@
                                 <tbody>
                                     <?php $sl_no=1; ?>
 
-                                        @foreach ($toReturn as $value)
+                                        <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <?php $id=$value['id']; ?> 
-                                                <td>{{$sl_no++}}</td>
-                                                <td>{{$value['name']}}</td>
-                                                <td>{{$value['code']}}</td>
-                                                <td>{{$value['symbol']}}</td>
-                                                <td>{{$value['format']}}</td>
-                                                <td>{{$value['exchange_rate']}}</td>
+                                                <td><?php echo e($sl_no++); ?></td>
+                                                <td><?php echo e($value['name']); ?></td>
+                                                <td><?php echo e($value['code']); ?></td>
+                                                <td><?php echo e($value['symbol']); ?></td>
+                                                <td><?php echo e($value['format']); ?></td>
+                                                <td><?php echo e($value['exchange_rate']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-currency_id="{{$id}}" data-currency_name="{{$value['name']}}" data-currency_code="{{$value['code']}}" data-currency_symbol="{{$value['symbol']}}" data-currency_formate="{{$value['format']}}" data-currency_exchange_rate="{{$value['exchange_rate']}}" data-toggle="modal" data-target="#edit_model_currency" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_currency/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-currency_id="<?php echo e($id); ?>" data-currency_name="<?php echo e($value['name']); ?>" data-currency_code="<?php echo e($value['code']); ?>" data-currency_symbol="<?php echo e($value['symbol']); ?>" data-currency_formate="<?php echo e($value['format']); ?>" data-currency_exchange_rate="<?php echo e($value['exchange_rate']); ?>" data-toggle="modal" data-target="#edit_model_currency" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('tools-master/delete_currency/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                               
 
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -89,11 +89,11 @@
                     </button>
             </div> 
             <div class="modal-body"> 
-                <form action ="{{url('tools-master/update_currency')}}" method="post">
+                <form action ="<?php echo e(url('tools-master/update_currency')); ?>" method="post">
                     <div class="row"> 
                         <div class="col-md-12"> 
                             <div class="form-group">
-                                <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
+                                <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
                                     <label for="field-1" class="control-label">Currency Name</label> 
                                         <input type="hidden" id="currency_id" name="currency_id"> 
                                         <input type="text" class="form-control"  name="currency_name" id="currency_name"  required placeholder="enter here...about"> 
@@ -164,28 +164,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{url('tools-master/add_currency')}}" method="POST">
-                   @csrf
+                <form action="<?php echo e(url('tools-master/add_currency')); ?>" method="POST">
+                   <?php echo csrf_field(); ?>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Currency Name</label>
-                            <input type="text" name="currency_name" class="form-control" value="" id="currency_name" required>
+                            <input type="text" name="currency_name" class="form-control" value="" id="currency_name">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Currency Code</label>
-                            <input type="text" name="currency_code" class="form-control" value="" id="currency_code" required>
+                            <input type="text" name="currency_code" class="form-control" value="" id="currency_code">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Syamboll</label>
-                            <input type="text" name="currency_symbol" class="form-control" value="" id="currency_symbol" required>
+                            <input type="text" name="currency_symbol" class="form-control" value="" id="currency_symbol">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Formate</label>
-                            <input type="text" name="currency_formate" class="form-control" value="" id="currency_formate" required>
+                            <input type="text" name="currency_formate" class="form-control" value="" id="currency_formate">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Exchange Rate</label>
-                            <input type="text" name="currency_exchange_rate" class="form-control" value="" id="currency_exchange_rate" required>
+                            <input type="text" name="currency_exchange_rate" class="form-control" value="" id="currency_exchange_rate">
                         </div>
                     </div>
 
@@ -277,3 +277,4 @@
 
 
 
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/currency.blade.php ENDPATH**/ ?>

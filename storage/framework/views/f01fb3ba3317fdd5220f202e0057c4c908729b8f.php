@@ -18,7 +18,7 @@
                     <ol class="breadcrumb pull-right">
                         <li><a href="#">Home </a></li>
                         <li><a href="#">Tools/master </a></li>
-                        <li class="active">Country</li>
+                        <li class="active">Terms</li>
                     </ol>
                 </div>
             </div>
@@ -35,26 +35,26 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Country Name</th>
+                                        <th>TERMS</th>
                                         <th>ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $sl_no=1; ?>
 
-                                        @foreach ($toReturn as $value)
+                                        <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <?php $id=$value['id']; ?> 
-                                                <td>{{$sl_no++}}</td>
-                                                <td>{{$value['country_name']}}</td>
+                                            <?php $id=$value['id']; ?>
+                                                <td><?php echo e($sl_no++); ?></td>
+                                                <td><?php echo e($value['terms']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-coun_id="{{$id}}" data-country_name="{{$value['country_name']}}" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_country/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-terms_id="<?php echo e($id); ?>" data-terms_terms="<?php echo e($value['terms']); ?>" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('terms/delete_terms/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
-                                              
+                                                <!-- <td></td> -->
 
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -75,20 +75,20 @@
     <div class="modal-dialog"> 
         <div class="modal-content"> 
             <div class="modal-header">
-                <h4 class="modal-title mt-0">Edit Country</h4> 
+                <h4 class="modal-title mt-0">Edit Terms</h4> 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div> 
             <div class="modal-body"> 
-                <form action ="{{url('tools-master/update_country')}}" method="post">
+                <form action ="<?php echo e(url('terms/update_terms')); ?>" method="post">
                     <div class="row"> 
                         <div class="col-md-12"> 
                             <div class="form-group">
-                                <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
-                                    <label for="field-1" class="control-label">Country</label> 
-                                        <input type="hidden" id="coun_id" name="coun_id"> 
-                                        <input type="text" class="form-control"  name="country_name" id="country_name"  required placeholder="enter here...about"> 
+                                <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
+                                    <label for="field-1" class="control-label">Terms</label> 
+                                        <input type="hidden" id="terms_id" name="terms_id"> 
+                                        <input type="text" class="form-control"  name="terms_terms" id="terms_terms"  required placeholder="enter here...about"> 
                             </div> 
                         </div> 
                     </div> 
@@ -108,12 +108,12 @@
     $(document).ready(function() {
     $('#edit_model_practic').on('show.bs.modal' , function (event){
         var button = $(event.relatedTarget)
-        var  country_name = button.data('country_name')
-        var coun_id = button.data('coun_id')
+        var  terms_terms = button.data('terms_terms')
+        var terms_id = button.data('terms_id')
         var modal = $(this)
 
-        modal.find('.modal-body #country_name').val(country_name);
-        modal.find('.modal-body #coun_id').val(coun_id);
+        modal.find('.modal-body #terms_terms').val(terms_terms);
+        modal.find('.modal-body #terms_id').val(terms_id);
 
     })
     });
@@ -125,19 +125,20 @@
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title mt-0" id="myLargeModalLabel">New Country</h4>
+                    <h4 class="modal-title mt-0" id="myLargeModalLabel">New Terms</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{url('tools-master/add_country')}}" method="POST">
-                   @csrf
+                <form action="<?php echo e(url('terms/add_new_terms')); ?>" method="POST">
+                   <?php echo csrf_field(); ?>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Enter Country</label>
-                            <input type="text" name="country_name" class="form-control" value="" id="country_name" required>
+                            <label for="exampleInputEmail1">Enter Terms</label>
+                            <input type="text" name="new_terms" class="form-control" value="" id="new_terms" required>
                         </div>
+                        <!-- <h6 id="new_terms_val"></h6> -->
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
@@ -156,8 +157,28 @@
 
 
 
+<!-- for validation  -->
 
+<!-- <script>
+$(document).ready(function()
+ {
+   $("#new_terms_val").hide();
+    var err_first_name =true;
+        $("#new_terms").blur(function(){
+            username2();
+        });
+        function username2(){
+          var k = $("#new_terms").val();
+          if(k.length==""){
+            $("#new_terms_val").show();
+            $("#new_terms_val").html("Please input the Terms");
+            $("#new_terms_val").focus();
+            $("#new_terms_val").css("color","red");
+          }
+        }
 
+  });
+    </script> -->
 
 
 
@@ -228,3 +249,9 @@
 
 
 
+
+
+
+
+
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/tools-master/terms.blade.php ENDPATH**/ ?>

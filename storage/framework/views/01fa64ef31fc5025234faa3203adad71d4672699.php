@@ -45,22 +45,22 @@
                                 <tbody>
                                     <?php $sl_no=1; ?>
 
-                                        @foreach ($toReturn as $value)
+                                        <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <?php $id=$value['id']; ?> 
-                                                <td>{{$sl_no++}}</td>
-                                                <td>{{$value['short_name']}}</td>
-                                                <td>{{$value['time_zone_name']}}</td>
-                                                <td>{{$value['change_time']}}</td>
-                                                <td>{{$value['cal_value']}}</td>
+                                                <td><?php echo e($sl_no++); ?></td>
+                                                <td><?php echo e($value['short_name']); ?></td>
+                                                <td><?php echo e($value['time_zone_name']); ?></td>
+                                                <td><?php echo e($value['change_time']); ?></td>
+                                                <td><?php echo e($value['cal_value']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-time_zone_id="{{$id}}" data-time_zone_name="{{$value['time_zone_name']}}" data-time_zone_short_name="{{$value['short_name']}}" data-time_zone_change_time="{{$value['change_time']}}" data-time_zone_value="{{$value['cal_value']}}" data-toggle="modal" data-target="#edit_model_time_zone" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_time_zone/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-time_zone_id="<?php echo e($id); ?>" data-time_zone_name="<?php echo e($value['time_zone_name']); ?>" data-time_zone_short_name="<?php echo e($value['short_name']); ?>" data-time_zone_change_time="<?php echo e($value['change_time']); ?>" data-time_zone_value="<?php echo e($value['cal_value']); ?>" data-toggle="modal" data-target="#edit_model_time_zone" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('tools-master/delete_time_zone/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                               
 
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -87,26 +87,26 @@
                     </button>
             </div> 
             <div class="modal-body"> 
-                <form action ="{{url('tools-master/update_time_zone')}}" method="post">
+                <form action ="<?php echo e(url('tools-master/update_time_zone')); ?>" method="post">
                     <div class="row"> 
                         <div class="col-md-12"> 
                             <div class="form-group">
-                                <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
+                                <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
                                     <label for="field-1" class="control-label">Time Zone</label> 
-                                        <input type="hidden" id="time_zone_id" name="time_zone_id"> 
-                                        <input type="text" class="form-control"  name="time_zone_name" id="time_zone_name"  required placeholder="enter here...about" required> 
+                                        <input type="text" id="time_zone_id" name="time_zone_id"> 
+                                        <input type="text" class="form-control"  name="time_zone_name" id="time_zone_name"  required placeholder="enter here...about"> 
                             </div> 
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Country Short Name</label> 
-                                        <input type="text" class="form-control"  name="time_zone_short_name" id="time_zone_short_name"  required placeholder="enter here...about" required> 
+                                        <input type="text" class="form-control"  name="time_zone_short_name" id="time_zone_short_name"  required placeholder="enter here...about"> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Change Time</label> 
-                                        <input type="text" class="form-control"  name="time_zone_change_time" id="time_zone_change_time"  required placeholder="enter here...about" required> 
+                                        <input type="text" class="form-control"  name="time_zone_change_time" id="time_zone_change_time"  required placeholder="enter here...about"> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Value</label> 
-                                        <input type="text" class="form-control"  name="time_zone_value" id="time_zone_value"  required placeholder="enter here...about" required> 
+                                        <input type="text" class="form-control"  name="time_zone_value" id="time_zone_value"  required placeholder="enter here...about"> 
                             </div>
                         </div> 
                     </div> 
@@ -158,24 +158,24 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{url('tools-master/add_time_zone')}}" method="POST">
-                   @csrf
+                <form action="<?php echo e(url('tools-master/add_time_zone')); ?>" method="POST">
+                   <?php echo csrf_field(); ?>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Country Short Name</label>
-                            <input type="text" name="time_zone_short_name" class="form-control" value="" id="time_zone_short_name" required>
+                            <input type="text" name="time_zone_short_name" class="form-control" value="" id="time_zone_short_name">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Time Zone Name</label>
-                            <input type="text" name="time_zone_name" class="form-control" value="" id="time_zone_name" required>
+                            <input type="text" name="time_zone_name" class="form-control" value="" id="time_zone_name">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Change Time</label>
-                            <input type="text" name="time_zone_change_time" class="form-control" value="" id="time_zone_change_time" required>
+                            <input type="text" name="time_zone_change_time" class="form-control" value="" id="time_zone_change_time">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Value</label>
-                            <input type="text" name="time_zone_value" class="form-control" value="" id="time_zone_value" required>
+                            <input type="text" name="time_zone_value" class="form-control" value="" id="time_zone_value">
                         </div>
                     </div>
 
@@ -267,3 +267,4 @@
 
 
 
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/time_zone.blade.php ENDPATH**/ ?>

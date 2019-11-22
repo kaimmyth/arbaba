@@ -36,7 +36,6 @@
                                     <tr>
                                         <th>#</th>
                                         <th>TERMS</th>
-                                        <th>TERMS TYPE </th>
                                         <th>ACTION</th>
                                     </tr>
                                 </thead>
@@ -48,9 +47,8 @@
                                             <?php $id=$value['id']; ?>
                                                 <td>{{$sl_no++}}</td>
                                                 <td>{{$value['terms']}}</td>
-                                                <td>{{$value['terms_type']}}</td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-terms_id="{{$id}}" data-terms_terms="{{$value['terms']}}" data-terms_type="{{$value['terms_type']}}" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-terms_id="{{$id}}" data-terms_terms="{{$value['terms']}}" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                                     <a href="{{url('terms/delete_terms/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                                 <!-- <td></td> -->
@@ -90,22 +88,15 @@
                                 <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
                                     <label for="field-1" class="control-label">Terms</label> 
                                         <input type="hidden" id="terms_id" name="terms_id"> 
-                                        <input type="text" class="form-control"  name="terms_terms" id="terms_terms"   placeholder="enter here...about"> 
+                                        <input type="text" class="form-control"  name="terms_terms" id="terms_terms"  required placeholder="enter here...about"> 
                             </div> 
-                            <h6 id="term_term_val"></h6>
-                            <div class="form-group">
-                               
-                                    <label for="field-1" class="control-label">Terms Type</label> 
-                                        <input type="text" class="form-control"  name="terms_type" id="terms_type" required placeholder="enter here...about"> 
-                            </div> 
-                           
                         </div> 
                     </div> 
                   
             </div> 
             <div class="modal-footer"> 
                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
-                <button type="submit" id="edit_submit" class="btn btn-info waves-effect waves-light" name="save">Edited</button> 
+                <button type="submit" class="btn btn-info waves-effect waves-light" name="save">Edited</button> 
             </div> 
             </form>
         </div> 
@@ -119,12 +110,10 @@
         var button = $(event.relatedTarget)
         var  terms_terms = button.data('terms_terms')
         var terms_id = button.data('terms_id')
-        var terms_type = button.data('terms_type')
         var modal = $(this)
 
         modal.find('.modal-body #terms_terms').val(terms_terms);
         modal.find('.modal-body #terms_id').val(terms_id);
-        modal.find('.modal-body #terms_type').val(terms_type);
 
     })
     });
@@ -147,19 +136,13 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Terms</label>
-                            <input type="text" name="new_terms" class="form-control" value="" id="new_terms" >
+                            <input type="text" name="new_terms" class="form-control" value="" id="new_terms" required>
                         </div>
-                        <h6 id="new_terms_val"></h6>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Enter Terms Type</label>
-                            <input type="text" name="terms_type" class="form-control" value="" id="terms_typee" >
-                        </div>
-                        <h6 id="terms_type_val"></h6>
+                        <!-- <h6 id="new_terms_val"></h6> -->
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
-                        <button type="submit" class="btn btn-primary waves-effect"  id="btnSubmit">Save</button>
+                        <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
                         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -176,134 +159,26 @@
 
 <!-- for validation  -->
 
-<script>
+<!-- <script>
 $(document).ready(function()
  {
    $("#new_terms_val").hide();
-   $("#terms_type_val").hide();
-   $("#term_term_val").hide();
-   
-
-   
-
+    var err_first_name =true;
         $("#new_terms").blur(function(){
             username2();
         });
-        $("#terms_typee").blur(function(){
-            username3();
-        });
-        $("#terms_terms").blur(function(){
-            username4();
-        });
-       
-        
-       
         function username2(){
           var k = $("#new_terms").val();
-          var regexOnlyNumbers=/^[0-9]+$/;
-          if(k.length==""||regexOnlyNumbers.test(k) != true){
+          if(k.length==""){
             $("#new_terms_val").show();
-            $("#new_terms_val").html("Please input numbers");
+            $("#new_terms_val").html("Please input the Terms");
             $("#new_terms_val").focus();
             $("#new_terms_val").css("color","red");
-
-                err_new_terms=false;
-                    return false;
-          }
-          else{
-                err_new_terms=true;
-              $("#new_terms_val").hide();
-              
           }
         }
-
-        function username3(){
-          var p = $("#terms_typee").val();
-          if(p.length==""){
-            $("#terms_type_val").show();
-            $("#terms_type_val").html("Please input the Terms");
-            $("#terms_type_val").focus();
-            $("#terms_type_val").css("color","red");
-
-                err_terms_type=false;
-                    return false;
-          }
-          else{
-                err_terms_type=true;
-              $("#terms_type_val").hide();
-              
-          }
-        }
-
-        function username4(){
-          var k = $("#terms_terms").val();
-          var regexOnlyNumbers=/^[0-9]+$/;
-          if(k.length==""||regexOnlyNumbers.test(k) != true){
-            $("#term_term_val").show();
-            $("#term_term_val").html("Please input numbers");
-            $("#term_term_val").focus();
-            $("#term_term_val").css("color","red");
-
-                err_terms_terms=false;
-                    return false;
-          }
-          else{
-                err_terms_terms=true;
-              $("#term_term_val").hide();
-              
-          }
-        }
-
-       
-
-        
-
-
-
-        
-
-        $("#btnSubmit").click(function(){
-
-        err_new_terms=true;
-        err_terms_type=true;
-
-        username2();
-        username3();
-
-        if((err_new_terms==true)&&(err_terms_type==true))
-        {
-            return true;
-        }
-        else{
-            return false;
-            
-        }
-
-        });
-
-        $("#edit_submit").click(function(){
-
-            err_terms_terms=true;
-            err_terms_type_edit=true;
-       
-
-        username4();
-        
-       
-        if(err_terms_terms==true)
-        {
-            return true;
-        }
-        else{
-            return false;
-            
-        }
-
-        });
-
 
   });
-    </script>
+    </script> -->
 
 
 

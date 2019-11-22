@@ -46,23 +46,23 @@
                                 <tbody>
                                     <?php $sl_no=1; ?>
 
-                                        @foreach ($toReturn as $value)
+                                        <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <?php $id=$value['id']; ?> 
-                                                <td>{{$sl_no++}}</td>
-                                                <td>{{$value['tax_name']}}</td>
-                                                <td>{{$value['tax_type']}}</td>
-                                                <td>{{$value['tax_discription']}}</td>
-                                                <td>{{$value['tax_validity']}}</td>
-                                                <td>{{$value['tax_rate']}}</td>
+                                                <td><?php echo e($sl_no++); ?></td>
+                                                <td><?php echo e($value['tax_name']); ?></td>
+                                                <td><?php echo e($value['tax_type']); ?></td>
+                                                <td><?php echo e($value['tax_discription']); ?></td>
+                                                <td><?php echo e($value['tax_validity']); ?></td>
+                                                <td><?php echo e($value['tax_rate']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-tax_id="{{$id}}" data-tax_name="{{$value['tax_name']}}" data-tax_type="{{$value['tax_type']}}" data-tax_discription="{{$value['tax_discription']}}" data-tax_validity="{{$value['tax_validity']}}" data-tax_rate="{{$value['tax_rate']}}" data-toggle="modal" data-target="#edit_model_tax_rate" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_tax_rate/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-tax_id="<?php echo e($id); ?>" data-tax_name="<?php echo e($value['tax_name']); ?>" data-tax_type="<?php echo e($value['tax_type']); ?>" data-tax_discription="<?php echo e($value['tax_discription']); ?>" data-tax_validity="<?php echo e($value['tax_validity']); ?>" data-tax_rate="<?php echo e($value['tax_rate']); ?>" data-toggle="modal" data-target="#edit_model_tax_rate" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('tools-master/delete_tax_rate/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                               
 
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -89,30 +89,30 @@
                     </button>
             </div> 
             <div class="modal-body"> 
-                <form action ="{{url('tools-master/update_tax_rate')}}" method="post">
+                <form action ="<?php echo e(url('tools-master/update_tax_rate')); ?>" method="post">
                     <div class="row"> 
                         <div class="col-md-12"> 
                             <div class="form-group">
-                                <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
+                                <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
                                     <label for="field-1" class="control-label">Tax  Name</label> 
                                         <input type="hidden" id="tax_id" name="tax_id"> 
-                                        <input type="text" class="form-control"  name="tax_name" id="tax_name"  required placeholder="enter here...about" required> 
+                                        <input type="text" class="form-control"  name="tax_name" id="tax_name"  required placeholder="enter here...about"> 
                             </div> 
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Tax Type</label> 
-                                        <input type="text" class="form-control"  name="tax_type" id="tax_type"  required placeholder="enter here...about" required> 
+                                        <input type="text" class="form-control"  name="tax_type" id="tax_type"  required placeholder="enter here...about"> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Tax Discription</label> 
-                                        <input type="text" class="form-control"  name="tax_discription" id="tax_discription"  required placeholder="enter here...about" required> 
+                                        <input type="text" class="form-control"  name="tax_discription" id="tax_discription"  required placeholder="enter here...about"> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Tax Validity</label> 
-                                        <input type="text" class="form-control"  name="tax_validity" id="tax_validity"  required placeholder="enter here...about" required> 
+                                        <input type="text" class="form-control"  name="tax_validity" id="tax_validity"  required placeholder="enter here...about"> 
                             </div>
                             <div class="form-group">
                                     <label for="field-1" class="control-label">Tax Rate</label> 
-                                        <input type="text" class="form-control"  name="tax_rate" id="tax_rate"  required placeholder="enter here...about" required> 
+                                        <input type="text" class="form-control"  name="tax_rate" id="tax_rate"  required placeholder="enter here...about"> 
                             </div>
                         </div> 
                     </div> 
@@ -164,33 +164,29 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{url('tools-master/add_tax_rate')}}" method="POST">
-                   @csrf
+                <form action="<?php echo e(url('tools-master/add_tax_rate')); ?>" method="POST">
+                   <?php echo csrf_field(); ?>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Name</label>
-                            <input type="text" name="tax_name" class="form-control" value="" id="tax_name" required>
+                            <input type="text" name="tax_name" class="form-control" value="" id="tax_name">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Type</label>
-                            <input type="text" name="tax_type" class="form-control" value="" id="tax_type" required>
+                            <input type="text" name="tax_type" class="form-control" value="" id="tax_type">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Discription</label>
-                            <input type="text" name="tax_discription" class="form-control" value="" id="tax_discription" required>
+                            <input type="text" name="tax_discription" class="form-control" value="" id="tax_discription">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Validity</label>
-                            <input type="text" name="tax_validity" class="form-control" value="" id="tax_validity" required>
+                            <input type="text" name="tax_validity" class="form-control" value="" id="tax_validity">
                         </div>
-
-                        
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Tax Rate</label>
-                            <input type="text" name="tax_rate" class="form-control" value="" id="tax_rate" required>
+                            <input type="text" name="tax_rate" class="form-control" value="" id="tax_rate">
                         </div>
-                       
-                        
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
@@ -280,3 +276,5 @@
 
 
 
+
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/tax_rate.blade.php ENDPATH**/ ?>

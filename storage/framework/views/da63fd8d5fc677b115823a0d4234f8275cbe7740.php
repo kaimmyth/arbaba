@@ -42,18 +42,18 @@
                                 <tbody>
                                     <?php $sl_no=1; ?>
 
-                                        @foreach ($toReturn['cities'] as $value)
+                                        <?php $__currentLoopData = $toReturn['cities']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <?php $id=$value['id']; ?>
-                                                <td>{{$sl_no++}}</td>
-                                                <td>{{$value['city']}}</td>
+                                                <td><?php echo e($sl_no++); ?></td>
+                                                <td><?php echo e($value['city']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-city_id="{{$id}}"  data-city_name="{{$value['city']}}" data-toggle="modal" data-target="#edit_model_city" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_city/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-city_id="<?php echo e($id); ?>"  data-city_name="<?php echo e($value['city']); ?>" data-toggle="modal" data-target="#edit_model_city" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('tools-master/delete_city/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
 
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -80,11 +80,11 @@
                     </button>
             </div> 
             <div class="modal-body"> 
-                <form action ="{{url('tools-master/update_city')}}" method="post">
+                <form action ="<?php echo e(url('tools-master/update_city')); ?>" method="post">
                     <div class="row"> 
                         <div class="col-md-12"> 
                             <div class="form-group">
-                                <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
+                                <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
                                     <label for="field-1" class="control-label">State</label> 
                                         <input type="hidden" id="city_id" name="city_id"> 
                                         <input type="text" class="form-control"  name="city_name" id="city_name"  required placeholder="enter here...about"> 
@@ -130,16 +130,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{url('tools-master/add_new_city')}}" method="POST">
-                   @csrf
+                <form action="<?php echo e(url('tools-master/add_new_city')); ?>" method="POST">
+                   <?php echo csrf_field(); ?>
                     <div class="col-md-12">
                     <div class="form-group">
                             <label for="exampleInputEmail1">Select Country</label>
                             <select class="form-control" onchange="terms_details_show(this.value)"  name="country_id" id="country_id"  required>
                             <option>-Select-</option>
-                                @foreach($toReturn['country'] as $value)
-                                <option value="{{$value['id']}}" >{{$value['country_name']}} </option>
-                                @endforeach
+                                <?php $__currentLoopData = $toReturn['country']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($value['id']); ?>" ><?php echo e($value['country_name']); ?> </option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -153,7 +153,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter City</label>
-                            <input type="text" name="city_name" class="form-control" value="" id="city_name" required>
+                            <input type="text" name="city_name" class="form-control" value="" id="city_name">
                         </div>
                     </div>
 
@@ -172,6 +172,7 @@
 
 <script>
         function terms_details_show(id) {
+
         $('#state_id').empty();
         // alert(id);
         $.ajaxSetup({
@@ -181,7 +182,7 @@
         });
 
         $.ajax({
-                url: "{{url('tools-master/fetch_according_to_country')}}" + "/" + id,
+                url: "<?php echo e(url('tools-master/fetch_according_to_country')); ?>" + "/" + id,
                 method: "GET",
                 success: function (data) {
                             $.each(data,function(i,content){
@@ -195,8 +196,25 @@
 </script>
 
 
+<!-- $("#content").empty();
+    $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+                $.ajax({
+                    url: "<?php echo e(url('employer/marketing/listtemplate')); ?>",
+                    type: 'get',
+                    dataType: "json",
 
+                    success: function(data) {
+                            $.each(data,function(i,content){
+                            $("#content").append("<option>"+content.et_sender_name+"</option>");
+                        });
+                        console.log(data);
 
+                    }
+                }); -->
 
 
 
@@ -266,3 +284,7 @@
 
 
 
+
+
+
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/city.blade.php ENDPATH**/ ?>
