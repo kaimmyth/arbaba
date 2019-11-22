@@ -40,35 +40,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <?php $sl_no=1; ?>
+                                    <?php $sl_no=1; ?>
 
                                         <?php $__currentLoopData = $toReturn['state']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                        <?php $id=$value['id']; ?> 
+                                            <?php $id=$value['state_id']; ?>
                                                 <td><?php echo e($sl_no++); ?></td>
-                                                <td><?php echo e($value['state']); ?></td>
+                                                <td><?php echo e($value['state_name']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-state_id="<?php echo e($id); ?>" data-state_name="<?php echo e($value['state']); ?>" data-toggle="modal" data-target="#edit_model_state" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="<?php echo e(url('tools-master/delete_state/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-state_id="<?php echo e($id); ?>" data-state_name="<?php echo e($value['state_name']); ?>" data-toggle="modal" data-target="#edit_model_state" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('tools-master/delete_state/'.$value['state_id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
-                                              
 
                                         </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
-                        <!--card body-->
+
                     </div>
-                    <!--card border-->
+
                 </div>
-                <!--col-->
+
             </div>
-            <!--end of row-->
+
         </div>
     </div>
 </div>
-</div>
+
 
 <!-- model for update-->
 <div id="edit_model_state" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
@@ -139,18 +138,20 @@
                             <select class="form-control" onchange="terms_details_show(this.value)"  name="country_id" id="country_id"  required>
                             <option>-Select-</option>
                                 <?php $__currentLoopData = $toReturn['country']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($value['id']); ?>" ><?php echo e($value['country_name']); ?> </option>
+                                <option value="<?php echo e($value['country_id']); ?>" ><?php echo e($value['country_name']); ?> </option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter State</label>
-                            <input type="text" name="state_name" class="form-control" value="" id="state_name" required>
+                            <input type="text" name="state_name" class="form-control" value="" id="state_name_new" >
                         </div>
+                        <h6 id="state_name_val"></h6>
+
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
-                        <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary waves-effect" id="btn">Save</button>
                         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -159,6 +160,74 @@
         </div>
     </div>
 <!-- end of model  -->
+
+
+
+
+
+
+<!-- for validation  -->
+
+<script>
+$(document).ready(function()
+ {
+ 
+   $("#state_name_val").hide();
+   
+   
+
+      
+        $("#state_name_new").blur(function(){
+            username3();
+        });
+        
+        
+       
+
+        function username3(){
+          var p = $("#state_name_new").val();
+          if(p.length==""){
+            $("#state_name_val").show();
+            $("#state_name_val").html("Please input the State");
+            $("#state_name_val").focus();
+            $("#state_name_val").css("color","red");
+
+                err_state_name=false;
+                    return false;
+          }
+          else{
+                err_state_name=true;
+              $("#state_name_val").hide();
+              
+          }
+        }
+
+       
+
+        $("#btnSubmit").click(function(){
+
+            err_state_name=true;
+        
+
+      
+        username3();
+
+        if(err_state_name==true)
+        {
+            return true;
+        }
+        else{
+            return false;
+            
+        }
+
+        });
+
+       
+
+
+  });
+    </script>
 
 
 

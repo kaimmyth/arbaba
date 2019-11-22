@@ -44,12 +44,12 @@
 
                                         @foreach ($toReturn as $value)
                                         <tr>
-                                            <?php $id=$value['id']; ?> 
+                                            <?php $id=$value['country_id']; ?> 
                                                 <td>{{$sl_no++}}</td>
                                                 <td>{{$value['country_name']}}</td>
                                                 <td class="actions">
                                                     <a href="#" class="on-default edit-row" data-coun_id="{{$id}}" data-country_name="{{$value['country_name']}}" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_country/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="{{url('tools-master/delete_country/'.$value['country_id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                               
 
@@ -90,13 +90,14 @@
                                         <input type="hidden" id="coun_id" name="coun_id"> 
                                         <input type="text" class="form-control"  name="country_name" id="country_name"  required placeholder="enter here...about"> 
                             </div> 
+                            <h6 id="country_name_edit_val"></h6>
                         </div> 
                     </div> 
                   
             </div> 
             <div class="modal-footer"> 
                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
-                <button type="submit" class="btn btn-info waves-effect waves-light" name="save">Edited</button> 
+                <button type="submit" id="edit_submit" class="btn btn-info waves-effect waves-light" name="save">Edited</button> 
             </div> 
             </form>
         </div> 
@@ -136,12 +137,13 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Country</label>
-                            <input type="text" name="country_name" class="form-control" value="" id="country_name" required>
+                            <input type="text" name="country_name" class="form-control" value="" id="country_name_add">
                         </div>
+                        <h6 id="country_name_add_val"></h6>
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
-                        <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
+                        <button type="submit" class="btn btn-primary waves-effect" id="btnSubmit">Save</button>
                         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -150,6 +152,98 @@
         </div>
     </div>
 <!-- end of model  -->
+
+
+
+<!-- for validation  -->
+
+<script>
+$(document).ready(function()
+ {
+  
+   $("#country_name_add_val").hide();
+   $("#country_name_edit_val").hide();
+   
+
+        $("#country_name_add").blur(function(){
+            username3();
+        });
+        $("#country_name").blur(function(){
+            username4();
+        });
+       
+        
+        function username3(){
+          var p = $("#country_name_add").val();
+          if(p.length==""){
+            $("#country_name_add_val").show();
+            $("#country_name_add_val").html("Please input the Country");
+            $("#country_name_add_val").focus();
+            $("#country_name_add_val").css("color","red");
+
+                err_add_country=false;
+                    return false;
+          }
+          else{
+                err_add_country=true;
+              $("#country_name_add_val").hide();
+              
+          }
+        }
+
+        function username4(){
+          var p = $("#country_name").val();
+          if(p.length==""){
+            $("#country_name_edit_val").show();
+            $("#country_name_edit_val").html("Please input the Country");
+            $("#country_name_edit_val").focus();
+            $("#country_name_edit_val").css("color","red");
+
+                err_edit_country=false;
+                    return false;
+          }
+          else{
+                err_edit_country=true;
+              $("#country_name_edit_val").hide();
+              
+          }
+        }
+       
+
+
+        $("#btnSubmit").click(function(){
+        err_add_country=true;
+        username3();
+        if(err_add_country==true)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+        });
+
+        $("#err_edit_country").click(function(){
+            err_edit_country=true;
+        username4();
+        if(err_edit_country==true)
+        {
+            return true;
+        }
+        else{
+            return false;
+            
+        }
+
+        });
+
+
+  });
+    </script>
+
+
+
+
 
 
 

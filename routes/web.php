@@ -205,11 +205,6 @@ Route::get('sale/customer2', function () {
 	return view('layouts.content', compact('data'));
 });
 
-// customer terms 
-Route::get('tools-master/terms','settingController@view_terms');
-Route::post('terms/add_new_terms','settingController@add_new_terms');
-Route::post('terms/update_terms','settingController@update_terms');
-Route::get('terms/delete_terms/{id}','settingController@delete_terms');
 
 // ================================= 18/11/19 abhishek anand ===========================================
 Route::get('tools-master/show_country','settingController@view_country');
@@ -250,3 +245,9 @@ Route::get('tools-master/tax_rate','settingController@view_tax_rate');
 Route::post('tools-master/add_tax_rate','settingController@add_tax_rate');
 Route::post('tools-master/update_tax_rate','settingController@update_tax_rate');
 Route::get('tools-master/delete_tax_rate/{id}','settingController@delete_tax_rate');
+
+// customer terms 
+Route::get('tools-master/terms','settingController@view_terms');
+Route::post('terms/add_new_terms','settingController@add_new_terms');
+Route::post('terms/update_terms','settingController@update_terms');
+Route::get('terms/delete_terms/{id}','settingController@delete_terms');

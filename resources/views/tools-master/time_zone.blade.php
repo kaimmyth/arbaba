@@ -163,24 +163,28 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Country Short Name</label>
-                            <input type="text" name="time_zone_short_name" class="form-control" value="" id="time_zone_short_name" required>
+                            <input type="text" name="time_zone_short_name" class="form-control" value="" id="country_short_name_add" >
                         </div>
+                        <h6 id="country_short_name_add_val"></h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Time Zone Name</label>
-                            <input type="text" name="time_zone_name" class="form-control" value="" id="time_zone_name" required>
+                            <input type="text" name="time_zone_name" class="form-control" value="" id="time_zone_name_add" >
                         </div>
+                        <h6 id="time_zone_name_val"></h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Change Time</label>
-                            <input type="text" name="time_zone_change_time" class="form-control" value="" id="time_zone_change_time" required>
+                            <input type="text" name="time_zone_change_time" class="form-control" value="" id="time_zone_change_time_add" >
                         </div>
+                        <h6 id="time_zone_change_time_val"></h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Value</label>
-                            <input type="text" name="time_zone_value" class="form-control" value="" id="time_zone_value" required>
+                            <input type="text" name="time_zone_value" class="form-control" value="" id="time_zone_value_add" >
                         </div>
+                        <h6 id="time_zone_value_val"></h6>
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
-                        <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
+                        <button type="submit" class="btn btn-primary waves-effect" id="btnSubmit">Save</button>
                         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -190,6 +194,141 @@
     </div>
 <!-- end of model  -->
 
+
+
+<!-- for validation  -->
+
+<script>
+$(document).ready(function()
+ {
+  
+   $("#country_short_name_add_val").hide();
+   $("#time_zone_name_val").hide();
+   $("#time_zone_change_time_val").hide();
+   $("#time_zone_value_val").hide();
+   
+
+
+
+   
+
+        $("#country_short_name_add").blur(function(){
+            username1();
+        });
+        $("#time_zone_name_add").blur(function(){
+            username2();
+        });
+        $("#time_zone_change_time_add").blur(function(){
+            username3();
+        });
+        $("#time_zone_value_add").blur(function(){
+            username4();
+        });
+      
+
+
+
+        
+        function username1(){
+          var p = $("#country_short_name_add").val();
+          if(p.length==""){
+            $("#country_short_name_add_val").show();
+            $("#country_short_name_add_val").html("Please input the Country");
+            $("#country_short_name_add_val").focus();
+            $("#country_short_name_add_val").css("color","red");
+
+                err_country_short_name_add=false;
+                    return false;
+          }
+          else{
+                err_country_short_name_add=true;
+              $("#country_short_name_add_val").hide();
+              
+          }
+        }
+
+        function username2(){
+          var p = $("#time_zone_name_add").val();
+          if(p.length==""){
+            $("#time_zone_name_val").show();
+            $("#time_zone_name_val").html("Please input Tax Type");
+            $("#time_zone_name_val").focus();
+            $("#time_zone_name_val").css("color","red");
+
+                err_time_zone_name_add=false;
+                    return false;
+          }
+          else{
+                err_time_zone_name_add=true;
+              $("#time_zone_name_val").hide();
+              
+          }
+        }
+
+        function username3(){
+          var p = $("#time_zone_change_time_add").val();
+          if(p.length==""){
+            $("#time_zone_change_time_val").show();
+            $("#time_zone_change_time_val").html("Please input Tax Discription");
+            $("#time_zone_change_time_val").focus();
+            $("#time_zone_change_time_val").css("color","red");
+
+                err_add_time_zone_change_time=false;
+                    return false;
+          }
+          else{
+                err_add_time_zone_change_time=true;
+              $("#time_zone_change_time_val").hide();
+              
+          }
+        }
+
+        function username4(){
+          var p = $("#time_zone_value_add").val();
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if(p.length==""||regexOnlyNumbers.test(p) != true){
+            $("#time_zone_value_val").show();
+            $("#time_zone_value_val").html("Please input Tax Validity");
+            $("#time_zone_value_val").focus();
+            $("#time_zone_value_val").css("color","red");
+
+                err_add_time_zone_value=false;
+                    return false;
+          }
+          else{
+                err_add_time_zone_value=true;
+              $("#time_zone_value_val").hide();
+              
+          }
+        }
+
+     
+
+
+        $("#btnSubmit").click(function(){
+            err_country_short_name_add=true;
+            err_time_zone_name_add=true;
+            err_add_time_zone_change_time=true;
+            err_add_time_zone_value=true;
+      
+        username1();
+        username2();
+        username3();
+        username4();
+        if((err_country_short_name_add==true)&&(err_time_zone_name_add==true)&&(err_add_time_zone_change_time==true)&&(err_add_time_zone_value==true))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+        });
+
+       
+
+
+  });
+    </script>
 
 
 
