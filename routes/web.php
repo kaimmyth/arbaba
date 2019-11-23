@@ -96,7 +96,7 @@ Route::get('sale/products-and-services/get_products_and_services_details/{id}','
 // });
 
 /* Setting */
-Route::prefix('company')->group(function () {
+	Route::prefix('company')->group(function () {
 	Route::resource('', 'CompanyController');
 	Route::post('store', 'CompanyController@store');
 	Route::get('destroy/{id}', 'CompanyController@destroy');

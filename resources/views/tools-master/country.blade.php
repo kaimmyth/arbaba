@@ -44,12 +44,12 @@
 
                                         @foreach ($toReturn as $value)
                                         <tr>
-                                            <?php $id=$value['country_id']; ?> 
+                                            <?php $id=$value['id']; ?> 
                                                 <td>{{$sl_no++}}</td>
-                                                <td>{{$value['country_name']}}</td>
+                                                <td>{{$value['country']}}</td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-coun_id="{{$id}}" data-country_name="{{$value['country_name']}}" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_country/'.$value['country_id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-coun_id="{{$id}}" data-country_name="{{$value['country']}}" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="{{url('tools-master/delete_country/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                         </tr>
                                         @endforeach

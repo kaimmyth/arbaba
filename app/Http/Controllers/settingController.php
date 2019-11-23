@@ -120,7 +120,7 @@ class settingController extends Controller
     public function view_country()
     {
         $toReturn=array();
-        $toReturn=countries::where('status',1)->orderBy('country_id','DESC')->get()->toArray();
+        $toReturn=countries::where('status',1)->orderBy('id','DESC')->get()->toArray();
         $data['content'] ='tools-master/country';
 	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
@@ -128,7 +128,7 @@ class settingController extends Controller
     public function add_new_country(Request $request)
     {
         $employee = new countries();
-        $employee->country_name = $request->country_name;
+        $employee->country = $request->country_name;
         $employee->save();
        
         return redirect('tools-master/show_country');
@@ -139,8 +139,8 @@ class settingController extends Controller
     public function  update(Request $Request)
     {
         
-        $update_about=countries::where('country_id',$Request->coun_id)->update(array(
-            'country_name'=>$Request->country_name
+        $update_about=countries::where('id',$Request->coun_id)->update(array(
+            'country'=>$Request->country_name
         ));
        
         return redirect('tools-master/show_country');
@@ -149,7 +149,7 @@ class settingController extends Controller
     
     public function delete_country(Request $Request)
     {
-        $del=countries::where('country_id',$Request->id)->update(array(
+        $del=countries::where('id',$Request->id)->update(array(
             'status'=>0
         ));
         return redirect('tools-master/show_country');
@@ -161,7 +161,7 @@ class settingController extends Controller
     public function view_state()
     {
         $toReturn=array();
-        $toReturn['state']=state::where('status',1)->orderBy('state_id','DESC')->get()->toArray();
+        $toReturn['state']=state::where('status',1)->orderBy('id','DESC')->get()->toArray();
         $toReturn['country']=countries::where('status',1)->get()->toArray();
         $data['content'] ='tools-master/state';
         return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
@@ -171,7 +171,7 @@ class settingController extends Controller
     public function add_new_state(Request $request)
     {
         $new_terms = new state();
-        $new_terms->state_name = $request->state_name;
+        $new_terms->state = $request->state_name;
         $new_terms->country_id = $request->country_id;
         $new_terms->save();
         return redirect('tools-master/state');
@@ -179,8 +179,8 @@ class settingController extends Controller
 
     public function  update_state(Request $Request)
     {
-        $update_about=state::where('state_id',$Request->state_id)->update(array(
-            'state_name'=>$Request->state_name
+        $update_about=state::where('id',$Request->state_id)->update(array(
+            'state'=>$Request->state_name
         ));
        
         return redirect('tools-master/state');
@@ -188,7 +188,7 @@ class settingController extends Controller
 
     public function delete_state(Request $Request)
     {
-        $del=state::where('state_id',$Request->id)->update(array(
+        $del=state::where('id',$Request->id)->update(array(
             'status'=>0
         ));
         return redirect('tools-master/state');
@@ -201,7 +201,7 @@ class settingController extends Controller
    public function view_city()
    {
        $toReturn=array();
-       $toReturn['cities']=cities::where('status',0)->orderBy('city_id','DESC')->get()->toArray();
+       $toReturn['cities']=cities::where('status',0)->orderBy('id','DESC')->get()->toArray();
        $toReturn['state']=state::where('status',1)->get()->toArray();
        $toReturn['country']=countries::where('status',1)->get()->toArray();
        $data['content'] ='tools-master/city';
@@ -211,16 +211,15 @@ class settingController extends Controller
    public function add_new_city(Request $request)
    {
        $new_terms = new cities();
-    //    $new_terms->country_id = $request->country_id;
-       $new_terms->state_id = $request->state_id;
        $new_terms->city = $request->city_name;
+       $new_terms->state_id = $request->state_id;
        $new_terms->save();
        return redirect('tools-master/city');
    }
    
    public function  update_city(Request $Request)
    {
-       $update_about=cities::where('city_id',$Request->city_id)->update(array(
+       $update_about=cities::where('id',$Request->city_id)->update(array(
            'city'=>$Request->city_name
        ));
       
@@ -229,7 +228,7 @@ class settingController extends Controller
 
     public function delete_city(Request $Request)
     {
-        $del=cities::where('city_id',$Request->id)->update(array(
+        $del=cities::where('id',$Request->id)->update(array(
             'status'=>1
         ));
         return redirect('tools-master/city');
@@ -424,8 +423,8 @@ class settingController extends Controller
     }
 
     public function get_user_details($id=""){
-        $data = candidate::leftJoin('countries','candidate.country','=','countries.country_id')
-              ->select('candidate.*','countries.country_name as country')
+        $data = candidate::leftJoin('countries','candidate.country','=','countries.id')
+              ->select('candidate.*','countries.country as country')
               ->where('candidate.id', $id)
               ->first();
         return $data;

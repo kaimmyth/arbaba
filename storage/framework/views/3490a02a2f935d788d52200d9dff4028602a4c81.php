@@ -43,25 +43,25 @@
                                             </tr>
                                           </thead>
                                           <tbody>
-                                              @foreach($userdetails as $data)
+                                              <?php $__currentLoopData = $userdetails; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                  
                                             <tr>
-                                              <td><img width="50" height="40" src="{{url('public/images')}}/{{$data->profile_image}}/"></td>
+                                              <td><img width="50" height="40" src="<?php echo e(url('public/images')); ?>/<?php echo e($data->profile_image); ?>/"></td>
 
-                                                   <td>{{$data->name}}</td>
-                                                   <td>{{$data->company_name}}</td>
-                                                   <td>{{$data->user_role}}</td>
-                                                   <td>{{$data->email}}</td>
-                                                   <td>{{$data->phone}}</td>
-                                                   <td>{{$data->city_district}}</td>
-                                                   <td>{{$data->state_provence}}</td>
+                                                   <td><?php echo e($data->name); ?></td>
+                                                   <td><?php echo e($data->company_name); ?></td>
+                                                   <td><?php echo e($data->user_role); ?></td>
+                                                   <td><?php echo e($data->email); ?></td>
+                                                   <td><?php echo e($data->phone); ?></td>
+                                                   <td><?php echo e($data->city_district); ?></td>
+                                                   <td><?php echo e($data->state_provence); ?></td>
                                                    <td class="actions">
-                                                    <a href="javascript:void();" onclick="viewEditProductsAndServices('view', {{$data->id}});"><i class="fas fa-eye"></i></a> &nbsp; 
-                                                    <a href="javascript:void();" onclick="viewEditProductsAndServices('edit', {{$data->id}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
-                                                    <a href="{{url('setting/user/delete')}}/{{$data->id}}" onclick=""><i class="fas fa-trash"></i></a> 
+                                                    <a href="javascript:void();" onclick="viewEditProductsAndServices('view', <?php echo e($data->id); ?>);"><i class="fas fa-eye"></i></a> &nbsp; 
+                                                    <a href="javascript:void();" onclick="viewEditProductsAndServices('edit', <?php echo e($data->id); ?>);"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
+                                                    <a href="<?php echo e(url('setting/user/delete')); ?>/<?php echo e($data->id); ?>" onclick=""><i class="fas fa-trash"></i></a> 
                                                   </td>
                                                </tr>
-                                                  @endforeach
+                                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                           </tbody>
                                         </table>
                                       </div>
@@ -75,8 +75,8 @@
                       </div> <!-- content -->
                        <!------------------------------------------------user view table ends---------------------------------------->
 
-                       <form action="{{url('setting/user/add')}}" method="POST" enctype="multipart/form-data" id="user-form">
-                        @csrf
+                       <form action="<?php echo e(url('setting/user/add')); ?>" method="POST" enctype="multipart/form-data" id="user-form">
+                        <?php echo csrf_field(); ?>
                       <!--------------------------------------- user add modal start-------------------------------------------->                   
                       <div class="modal user-modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
                           <div class="modal-dialog modal-lg">
@@ -188,9 +188,9 @@
                                                             <label for="">Country</label>
                                                               <select class="select2 form-control" id="country" name="country" required="" aria-required="true" data-placeholder="Choose a Country...">
                                                                   <option value="">Choose a Country...</option>
-                                                                  @foreach($countries as $country)
-                                                                  <option value="{{$country->id}}">{{$country->country}}</option>
-                                                                  @endforeach
+                                                                  <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                  <option value="<?php echo e($country->id); ?>"><?php echo e($country->country); ?></option>
+                                                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                 </select>   
                                                         </div> 
                                                 </div>
@@ -345,7 +345,7 @@
             }
         });
         $.ajax({
-            url: "{{url('setting/user/get_user_details')}}" + "/" + id,
+            url: "<?php echo e(url('setting/user/get_user_details')); ?>" + "/" + id,
             method: "GET",
             contentType: 'application/json',
             dataType: "json",
@@ -371,7 +371,7 @@
                     document.getElementById("v_pin_code").innerHTML = data.pin_code;
                     document.getElementById("v_country").innerHTML = data.country;
                     document.getElementById("v_username").innerHTML = data.username;
-                    document.getElementById("v_profile_image").innerHTML = "<img src='"+"{{url('public/images')}}/"+data.profile_image+"'>";
+                    document.getElementById("v_profile_image").innerHTML = "<img src='"+"<?php echo e(url('public/images')); ?>/"+data.profile_image+"'>";
                  
                     $('.user-details-model').modal('show');
                 }
@@ -643,4 +643,4 @@
   });
 
 </script>
-<!-- -----------------------------j query validation ends------------------------------- -->
+<!-- -----------------------------j query validation ends------------------------------- --><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/setting/user.blade.php ENDPATH**/ ?>

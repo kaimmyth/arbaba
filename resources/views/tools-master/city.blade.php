@@ -43,12 +43,12 @@
 
                                         @foreach ($toReturn['cities'] as $value)
                                         <tr>
-                                            <?php $id=$value['city_id']; ?>
+                                            <?php $id=$value['id']; ?>
                                                 <td>{{$sl_no++}}</td>
                                                 <td>{{$value['city']}}</td>
                                                 <td class="actions">
                                                     <a href="#" class="on-default edit-row" data-city_id="{{$id}}"  data-city_name="{{$value['city']}}" data-toggle="modal" data-target="#edit_model_city" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_city/'.$value['city_id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="{{url('tools-master/delete_city/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
 
                                         </tr>
@@ -136,7 +136,7 @@
                             <select class="form-control" onchange="terms_details_show(this.value)"  name="country_id" id="country_id"  required>
                             <option>-Select-</option>
                                 @foreach($toReturn['country'] as $value)
-                                <option value="{{$value['country_id']}}" >{{$value['country_name']}} </option>
+                                <option value="{{$value['id']}}" >{{$value['country']}} </option>
                                 @endforeach
                             </select>
                         </div>
@@ -182,7 +182,7 @@
                 method: "GET",
                 success: function (data) {
                             $.each(data,function(i,content){
-                            $("#state_id").append("<option value='"+content.state_id+"'>"+content.state_name+"</option>");
+                            $("#state_id").append("<option value='"+content.id+"'>"+content.state+"</option>");
                         });
                         console.log(data);
 

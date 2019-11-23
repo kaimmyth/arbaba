@@ -117,7 +117,10 @@
     <?php if(Session::get('gorgID')==1): ?>
     <li>
       <a href="<?php echo e(URL::to('company')); ?>" class="waves-effect"><span>Company </span></a>
+
     </li>
+    <li><a href="<?php echo e(url('setting/user')); ?>"><span>User</span></a></li>
+
     <?php endif; ?>
     <li><a href="<?php echo e(url('update-site')); ?>"><span>Organization structure</span></a></li>
   </ul>

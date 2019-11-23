@@ -44,12 +44,12 @@
 
                                         <?php $__currentLoopData = $toReturn['state']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <?php $id=$value['state_id']; ?>
+                                            <?php $id=$value['id']; ?>
                                                 <td><?php echo e($sl_no++); ?></td>
-                                                <td><?php echo e($value['state_name']); ?></td>
+                                                <td><?php echo e($value['state']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-state_id="<?php echo e($id); ?>" data-state_name="<?php echo e($value['state_name']); ?>" data-toggle="modal" data-target="#edit_model_state" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="<?php echo e(url('tools-master/delete_state/'.$value['state_id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-state_id="<?php echo e($id); ?>" data-state_name="<?php echo e($value['state']); ?>" data-toggle="modal" data-target="#edit_model_state" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('tools-master/delete_state/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
 
                                         </tr>
@@ -138,7 +138,7 @@
                             <select class="form-control" onchange="terms_details_show(this.value)"  name="country_id" id="country_id"  required>
                             <option>-Select-</option>
                                 <?php $__currentLoopData = $toReturn['country']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($value['country_id']); ?>" ><?php echo e($value['country_name']); ?> </option>
+                                <option value="<?php echo e($value['id']); ?>" ><?php echo e($value['country']); ?> </option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>

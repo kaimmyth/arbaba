@@ -44,12 +44,12 @@
 
                                         @foreach ($toReturn['state'] as $value)
                                         <tr>
-                                            <?php $id=$value['state_id']; ?>
+                                            <?php $id=$value['id']; ?>
                                                 <td>{{$sl_no++}}</td>
-                                                <td>{{$value['state_name']}}</td>
+                                                <td>{{$value['state']}}</td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-state_id="{{$id}}" data-state_name="{{$value['state_name']}}" data-toggle="modal" data-target="#edit_model_state" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_state/'.$value['state_id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-state_id="{{$id}}" data-state_name="{{$value['state']}}" data-toggle="modal" data-target="#edit_model_state" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="{{url('tools-master/delete_state/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
 
                                         </tr>
@@ -138,7 +138,7 @@
                             <select class="form-control" onchange="terms_details_show(this.value)"  name="country_id" id="country_id"  required>
                             <option>-Select-</option>
                                 @foreach($toReturn['country'] as $value)
-                                <option value="{{$value['country_id']}}" >{{$value['country_name']}} </option>
+                                <option value="{{$value['id']}}" >{{$value['country']}} </option>
                                 @endforeach
                             </select>
                         </div>
