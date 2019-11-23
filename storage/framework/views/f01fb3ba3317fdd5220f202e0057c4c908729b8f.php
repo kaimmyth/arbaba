@@ -43,20 +43,20 @@
                                 <tbody>
                                     <?php $sl_no=1; ?>
 
-                                        @foreach ($toReturn as $value)
+                                        <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <?php $id=$value['id']; ?>
-                                                <td>{{$sl_no++}}</td>
-                                                <td>{{$value['terms']}}</td>
-                                                <td>{{$value['terms_type']}}</td>
+                                                <td><?php echo e($sl_no++); ?></td>
+                                                <td><?php echo e($value['terms']); ?></td>
+                                                <td><?php echo e($value['terms_type']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-terms_id="{{$id}}" data-terms_terms="{{$value['terms']}}" data-terms_type="{{$value['terms_type']}}" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('terms/delete_terms/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-terms_id="<?php echo e($id); ?>" data-terms_terms="<?php echo e($value['terms']); ?>" data-terms_type="<?php echo e($value['terms_type']); ?>" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('terms/delete_terms/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                                 <!-- <td></td> -->
 
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -83,11 +83,11 @@
                     </button>
             </div> 
             <div class="modal-body"> 
-                <form action ="{{url('terms/update_terms')}}" method="post">
+                <form action ="<?php echo e(url('terms/update_terms')); ?>" method="post">
                     <div class="row"> 
                         <div class="col-md-12"> 
                             <div class="form-group">
-                                <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
+                                <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
                                     <label for="field-1" class="control-label">Terms</label> 
                                         <input type="hidden" id="terms_id" name="terms_id"> 
                                         <input type="text" class="form-control"  name="terms_terms" id="terms_terms"   placeholder="enter here...about"> 
@@ -140,8 +140,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{url('terms/add_new_terms')}}" method="POST">
-                   @csrf
+                <form action="<?php echo e(url('terms/add_new_terms')); ?>" method="POST">
+                   <?php echo csrf_field(); ?>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Terms</label>
@@ -373,3 +373,4 @@ $(document).ready(function()
 
 
 
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/tools-master/terms.blade.php ENDPATH**/ ?>

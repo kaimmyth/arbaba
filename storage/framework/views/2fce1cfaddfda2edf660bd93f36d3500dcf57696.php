@@ -42,17 +42,17 @@
                                 <tbody>
                                     <?php $sl_no=1; ?>
 
-                                        @foreach ($toReturn as $value)
+                                        <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <?php $id=$value['country_id']; ?> 
-                                                <td>{{$sl_no++}}</td>
-                                                <td>{{$value['country_name']}}</td>
+                                                <td><?php echo e($sl_no++); ?></td>
+                                                <td><?php echo e($value['country_name']); ?></td>
                                                 <td class="actions">
-                                                    <a href="#" class="on-default edit-row" data-coun_id="{{$id}}" data-country_name="{{$value['country_name']}}" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{url('tools-master/delete_country/'.$value['country_id'])}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" class="on-default edit-row" data-coun_id="<?php echo e($id); ?>" data-country_name="<?php echo e($value['country_name']); ?>" data-toggle="modal" data-target="#edit_model_practic" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?php echo e(url('tools-master/delete_country/'.$value['country_id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -79,11 +79,11 @@
                     </button>
             </div> 
             <div class="modal-body"> 
-                <form action ="{{url('tools-master/update_country')}}" method="post">
+                <form action ="<?php echo e(url('tools-master/update_country')); ?>" method="post">
                     <div class="row"> 
                         <div class="col-md-12"> 
                             <div class="form-group">
-                                <input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
+                                <input type="hidden" name="_token" value = "<?php echo e(csrf_token()); ?>" > 
                                     <label for="field-1" class="control-label">Country</label> 
                                         <input type="hidden" id="coun_id" name="coun_id"> 
                                         <input type="text" class="form-control"  name="country_name" id="country_name"  required placeholder="enter here...about"> 
@@ -129,8 +129,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{url('tools-master/add_country')}}" method="POST">
-                   @csrf
+                <form action="<?php echo e(url('tools-master/add_country')); ?>" method="POST">
+                   <?php echo csrf_field(); ?>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Country</label>
@@ -319,3 +319,4 @@ $(document).ready(function()
 
 
 
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/tools-master/country.blade.php ENDPATH**/ ?>

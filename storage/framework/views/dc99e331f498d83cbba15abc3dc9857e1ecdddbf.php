@@ -59,8 +59,6 @@
                                                     <a href="#" class="on-default edit-row" data-tax_id="<?php echo e($id); ?>" data-tax_name="<?php echo e($value['tax_name']); ?>" data-tax_type="<?php echo e($value['tax_type']); ?>" data-tax_discription="<?php echo e($value['tax_discription']); ?>" data-tax_validity="<?php echo e($value['tax_validity']); ?>" data-tax_rate="<?php echo e($value['tax_rate']); ?>" data-toggle="modal" data-target="#edit_model_tax_rate" title="edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                                     <a href="<?php echo e(url('tools-master/delete_tax_rate/'.$value['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash"></i></a>
                                                 </td>
-                                              
-
                                         </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
@@ -194,8 +192,6 @@
                             <input type="text" name="tax_rate" class="form-control" value="" id="tax_rate_add" >
                         </div>
                         <h6 id="tax_rate_val"></h6>
-                       
-                        
                     </div>
 
                     <div class="col-md-12" style="text-align: right;">
@@ -344,13 +340,6 @@ $(document).ready(function()
         }
 
 
-
-
-
-
-
-
-         
 
 
         $("#btnSubmit").click(function(){
