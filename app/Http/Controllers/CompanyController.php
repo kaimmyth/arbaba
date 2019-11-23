@@ -25,11 +25,13 @@ class CompanyController extends Controller
    public function index()
    {
       $cities = DB::table('cities')->orderBy('city','ASC')->where('is_deleted', '=', 0)->get();
-      $countries = DB::table('countries')->where('is_deleted', '=', 0)->get();
-      $state = DB::table('state')->orderBy('state','ASC')->where('is_deleted', '=', 0)->get();
+      $countries = DB::table('countries')->where('status', '=', 1)->get();
+      $state = DB::table('state')->orderBy('state_id','ASC')->where('status', '=', 1)->get();
       $cmpnydata = DB::table('org')->where('is_deleted', '=', 0)->get();
+      $currencies = DB::table('currencies')->where('status', '=', 1)->get();
+      $time_zone = DB::table('time_zone')->where('status', '=', 1)->get();
       $data['content'] = 'admin.company.Company-Listing';
-      return view('layouts.content', compact('data'))->with(['cities' => $cities, 'countries' => $countries, 'state' => $state, 'cmpnydata' => $cmpnydata]);
+      return view('layouts.content', compact('data'))->with(['cities' => $cities, 'countries' => $countries, 'state' => $state, 'cmpnydata' => $cmpnydata ,'currencies' => $currencies,'time_zone' => $time_zone]);
    }
 
    public function store(Request $request)

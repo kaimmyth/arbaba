@@ -251,3 +251,8 @@ Route::get('tools-master/terms','settingController@view_terms');
 Route::post('terms/add_new_terms','settingController@add_new_terms');
 Route::post('terms/update_terms','settingController@update_terms');
 Route::get('terms/delete_terms/{id}','settingController@delete_terms');
+//==========Nikhil Setting User=====
+Route::get('setting/user', "settingController@index");
+Route::post('setting/user/add', "settingController@add_user");
+Route::get('setting/user/delete/{id}','settingController@delete_user');
+Route::get('setting/user/get_user_details/{id}','settingController@get_user_details');

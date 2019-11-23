@@ -13,6 +13,9 @@ use App\tax;
 use App\terms;
 use App\countries;
 use App\city;
+use App\candidate;
+use DB;
+use Session;
 
 class settingController extends Controller
 {
@@ -336,6 +339,96 @@ class settingController extends Controller
          ));
          return redirect('tools-master/currency');
      }
+
+      //==================NiKhil========= User Setting==============
+     
+     public function index()
+   {
+     
+      $countries = DB::table('countries')->where('status', '=', 1)->get();
+     $userdetails = DB::table('candidate')->get();
+     $data['content'] ='setting.user';
+      return view('layouts.content', compact('data'))->with(['countries' => $countries,'userdetails' =>$userdetails]);
+   }
+
+
+
+    public function add_user(Request $request)
+   {
+    // return $request->country;
+     // $users = DB::table('users')->where('id', '=', 1)->get();
+     // return view('layouts.content', compact('data'))->with(['name' => $name, 'role' => $role, 'city_district' => $city_district, 'state_provider' => $state_provider ,'phone' => $phone]);
+        $product = new candidate();
+        $product->name=$request->name;
+        $product->user_role=$request->user_role;
+        $product->phone=$request->phone;
+        $product->email=$request->email;
+        $product->gender=$request->gender;
+        $product->company_name=$request->company_name;
+        $product->address_line1=$request->address_line1;
+        $product->city_district=$request->city_district;
+        $product->state_provence=$request->state_provence;
+        $product->country=$request->country;
+        $product->pin_code=$request->pin_code;
+        $product->username=$request->username;
+        $product->password =$request->password;
+
+        // $product->password = Hash::make($request->password);
+        
+        
+        $product->profile_image = "";
+        if($request->hasFile('profile_image'))
+        {
+            //
+            $file = $request->file('profile_image');
+
+            $product->profile_image = $file->getClientOriginalName();
+            $destinationPath = 'public/images';
+            $file->move($destinationPath, $file->getClientOriginalName()); 
+        }
+        else{
+          if($request->hidden_input_purpose=="edit")
+          {
+            $data = candidate::select('profile_image')->where('id', $request->hidden_input_id)->first();
+            if($data->profile_image!=""){
+              $product->profile_image = $data->profile_image;
+            }
+          }
+        }
+
+       if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($product), true);
+            $update_query = DB::table('candidate')->where('id', $request->hidden_input_id)->update($update_values_array);
+            Session::flash('success', 'Products details has been updated successfully');
+        }
+        else if($request->hidden_input_purpose=="add")
+        {
+            $product->save();
+            Session::flash('success', 'Products details has been saved successfully');
+        }
+        
+        return redirect('setting/user');
+
+
+
+
+    }
+
+    public function delete_user($id="")
+    {
+        $del=DB::table('candidate')->where('id',$id)->delete();
+        Session::flash('success', 'Customer details has been deleted successfully');
       
+        return redirect('setting/user'); 
+    }
+
+    public function get_user_details($id=""){
+        $data = candidate::leftJoin('countries','candidate.country','=','countries.country_id')
+              ->select('candidate.*','countries.country_name as country')
+              ->where('candidate.id', $id)
+              ->first();
+        return $data;
+    }
 
 }
