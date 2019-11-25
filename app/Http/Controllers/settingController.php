@@ -14,7 +14,9 @@ use App\terms;
 use App\countries;
 use App\city;
 use App\candidate;
+use App\users;
 use DB;
+use Hash;
 use Session;
 
 class settingController extends Controller
@@ -339,7 +341,7 @@ class settingController extends Controller
          return redirect('tools-master/currency');
      }
 
-      //==================NiKhil========= User Setting==============
+      //===================================== NiKhil User Setting =============================================
      
      public function index()
    {
@@ -354,11 +356,21 @@ class settingController extends Controller
 
     public function add_user(Request $request)
    {
-    // return $request->country;
-     // $users = DB::table('users')->where('id', '=', 1)->get();
-     // return view('layouts.content', compact('data'))->with(['name' => $name, 'role' => $role, 'city_district' => $city_district, 'state_provider' => $state_provider ,'phone' => $phone]);
+
+    $user_info = new users();
+        $user_info->users_role=3;
+        $user_info->name=$request->name;
+        $user_info->username=$request->username;
+        $user_info->password =Hash::make ($request->password);
+        $user_info->email=$request->email;
+        $user_info->phone=$request->phone;
+        $user_info->address=$request->address_line1;
+        $user_info->save();
+
+
         $product = new candidate();
         $product->name=$request->name;
+        $product->user_id=$user_info->id;
         $product->user_role=$request->user_role;
         $product->phone=$request->phone;
         $product->email=$request->email;
@@ -370,10 +382,13 @@ class settingController extends Controller
         $product->country=$request->country;
         $product->pin_code=$request->pin_code;
         $product->username=$request->username;
-        $product->password =$request->password;
-
+        $product->password =Hash::make ($request->password);
         // $product->password = Hash::make($request->password);
+
         
+        
+
+
         
         $product->profile_image = "";
         if($request->hasFile('profile_image'))

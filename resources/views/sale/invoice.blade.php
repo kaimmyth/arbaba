@@ -1475,7 +1475,7 @@ function invoice_details_show(id) {
 <script>
         $(document).ready(function() {
             $("#new_customer_insert").click(function(e) {
-            alert("hello");
+            // alert("hello");
                 // alert("hello");
                 e.preventDefault();
                 var customer_name = $("#customer_name").val();
@@ -1552,7 +1552,7 @@ function invoice_details_show(id) {
 <script>
         $(document).ready(function() {
             $("#new_terms_insert").click(function(e) {
-                // alert("hello");
+                alert("hello");
                 e.preventDefault();
                 var terms_name = $("#terms_name").val();
                 var token = $("#token").val();
@@ -1601,3 +1601,4 @@ function invoice_details_show(id) {
         });
 }
 </script>
+
