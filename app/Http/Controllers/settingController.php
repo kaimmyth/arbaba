@@ -41,7 +41,7 @@ class settingController extends Controller
         $employee->tax_validity = $request->tax_validity;
         $employee->tax_rate = $request->tax_rate;
         $employee->save();
-
+        Session::flash('success', 'add Successfully');
         return redirect('tools-master/tax_rate');
     }
 
@@ -57,7 +57,7 @@ class settingController extends Controller
             'tax_validity' => $Request->tax_validity,
             'tax_rate' => $Request->tax_rate
         ));
-
+        Session::flash('success', 'update Successfully');
         return redirect('tools-master/tax_rate');
     }
 
@@ -66,6 +66,7 @@ class settingController extends Controller
         $del=tax::where('id',$Request->id)->update(array(
             'status'=>0
         ));
+        Session::flash('success', 'remove Successfully');
         return redirect('tools-master/tax_rate');
     }
 
@@ -88,7 +89,7 @@ class settingController extends Controller
          $employee->change_time = $request->time_zone_change_time;
          $employee->cal_value = $request->time_zone_value;
          $employee->save();
- 
+         Session::flash('success', 'add Successfully');
          return redirect('tools-master/show_time_zone');
      }
  
@@ -103,7 +104,7 @@ class settingController extends Controller
              'change_time' => $Request->time_zone_change_time,
              'cal_value' => $Request->time_zone_value
          ));
- 
+         Session::flash('success', 'update Successfully');
          return redirect('tools-master/show_time_zone');
      }
  
@@ -113,6 +114,7 @@ class settingController extends Controller
          $del=time_zone::where('id',$Request->id)->update(array(
              'status'=>0
          ));
+         Session::flash('success', 'remove Successfully');
          return redirect('tools-master/show_time_zone');
      }
 
@@ -132,7 +134,7 @@ class settingController extends Controller
         $employee = new countries();
         $employee->country = $request->country_name;
         $employee->save();
-       
+        Session::flash('success', 'add Successfully');
         return redirect('tools-master/show_country');
     }
     
@@ -144,7 +146,7 @@ class settingController extends Controller
         $update_about=countries::where('id',$Request->coun_id)->update(array(
             'country'=>$Request->country_name
         ));
-       
+        Session::flash('success', 'update Successfully');
         return redirect('tools-master/show_country');
     }
 
@@ -154,6 +156,7 @@ class settingController extends Controller
         $del=countries::where('id',$Request->id)->update(array(
             'status'=>0
         ));
+        Session::flash('success', 'remove Successfully');
         return redirect('tools-master/show_country');
     }
 
@@ -176,6 +179,7 @@ class settingController extends Controller
         $new_terms->state = $request->state_name;
         $new_terms->country_id = $request->country_id;
         $new_terms->save();
+        Session::flash('success', 'add Successfully');
         return redirect('tools-master/state');
     }
 
@@ -184,7 +188,7 @@ class settingController extends Controller
         $update_about=state::where('id',$Request->state_id)->update(array(
             'state'=>$Request->state_name
         ));
-       
+        Session::flash('success', 'update Successfully');
         return redirect('tools-master/state');
     }
 
@@ -193,6 +197,7 @@ class settingController extends Controller
         $del=state::where('id',$Request->id)->update(array(
             'status'=>0
         ));
+        Session::flash('success', 'remove Successfully');
         return redirect('tools-master/state');
     }
 
@@ -216,6 +221,7 @@ class settingController extends Controller
        $new_terms->city = $request->city_name;
        $new_terms->state_id = $request->state_id;
        $new_terms->save();
+       Session::flash('success', 'add Successfully');
        return redirect('tools-master/city');
    }
    
@@ -224,7 +230,7 @@ class settingController extends Controller
        $update_about=cities::where('id',$Request->city_id)->update(array(
            'city'=>$Request->city_name
        ));
-      
+       Session::flash('success', 'update Successfully');
        return redirect('tools-master/city');
    }
 
@@ -233,6 +239,7 @@ class settingController extends Controller
         $del=cities::where('id',$Request->id)->update(array(
             'status'=>1
         ));
+        Session::flash('success', 'remove Successfully');
         return redirect('tools-master/city');
     }
 
@@ -257,7 +264,7 @@ class settingController extends Controller
         $employee->terms = $request->new_terms;
         $employee->terms_type = $request->terms_type;
         $employee->save();
-       
+        Session::flash('success', 'add Successfully');
         return redirect('tools-master/terms');
     }
     
@@ -269,6 +276,8 @@ class settingController extends Controller
             'terms_type'=>$Request->terms_type
            
         ));
+        Session::flash('success', 'update Successfully');
+        
         return redirect('tools-master/terms');
     }
 
@@ -279,6 +288,8 @@ class settingController extends Controller
         ));
         // $del=terms::where('id',$Request->id)->first();
         // return $del;
+        Session::flash('success', 'remove Successfully');
+
         return redirect('tools-master/terms');
     }
 
@@ -311,7 +322,7 @@ class settingController extends Controller
          $employee->format = $request->currency_formate;
          $employee->exchange_rate = $request->currency_exchange_rate;
          $employee->save();
- 
+         Session::flash('success', 'add Successfully');
          return redirect('tools-master/currency');
      }
  
@@ -327,7 +338,7 @@ class settingController extends Controller
              'format' => $Request->currency_formate,
              'exchange_rate' => $Request->currency_exchange_rate
          ));
- 
+        Session::flash('success', 'update Successfully');
          return redirect('tools-master/currency');
      }
  
@@ -338,6 +349,7 @@ class settingController extends Controller
          $del=currencies::where('id',$Request->id)->update(array(
              'status'=>0
          ));
+         Session::flash('success', 'remove Successfully');
          return redirect('tools-master/currency');
      }
 
@@ -414,12 +426,12 @@ class settingController extends Controller
         {
             $update_values_array = json_decode(json_encode($product), true);
             $update_query = DB::table('candidate')->where('id', $request->hidden_input_id)->update($update_values_array);
-            Session::flash('success', 'Products details has been updated successfully');
+            Session::flash('success', ' updated successfully');
         }
         else if($request->hidden_input_purpose=="add")
         {
             $product->save();
-            Session::flash('success', 'Products details has been saved successfully');
+            Session::flash('success', ' saved successfully');
         }
         
         return redirect('setting/user');
