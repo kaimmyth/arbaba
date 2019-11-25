@@ -467,7 +467,7 @@ $("#cc").show(cc);
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{url('sale/invoice/remainder_mail/'.$value['id'])}}" method="POST">
+      <form action="{{url('sale/all-sale/remainder_mail/'.$value['id'])}}" method="POST">
         @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">To:</label>

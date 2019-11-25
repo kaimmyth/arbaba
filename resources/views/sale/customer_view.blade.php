@@ -135,8 +135,8 @@
                                     <tr>
                                         <td style="font-weight:bold;">Title</td>
                                         <td>{{$details['title']}}</td>
-                                        <td style="font-weight:bold;">Phone No</td>
-                                        <td>{{$details['phone_no']}}</td>
+                                        <td style="font-weight:bold;"></td>
+                                        <td></td>
                                     </tr>
 
                                 </thead>

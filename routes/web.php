@@ -75,6 +75,8 @@ Route::post('sale/customers/add','SalesController@add_customers');
 Route::get('sale/customer/delete/{id}','SalesController@delete_customer');
 Route::get('sale/customer/view/{id}','SalesController@view_customer');
 Route::get('sale/customer_estimate/{id}', 'SalesController@view_customer_statement');
+Route::get('sale/customer/get_customer_details/{id}','SalesController@get_customer_details');
+
 
 
 //Product & Services

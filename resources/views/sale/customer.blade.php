@@ -152,7 +152,7 @@
                         <a class="dropdown-item" href="#">Create Sales Receipt</a>
                         <a class="dropdown-item" href="#">Create Estimate</a>
                       <a class="dropdown-item" href="{{url('sale/customer/delete/'.$items1['id'])}}">Delete</a>
-                       <a class="dropdown-item"  onclick="editCustomer({{$items1['id']}});" href="{{url('sale/customer/edit/'.$items1['id'])}}">Edit</a>
+                       <a class="dropdown-item"  onclick="editCustomer({{$items1['id']}});" href="javascript:void();">Edit</a>
                       </div>
                     </td>
                     
@@ -1164,7 +1164,7 @@ function editCustomer(id){
             resetCustomerForms(); // reseting forms
             $("#title").val(data.title);
             $("#first_name").val(data.first_name);
-            $("#last_name").datepicker( data.last_name);
+            $("#last_name").val( data.last_name);
             $("#email_id").val(data.email_id);
             $("#company").val(data.company);
             $("#mobile_no").val(data.mobile_no);

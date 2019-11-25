@@ -84,183 +84,242 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <form action="{{url('employee/add-edit-employee')}}" method="post" id="form-employee">
                     @csrf
-                    <div class="row">
-                        <div class="col-md-12"><br>
-                            <div class="form-group emp-detail">
-                                <label for="">Title</label>
-                                    <div class="input-group">
-                                        <input type="" class="form-control" id="title" name="title" placeholder="" required>
-                                    </div>
-                                </div><!--form-group-->
-
-                                <div class="form-group emp-detail">
-                                <label for="">First Name</label>
-                                    <div class="input-group">
-                                        <input type="" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
-
-                                    </div>
-                                   <h6 id="first_name_val"></h6>
-                                </div><!--form-group-->
-
-                                <div class="form-group emp-detail">
-                                <label for="">Last Name</label>
-                                    <div class="input-group">
-                                        <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name" >
-                                    </div>
-                                    <h6 id="last_name_val"></h6>
-                                </div><!--form-group-->
-
-                            <div class="form-group display-detail">
-                                <label for="">Display Name as</label>
-                                    <div class="input-group">
-                                        <input type="" class="form-control" id="display_name_as" name="display_name_as" placeholder="" readonly>
-                                    </div>
-                                </div><!--form-group-->
-
-                            <div class="form-group display-detail">
-                                <label for="">Email Id.</label>
-                                    <div class="input-group">
-                                        <input type="email" class="form-control" id="email_id" name="email_id" placeholder="eg.example@gmail.com" required>
-                                    </div>
-                                    <h6 id="email_id_val"></h6>
-                                </div><!--form-group-->
-
-                            <div class="form-group display-detail">
-                                <label for="">Phone No.</label>
-                                    <div class="input-group">
-                                    <input type="text" placeholder="" data-mask="(999) 999-9999" name="phone_no" id="phone_no" class="form-control" required>
-                                    </div>
-                                </div><!--form-group-->
-
-                            <div class="form-group display-detail">
-                                <label for="">Mobile No.</label>
-                                    <div class="input-group">
-                                    <input type="text" placeholder="" data-mask="(999) 999-9999" name="mobile_no" id="mobile_no" class="form-control">
-                                    </div>
-                                    <h6 id="mobile_no_val"></h6>
-                                </div><!--form-group-->
-
-                            <div class="form-group">
-                                <label for="">Address</label>
-                                    <div class="input-group">
-                                        <textarea class="form-control" rows="5" id="address" name="address" required></textarea>
-                                    </div>
-                                    <h6 id="address_val"></h6>
-                                </div><!--form-group-->
-
-                            <div class="form-group add-detail">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="City/Town" name="city" id="city" required>
-                                    </div>
-                                </div><!--form-group-->  
-
-                                <div class="form-group add-detail">
-                                    <div class="input-group">
-                                        <input type="" class="form-control"  placeholder="State" name="state" id="state" required>
-                                    </div>
-                                </div><!--form-group-->
-
-                                <div class="form-group add-detail">
-                                    <div class="input-group">
-                                        <input style="display: block;width: 100;" type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code" required>
-                                        <span id="pin_code_check"></span>
-                                    </div>
-
-                                </div><!--form-group-->
-
-                                <div class="form-group add-detail">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
-                                    </div>
-                                </div><!--form-group-->
-
-                            <div class="form-group display-detail">
-                                <label for="">Billing Rate</label>
-                                    <div class="input-group">
-                                        <input type="" class="form-control" id="billing_rate" name="billing_rate" placeholder="" required>
-                                    </div>
-                                    <h6 id="billing_rate_val"></h6>
-                                </div><!--form-group--> 
-
-                                <div class="form-group display-detail"><br><br>
-                                    <div class="checkbox checkbox-info">
-                                        <input id="checkbox4" type="checkbox">
-                                        <label for="checkbox4">
-                                            Billable by default
-                                        </label>
-                                    </div>
-                                </div><!--form-group--> 
-
-                            <div class="form-group emp-detail">
-                                <label for="">Employee ID No.</label>
-                                    <div class="input-group">
-                                        <input type="" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." required>
-                                    </div>
-                                    <h6 id="employee_id_no_val"></h6>
-                                </div><!--form-group-->
-
-                                <div class="form-group emp-detail">
-                                <label for="">Employee ID</label>
-                                    <div class="input-group">
-                                        <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID" required>
-                                    </div>
-                                    <h6 id="employee_id_val"></h6>
-                                </div><!--form-group-->
-
-                                <div class="form-group emp-detail">
-                                <label for="">Gender</label>
-                                    <select class="form-control" placeholder="Gender" name="gender" id="gender" required>
-                                            <option>--select--</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                           
-                                        </select>
-                                    </div>
-                                </div><!--form-group--> 
-
-
-                                <div class="form-group emp-detail">
-                                <label for="">Hire Date</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="hire_date" autocomplete="off" required>
-                                           
+                    
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Title</label>
+                                        <div class="input-group">
+                                            <input type="" class="form-control" id="title" name="title" placeholder="" required>
                                         </div>
                                 </div><!--form-group-->
-
-                            <div class="form-group emp-detail">
-                                <label for="">Release Date</label>
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="release_date" autocomplete="off" required>
-                                       
+                            </div>
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">First Name</label>
+                                            <div class="input-group">
+                                                <input type="" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+                                            </div>
+                                            <h6 id="first_name_val"></h6>
+                                    </div><!--form-group-->
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Last Name</label>
+                                        <div class="input-group">
+                                            <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name" >
+                                        </div>
+                                        <h6 id="last_name_val"></h6>
                                 </div><!--form-group-->
-
-                                <div class="form-group emp-detail">
-                                    <label for="">Date of Birth</label>
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3" name="dob" autocomplete="off" required>
-                                            
-                                </div><!--form-group--> 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Display Name as</label>
+                                        <div class="input-group">
+                                            <input type="" class="form-control" id="display_name_as" name="display_name_as" placeholder="" readonly>
+                                        </div>
+                                </div><!--form-group-->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label for="">Email Id.</label>
+                                        <div class="input-group">
+                                            <input type="email" class="form-control" id="email_id" name="email_id" placeholder="eg.example@gmail.com" required>
+                                        </div>
+                                        <h6 id="email_id_val"></h6>
+                                </div><!--form-group-->
+                            </div>        <!--form-group-->
+                             </div>
+                             <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Address</label>
+                                             <div class="input-group">
+                                                 <textarea class="form-control" rows="7" id="address" name="address" ></textarea>
+                                              </div>
+                                                <h6 id="address_val"></h6>
+                                        </div><!--form-group-->
+                                    </div>
+                                    <div class="col-md-6" style="padding:10px;">
+                                        <div class="row">
+                                            <div class="col-md-6">  
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="City/Town" name="city" id="city" required>
+                                                    </div>
+                                                </div><!--form-group-->  
+                                            </div> 
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="" class="form-control"  placeholder="State" name="state" id="state" required>
+                                                    </div>
+                                                </div><!--form-group-->   
+                                             </div>
+                                             <div class="col-md-6"> 
+                                                  <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code" required>   
+                                                    </div>
+                                                    <span id="pin_code_check"></span>
+                                                  </div><!--form-group-->
+                                             </div>
+                                             <div class="col-md-6">
+                                                  <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
+                                                        </div>
+                                                  </div><!--form-group-->
+                                             </div>
+                                              <div class="col-md-6">
+                                                   <div class="form-group">
+                                                    <label for="">Mobile No.</label>
+                                                        <div class="input-group">
+                                                        <input type="text" placeholder="" data-mask="(999) 999-9999" name="mobile_no" id="mobile_no" class="form-control">
+                                                        </div>
+                                                        <h6 id="mobile_no_val"></h6>
+                                                    </div><!--form-group-->
+                                              </div>
+                                              <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Phone No.</label>
+                                                        <div class="input-group">
+                                                        <input type="text" placeholder="" data-mask="(999) 999-9999" name="phone_no" id="phone_no" class="form-control" required>
+                                                        </div>
+                                                </div>
+                                             </div>
+                                         </div>
+                                     </div>   
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Experience</label>
+                                                    <div class="input-group">
+                                                    <input type="text" placeholder=" What's your experience" name="experience" id="experience" class="form-control" required>
+                                                    </div>
+                                            </div>
+                                      </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Designation</label>
+                                                    <div class="input-group">
+                                                        <input type="text" placeholder="What's your designation" name="designation" id="designation" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Job type</label>
+                                                    <div class="input-group">
+                                                        <input type="text" placeholder="What's your job type" name="job_type" id="job_type" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                         <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Tax Type</label>
+                                                    <div class="input-group">
+                                                        <input type="text" placeholder="Tax Type" name="tax_type" id="tax_type" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                             <div class="form-group">
+                                                   <label for="">Billing Rate</label>
+                                                    <div class="input-group">
+                                                        <input type="" class="form-control" id="billing_rate" name="billing_rate" placeholder="" required>
+                                                    </div>
+                                                    <h6 id="billing_rate_val"></h6>
+                                             </div><!--form-group--> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                               <label for="">Employee ID No.</label>
+                                               <div class="input-group">
+                                                   <input type="" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." required>
+                                               </div>
+                                               <h6 id="employee_id_no_val"></h6>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group"><br><br>
+                                                <div class="checkbox checkbox-info">
+                                                    <input id="checkbox4" type="checkbox">
+                                                    <label for="checkbox4">
+                                                        Billable by default
+                                                    </label>
+                                                </div>
+                                            </div><!--form-group--> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label for="">Employee ID</label>
+                                                <div class="input-group">
+                                                    <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID" required>
+                                                </div>
+                                                <h6 id="employee_id_val"></h6>
+                                            </div><!--form-group-->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label for="">Gender</label>
+                                                    <select class="form-control" placeholder="Gender" name="gender" id="gender" required>
+                                                            <option>--select--</option>
+                                                            <option>Male</option>
+                                                            <option>Female</option>   
+                                                        </select>
+                                            </div><!--form-group--> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group ">
+                                                   <label for="">Hire Date</label>
+                                                <div class="input-group">
+                                                     <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="hire_date" autocomplete="off" required>
+                                                </div>
+                                            </div><!--form-group-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group ">
+                                                <label for="">Release Date</label>
+                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker2" name="release_date" autocomplete="off" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                              <label for="">Date of Birth</label>
+                                              <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker3" name="dob" autocomplete="off" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div style="width:100%; padding: 0.5px;background: #6f6f6f;"></div><br>
+                                        <div class="d-print-none">
+                                            <div class="pull-left">
+                                                    <!-- hidden inputs -->
+                                                    <input type="text" name="hidden_input_id" value="NA" hidden>
+                                                    <input type="text" name="hidden_input_purpose" value="add" hidden>
+                                                    <!-- hidden inputs -->
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit">Save</a>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Cancel</button>
+                                               </div>
+                                            </div>
+                                       </div>
+                                   </form>
+                                 </div>
+                               </div>
                             </div>
                         </div>
-                <hr>  
-            <div style="width:100%; padding: 0.5px;background: #6f6f6f;"></div><br>
-                <div class="d-print-none">
-                    <div class="pull-left">
-                        <!-- hidden inputs -->
-                        <input type="text" name="hidden_input_id" value="NA" hidden>
-                        <input type="text" name="hidden_input_purpose" value="add" hidden>
-                        <!-- hidden inputs -->
-                        <button type="submit" class="btn btn-primary waves-effect waves-light" id="btnSubmit">Save</a>
                     </div>
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-        </div>
-    </div>
+                 
+           
 <!-----------------------------------------------------------end of modal-------------------------------------------->
 
 
@@ -305,6 +364,22 @@
                         <tr style="border: none;">
                             <td><p><strong>Address</strong></p></td>
                             <td><p id="v_address"></p></td>
+                        </tr>
+                         <tr style="border: none;">
+                            <td><p><strong>Experience</strong></p></td>
+                            <td><p id="v_experience"></p></td>
+                        </tr>
+                         <tr style="border: none;">
+                            <td><p><strong>Dsignation</strong></p></td>
+                            <td><p id="v_designation"></p></td>
+                        </tr>
+                         <tr style="border: none;">
+                            <td><p><strong>Job Type</strong></p></td>
+                            <td><p id="v_job_type"></p></td>
+                        </tr>
+                         <tr style="border: none;">
+                            <td><p><strong>Tax Type</strong></p></td>
+                            <td><p id="v_tax_type"></p></td>
                         </tr>
                         <tr style="border: none;">
                             <td><p><strong>Billing Rate</strong></p></td>
@@ -715,6 +790,10 @@ function viewEditEmployee(purpose, id){
                 document.getElementById("v_phone_no").innerHTML = data.phone_no;
                 document.getElementById("v_mobile_no").innerHTML = data.mobile_no;
                 document.getElementById("v_address").innerHTML = data.address+"<br/>"+data.city+", "+data.state+" "+data.country+"<br/>Pin: "+data.pin_code;
+                document.getElementById("v_experience").innerHTML = data.experience;
+                document.getElementById("v_designation").innerHTML = data.designation;
+                document.getElementById("v_job_type").innerHTML = data.job_type;
+                document.getElementById("v_tax_type").innerHTML = data.tax_type;
                 document.getElementById("v_billing_rate").innerHTML = data.billing_rate;
                 document.getElementById("v_employee_id_no").innerHTML = data.employee_id_no;
                 document.getElementById("v_employee_id").innerHTML = data.employee_id;
@@ -738,6 +817,10 @@ function viewEditEmployee(purpose, id){
                 $("#city").val(data.city);
                 $("#state").val(data.state);
                 $("#country").val(data.country);
+                $("#experience").val(data.experience);
+                $("#designation").val(data.designation);
+                $("#job_type").val(data.job_type);
+                $("#tax_type").val(data.tax_type);
                 $("#pin_code").val(data.pin_code);
                 $("#billing_rate").val(data.billing_rate);
                 $("#employee_id_no").val(data.employee_id_no);

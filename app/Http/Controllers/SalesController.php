@@ -47,14 +47,15 @@ class SalesController extends Controller
 
      public function all_sales_remainder_email(Request $request)
     {
-       
-        // Mail::raw($request->message_text, function ($message) {
-        //     $message->from('tax_invoice@arbaba.com','AR BABA');
-        //     $message->to($request->reminder_recipient_email);
-        //     $message->subject($request->subject);
-        // });
-        
       
+      $data=array('to'=>$request->reminder_recipient_email,'subject'=>$request->subject,'message'=>$request->message_text);
+        Mail::send('emails.all_invoice',['data'=>$data],function($message)use($data){
+            $message->to($data['to'])
+                    ->subject($data['subject']);
+            $message->from('tax_invoice@arbaba.com','AR BABA');
+        });
+        
+      return view('emails.all_invoice')->with('data',$data);
         Session::flash('success', 'Reminder has been sent successfully');
         return redirect('sale/allsale');
     
@@ -266,7 +267,7 @@ class SalesController extends Controller
         $product->terms=$request->terms;
         $product->opening_balance=$request->opening_balance;
         $product->as_of=date("Y-m-d",strtotime($request->as_of));
-        $product->org_id=Session::get('org_id');
+        $product->status="1";
         // for attachment
         $product->attachment = "";
         if($request->hasFile('attachment'))
@@ -350,7 +351,7 @@ class SalesController extends Controller
     }
 
     public function view_customer($id){
-        $org = $request->session()->get('organization_id');
+       
         $details = sales_customers::find($id);
         $invoices = sales_invoice::where("customer",$id)->get();
         $data['content'] ='sale.customer_view';
@@ -358,7 +359,7 @@ class SalesController extends Controller
     }
 
     public function get_customer_details($id=""){
-        $org = $request->session()->get('organization_id');
+        
         $data = sales_customers::where('id', $id)->first();
         return $data;
     }
@@ -434,12 +435,12 @@ class SalesController extends Controller
     public function invoice_mail($id="")
     {
         $toReturn=array();
-        $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
+        $toReturn=sales_invoice::where('id',$id)->where('status',1)->first();
         
         // return $toReturn;
         
         Mail::send('emails.sales_invoice_mail',['toReturn'=>$toReturn],function($message)use($toReturn){
-            $message->to($toReturn[0]['customer_email'])
+            $message->to($toReturn['customer_email'])
                     ->subject('Tax Invoice');
             $message->from('tax_invoice@arbaba.com','AR BABA');
         });

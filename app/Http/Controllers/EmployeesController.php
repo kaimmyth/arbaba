@@ -33,6 +33,10 @@ class EmployeesController extends Controller
         $employee->state = $request->state;
         $employee->pin_code = $request->pin_code;
         $employee->country = $request->country;
+        $employee->experience = $request->experience;
+        $employee->designation = $request->designation;
+        $employee->job_type = $request->job_type;
+        $employee->tax_type = $request->tax_type;
         $employee->billing_rate = $request->billing_rate;
         $employee->employee_id_no = $request->employee_id_no;
         $employee->employee_id = $request->employee_id;
@@ -40,6 +44,7 @@ class EmployeesController extends Controller
         $employee->hire_date = date("Y-m-d",strtotime($request->hire_date));
         $employee->release_date = date("Y-m-d",strtotime($request->release_date));
         $employee->dob =date("Y-m-d",strtotime( $request->dob));
+        $employee->org_id=Session::get('org_id');
 
         // finall query create, edit
         if($request->hidden_input_purpose=="edit")
