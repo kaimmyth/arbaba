@@ -45,7 +45,29 @@ class SalesController extends Controller
         return view('sale.sales_all_sales_print')->with('toReturn',$toReturn);
     }
 
-   
+     public function all_sales_remainder_email(Request $request)
+    {
+       
+        // Mail::raw($request->message_text, function ($message) {
+        //     $message->from('tax_invoice@arbaba.com','AR BABA');
+        //     $message->to($request->reminder_recipient_email);
+        //     $message->subject($request->subject);
+        // });
+        
+      
+        Session::flash('success', 'Reminder has been sent successfully');
+        return redirect('sale/allsale');
+    
+    }
+      public function all_sales_delivery_challan($id="")
+    {
+        $toReturn=array();
+        $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
+            
+        return view('sale.sales_allsales_delivery_challan')->with('toReturn',$toReturn);
+    }
+
+
     public function view_invoices(Request $request)
     {
         $org = $request->session()->get('organization_id');
@@ -154,7 +176,7 @@ class SalesController extends Controller
 
     public function get_invoice_details($id=""){
         $data = sales_invoice::where('id', $id)->first();
-        $org = $request->session()->get('organization_id');
+        
         // for expenses_details
         $no_of_rows=0;
         $product_services=[];

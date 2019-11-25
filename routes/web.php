@@ -50,6 +50,8 @@ Route::get('dashboard', 'HomeController@Dashboard');
 // All Sales
 Route::get('sale/all-sale','SalesController@view_all_sales');
 Route::get('sale/all-sale/print/{id}','SalesController@print_all_sales');
+Route::post('sale/all-sale/remainder_mail/{id}','SalesController@all_sales_remainder_email');
+Route::get('sale/allsales/delivery_challan/{id}','SalesController@all_sales_delivery_challan');
 
 // Invoices
 Route::get('sale/invoice','SalesController@view_invoices');
