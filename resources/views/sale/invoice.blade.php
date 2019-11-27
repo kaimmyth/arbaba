@@ -19,7 +19,7 @@
   </div>
 </div>
 
-                        <div>
+                        <!-- <div>
                      role        {{ Session::get('role') }} <br>
                     
                           tiem zone   {{ Session::get('time_zone') }}<br>
@@ -36,7 +36,7 @@
 
                        can_id    {{ Session::get('candidate_id') }}
                         
-                        </div>
+                        </div> -->
 
 <?php
       $overdue_amount=$estimate_amount=$paid_amount=$tax=$total_not_deposited =0;
