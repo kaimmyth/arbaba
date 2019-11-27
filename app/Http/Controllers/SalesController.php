@@ -27,7 +27,7 @@ class SalesController extends Controller
 
     {
         $toReturn=array();
-        $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
+        $toReturn=sales_invoice::orderBy('id','asc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
 
        
         
@@ -71,7 +71,7 @@ class SalesController extends Controller
 
     public function view_invoices(Request $request)
     {
-        $org = $request->session()->get('organization_id');
+        $org = $request->session()->get('org_id');
         // to open invoice form/ modal form
         $invoice="no";
         if($request->invoice){
@@ -82,7 +82,7 @@ class SalesController extends Controller
         }
 
         $toReturn=array();
-        $toReturn = sales_invoice::orderBy('sales_invoice.id','desc')->get()->where('status',1)->toArray();
+        $toReturn = sales_invoice::orderBy('sales_invoice.id','desc')->where('created_by',Session::get('candidate_id'))->where('status',1)->get()->toArray();
         
         // for dropdown
         $customers=sales_customers::orderBy('id','desc')->get();
@@ -93,11 +93,11 @@ class SalesController extends Controller
 
     public function add_edit_invoice(Request $request)
     {
-       $org = $request->session()->get('organization_id');
+       $org = $request->session()->get('org_id');
         //return $request;
         $invoice = new sales_invoice();
         $invoice->invoice_no=$request->invoice_no;
-        $invoice->customer =$request->customer ; 
+        $invoice->customer =$request->first_name ; 
         $invoice->customer_email=$request->customer_email; 
         $invoice->billing_address =$request->billing_address ; 
         $invoice->terms = $request->terms ; 
@@ -107,6 +107,10 @@ class SalesController extends Controller
         $invoice->msg_on_invoice = $request->msg_on_invoice; 
         $invoice->msg_on_statement=$request->msg_on_statement;
         $invoice->org_id=Session::get('org_id');
+
+        $invoice->created_by=Session::get('candidate_id');
+        $invoice->updated_by=Session::get('candidate_id');
+
         $invoice->status=1;
         
         // for attachment
@@ -268,6 +272,12 @@ class SalesController extends Controller
         $product->opening_balance=$request->opening_balance;
         $product->as_of=date("Y-m-d",strtotime($request->as_of));
         $product->status="1";
+
+        $product->org_id=Session::get('org_id');
+        $product->created_by=Session::get('candidate_id');
+        $product->updated_by=Session::get('candidate_id');
+
+
         // for attachment
         $product->attachment = "";
         if($request->hasFile('attachment'))
@@ -336,7 +346,7 @@ class SalesController extends Controller
         $toReturnInvoice=sales_invoice::get()->toArray();
         
         $toReturn=array();
-        $toReturn=sales_customers::orderBy('id','desc')->get()->where('status',1)->toArray();
+        $toReturn=sales_customers::orderBy('id','desc')->get()->where('created_by',Session::get('candidate_id'))->where('status',1)->toArray();
         
         $data['content'] ='sale.customer';
         return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturnInvoice'));
@@ -373,7 +383,7 @@ class SalesController extends Controller
     public function view_products_and_services()
     {
         $toReturn=array();
-        $toReturn=products_and_services::get()->toArray();
+        $toReturn=products_and_services::where('created_by',Session::get('candidate_id'))->get()->toArray();
 
        
         $data['content'] = 'sale.products-services';
@@ -403,6 +413,12 @@ class SalesController extends Controller
         $products->reverse_change=$request->reverse_change;
         $products->preferred_supplier=$request->preferred_supplier;
         $products->org_id=Session::get('org_id');
+
+
+        $products->created_by=Session::get('candidate_id');
+        $products->updated_by=Session::get('candidate_id');
+
+
         // finall query create, edit
         if($request->hidden_input_purpose=="edit")
         {
@@ -565,7 +581,7 @@ class SalesController extends Controller
         return $new_terms;
     }
     public function get_terms_details($id=""){
-        $data = terms::where('id', $id)->first();
+        $data = terms::where('status',1)->where('id', $id)->get();
         return $data;
     }
 }

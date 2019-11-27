@@ -359,7 +359,7 @@ class settingController extends Controller
    {
      
       $countries = DB::table('countries')->where('status', '=', 1)->get();
-     $userdetails = DB::table('candidate')->get();
+     $userdetails = DB::table('candidate')->where('org_id',Session::get('org_id'))->get();
      $data['content'] ='setting.user';
       return view('layouts.content', compact('data'))->with(['countries' => $countries,'userdetails' =>$userdetails]);
    }
@@ -383,7 +383,8 @@ class settingController extends Controller
         $product = new candidate();
         $product->name=$request->name;
         $product->user_id=$user_info->id;
-        $product->user_role=$request->user_role;
+        $product->org_id=Session::get('org_id');
+        // $product->user_role=$request->user_role;
         $product->phone=$request->phone;
         $product->email=$request->email;
         $product->gender=$request->gender;

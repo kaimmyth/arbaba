@@ -20,21 +20,22 @@
 </div>
 
                         <div>
-                     role        {{ Session::get('role') }} <br>
+                     role        <?php echo e(Session::get('role')); ?> <br>
                     
-                          tiem zone   {{ Session::get('time_zone') }}<br>
+                          tiem zone   <?php echo e(Session::get('time_zone')); ?><br>
 
-                          currency  {{ Session::get('currency') }}<br>
+                          currency  <?php echo e(Session::get('currency')); ?><br>
 
-                     email        {{ Session::get('email') }}<br>
+                     email        <?php echo e(Session::get('email')); ?><br>
 
-                        org name     {{ Session::get('org_name') }}<br>
+                        org name     <?php echo e(Session::get('org_name')); ?><br>
                     
-                       id     {{ Session::get('gorgID') }}<br>
+                       id     <?php echo e(Session::get('gorgID')); ?><br>
 
-                       id_org    {{ Session::get('org_id') }}<br>
+                       id_org    <?php echo e(Session::get('org_id')); ?><br>
 
-                       can_id    {{ Session::get('candidate_id') }}
+                       can_id    <?php echo e(Session::get('candidate_id')); ?>
+
                         
                         </div>
 
@@ -45,7 +46,7 @@
      @$total=0;
      @$before_tax=0;
       ?>
-      @foreach(@$toReturn as $value)
+      <?php $__currentLoopData = @$toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <?php
         // overdue
         if(@$value['due_date'] < date("Y-m-d") &&  $value['status'] == 1 && $value["invoice_details"]!="" && date('Y-m-d', strtotime('today + 365 days')))
@@ -116,7 +117,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
         
             
          ?>
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       <!-- top headder  -->
 <div class="row">
   <div class="col-lg-12">
@@ -125,17 +126,17 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
       <div class="col-md-6" style="border: 1px solid;">
         <div class="row">
           <div class="col-md-4">
-           <h4 class="unp"><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp;{{$total}} Unpaid</h4>
+           <h4 class="unp"><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp;<?php echo e($total); ?> Unpaid</h4>
          </div>
          <div class="col-md-8">
           <p style="margin-top: 12px;">LAST 365 DAYS </p>
         </div>
 
         <div class="col-md-6">
-        <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i>{{$overdue_amount}}</h3> OVERDUE
+        <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i><?php echo e($overdue_amount); ?></h3> OVERDUE
        </div>
        <div class="col-md-6" style="text-align: right;">
-       <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> {{$estimate_amount}}</h3> NOT DUE YET
+       <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> <?php echo e($estimate_amount); ?></h3> NOT DUE YET
        </div>
 
        <div class="col-md-12" style="margin-top: 18px;">
@@ -149,17 +150,17 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
   <div class="col-md-6" style="border: 1px solid;">
    <div class="row">
     <div class="col-md-4">
-     <h4><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp; {{$paid_amount}} Paid</h4>
+     <h4><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp; <?php echo e($paid_amount); ?> Paid</h4>
    </div>
    <div class="col-md-8">
     <p style="margin-top: 12px;">LAST 30 DAYS </p>
   </div>
 
   <div class="col-md-6">
-  <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> {{$total_not_deposited}}</h3> NOT DEPOSITED
+  <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> <?php echo e($total_not_deposited); ?></h3> NOT DEPOSITED
  </div>
  <div class="col-md-6" style="text-align: right;">
- <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> {{$paid_amount}}</h3> DEPOSITED
+ <h3><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> <?php echo e($paid_amount); ?></h3> DEPOSITED
  </div>
 
  <div class="col-md-12" style="margin-top: 18px;">
@@ -193,14 +194,14 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
    </thead>
    <tbody>
       
-          @foreach ($toReturn as $value)
+          <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
  
         <tr>
         <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-        <td>{{$value['invoice_no']}}</td>
-        <td>{{$value['customer']}}</td>
-        <td>{{$value['invoice_date']}}</td>
-        <td>{{$value['due_date']}}</td>
+        <td><?php echo e($value['invoice_no']); ?></td>
+        <td><?php echo e($value['customer']); ?></td>
+        <td><?php echo e($value['invoice_date']); ?></td>
+        <td><?php echo e($value['due_date']); ?></td>
         <?php
         $total=0;
         if($value["invoice_details"]!="")
@@ -214,8 +215,8 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
             }
         }
         ?>
-        <td>{{$total}}</td>
-        <td>{{$total}}</td>
+        <td><?php echo e($total); ?></td>
+        <td><?php echo e($total); ?></td>
         <td>
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
           <?php
@@ -238,21 +239,21 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
 
       </td>
         <td style="color: #0077C5; font-weight: 600; cursor: pointer;" >
-            <span  onclick="receivePayment({{@$value['id']}})" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment</span>&nbsp;&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+            <span  onclick="receivePayment(<?php echo e(@$value['id']); ?>)" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment</span>&nbsp;&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
             <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{url('sale/invoice/print/'.@$value['id'])}}">Print</a>
-                <a class="dropdown-item" href="{{url('sale/invoice/email/'.@$value['id'])}}">Send</a>
-                <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{@$value['invoice_no']}}','{{@$value['customer']}}');">Send remainder</a>
+                <a class="dropdown-item" href="<?php echo e(url('sale/invoice/print/'.@$value['id'])); ?>">Print</a>
+                <a class="dropdown-item" href="<?php echo e(url('sale/invoice/email/'.@$value['id'])); ?>">Send</a>
+                <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('<?php echo e($value['customer_email']); ?>','<?php echo e(@$value['invoice_no']); ?>','<?php echo e(@$value['customer']); ?>');">Send remainder</a>
                 <!-- <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a> -->
-                <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.@$value['id'])}}">Print Delivery Challan</a>
-                <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', {{@$value['id']}});">View</a>
-                <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', {{@$value['id']}});">Edit</a>
+                <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delivery_challan/'.@$value['id'])); ?>">Print Delivery Challan</a>
+                <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', <?php echo e(@$value['id']); ?>);">View</a>
+                <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', <?php echo e(@$value['id']); ?>);">Edit</a>
                 <!-- <a class="dropdown-item" href="#">Copy</a> -->
-                <a class="dropdown-item" href="{{url('sale/invoice/delete/'.@$value['id'])}}" onclick="return confirm('Do you want to delete this data?')">Delete</a>
+                <a class="dropdown-item" href="<?php echo e(url('sale/invoice/delete/'.@$value['id'])); ?>" onclick="return confirm('Do you want to delete this data?')">Delete</a>
             </div>
       </td>
       </tr>
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </tbody>
 </table>
 </div>
@@ -277,8 +278,8 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
             </button>
              </div>
          <div class="modal-body">
-            <form action="{{url('sale/invoice/add-edit')}}" method="post" enctype="multipart/form-data" id="form-invoice">
-                 @csrf
+            <form action="<?php echo e(url('sale/invoice/add-edit')); ?>" method="post" enctype="multipart/form-data" id="form-invoice">
+                 <?php echo csrf_field(); ?>
                  <div class="row">
          <div class="col-md-12">
             <div class="row">
@@ -296,11 +297,11 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                             <select class="form-control"  onchange="invoice_details_show(this.value)"  name="first_name" id="first_name"  required>
                             <option>-Select-</option>
                             <option id="selected_customer_name"></option>
-                                @foreach($customers as $customer)
+                                <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                <option value="{{$customer['first_name']}}">{{$customer['first_name']}} </option>
-                                <!-- <option value="{{$customer['id']}}">{{$customer['first_name']}} </option> -->
-                                @endforeach
+                                <option value="<?php echo e($customer['first_name']); ?>"><?php echo e($customer['first_name']); ?> </option>
+                                <!-- <option value="<?php echo e($customer['id']); ?>"><?php echo e($customer['first_name']); ?> </option> -->
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button" id="button-addon2" data-toggle="modal"  data-target=".new_customer_add">Add New +</button>
@@ -376,9 +377,9 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                             <select class="form-control" onchange="terms_details_show(this.value)"  name="terms" id="terms"  required>
                             <option>-Select-</option>
                             <option id="selected_customer_terms"></option>
-                                @foreach($terms as $terms)
-                                <option value="{{$terms['id']}}" >{{$terms['terms']}} </option>
-                                @endforeach
+                                <?php $__currentLoopData = $terms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $terms): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($terms['id']); ?>" ><?php echo e($terms['terms']); ?> </option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button" id="button-addon2" data-toggle="modal"  data-target=".new_terms_add">Add New +</button>
@@ -554,7 +555,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
 <!-- /.modal -->
 
 
-{{-- --------------------------------------------------Model for Sending Reminder-------------------------------------------------------- --}}
+
 <div class="modal fade" id="reminderModal" tabindex="-1" role="dialog" aria-labelledby="reminderModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -565,8 +566,8 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{url('sale/invoice/remainder_mail/'.@$value['id'])}}" method="POST">
-        @csrf
+      <form action="<?php echo e(url('sale/invoice/remainder_mail/'.@$value['id'])); ?>" method="POST">
+        <?php echo csrf_field(); ?>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">To:</label>
             <input type="text" class="form-control" id="reminder_recipient_email" name="reminder_recipient_email">
@@ -589,7 +590,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
     </div>
   </div>
 </div>
-{{-- ----------------------------------------Model for Share Invoice Link----------------------------------------------}}
+
 <div class="modal fade" id="shareinvoiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -704,7 +705,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
     </div>
 </div>
 
-{{-- ------------------------------------Payment Received Model---------------------------------------- --}}
+
 
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -717,8 +718,8 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
       </div>
       <div class="modal-body">
           
-      <form action="{{url('sale/invoice/payment_received')}}" method="post" enctype="multipart/form-data">
-           @csrf
+      <form action="<?php echo e(url('sale/invoice/payment_received')); ?>" method="post" enctype="multipart/form-data">
+           <?php echo csrf_field(); ?>
             <div class="row">
                    
             <div class="col-md-4">
@@ -798,7 +799,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                     </tr>
                 </thead>
                 <tbody id="receive_payment_details">
-                    {{-- appending datas --}}
+                    
                 </tbody>
             </table>
            
@@ -1025,7 +1026,7 @@ function viewEditInvoice(purpose, id){
         }
     });
     $.ajax({
-        url: "{{url('sale/invoice/get-invoice-details')}}" + "/" + id,
+        url: "<?php echo e(url('sale/invoice/get-invoice-details')); ?>" + "/" + id,
         method: "GET",
         contentType: 'application/json',
         dataType: "json",
@@ -1049,7 +1050,7 @@ function viewEditInvoice(purpose, id){
                 document.getElementById("v_place_of_supply").innerHTML = data.place_of_supply;
                 document.getElementById("v_msg_on_invoice").innerHTML = data.msg_on_invoice;
                 document.getElementById("v_msg_on_statement").innerHTML = data.msg_on_statement;
-                document.getElementById("v_attachment").innerHTML = "<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Attachment</a>";
+                document.getElementById("v_attachment").innerHTML = "<a target='_blank' href='<?php echo e(url('public/images')); ?>"+"/"+data.attachment+"'>View Attachment</a>";
                 
 
                 // view invoice details
@@ -1075,7 +1076,7 @@ function viewEditInvoice(purpose, id){
                 $("#msg_on_invoice").val(data.msg_on_invoice);
                 $("#msg_on_statement").val(data.msg_on_statement);
 
-                $("#e_invoice_attachment").html("<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Previous Attachment</a>");
+                $("#e_invoice_attachment").html("<a target='_blank' href='<?php echo e(url('public/images')); ?>"+"/"+data.attachment+"'>View Previous Attachment</a>");
                 
                 // get form elements details
                 var product_service_fields = document.getElementsByName("product_service[]");
@@ -1122,7 +1123,7 @@ function receivePayment(id){
         }
     });
     $.ajax({
-        url: "{{url('sale/invoice/get-invoice-details')}}" + "/" + id,
+        url: "<?php echo e(url('sale/invoice/get-invoice-details')); ?>" + "/" + id,
         method: "GET",
         contentType: 'application/json',
         dataType: "json",
@@ -1156,7 +1157,7 @@ function receivePayment(id){
 
 // yo open invoice form/ modal form if GET to open invoice
 var modalOpen="";
-modalOpen='{{$invoice}}';
+modalOpen='<?php echo e($invoice); ?>';
 $(document).ready(function(){
     if(modalOpen=="yes"){
         // to remove query from url i.e. invoice=yes
@@ -1326,7 +1327,7 @@ function viewEditInvoice(purpose, id){
         }
     });
     $.ajax({
-        url: "{{url('sale/invoice/get-invoice-details')}}" + "/" + id,
+        url: "<?php echo e(url('sale/invoice/get-invoice-details')); ?>" + "/" + id,
         method: "GET",
         contentType: 'application/json',
         dataType: "json",
@@ -1350,7 +1351,7 @@ function viewEditInvoice(purpose, id){
                 document.getElementById("v_place_of_supply").innerHTML = data.place_of_supply;
                 document.getElementById("v_msg_on_invoice").innerHTML = data.msg_on_invoice;
                 document.getElementById("v_msg_on_statement").innerHTML = data.msg_on_statement;
-                document.getElementById("v_attachment").innerHTML = "<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Attachment</a>";
+                document.getElementById("v_attachment").innerHTML = "<a target='_blank' href='<?php echo e(url('public/images')); ?>"+"/"+data.attachment+"'>View Attachment</a>";
                 
 
                 // view invoice details
@@ -1376,7 +1377,7 @@ function viewEditInvoice(purpose, id){
                 $("#msg_on_invoice").val(data.msg_on_invoice);
                 $("#msg_on_statement").val(data.msg_on_statement);
 
-                $("#e_invoice_attachment").html("<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Previous Attachment</a>");
+                $("#e_invoice_attachment").html("<a target='_blank' href='<?php echo e(url('public/images')); ?>"+"/"+data.attachment+"'>View Previous Attachment</a>");
                 
                 // get form elements details
                 var product_service_fields = document.getElementsByName("product_service[]");
@@ -1430,7 +1431,7 @@ function viewEditInvoice(purpose, id){
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Customer Name</label>
-                        <input type="hidden" name="_token" value="{{csrf_token()}}" id="token">
+                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" id="token">
                         <input type="text" name="customer_name" class="form-control" value="" id="customer_name">
                     </div>
                 </div>
@@ -1478,7 +1479,7 @@ function invoice_details_show(id) {
         }
     });
     $.ajax({
-        url: "{{url('sale/invoice/get-invoice-details_bill')}}" + "/" + id,
+        url: "<?php echo e(url('sale/invoice/get-invoice-details_bill')); ?>" + "/" + id,
         method: "GET",
         contentType: 'application/json',
         dataType: "json",
@@ -1509,7 +1510,7 @@ function invoice_details_show(id) {
                     }
                 });
                 $.ajax({
-                    url: "{{url('sale/invoice/add_new_customer')}}",
+                    url: "<?php echo e(url('sale/invoice/add_new_customer')); ?>",
                     type: 'POST',
 
                     data: {
@@ -1548,7 +1549,7 @@ function invoice_details_show(id) {
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Terms</label>
-                        <input type="hidden" name="_token" value="{{csrf_token()}}" id="token">
+                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" id="token">
                         <input type="text" name="terms_name" class="form-control" value="" id="terms_name">
                     </div>
                 </div>
@@ -1584,7 +1585,7 @@ function invoice_details_show(id) {
                     }
                 });
                 $.ajax({
-                    url: "{{url('sale/invoice/add_new_terms')}}",
+                    url: "<?php echo e(url('sale/invoice/add_new_terms')); ?>",
                     type: 'POST',
 
                     data: {
@@ -1612,7 +1613,7 @@ function invoice_details_show(id) {
         });
 
         $.ajax({
-            url: "{{url('sale/invoice/get-invoice-details_terms')}}" + "/" + id,
+            url: "<?php echo e(url('sale/invoice/get-invoice-details_terms')); ?>" + "/" + id,
                 method: "GET",
                 contentType: 'application/json',
                 dataType: "json",
@@ -1623,3 +1624,4 @@ function invoice_details_show(id) {
 }
 </script>
 
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/invoice.blade.php ENDPATH**/ ?>

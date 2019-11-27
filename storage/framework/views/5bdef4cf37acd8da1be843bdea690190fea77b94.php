@@ -113,7 +113,8 @@
           <div class="col-md-12">
             <br>
             <div class="col-md-12" style="text-align: right; margin-bottom: 4px;">
-              <button class="btn btn-primary" onclick="addCustomer();">New Customer</button>
+              <!-- <button class="btn btn-primary"  data-toggle="modal" data-target=".customer-modal">New Customer</button> -->
+              <button class="btn btn-primary"  onclick="addCustomer();">New Customer</button>
             </div>
             <br>
             <br>
@@ -575,7 +576,7 @@
     </form>
     </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-
+</div>
 
 
 
@@ -722,7 +723,6 @@
   </div>
   </div>
   </div>
-</div>
 </div>
 
 <script>
@@ -1123,13 +1123,15 @@
   });
 </script>
 
-
-<script>
-  //add expanses
-function addCustomer(){
-    $(".customer-modal").modal('show');
+<script type="text/javascript">
+  function addCustomer(){
+   $(".customer-modal").modal('show');
     resetCustomerForms();
 }
+</script>
+<script>
+  //add expanses
+
 // reset expensess form fields
 function resetCustomerForms(){
     // reset all fileds in expenses form model
@@ -1164,7 +1166,7 @@ function editCustomer(id){
             resetCustomerForms(); // reseting forms
             $("#title").val(data.title);
             $("#first_name").val(data.first_name);
-            $("#last_name").val( data.last_name);
+            $("#last_name").( data.last_name);
             $("#email_id").val(data.email_id);
             $("#company").val(data.company);
             $("#mobile_no").val(data.mobile_no);

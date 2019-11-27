@@ -24,13 +24,10 @@ class CheckRole
             Session::put('org_id',Auth::user()->org_id);
             Session::put('role',Auth::user()->users_role);
 
-
         }else{
             Session::put('gorgID',1);
             Session::put('org_id',Auth::user()->org_id);
             Session::put('role',Auth::user()->users_role);
-
-
         }       
 
         return $next($request);
@@ -38,22 +35,42 @@ class CheckRole
     elseif (Auth::check() && Auth::user()->users_role == 2) {
         $authID = Auth::user()->id;
         $role = Auth::user()->users_role;
+
+        $org_id = Auth::user()->users_id;
+        
         $odata = Company::where('users_id',$authID)->first();
+        Session::put('gorgID',$odata->users_role);
         Session::put('gorgID',$odata->id);
-        Session::put('org_id',Auth::user()->org_id);
+        Session::put('org_name',$odata->org_name);
+        Session::put('email',$odata->email);
+
+        Session::put('org_id',$odata->users_id);
+
+        Session::put('currency',$odata->currency);
+        Session::put('time_zone',$odata->time_zone);
         Session::put('role',Auth::user()->users_role);
+       
         return $next($request);
     }
     elseif (Auth::check() && Auth::user()->users_role == 3) {
         $authID = Auth::user()->id;
         $role = Auth::user()->users_role;
-        // $users_role = Auth::user()->users_role;
+        $odata = candidate::where('user_id',$authID)->first();
+        // print_r($authID);
+        // exit;
+        Session::put('role',Auth::user()->users_role);
+        Session::put('org_id',$odata->org_id);
+        Session::put('candidate_id',$odata->id);
+
+
+         // $users_role = Auth::user()->users_role;
         // print_r($users_role);
         // exit;
-        $odata = candidate::where('user_id',$authID)->first();
-        Session::put('gorgID',$odata->users_role);
-        Session::put('gorgID',$odata->id);
-        Session::put('role',Auth::user()->users_role);
+        
+        // echo "<pre>";
+        // print_r($odata);
+        // exit;
+
         return $next($request);
     }
     else {

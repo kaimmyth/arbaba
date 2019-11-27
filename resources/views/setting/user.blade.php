@@ -34,7 +34,7 @@
                                               <th>Image</th>
                                               <th>Name</th>
                                               <th>Company Name</th>
-                                              <th>Role</th>
+                                              <!-- <th>Role</th> -->
                                               <th>Email</th>
                                               <th>Phone Number</th>
                                               <th>City</th>
@@ -50,7 +50,7 @@
 
                                                    <td>{{$data->name}}</td>
                                                    <td>{{$data->company_name}}</td>
-                                                   <td>{{$data->user_role}}</td>
+                                                   <!-- <td>{{$data->user_role}}</td> -->
                                                    <td>{{$data->email}}</td>
                                                    <td>{{$data->phone}}</td>
                                                    <td>{{$data->city_district}}</td>
@@ -98,12 +98,12 @@
                                                       </div>
                                                        <h6 id="name_val"> 
                                               </div>
-                                              <div class="col-md-4">
+                                              <!-- <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="">Role</label>
                                                            <input type="text" name="user_role" class="form-control" placeholder="" id="user_role">   
                                                       </div>
-                                              </div>
+                                              </div> -->
                                               <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="">Email</label>

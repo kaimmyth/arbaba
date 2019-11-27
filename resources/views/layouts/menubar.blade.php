@@ -115,13 +115,12 @@
 <li class="has_sub">
   <a href="#" class="waves-effect"><i class="fas fa-users-cog"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Settings</span><span class="pull-right"><i class="md md-add"></i></span></a>
   <ul class="list-unstyled">
-    @if(Session::get('gorgID')==1)
-    <li>
-      <a href="{{ URL::to('company')}}" class="waves-effect"><span>Company </span></a>
-
-    </li>
+    @if(Session::get('role')==1)
+    <li><a href="{{ URL::to('company')}}" class="waves-effect"><span>Company </span></a></li>
     <li><a href="{{url('setting/user')}}"><span>User</span></a></li>
-
+    @elseif(Session::get('role')==2)
+    <li><a href="{{url('setting/user')}}"><span>User</span></a></li>
+    @else
     @endif
     <li><a href="{{url('update-site')}}"><span>Organization structure</span></a></li>
   </ul>
