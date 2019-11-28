@@ -125,6 +125,7 @@
     @endif
     <li><a href="{{url('update-site')}}"><span>Organization structure</span></a></li>
     <li><a href="{{url('setting/module')}}"><span>Module</span></a></li>
+    <li><a href="{{url('setting/user_role')}}"><span>User Role</span></a></li>
   </ul>
 </li>
 </ul>

@@ -19,14 +19,14 @@
   </div>
 </div>
 
-                        <!-- <div>
+                        <div>
                      role        <?php echo e(Session::get('role')); ?> <br>
                     
                           tiem zone   <?php echo e(Session::get('time_zone')); ?><br>
 
                           currency  <?php echo e(Session::get('currency')); ?><br>
 
-                     email        <?php echo e(Session::get('email')); ?><br>
+                       email     <?php echo e(Session::get('email')); ?><br>
 
                         org name     <?php echo e(Session::get('org_name')); ?><br>
                     
@@ -37,7 +37,7 @@
                        can_id    <?php echo e(Session::get('candidate_id')); ?>
 
                         
-                        </div> -->
+                        </div>
 
 <?php
       $overdue_amount=$estimate_amount=$paid_amount=$tax=$total_not_deposited =0;
@@ -299,7 +299,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                             <option id="selected_customer_name"></option>
                                 <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                <option value="<?php echo e($customer['first_name']); ?>"><?php echo e($customer['first_name']); ?> </option>
+                                <option value="<?php echo e(@$customer['first_name']); ?>"><?php echo e(@$customer['first_name']); ?> </option>
                                 <!-- <option value="<?php echo e($customer['id']); ?>"><?php echo e($customer['first_name']); ?> </option> -->
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>

@@ -17,6 +17,7 @@ use App\candidate;
 use App\users;
 use App\department;
 use App\module;
+use App\user_role;
 use DB;
 use Hash;
 use Session;
@@ -544,6 +545,46 @@ class settingController extends Controller
 
       public function get_module_details($id=""){
         $data = module::where('id', $id)->first();
+
+       
+        return $data;
+    }
+
+    // setting/user_role
+       public function view_user_role()
+    {
+        $toReturn=array();
+        $toReturn=user_role::get()->toArray();
+        $data['content'] ='setting/user_role';
+        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+    }
+
+         public function add_user_role(Request $request)
+    {
+        $user = new user_role();
+        $user->user_role = $request->user_role;
+        $user->is_add = $request->is_add;
+        $user->is_edit = $request->is_edit;
+        $user->is_view = $request->is_view;
+        $user->is_delete = $request->is_delete;
+        $user->org_id=Session::get('org_id');
+        
+        // finall query create, edit
+        if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($user), true);
+            
+            $update_query = user_role::where('id', $request->hidden_input_id)->update($update_values_array);
+
+        }
+         if($request->hidden_input_purpose=="add")
+        {
+            $user->save();
+        }
+        return redirect('setting/user_role');
+    }
+    public function get_user_role_details($id=""){
+        $data = user_role::where('id', $id)->first();
 
        
         return $data;

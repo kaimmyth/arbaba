@@ -276,3 +276,9 @@ Route::get('tools-master/get-department-details/{id}','settingController@get_dep
 Route::get('setting/module','settingController@view_module');
 Route::post('setting/module/add','settingController@add_module');
 Route::get('setting/module/get-module-details/{id}','settingController@get_module_details');
+
+// user_role
+
+Route::get('setting/user_role','settingController@view_user_role');
+Route::post('setting/user_role/add','settingController@add_user_role');
+Route::get('setting/user_role/get_user_role_details/{id}','settingController@get_user_role_details');

@@ -125,6 +125,7 @@
     <?php endif; ?>
     <li><a href="<?php echo e(url('update-site')); ?>"><span>Organization structure</span></a></li>
     <li><a href="<?php echo e(url('setting/module')); ?>"><span>Module</span></a></li>
+    <li><a href="<?php echo e(url('setting/user_role')); ?>"><span>User Role</span></a></li>
   </ul>
 </li>
 </ul>

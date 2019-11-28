@@ -57,7 +57,7 @@ $("#cc").show(cc);
         <h4>Sales Transactions</h4>
         <div class="row">
          <div class="col-md-12" style="text-align: right;">
-         <a href="{{url('sale/invoice?invoice=yes')}}" class="btn btn-primary">New transaction</a>
+         <a href="<?php echo e(url('sale/invoice?invoice=yes')); ?>" class="btn btn-primary">New transaction</a>
       </div>
       <?php
       $overdue_count=$overdue_amount=$open_invoice_count= $estimate_count= $estimate_amount=$paid_count=$paid_amount=0;
@@ -65,7 +65,7 @@ $("#cc").show(cc);
      $taxes=0;
      $total=0;
       ?>
-      @foreach($toReturn as $value)
+      <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <?php
         // overdue
         if($value['due_date'] < date("Y-m-d")&&$value['status']==1)
@@ -129,26 +129,30 @@ $("#cc").show(cc);
             }
         }
          ?>
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       <div class="col-md-3 dv" style="background-color: Tomato;">
-          <i class="fa fa-calculator sz" aria-hidden="true"></i>  {{$estimate_amount}}
-      <p style="font-size: 15px; font-weight: 600;">{{$estimate_count}} ESTIMATE</p>
+          <i class="fa fa-calculator sz" aria-hidden="true"></i>  <?php echo e($estimate_amount); ?>
+
+      <p style="font-size: 15px; font-weight: 600;"><?php echo e($estimate_count); ?> ESTIMATE</p>
       </div>
       <div class="col-md-3 dv" style="background-color: SlateBlue;">
           <i class="fa fa-file sz" aria-hidden="true"></i> NA
           <p style="font-size: 15px; font-weight: 600;">NA UNBILLED ACTIVITY</p>
       </div>
       <div class="col-md-3 dv" style="background-color: Violet;">
-          <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  {{$overdue_amount}}
-          <p style="font-size: 15px; font-weight: 600;">{{$overdue_count}} OVERDUE</p>
+          <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  <?php echo e($overdue_amount); ?>
+
+          <p style="font-size: 15px; font-weight: 600;"><?php echo e($overdue_count); ?> OVERDUE</p>
       </div>
       <div class="col-md-3 dv" style="background-color: LightGray;">
-          <i class="fa fa-rupee-sign sz" aria-hidden="true"></i> {{$total}}
-      <p style="font-size: 15px; font-weight: 600;">{{$open_invoice_count}} Open Invoice</p>
+          <i class="fa fa-rupee-sign sz" aria-hidden="true"></i> <?php echo e($total); ?>
+
+      <p style="font-size: 15px; font-weight: 600;"><?php echo e($open_invoice_count); ?> Open Invoice</p>
       </div>
       <div class="col-md-3 dv" style="background-color: MediumSeaGreen;">
-          <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  {{$paid_amount}}
-          <p style="font-size: 15px; font-weight: 600;">{{$paid_count}} PAID LAST 30 DAYS</p>
+          <i class="fa fa-rupee-sign sz" aria-hidden="true"></i>  <?php echo e($paid_amount); ?>
+
+          <p style="font-size: 15px; font-weight: 600;"><?php echo e($paid_count); ?> PAID LAST 30 DAYS</p>
       </div>
   </div>
   <div class="tab-content colm">
@@ -170,14 +174,14 @@ $("#cc").show(cc);
      </tr>
  </thead>
  <tbody>
-    @foreach($toReturn as $value)
+    <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <tr>
      <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-     <td>{{$value['invoice_date']}}</td>
+     <td><?php echo e($value['invoice_date']); ?></td>
      <td>Invoice</td>
-    <td>{{$value['invoice_no']}}</td>
-     <td>{{$value['customer']}}</td>
-     <td>{{$value['due_date']}}</td>
+    <td><?php echo e($value['invoice_no']); ?></td>
+     <td><?php echo e($value['customer']); ?></td>
+     <td><?php echo e($value['due_date']); ?></td>
      <?php
      $total_before_tax=0;
      $taxes=0;
@@ -194,9 +198,9 @@ $("#cc").show(cc);
      }
     $total = $total_before_tax + $taxes;
      ?>
-    <td>{{$total_before_tax}}</td>
-    <td>{{$taxes}}</td>
-    <td>{{$total}}</td>
+    <td><?php echo e($total_before_tax); ?></td>
+    <td><?php echo e($taxes); ?></td>
+    <td><?php echo e($total); ?></td>
      <td>
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
          <?php
@@ -216,24 +220,23 @@ $("#cc").show(cc);
             }
           ?>
      </td>
-     <td><span  onclick="receivePayment({{$value['id']}})" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive Payment</span>&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
+     <td><span  onclick="receivePayment(<?php echo e($value['id']); ?>)" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive Payment</span>&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
       
-     {{-- <td style="color: #0077C5; font-weight: 600; cursor: pointer;" >
-      Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i> --}}
+     
      
         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-         <a class="dropdown-item" href="{{url('sale/all-sale/print')}}/{{$value['id']}}">Print</a>
-         <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send reminder</a>
-         <a class="dropdown-item" href="javascript:void();"  onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send</a>
+         <a class="dropdown-item" href="<?php echo e(url('sale/all-sale/print')); ?>/<?php echo e($value['id']); ?>">Print</a>
+         <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('<?php echo e($value['customer_email']); ?>','<?php echo e($value['invoice_no']); ?>','<?php echo e($value['customer']); ?>');">Send reminder</a>
+         <a class="dropdown-item" href="javascript:void();"  onclick="sendReminder('<?php echo e($value['customer_email']); ?>','<?php echo e($value['invoice_no']); ?>','<?php echo e($value['customer']); ?>');">Send</a>
          <a class="dropdown-item" href="#">Share Invoice Link</a>
-         <a class="dropdown-item" href="{{url('sale/allsales/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
+         <a class="dropdown-item" href="<?php echo e(url('sale/allsales/delivery_challan/'.$value['id'])); ?>">Print Delivery Challan</a>
          <a class="dropdown-item" href="#">View/Edit</a>
          <a class="dropdown-item" href="#">Copy</a>
          <a class="dropdown-item" href="#">Delete</a>
         </div>   
    </td>
    </tr>
-  @endforeach   
+  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
 
 </tbody>
 </table>
@@ -449,7 +452,7 @@ $("#cc").show(cc);
 </div>
 <!-- /.modal -->
 
-{{-- --------------------------------------------------Model for Sending Reminder-------------------------------------------------------- --}}
+
 <div class="modal fade" id="reminderModal" tabindex="-1" role="dialog" aria-labelledby="reminderModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -460,8 +463,8 @@ $("#cc").show(cc);
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{url('sale/all-sale/remainder_mail/'.@$value['id'])}}" method="POST">
-        @csrf
+      <form action="<?php echo e(url('sale/all-sale/remainder_mail/'.@$value['id'])); ?>" method="POST">
+        <?php echo csrf_field(); ?>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">To:</label>
             <input type="text" class="form-control" id="reminder_recipient_email" name="reminder_recipient_email">
@@ -485,7 +488,7 @@ $("#cc").show(cc);
   </div>
 </div>
 
-{{-- --------------------------------------------------Model for Send-------------------------------------------------------- --}}
+
 <div class="modal fade" id="reminderModal" tabindex="-1" role="dialog" aria-labelledby="reminderModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -496,8 +499,8 @@ $("#cc").show(cc);
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{url('sale/invoice/remainder_mail/'.@$value['id'])}}" method="POST">
-        @csrf
+      <form action="<?php echo e(url('sale/invoice/remainder_mail/'.@$value['id'])); ?>" method="POST">
+        <?php echo csrf_field(); ?>
           <div class="form-group">
                 <label for="recipient-name" class="col-form-label">To:</label>
                 <input type="text" class="form-control" id="reminder_recipient_email" name="reminder_recipient_email">
@@ -530,7 +533,7 @@ $("#cc").show(cc);
 </div>
 
 
-{{-- ------------------------------------Payment Received Model------------------------------------------}}
+
 
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -543,8 +546,8 @@ $("#cc").show(cc);
             </div>
             <div class="modal-body">
                 
-            <form action="{{url('sale/invoice/payment_received')}}" method="post" enctype="multipart/form-data">
-                 @csrf
+            <form action="<?php echo e(url('sale/invoice/payment_received')); ?>" method="post" enctype="multipart/form-data">
+                 <?php echo csrf_field(); ?>
                   <div class="row">
                          
                   <div class="col-md-4">
@@ -624,7 +627,7 @@ $("#cc").show(cc);
                           </tr>
                       </thead>
                       <tbody id="receive_payment_details">
-                          {{-- appending datas --}}
+                          
                       </tbody>
                   </table>
                  
@@ -686,7 +689,7 @@ $("#cc").show(cc);
             }
         });
         $.ajax({
-            url: "{{url('sale/invoice/get-invoice-details')}}" + "/" + id,
+            url: "<?php echo e(url('sale/invoice/get-invoice-details')); ?>" + "/" + id,
             method: "GET",
             contentType: 'application/json',
             dataType: "json",
@@ -836,3 +839,4 @@ $("#cc").show(cc);
   });
 
 </script>
+<?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/allsale.blade.php ENDPATH**/ ?>

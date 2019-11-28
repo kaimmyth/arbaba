@@ -18,7 +18,7 @@
                     <ol class="breadcrumb pull-right">
                         <li><a href="#">Home </a></li>
                         <li><a href="#">Setting</a></li>
-                        <li class="active">Module</li>
+                        <li class="active">User Role</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="col-lg-12">
                     <div class="card card-border card-primary">
                         <div class="card-header">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"  onclick="addmodule();" style="float:right;">Add New </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"  onclick="adduser_role();" style="float:right;">Add New </button>
 
                         </div>
                         <div class="card-body">
@@ -34,27 +34,29 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Module Name</th>
-                                        <th>Is Admin</th>
-                                        <th>Is Company</th>
-                                        <th>Is User</th>
+                                        <th>User Role</th>
+                                        <th>Is Add</th>
+                                        <th>Is Edit</th>
+                                        <th>Is View</th>
+                                        <th>Is Delete</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody> 
-                                      <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    @foreach ($toReturn as $value)
                                         <tr>
                                             <td>&nbsp;<input type="checkbox" name="ids[]" value=""/></td>
-                                            <td><?php echo e($value['module_name']); ?></td>
-                                            <td><?php echo e($value['is_admin']); ?></td>
-                                            <td><?php echo e($value['is_company']); ?></td>
-                                            <td><?php echo e($value['is_user']); ?></td>
+                                            <td>{{$value['user_role']}}</td>
+                                            <td>{{$value['is_add']}}</td>
+                                            <td>{{$value['is_edit']}}</td>
+                                            <td>{{$value['is_view']}}</td>
+                                            <td>{{$value['is_delete']}}</td>
                                             <td class="actions">
-                                                <a href="javascript:void();" onclick="vieweditmodule('view', <?php echo e($value['id']); ?>);"><i class="fas fa-eye"></i></a> &nbsp;
-                                                <a href="javascript:void();" onclick="vieweditmodule('edit', <?php echo e($value['id']); ?>);"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
+                                                <a href="javascript:void();" onclick="viewedituser('view', {{$value['id']}});"><i class="fas fa-eye"></i></a> &nbsp;
+                                                <a href="javascript:void();" onclick="viewedituser('edit', {{$value['id']}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
                                             </td>
                                         </tr>
-                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -75,38 +77,43 @@
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title mt-0" id="myLargeModalLabel">Module</h4>
+                    <h4 class="modal-title mt-0" id="myLargeModalLabel">User Role</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo e(url('setting/module/add')); ?>" method="POST" id="form-module">
-                        <?php echo csrf_field(); ?>
+                    <form action="{{url('setting/user_role/add')}}" method="POST" id="form_user_role">
+                        @csrf
                              <div class="row" style="margin:0 -10px 0 -10px !important;">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Module Name<font color="red">*</font></label>
-                                        <input type="text" name="module_name" class="form-control" value="" id="module_name">
+                                        <label for="exampleInputEmail1">User Role<font color="red">*</font></label>
+                                        <input type="text" name="user_role" class="form-control" value="" id="user_role">
                                     </div>
                                  </div>
                                  <br>
                                  <br>
                                  <div class="col-md-12" style="margin:10px;">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                          <label class="checkbox-inline"> <input type="checkbox"  value="yes"  name="is_admin" id="is_admin">Is Admin</label>
+                                        <div class="col-md-3">
+                                          <label class="checkbox-inline"> <input type="checkbox"  value="yes"  name="is_add" id="is_add">Is Add</label>
                                       </div>
-                                      <div class="col-md-4">
-                                          <label class="checkbox-inline"><input type="checkbox" value="yes"  name="is_company" id="is_company">Is Company</label>
+                                      <div class="col-md-3">
+                                          <label class="checkbox-inline"><input type="checkbox" value="yes"  name="is_edit" id="is_edit">Is Edit</label>
                                       </div>
-                                      <div class="col-md-4">
-                                          <label class="checkbox-inline"> <input type="checkbox"  value="yes" name="is_user" id="is_user">Is User</label>
+                                      <div class="col-md-3">
+                                          <label class="checkbox-inline"> <input type="checkbox"  value="yes" name="is_view" id="is_view">Is View</label>
+                                      </div>
+                                       <div class="col-md-3">
+                                          <label class="checkbox-inline"> <input type="checkbox"  value="yes" name="is_delete" id="is_delete">Is Delete</label>
                                       </div>
                                   </div>
                                   </div>
                             </div> 
+                            <br>
                             <hr/>
+                            <br>
                             <div class="col-md-12" style="text-align: right;">
                                     <input type="text" name="hidden_input_id" value="NA" hidden>
                                     <input type="text" name="hidden_input_purpose" value="add" hidden>
@@ -121,11 +128,11 @@
 <!-- end of model  -->
 
 <!-- view model start -->
-<div class="modal module-details-model fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+<div class="modal user_role-details-model fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title mt-0" id="myLargeModalLabel">Module Details</h4>
+                <h4 class="modal-title mt-0" id="myLargeModalLabel">User Role Details</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -135,20 +142,24 @@
                     <tbody>
                        <br>
                         <tr style="border: none;">
-                            <td><p><strong>Module Name</strong></p></td>
-                            <td><p id="v_module_name"></p></td>
+                            <td><p><strong>User Role</strong></p></td>
+                            <td><p id="v_user_role"></p></td>
                         </tr>
                         <tr style="border: none;">
-                            <td><p><strong>Is Admin</strong></p></td>
-                            <td><p id="v_is_admin"></p></td>
+                            <td><p><strong>Is Add</strong></p></td>
+                            <td><p id="v_is_add"></p></td>
                         </tr>
                         <tr style="border: none;">
-                            <td><p><strong>Is Company</strong></p></td>
-                            <td><p id="v_is_company"></p></td>
+                            <td><p><strong>Is Edit</strong></p></td>
+                            <td><p id="v_is_edit"></p></td>
                         </tr>
                         <tr style="border: none;">
-                            <td><p><strong>Is User</strong></p></td>
-                            <td><p id="v_is_user"></p></td>
+                            <td><p><strong>Is View</strong></p></td>
+                            <td><p id="v_is_view"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Is Delete</strong></p></td>
+                            <td><p id="v_is_delete"></p></td>
                         </tr>
                     </tbody>
                 </table>
@@ -162,21 +173,21 @@
 <script>
 // to get employee details from controller through ajax, purpose = edit & view
 //add employees
-function addmodule(){
+function adduser_role(){
 
-    resetmoduleForms();
+    resetuser_role();
   
     $(".bs-example-modal-sm").modal('show');
 }
 // reset expensess form fields
-function resetmoduleForms(){
+function resetuser_role(){
     // reset all fileds in employee form model
-    document.getElementById("form-module").reset();
+    document.getElementById("form_user_role").reset();
     // assigning hidden inputs
     $("input[name='hidden_input_id'").val("NA");
     $("input[name='hidden_input_purpose'").val("add");
 }
-function vieweditmodule(purpose, id){
+function viewedituser(purpose, id){
     
     $.ajaxSetup({
         headers: {
@@ -184,7 +195,7 @@ function vieweditmodule(purpose, id){
         }
     });
     $.ajax({
-        url: "<?php echo e(url('setting/module/get-module-details/')); ?>" + "/" + id,
+        url: "{{url('setting/user_role/get_user_role_details/')}}" + "/" + id,
         method: "GET",
         contentType: 'application/json',
         dataType: "json",
@@ -199,20 +210,22 @@ function vieweditmodule(purpose, id){
             if(purpose=="view")
             { 
                
-                document.getElementById("v_module_name").innerHTML = data.module_name;
-                document.getElementById("v_is_admin").innerHTML = data.is_admin;
-                document.getElementById("v_is_company").innerHTML = data.is_company;
-                document.getElementById("v_is_user").innerHTML = data.is_user;
+                document.getElementById("v_user_role").innerHTML = data.module_name;
+                document.getElementById("v_is_add").innerHTML = data.is_add;
+                document.getElementById("v_is_edit").innerHTML = data.is_edit;
+                document.getElementById("v_is_view").innerHTML = data.is_view;
+                document.getElementById("v_is_delete").innerHTML = data.is_delete;
                
-                $('.module-details-model').modal('show');
+                $('.user_role-details-model').modal('show');
             }
              else if(purpose=="edit"){
                 
-                resetmoduleForms(); // reseting forms
-                $("#module_name").val(data.module_name);
-                $("#is_admin"). prop("checked", data.is_admin);
-                $("#is_company").prop("checked",data.is_company);
-                $("#is_user").prop("checked",data.is_user);
+                resetuser_role(); // reseting forms
+                $("#user_role").val(data.user_role);
+                $("#is_add"). prop("checked", data.is_add);
+                $("#is_edit").prop("checked",data.is_edit);
+                $("#is_view").prop("checked",data.is_view);
+                $("#is_delete").prop("checked",data.is_delete);
                 // assigning hidden inputs
                 $("input[name='hidden_input_id'").val(data.id);
                 $("input[name='hidden_input_purpose'").val("edit");
@@ -223,4 +236,4 @@ function vieweditmodule(purpose, id){
         }
     });
 }
-</script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/setting/module.blade.php ENDPATH**/ ?>
+</script>

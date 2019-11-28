@@ -210,7 +210,7 @@ function vieweditmodule(purpose, id){
                 
                 resetmoduleForms(); // reseting forms
                 $("#module_name").val(data.module_name);
-                    $("#is_admin"). prop("checked", data.is_admin);
+                $("#is_admin"). prop("checked", data.is_admin);
                 $("#is_company").prop("checked",data.is_company);
                 $("#is_user").prop("checked",data.is_user);
                 // assigning hidden inputs
