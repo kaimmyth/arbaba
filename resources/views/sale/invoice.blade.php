@@ -19,14 +19,14 @@
   </div>
 </div>
 
-                        <!-- <div>
+                        <div>
                      role        {{ Session::get('role') }} <br>
                     
                           tiem zone   {{ Session::get('time_zone') }}<br>
 
                           currency  {{ Session::get('currency') }}<br>
 
-                     email        {{ Session::get('email') }}<br>
+                       email     {{ Session::get('email') }}<br>
 
                         org name     {{ Session::get('org_name') }}<br>
                     
@@ -36,7 +36,7 @@
 
                        can_id    {{ Session::get('candidate_id') }}
                         
-                        </div> -->
+                        </div>
 
 <?php
       $overdue_amount=$estimate_amount=$paid_amount=$tax=$total_not_deposited =0;
@@ -298,7 +298,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                             <option id="selected_customer_name"></option>
                                 @foreach($customers as $customer)
 
-                                <option value="{{$customer['first_name']}}">{{$customer['first_name']}} </option>
+                                <option value="{{@$customer['first_name']}}">{{@$customer['first_name']}} </option>
                                 <!-- <option value="{{$customer['id']}}">{{$customer['first_name']}} </option> -->
                                 @endforeach
                             </select>

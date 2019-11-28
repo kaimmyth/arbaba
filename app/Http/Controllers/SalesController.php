@@ -22,20 +22,39 @@ class SalesController extends Controller
   
     
 
-    public function view_all_sales()
-
-
+    public function view_all_sales(Request $request)
     {
-        $toReturn=array();
-        $toReturn=sales_invoice::orderBy('id','asc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
+        $org_id = $request->session()->get('org_id');
+        $role = $request->session()->get('role');
+        // print_r($role);
+        // exit;
 
-       
-        
+        if($role == 1)
+        {
+            $toReturn=array();
+            $toReturn=sales_invoice::orderBy('id','asc')->get()->toArray();
+        }
+        elseif($role == 2)
+        {
+            $toReturn=array();
+            $toReturn=sales_invoice::orderBy('id','asc')->where('org_id',Session::get('org_id'))->get()->toArray();
+        }
+        elseif($role == 3)
+        {
+            $toReturn=array();
+            $toReturn=sales_invoice::orderBy('id','asc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
+     
+        }
+        else
+        {
+            Session::flash('success', 'error');
+        }
 
         $data['content'] ='sale.allsale';
         return view('layouts.content',compact('data'))->with(compact('toReturn'));
        
     }
+    
      public function print_all_sales($id="")
     {
         $toReturn=array();
@@ -72,24 +91,48 @@ class SalesController extends Controller
     public function view_invoices(Request $request)
     {
         $org = $request->session()->get('org_id');
+        $role = $request->session()->get('role');
         // to open invoice form/ modal form
         $invoice="no";
         if($request->invoice){
             if($request->invoice=="yes"){
                 $invoice="yes";
-                // session(['invoice' => 'yes']);
             }
         }
+        if($role == 1)
+        {
+            $toReturn=array();
+            $toReturn = sales_invoice::orderBy('id','desc')->get()->toArray();
+             // for dropdown
+         $customers=sales_customers::orderBy('id','desc')->get();
+         $terms=terms::orderBy('id','desc')->get(); 
+        }
+        elseif($role == 2)
+        {
+            $toReturn=array();
+            $toReturn = sales_invoice::orderBy('id','desc')->where('org_id',Session::get('org_id'))->where('status',1)->get()->toArray();
+                // for dropdown
+         $customers=sales_customers::orderBy('id','desc')->get();
+         $terms=terms::orderBy('id','desc')->get();
+        }
+        elseif($role == 3)
+        {
+            $toReturn=array();
+            $toReturn = sales_invoice::orderBy('id','desc')->where('created_by',Session::get('candidate_id'))->where('status',1)->get()->toArray();
+                // for dropdown
+         $customers=sales_customers::orderBy('id','desc')->get();
+         $terms=terms::orderBy('id','desc')->get();
+        }
+        else
+        {
 
-        $toReturn=array();
-        $toReturn = sales_invoice::orderBy('sales_invoice.id','desc')->where('created_by',Session::get('candidate_id'))->where('status',1)->get()->toArray();
-        
-        // for dropdown
-        $customers=sales_customers::orderBy('id','desc')->get();
-        $terms=terms::orderBy('id','desc')->get();
+        }
+      
         $data['content'] ='sale.invoice';
         return view('layouts.content',compact('data'))->with(compact('toReturn','invoice','customers','terms'));
     }
+
+   
 
     public function add_edit_invoice(Request $request)
     {
@@ -339,15 +382,39 @@ class SalesController extends Controller
     }
    
 
-    public function view_customers()
+    public function view_customers(Request $request)
     {
-        
-        $toReturnInvoice=array();
-        $toReturnInvoice=sales_invoice::get()->toArray();
-        
-        $toReturn=array();
-        $toReturn=sales_customers::orderBy('id','desc')->get()->where('created_by',Session::get('candidate_id'))->where('status',1)->toArray();
-        
+        $org_id = $request->session()->get('org_id');
+        $role = $request->session()->get('role');
+        // print_r($role);
+        // exit;
+
+        if($role == 1)
+        {
+            $toReturnInvoice=array();
+            $toReturnInvoice=sales_invoice::get()->toArray();
+            $toReturn=array();
+            $toReturn=sales_customers::orderBy('id','desc')->get()->where('status',1)->toArray();
+        }
+        elseif($role == 2)
+        {
+            $toReturnInvoice=array();
+            $toReturnInvoice=sales_invoice::get()->toArray();
+            $toReturn=array();
+            $toReturn=sales_customers::orderBy('id','desc')->get()->where('org_id',Session::get('org_id'))->where('status',1)->toArray();
+        }
+        elseif($role == 3)
+        {
+            $toReturnInvoice=array();
+            $toReturnInvoice=sales_invoice::get()->toArray();
+            $toReturn=array();
+            $toReturn=sales_customers::orderBy('id','desc')->get()->where('created_by',Session::get('candidate_id'))->where('status',1)->toArray();
+        }
+        else
+        {
+            Session::flash('success', 'error');
+        }
+
         $data['content'] ='sale.customer';
         return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturnInvoice'));
     }
@@ -380,12 +447,34 @@ class SalesController extends Controller
         // return view('sale.customer_estimate')->with('toReturn',$toReturn);
     }
 
-    public function view_products_and_services()
+    public function view_products_and_services(Request $request)
     {
-        $toReturn=array();
-        $toReturn=products_and_services::where('created_by',Session::get('candidate_id'))->get()->toArray();
+        
+        $org_id = $request->session()->get('org_id');
+        $role = $request->session()->get('role');
+        // print_r($role);
+        // exit;
 
-       
+        if($role == 1)
+        {
+            $toReturn=array();
+            $toReturn = products_and_services::orderBy('id','desc')->get()->toArray();
+        }
+        elseif($role == 2)
+        {
+            $toReturn=array();
+            $toReturn = products_and_services::orderBy('id','desc')->where('org_id',Session::get('org_id'))->where('status',1)->get()->toArray();
+           
+        }
+        elseif($role == 3)
+        {
+            $toReturn=array();
+            $toReturn=products_and_services::where('created_by',Session::get('candidate_id'))->get()->toArray();
+        }
+        else
+        {
+
+        }
         $data['content'] = 'sale.products-services';
         return view('layouts.content', compact('data'))->with('toReturn', $toReturn);
     }
