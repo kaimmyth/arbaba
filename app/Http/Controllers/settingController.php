@@ -15,9 +15,12 @@ use App\countries;
 use App\city;
 use App\candidate;
 use App\users;
+use App\department;
+use App\module;
 use DB;
 use Hash;
 use Session;
+
 
 class settingController extends Controller
 {
@@ -458,4 +461,91 @@ class settingController extends Controller
         return $data;
     }
 
+
+     public function view_department()
+    {
+        $toReturn=array();
+        $toReturn=department::get()->toArray();
+        $data['content'] ='tools-master/department';
+        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+    }
+    
+
+
+     public function add_department(Request $request)
+    {
+        $department = new department();
+        $department->department_name = $request->department_name;
+        $department->department_type = $request->department_type;
+        $department->department_hod = $request->department_hod;
+        $department->company_name = $request->company_name;
+        $department->branch = $request->branch;
+        // $department->save();
+        
+        // finall query create, edit
+        if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($department), true);
+            
+            $update_query = department::where('id', $request->hidden_input_id)->update($update_values_array);
+        }
+        else if($request->hidden_input_purpose=="add")
+        {
+            $department->save();
+        }
+        return redirect('tools-master/department');
+    }
+      public function delete_department($id="")
+    {
+        $del=DB::table('department')->where('id',$id)->delete();
+        Session::flash('success', 'Customer details has been deleted successfully');
+      
+        return redirect('tools-master/department'); 
+    }
+
+     // get employee details -> for -> view and edit -> in jquery ajax
+    public function get_department_details($id=""){
+        $data = department::where('id', $id)->first();
+       
+        return $data;
+    }
+
+      public function view_module()
+    {
+        $toReturn=array();
+        $toReturn=module::get()->toArray();
+        $data['content'] ='setting/module';
+        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+    }
+
+       public function add_module(Request $request)
+    {
+        $module = new module();
+        $module->module_name = $request->module_name;
+        $module->is_admin = $request->is_admin;
+        $module->is_company = $request->is_company;
+        $module->is_user = $request->is_user;
+        $module->org_id=Session::get('org_id');
+        
+        // finall query create, edit
+        if($request->hidden_input_purpose=="edit")
+        {
+            $update_values_array = json_decode(json_encode($module), true);
+            
+            $update_query = module::where('id', $request->hidden_input_id)->update($update_values_array);
+
+        }
+         if($request->hidden_input_purpose=="add")
+        {
+            $module->save();
+        }
+        return redirect('setting/module');
+    }
+
+      public function get_module_details($id=""){
+        $data = module::where('id', $id)->first();
+
+       
+        return $data;
+    }
 }

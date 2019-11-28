@@ -137,7 +137,7 @@
 
                      @foreach ($toReturn as $items1)
                      <tr>
-                      <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
+                      <td>&nbsp;<input type="checkbox" name="ids[]" value=""/></td>
                       <td><a href="{{url('sale/customer/view')}}/{{$items1['id']}}">{{$items1['first_name']}} / {{$items1['company']}}</td>
                       <td>{{$items1['gst_reg_type']}}</td>
                       <td>{{$items1['gst_in']}}</td>

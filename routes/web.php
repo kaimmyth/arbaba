@@ -126,7 +126,11 @@ Route::post('employee/add-edit-employee','EmployeesController@add_edit_employee'
 Route::get('employee/delete/{id}','EmployeesController@delete_employee');
 Route::get('employee/get-employee-details/{id}','EmployeesController@get_employee_details');
 
-
+//purchase-vendor
+Route::get('purchases/vendor','purchaseController@index');
+Route::post('purchases/vendor/add_edit_vendor','purchaseController@add_edit_vendor');
+Route::get('purchases/vendor/delete/{id}','purchaseController@delete_vendor');
+Route::get('purchases/vendor/get-vendor-details/{id}','purchaseController@get_vendor_details');
 /* accounting */
 // Route::get('accounting', function () {
 // 	$data['content'] ='accounting.accounting';
@@ -149,10 +153,6 @@ Route::get('tax/payment-history/delete/{id}','TaxesController@payment_history_de
 Route::get('tax/payment-history/get-payment-details/{id}','TaxesController@get_payment_details');
 
 // purchases
-Route::get('purchases/vendor', function () {
-	$data['content'] = 'purchases.vendor';
-	return view('layouts.content', compact('data'));
-});
 
 //recurring expanses
 
@@ -210,6 +210,9 @@ Route::get('sale/customer2', function () {
 });
 
 
+
+
+
 // ================================= 18/11/19 abhishek anand ===========================================
 Route::get('tools-master/show_country','settingController@view_country');
 Route::post('tools-master/add_country','settingController@add_new_country');
@@ -244,6 +247,7 @@ Route::post('tools-master/add_currency','settingController@add_currency');
 Route::post('tools-master/update_currency','settingController@update_currency');
 Route::get('tools-master/delete_currency/{id}','settingController@delete_currency');
 
+//department
 // tax Rate
 Route::get('tools-master/tax_rate','settingController@view_tax_rate');
 Route::post('tools-master/add_tax_rate','settingController@add_tax_rate');
@@ -260,3 +264,15 @@ Route::get('setting/user', "settingController@index");
 Route::post('setting/user/add', "settingController@add_user");
 Route::get('setting/user/delete/{id}','settingController@delete_user');
 Route::get('setting/user/get_user_details/{id}','settingController@get_user_details');
+
+///////////////////////////nikhil///////////////////////
+//add-department
+Route::get('tools-master/department','settingController@view_department');
+Route::post('tools-master/add_department','settingController@add_department');
+Route::get('tools-master/delete/department/{id}','settingController@delete_department');
+Route::get('tools-master/get-department-details/{id}','settingController@get_department_details');
+
+//setting-module
+Route::get('setting/module','settingController@view_module');
+Route::post('setting/module/add','settingController@add_module');
+Route::get('setting/module/get-module-details/{id}','settingController@get_module_details');

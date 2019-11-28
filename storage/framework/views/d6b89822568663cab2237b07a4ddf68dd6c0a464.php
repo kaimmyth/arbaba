@@ -47,24 +47,24 @@
                                 </thead>
                                 <tbody>
 
-                                @foreach ($toReturn as $items)
+                                <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $items): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                     <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-                                    <td>{{$items['name']}}</td>
-                                    <td>{{$items['product_type']}}</td>
-                                    <td>{{$items['sku']}}</td>
-                                    <td>{{$items['hsn_code']}}</td>
-                                    <td>{{$items['sac_code']}}</td>
-                                    <td>{{$items['category']}}</td>
-                                    <td>{{$items['cost']}}</td>
+                                    <td><?php echo e($items['name']); ?></td>
+                                    <td><?php echo e($items['product_type']); ?></td>
+                                    <td><?php echo e($items['sku']); ?></td>
+                                    <td><?php echo e($items['hsn_code']); ?></td>
+                                    <td><?php echo e($items['sac_code']); ?></td>
+                                    <td><?php echo e($items['category']); ?></td>
+                                    <td><?php echo e($items['cost']); ?></td>
                                     <td>
-                                        <a href="javascript:void();" onclick="viewEditProductsAndServices('view', {{$items['id']}});"><i class="fas fa-eye"></i></a> &nbsp; 
-                                        <a href="javascript:void();" onclick="viewEditProductsAndServices('edit', {{$items['id']}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
-                                        <a href="{{url('sale/products-and-services/delete/'.$items['id'])}}" onclick=""><i class="fas fa-trash"></i></a>
+                                        <a href="javascript:void();" onclick="viewEditProductsAndServices('view', <?php echo e($items['id']); ?>);"><i class="fas fa-eye"></i></a> &nbsp; 
+                                        <a href="javascript:void();" onclick="viewEditProductsAndServices('edit', <?php echo e($items['id']); ?>);"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
+                                        <a href="<?php echo e(url('sale/products-and-services/delete/'.$items['id'])); ?>" onclick=""><i class="fas fa-trash"></i></a>
                                     </td>
 
                                     </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
                                 </tbody>
@@ -81,8 +81,8 @@
 
 
 
-<form action=" L" method="POST" id="products-and-services-forms">
-  @csrf
+<form action="<?php echo e(url('sale/products-and-services/add-edit')); ?>" method="POST" id="products-and-services-forms">
+  <?php echo csrf_field(); ?>
   <!--  Modal content for the above example -->
   <div class="modal fade bs-example-modal-lg products-and-services" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog modal-lg">
@@ -304,7 +304,7 @@
                                     <tbody id="expenses-details-expand">
                                         <tr>
                                             <td><input  type="checkbox" name="ids[]" value="" /></td>
-                                           <!--  {{-- <td><input type="text" name="product_services" class="form-control input-sm" placeholder="product&services"></td> --}} -->
+                                           <!--   -->
                                             <td>
                                                 <input type="text" name="bundle_product_details" class="form-control input-sm" placeholder="Product&Services" id="bundle_product_details">
                                                   
@@ -768,7 +768,7 @@
             }
         });
         $.ajax({
-            url: "{{url('sale/products-and-services/get_products_and_services_details')}}" + "/" + id,
+            url: "<?php echo e(url('sale/products-and-services/get_products_and_services_details')); ?>" + "/" + id,
             method: "GET",
             contentType: 'application/json',
             dataType: "json",
@@ -1007,4 +1007,4 @@ $("#expenses-details-expand").delegate(".expenses-details-expand-dlt-btn", "clic
     $(this).closest("tr").remove();
     getExpensesDetailsValues();
 });
-</script>
+</script><?php /**PATH C:\xampp\htdocs\arbaba\resources\views/sale/products-services.blade.php ENDPATH**/ ?>

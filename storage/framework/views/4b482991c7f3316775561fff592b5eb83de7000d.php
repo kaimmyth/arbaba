@@ -109,6 +109,7 @@
     <li><a href="<?php echo e(url('tools-master/city')); ?>">City</a></li>
     <li><a href="<?php echo e(url('tools-master/terms')); ?>">Tearms</a></li>
     <li><a href="<?php echo e(url('tools-master/currency')); ?>">Currency</a></li>
+    <li><a href="<?php echo e(url('tools-master/department')); ?>">Department</a></li>
   </ul>
 </li>
   <?php endif; ?>
@@ -123,6 +124,7 @@
     <?php else: ?>
     <?php endif; ?>
     <li><a href="<?php echo e(url('update-site')); ?>"><span>Organization structure</span></a></li>
+    <li><a href="<?php echo e(url('setting/module')); ?>"><span>Module</span></a></li>
   </ul>
 </li>
 </ul>

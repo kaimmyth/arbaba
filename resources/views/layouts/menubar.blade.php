@@ -109,6 +109,7 @@
     <li><a href="{{url('tools-master/city')}}">City</a></li>
     <li><a href="{{url('tools-master/terms')}}">Tearms</a></li>
     <li><a href="{{url('tools-master/currency')}}">Currency</a></li>
+    <li><a href="{{url('tools-master/department')}}">Department</a></li>
   </ul>
 </li>
   @endif
@@ -123,6 +124,7 @@
     @else
     @endif
     <li><a href="{{url('update-site')}}"><span>Organization structure</span></a></li>
+    <li><a href="{{url('setting/module')}}"><span>Module</span></a></li>
   </ul>
 </li>
 </ul>

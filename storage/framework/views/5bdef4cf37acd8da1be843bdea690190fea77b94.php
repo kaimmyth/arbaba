@@ -137,7 +137,7 @@
 
                      <?php $__currentLoopData = $toReturn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $items1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                      <tr>
-                      <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
+                      <td>&nbsp;<input type="checkbox" name="ids[]" value=""/></td>
                       <td><a href="<?php echo e(url('sale/customer/view')); ?>/<?php echo e($items1['id']); ?>"><?php echo e($items1['first_name']); ?> / <?php echo e($items1['company']); ?></td>
                       <td><?php echo e($items1['gst_reg_type']); ?></td>
                       <td><?php echo e($items1['gst_in']); ?></td>

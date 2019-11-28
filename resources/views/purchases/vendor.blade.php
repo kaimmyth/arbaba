@@ -37,7 +37,7 @@
 
           <div class="col-md-12">
             <div class="col-md-12" style="text-align: right; margin-bottom: 4px;">
-              <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">New Vendor</button>
+              <button class="btn btn-primary" onclick="addvendor()">New Vendor</button>
             </div>
 
             <div class="tab-content colm">
@@ -45,6 +45,7 @@
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                   <thead>
                     <tr>
+                      
                       <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
                       <th>Customer/Company</th>
                       <th>Name</th>
@@ -55,7 +56,20 @@
                     </tr>
                   </thead>
                   <tbody>
-                    
+                     @foreach ($toReturn as $value)
+                    <tr>
+                      <td><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></td>
+                      <td>{{$value['company_name']}}</td>
+                      <td>{{$value['first_name']}}</td>
+                      <td>{{$value['opening_balance']}}</td>
+                      <td>{{$value['mobile']}}</td>
+                      <td>{{$value['phone']}}</td>
+                     <td><a href="javascript:void();" onclick="viewvendor('view', {{$value['id']}});">
+                      <i class="fas fa-eye"></i></a> &nbsp; <a href="javascript:void();" onclick="viewvendor('edit', {{$value['id']}});">
+                      <i class="fas fa-pencil-alt"></i></a> &nbsp; <a href="{{url('purchases/vendor/delete/'.$value['id'])}}" onclick="return confirm('Are you sure you want to delete this item?');">
+                        <i class="fas fa-trash"></i></a></td>
+                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -71,19 +85,106 @@
 </div>
 </div>
 </div>
+<!-- view model start -->
+<div class="modal vendor-details-model fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myLargeModalLabel">Vendor Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <br>
+            <br>
+            <div class="modal-body" style="padding: 0px 0;">
+                
+                <table class="table table-bordered table-striped" border="0">
+                    <tbody>
+                        <tr style="border: none;">
+                            <td><p><strong>First Name</strong></p></td>
+                            <td><p id="v_first_name"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Last Name</strong></p></td>
+                            <td><p id="v_last_name"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Company Name</strong></p></td>
+                            <td><p id="v_company_name"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Phone No</strong></p></td>
+                            <td><p id="v_phone"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Mobile No</strong></p></td>
+                            <td><p id="v_mobile"></p></td>
+                        </tr>
+                         <tr style="border: none;">
+                            <td><p><strong>Vendor Email</strong></p></td>
+                            <td><p id="v_vendor_email"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Billing Address</strong></p></td>
+                            <td><p id="v_billing_address"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Contact Person name</strong></p></td>
+                            <td><p id="v_contact_first_name"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Contact Person Phone</strong></p></td>
+                            <td><p id="v_contact_phone"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Contact Person Email</strong></p></td>
+                            <td><p id="v_contact_email"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Designation</strong></p></td>
+                            <td><p id="v_designation"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Department</strong></p></td>
+                            <td><p id="v_department"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Opening Balance</strong></p></td>
+                            <td><p id="v_opening_balance"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Currency</strong></p></td>
+                            <td><p id="v_currency"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>website</strong></p></td>
+                            <td><p id="v_website"></p></td>
+                        </tr>
+                        <tr style="border: none;">
+                            <td><p><strong>Payment Terms</strong></p></td>
+                            <td><p id="v_payment_terms"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end model -->
 
-<form action="#" method="POST">
-  @csrf
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal vendor fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title mt-0" id="myLargeModalLabel">Vendor information</h4>
+            <h4 class="modal-title mt-0" id="myLargeModalLabel">Add New Vendor </h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
+            <form action="{{url('purchases/vendor/add_edit_vendor')}}" method="post" id="form-vendor" enctype="multipart/form-data">
+                    @csrf
             <div class="row">
               <div class="col-md-12">
                 <div class="row">
@@ -114,7 +215,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Company name</label>
-                      <input type="text" class="form-control" value="" id="company" name="company">
+                      <input type="text" class="form-control" value="" id="company_name" name="company_name">
                       
                     </div>
                     <h6 id="company_val"></h6>
@@ -130,59 +231,47 @@
                    <div class="col-md-2">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Phone</label>
-                      <input type="text" class="form-control" value="" id="phone_no" name="phone_no" data-mask="(999) 999-9999" required>
+                      <input type="text" class="form-control" value="" id="phone" name="phone" data-mask="(999) 999-9999" required>
                     </div>
                     <h6 id="phone_val"></h6>
                   </div>
-
                   <div class="col-md-2">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Mobile</label>
-                      <input type="text" class="form-control" value="" id="mobile_no" name="mobile_no" data-mask="(999) 999-9999" required>
+                      <input type="text" class="form-control" value="" id="mobile" name="mobile" data-mask="(999) 999-9999" required>
                     </div>
-                    <h6 id="mobile_no_val"></h6>
+                    <h6 id="mobile_val"></h6>
+                  </div>                  <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="exampleInputEmail1">Skype Name/Number</label>
+                      <input type="text" class="form-control" value="" id="skype_name" name="skype_name" required>
+                    </div>
                   </div>
-
-       
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Skype Name/Number</label>
-                      <input type="text" class="form-control" value="" id="other" name="other" required>
-                    </div>
-                  </div>
-
-                 <div class="col-md-4">
-                    <div class="form-group">
                       <label for="exampleInputEmail1">Designation</label>
-                      <input type="text" class="form-control" value="" id="other" name="other" required>
+                      <input type="text" class="form-control" value="" id="designation" name="designation" required>
                     </div>
                   </div>
-
-                 <div class="col-md-4">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Department</label>
-                      <input type="text" class="form-control" value="" id="other" name="other" required>
+                      <input type="text" class="form-control" value="" id="department" name="department" required>
                     </div>
                   </div>
-
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1"> Vender Email</label>
-                      <input type="email" required pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control" id="email_id" name="email_id" placeholder="Enter email" >
+                      <input type="email" required pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control" id="vendor_email" name="vendor_email" placeholder="Enter email" >
                     </div>
-                    <h6 id="email_id_val"></h6>
+                    <h6 id="vendor_email_val"></h6>
                   </div>
-
-                 <div class="col-md-6">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Website</label>
                       <input type="text" class="form-control" value="" id="website" name="website" required>
                     </div>
                   </div>
-
-
-
-
             <div class="col-md-12">
               <ul class="nav nav-tabs" role="tablist">
                
@@ -222,12 +311,7 @@
                   </a>
                 </li>
               </ul>
-
-          
-
               <div class="tab-content" style="border: 1px solid;">
-
-
                 <div class="tab-pane  show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                   <div class="row">
                     <div class="col-md-6">
@@ -237,20 +321,20 @@
                           <textarea class="form-control" rows="2" id="billing_address" name="billing_address" required></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="city_town "name="city_town" placeholder="City/Town" required>
+                          <input type="text" class="form-control" id="billing_city_town" name="billing_city_town" placeholder="City/Town" required>
                         </div>
                         <h6 id="city_town_val"></h6>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="state" name="state" placeholder="State" required>
+                          <input type="text" class="form-control" id="billing_state" name="billing_state" placeholder="State" required>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="pin_code" name="pin_code" placeholder="Pincode">
-                            <h6 id="pin_code_val"></h6>
+                          <input type="text" class="form-control" id="billing_pin_code" name="billing_pin_code" placeholder="Pincode">
+                            <h6 id="billing_pin_code_val"></h6>
                         </div>
                         
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
+                          <input type="text" class="form-control" id="billing_country" name="billing_country" placeholder="Country" required>
                         </div>
                         <h6 id="country_val"></h6>
                       </div>
@@ -263,20 +347,20 @@
                           <textarea class="form-control" rows="2" id="shipping_address" name="shipping_address" required></textarea>
                         </div>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="city_town_shipping" name="city_town_shipping" placeholder="City/Town" required>
+                          <input type="text" class="form-control" id="shipping_city_town" name="shipping_city_town" placeholder="City/Town" required>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="state_shipping" name="state_shipping" placeholder="State" required>
+                          <input type="text" class="form-control" id="shipping_state" name="shipping_state" placeholder="State" required>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="pin_code_shipping" name="pin_code_shipping" placeholder="Pincode" required>
-                        <h6 id="pin_code_shipping_val"></h6>
+                          <input type="text" class="form-control" id="shipping_pin_code" name="shipping_pin_code" placeholder="Pincode" required>
+                        <h6 id="shipping_pin_code_val"></h6>
                       </div>
                         
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="country_shipping" name="country_shipping" placeholder="Country" required>
+                          <input type="text" class="form-control" id="shipping_country" name="shipping_country" placeholder="Country" required>
                         </div>
                       </div>
                     </div>
@@ -285,7 +369,7 @@
                 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                   <h5>Remarks</h5>
                   <div class="col-md-12">
-                    <textarea class="form-control" rows="3" id="notes" name="notes" required></textarea>
+                    <textarea class="form-control" rows="3" id="remark" name="remark"></textarea>
                   </div>
 
                 </div>
@@ -294,60 +378,71 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Currency</label>
-                        <input type="text" class="form-control" id="tax_reg_no" name="tax_reg_no" placeholder="" required>
+                        <input type="text" class="form-control" id="currency" name="currency" placeholder="" required>
                       </div>
-                      <h6 id="tax_reg_no_val"></h6>
+                      <h6 id="currency_val"></h6>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Opening Balance</label>
-                        <input type="text" class="form-control" id="cst_reg_no" name="cst_reg_no" placeholder="" required>
+                        <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="" required>
                       </div>
-                      <h6 id="cst_reg_no_val"></h6>
+                      <h6 id="opening_balance_val"></h6>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Payment Terms</label>
-                        <input type="text" class="form-control" id="pan_no" name="pan_no" placeholder="" required>
+                        <input type="text" class="form-control" id="payment_terms" name="payment_terms" placeholder="" required>
                       </div>
-                            <h6 id="pan_no_val"></h6>
+                            <h6 id=""></h6>
                     </div>
 
                     
                   </div>
                 </div>
-                
-
                 <div class="tab-pane" id="contact_person" role="tabpanel" aria-labelledby="note-tab">
                  <div class="col-md-12">
-                   <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                           <thead>
-                            <tr>
-                             <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
-                             <th>First Name</th>
-                             <th>Last Name</th>
-                             <th>Email Address</th>
-                             <th>Work Phone</th>
-                             <th>Mobile</th>
-                             
-                         </tr>
-                     </thead>
-                     <tbody>
-                        <tr>
-                         <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         
-                     </tr>
-                     </tbody>
-                  </table>
+                  <div class="row">
+                    <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">First Name</label>
+                      <input type="text" class="form-control" value="" id="contact_first_name" name="contact_first_name" required  maxlength="20">
+                    </div>
+                    <h6 id="contact_first_name_val"></h6>
+                  </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Last Name</label>
+                      <input type="text" class="form-control" value="" id="contact_last_name" name="contact_last_name" required  maxlength="20">
+                    </div>
+                    <h6 id="contact_last_name_val"></h6>
+                  </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email Address</label>
+                      <input type="text" class="form-control" value="" id="contact_email" name="contact_email" required  maxlength="20">
+                    </div>
+                    <h6 id="contact_email_val"></h6>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Work Phone</label>
+                      <input type="text" class="form-control" value="" id="contact_phone" name="contact_phone" required  maxlength="20" data-mask="(999) 999-9999">
+                    </div>
+                    <h6 id="last_name_val"></h6>
+                  </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Mobile</label>
+                      <input type="text" class="form-control" value="" id="contact_mobile" name="contact_mobile" required  maxlength="20" data-mask="(999) 999-9999">
+                    </div>
+                    <h6 id="contact_mobile_val"></h6>
+                  </div>
                 </div>
               </div>
+            </div>
 
               <div class="tab-pane" id="note" role="tabpanel" aria-labelledby="note-tab">
                  <div class="col-md-12">
@@ -355,25 +450,31 @@
                     <label for="exampleInputEmail1">Attachments</label>
                     <div class="dropzone" id="dropzone" style="min-height: 55px">
                       <div class="fallback">
-                        <input name="attachment" type="file" id="attachments">
+                        <input name="attachment" type="file" id="attachment">
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>  
             </div>
           </div>
-
+          <div class="modal-footer">
+                 <input type="text" name="hidden_input_id" value="NA" hidden>
+                 <input type="text" name="hidden_input_purpose" value="add" hidden>
+                 <input type="text" name="hidden_input_attachment" value="NA" hidden>
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" id="save" name="save">Save</button>
+              </div> 
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary waves-effect waves-light" id="save" name="save">Save</button>
-      </div>
+      </div> 
     </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-
+  </div><!-- /.modal-dialog -->
+</div>
+</div>
+</div>
 </form>
+
+
 
 
 <!--jquery validation-->
@@ -390,11 +491,12 @@
         $("#mobile_no_val").hide();
         $("#pin_code_val").hide();
         $("#pin_code_shipping_val").hide();
-        $("#tax_reg_no_val").hide();
-        $("#cst_reg_no_val").hide();
         $("#pan_no_val").hide();
-         $("#opening_balance_val").hide();
- 
+        $("#opening_balance_val").hide();
+        $("#currency_val").hide(); 
+        $("#contact_first_name_val").hide();
+        $("contact_email_val").hide();
+
         var err_first_name =true;
         var err_last_name =true;
         var err_company =true;
@@ -406,8 +508,8 @@
         var err_cst_reg_no=true;
         var err_pan_no=true;
         var err_opening_balance=true;
-
-
+        var err_contact_first_name=true;
+        var err_contact_email=true;
         $("#first_name").blur(function(){
 
             first_name_f();
@@ -500,147 +602,138 @@
         }
 
 
-             $("#email_id").blur(function(){
+         $("#vendor_email").blur(function(){
 
             email_id_f();
         });
         function email_id_f(){
 
-          var m = $("#email_id").val();
+          var m = $("#vendor_email").val();
            var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
            var result = m.match(v); 
 
           if((m.length=="")||(result == null)){
 
-            $("#email_id_val").show();
-            $("#email_id_val").html("Please insert valid email ");
-            $("#email_id_val").focus();
-            $("#email_id_val").css("color","red");
-
+            $("#vendor_email_val").show();
+            $("#vendor_email_val").html("Please insert valid email ");
+            $("#vendor_email_val").focus();
+            $("#vendor_email_val").css("color","red");
+            
               err_email_id=false;
               return false;
           }else{
             err_email_id=true;
-            $("#email_id_val").hide();
+            $("#vendor_email_val").hide();
           }
         }
 
 
-         $("#mobile_no").blur(function(){
+         $("#mobile").blur(function(){
 
             mobile_no_f();
         });
         function mobile_no_f(){
 
-          var q = $("#mobile_no").val();
+          var q = $("#mobile").val();
 
           var regexOnlyNumbers=/^[0-9() -]+$/;
           if((q=="")|| regexOnlyNumbers.test(q)!=true){
 
-            $("#mobile_no_val").show();
-            $("#mobile_no_val").html("Please input numbers between 0-9 ");
-            $("#mobile_no_val").focus();
-            $("#mobile_no_val").css("color","red");
+            $("#mobile_val").show();
+            $("#mobile_val").html("This field is required ");
+            $("#mobile_val").focus();
+            $("#mobile_val").css("color","red");
 
               err_mobile_no=false;
               return false;
           }else{
             err_mobile_no=true;
-            $("#mobile_no_val").hide();
+            $("#mobile_val").hide();
           }
         }
 
-
-
-
-         $("#pin_code").blur(function(){
-
+        $("#billing_pin_code").blur(function(){
             pin_code_f();
         });
         function pin_code_f(){
            var regexOnlyNumbers=/^[0-9]+$/;
-          var c = $("#pin_code").val();
+          var c = $("#billing_pin_code").val();
 
          if((c=="")|| regexOnlyNumbers.test(c)!=true){
-
-            $("#pin_code_val").show();
-            $("#pin_code_val").html("Please input pin code ");
-            $("#pin_code_val").focus();
-            $("#pin_code_val").css("color","red");
+            $("#billing_pin_code_val").show();
+            $("#billing_pin_code_val").html("Please input pin code ");
+            $("#billing_pin_code_val").focus();
+            $("#billing_pin_code_val").css("color","red");
 
               err_pin_code=false;
               return false;
           }else{
             err_pin_code=true;
-            $("#pin_code_val").hide();
+            $("#billing_pin_code_val").hide();
           }
         }
        
 
-           $("#pin_code_shipping").blur(function(){
+        $("#shipping_pin_code").blur(function(){
 
             pin_code_shipping_f();
         });
         function pin_code_shipping_f(){
           var regexOnlyNumbers=/^[0-9]+$/;
-          var w = $("#pin_code_shipping").val();
+          var w = $("#shipping_pin_code").val();
 
           if((w=="")|| regexOnlyNumbers.test(w)!=true){
 
-            $("#pin_code_shipping_val").show();
-            $("#pin_code_shipping_val").html("Please insert pin code ");
-            $("#pin_code_shipping_val").focus();
-            $("#pin_code_shipping_val").css("color","red");
+            $("#shipping_pin_code_val").show();
+            $("#shipping_pin_code_val").html("Please insert pin code ");
+            $("#shipping_pin_code_val").focus();
+            $("#shipping_pin_code_val").css("color","red");
 
               err_pin_code_shipping=false;
               return false;
           }else{
             err_pin_code_shipping=true;
-            $("#pin_code_shipping_val").hide();
+            $("#shipping_pin_code_val").hide();
           }
         }
 
-
-
-
-         $("#tax_reg_no").blur(function(){
+        $("#currency").blur(function(){
 
             tax_reg_f();
         });
         function tax_reg_f(){
-          var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
-          var z = $("#tax_reg_no").val();
+          var z = $("#currency").val();
 
-             if((z=="")|| regexOnlyNumbers.test(z)!=true){
+             if(z==""){
 
-            $("#tax_reg_no_val").show();
-            $("#tax_reg_no_val").html("This field is required ");
-            $("#tax_reg_no_val").focus();
-            $("#tax_reg_no_val").css("color","red");
+            $("#currency_val").show();
+            $("#currency_val").html("This field is required ");
+            $("#currency_val").focus();
+            $("#currency_val").css("color","red");
 
-              err_tax_reg_no=false;
+              err_currency=false;
               return false;
           }else{
-            err_tax_reg_no=true;
-            $("#tax_reg_no_val").hide();
+            err_currency=true;
+            $("#currency_val").hide();
           }
         }
                 
 
-         $("#cst_reg_no").blur(function(){
+         $("#opening_balance").blur(function(){
              cst_reg_no_f();
            });
         function cst_reg_no_f(){
 
           var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
-          var u = $("#cst_reg_no").val();
+          var u = $("#opening_balance").val();
 
           if((u=="")|| regexOnlyNumbers.test(u)!=true){
 
-            $("#cst_reg_no_val").show();
-            $("#cst_reg_no_val").html("This field is required ");
-            $("#cst_reg_no_val").focus();
-            $("#cst_reg_no_val").css("color","red");
+            $("#opening_balance_val").show();
+            $("#opening_balance_val").html("This field is required ");
+            $("#opening_balance_val").focus();
+            $("#opening_balance_val").css("color","red");
 
               err_cst_reg_no=false;
               return false;
@@ -652,55 +745,73 @@
           }
         }
 
+        $("#contact_first_name").keyup(function(){
+            contact_first_name_f();
+        });
+        function contact_first_name_f(){
 
+          var p = $("#contact_first_name").val();
 
-         $("#pan_no").blur(function(){
-             pan_no_f();
-           });
-        function pan_no_f(){
-          var regexOnlyNumbers=/^[0-9a-zA-Z]+$/;
-          var r = $("#pan_no").val();
+          if(p.length==""){
+            $("#contact_first_name_val").show();
+            $("#contact_first_name_val").html("This field is required");
+            $("#contact_first_name_val").focus();
+            $("#contact_first_name_val").css("color","red");
 
-          if((r=="")|| regexOnlyNumbers.test(r)!=true){
-
-            $("#pan_no_val").show();
-            $("#pan_no_val").html("Please enter pan no ");
-            $("#pan_no_val").focus();
-            $("#pan_no_val").css("color","red");
-
-              err_pan_no=false;
+              err_contact_first_name=false;
               return false;
+          }else{
+            err_contact_first_name=true;
+            $("#contact_first_name_val").hide();
           }
-           else {
-            err_pan_no=true;
-            $("#pan_no_val").hide();
-          }
+        }
 
-          }
+        $("#contact_mobile").blur(function(){
+            contact_mobile_f();
+        });
+        function contact_mobile_f(){
 
-           $("#opening_balance").blur(function(){
-             opening_balance_f();
-           });
-        function opening_balance_f(){
           var regexOnlyNumbers=/^[0-9]+$/;
-          var op_bal = $("#opening_balance").val();
+          var w = $("#contact_mobile").val();
 
-          if((op_bal=="")|| regexOnlyNumbers.test(op_bal)!=true){
+          if((w=="")|| regexOnlyNumbers.test(w)!=true){
 
-            $("#opening_balance_val").show();
-            $("#opening_balance_val").html("This field is required");
-            $("#opening_balance_val").focus();
-            $("#opening_balance_val").css("color","red");
+            $("#contact_mobile_val").show();
+            $("#contact_mobile_val").html("Please insert pin code ");
+            $("#contact_mobile_val").focus();
+            $("#contact_mobile_val").css("color","red");
 
-              err_opening_balance=false;
+              err_contact_mobile=false;
               return false;
+          }else{
+            err_contact_mobile=true;
+            $("#contact_mobile_val").hide();
           }
-           else {
-            err_opening_balance=true;
-            $("#opening_balance_val").hide();
-          }
+        }
 
+        $("#contact_email").blur(function(){
+            contact_email_f();
+        });
+        function contact_email_f(){
+
+           var m = $("#contact_email").val();
+           var v =/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+           var result = m.match(v); 
+
+          if((m.length=="")||(result == null)){
+            $("#contact_email_val").show();
+            $("#contact_email_val").html("Please insert valid phone no ");
+            $("#contact_email_val").focus();
+            $("#contact_email_val").css("color","red");
+
+              err_contact_email=false;
+              return false;
+          }else{
+            err_contact_email=true;
+            $("#contact_email_val").hide();
           }
+        }
+      
 
      $("#save").click(function(){
 
@@ -715,12 +826,6 @@
       err_cst_reg_no=true;
       err_pan_no=true;
       err_opening_balance=true;
-
-
-     
-
-
-    
       first_name_f();
       company_f();
       email_id_f();
@@ -733,7 +838,7 @@
       opening_balance_f();
       
 
-     if((err_first_name==true)&&(err_company==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_pin_code==true)&&(err_pin_code_shipping==true)&&(err_tax_reg_no=true)&&(err_cst_reg_no=true)&&(err_pan_no=true)&&(err_opening_balance=true))
+     if((err_first_name==true)&&(err_company==true)&&(err_vendor_email==true)&&(err_mobile==true)&&(err_billing_pin_code==true)&&(err_shipping_pin_code==true)(err_opening_balance=true))
      {
         return true;
      }else{
@@ -748,4 +853,111 @@
 
 
   });
+</script>
+<script>
+// to get employee details from controller through ajax, purpose = edit & view
+//add employees
+function addvendor(){
+  
+    resetvendorforms();
+    $(".bs-example-modal-lg").modal('show');
+}
+// reset expensess form fields
+function resetvendorforms(){
+    // reset all fileds in employee form model
+    document.getElementById("form-vendor").reset();
+    // assigning hidden inputs
+    $("input[name='hidden_input_id'").val("NA");
+    $("input[name='hidden_input_purpose'").val("add");
+    $("input[name='hidden_input_attachment'").val("NA");
+}
+  
+function viewvendor(purpose, id){       
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: "{{url('purchases/vendor/get-vendor-details')}}" + "/" + id,
+        method: "GET",
+        contentType: 'application/json',
+        dataType: "json",
+        beforeSend: function(data){
+            $("#loader1").css("display","block");
+        },
+        error: function(xhr){
+            alert("error"+xhr.status+", "+xhr.statusText);
+        },
+        success: function (data) {
+            console.log(data);
+            if(purpose =="view")
+            { 
+              
+                document.getElementById("v_first_name").innerHTML = data.first_name;
+                document.getElementById("v_last_name").innerHTML =data.last_name;
+                document.getElementById("v_company_name").innerHTML = data.company_name;
+                document.getElementById("v_phone").innerHTML = data.phone;
+                document.getElementById("v_mobile").innerHTML = data.mobile;
+                document.getElementById("v_designation").innerHTML = data.designation;
+                document.getElementById("v_billing_address").innerHTML = data.address+"<br/>"+data.billing_city_town+", "+data.billing_state+" "+data.billing_country+"<br/>Pin: "+data.billing_pin_code;
+                document.getElementById("v_department").innerHTML = data.department;
+                document.getElementById("v_vendor_email").innerHTML = data.vendor_email;
+                document.getElementById("v_website").innerHTML = data.website;
+                document.getElementById("v_currency").innerHTML = data.currency;
+                document.getElementById("v_opening_balance").innerHTML = data.opening_balance;
+                document.getElementById("v_payment_terms").innerHTML = data.payment_terms;
+                document.getElementById("v_contact_first_name").innerHTML = data.contact_first_name;
+                document.getElementById("v_contact_phone").innerHTML = data.contact_phone;
+                document.getElementById("v_contact_email").innerHTML = data.contact_email;
+                 $('.vendor-details-model').modal('show');
+
+            }
+            else if(purpose=="edit"){
+                resetvendorforms(); // reseting forms
+                $("#title").val(data.title);
+                $("#first_name").val(data.first_name);
+                $("#last_name").val(data.last_name);
+                $("#company_name").val(data.company_name);
+                $("#phone").val(data.phone);
+                $("#mobile").val(data.mobile);
+                $("#skype_name").val(data.skype_name);
+                $("#designation").val(data.designation);
+                $("#department").val(data.department);
+                $("#vendor_email").val(data.vendor_email);
+                $("#website").val(data.website);
+                $("#currency").val(data.currency);
+                $("#opening_balance").val(data.opening_balance);
+                $("#payment_terms").val(data.payment_terms);
+                $("#billing_address").val(data.billing_address);
+                $("#billing_city_town").val(data.billing_city_town);
+                $("#billing_state").val(data.billing_state);
+                $("#billing_country").val(data.billing_country);
+                $("#billing_pin_code").val(data.billing_pin_code);
+                $("#shipping_address").val(data.shipping_address);
+                $("#shipping_city_town").val(data.shipping_city_town);
+                $("#shipping_state").val(data.shipping_state);
+                $("#shipping_country").val(data.shipping_country);
+                $("#shipping_pin_code").val(data.shipping_pin_code);
+                $("#contact_first_name").val(data.contact_first_name);
+                $("#contact_first_name").val(data.contact_first_name);
+                $("#contact_last_name").val(data.contact_last_name);
+                $("#contact_email").val(data.contact_email);
+                $("#contact_phone").val(data.contact_phone);
+                $("#contact_mobile").val(data.contact_mobile);
+                $("#remark").val(data.remark);
+
+                // assigning hidden inputs
+                $("input[name='hidden_input_id'").val(data.id);
+                $("input[name='hidden_input_purpose'").val("edit");
+                $("input[name='hidden_input_attachment']").val(data.attachment);
+
+                $('.bs-example-modal-lg').modal('show'); // expense insert form model
+            }
+            $("#loader1").css("display","none");
+        }
+    });
+}
+
 </script>

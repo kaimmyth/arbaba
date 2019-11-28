@@ -19,7 +19,7 @@
   </div>
 </div>
 
-                        <div>
+                        <!-- <div>
                      role        <?php echo e(Session::get('role')); ?> <br>
                     
                           tiem zone   <?php echo e(Session::get('time_zone')); ?><br>
@@ -37,7 +37,7 @@
                        can_id    <?php echo e(Session::get('candidate_id')); ?>
 
                         
-                        </div>
+                        </div> -->
 
 <?php
       $overdue_amount=$estimate_amount=$paid_amount=$tax=$total_not_deposited =0;
