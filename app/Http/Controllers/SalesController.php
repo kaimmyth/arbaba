@@ -654,8 +654,12 @@ class SalesController extends Controller
     public function add_new_customer(Request $request)
     {
         $employee = new sales_customers();
+        $employee->org_id=Session::get('org_id');
         $employee->first_name = $request->customer_name;
         $employee->company = $request->company_name;
+        $employee->created_by=Session::get('candidate_id');
+        $employee->updated_by=Session::get('candidate_id');
+
         $employee->save();
        
         return $employee;
@@ -665,7 +669,10 @@ class SalesController extends Controller
     public function add_new_terms(Request $request)
     {
         $new_terms = new terms();
+        $new_terms->org_id=Session::get('org_id');
         $new_terms->terms = $request->terms_name;
+        $new_terms->created_by=Session::get('candidate_id');
+        $new_terms->updated_by=Session::get('candidate_id');
         $new_terms->save();
         return $new_terms;
     }

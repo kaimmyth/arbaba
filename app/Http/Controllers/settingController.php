@@ -254,10 +254,41 @@ class settingController extends Controller
 
     // ============================================= terms =====================================
 
-    public function view_terms()
+    public function view_terms(Request $request)
     {
-        $toReturn=array();
-        $toReturn=terms::where('status',1)->orderBy('terms','DESC')->get()->toArray();
+
+        $org_id = $request->session()->get('org_id');
+        $role = $request->session()->get('role');
+        // print_r($role);
+        // exit;
+
+        if($role == 1)
+        {
+            $toReturn=array();
+            $toReturn=terms::where('status',1)->orderBy('id','DESC')->get()->toArray();
+     
+        }
+        elseif($role == 2)
+        {
+            $toReturn=array();
+            $toReturn=terms::where('status',1)->orderBy('id','DESC')->where('org_id',Session::get('org_id'))->get()->toArray();
+     
+     
+        }
+        elseif($role == 3)
+        {
+            
+           
+            $toReturn=array();
+            $toReturn=terms::where('status',1)->orderBy('id','DESC')->where('created_by',Session::get('candidate_id'))->get()->toArray();
+     
+        }
+        else
+        {
+            Session::flash('success', 'error');
+        }
+
+       
         $data['content'] ='tools-master/terms';
 	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
@@ -265,8 +296,11 @@ class settingController extends Controller
     public function add_new_terms(Request $request)
     {
         $employee = new terms();
+        $employee->org_id=Session::get('org_id');
         $employee->terms = $request->new_terms;
         $employee->terms_type = $request->terms_type;
+        $employee->created_by=Session::get('candidate_id');
+        $employee->updated_by=Session::get('candidate_id');
         $employee->save();
         Session::flash('success', 'add Successfully');
         return redirect('tools-master/terms');
@@ -441,9 +475,6 @@ class settingController extends Controller
         
         return redirect('setting/user');
 
-
-
-
     }
 
     public function delete_user($id="")
@@ -462,25 +493,67 @@ class settingController extends Controller
         return $data;
     }
 
+// ======================================== department ====================================================================
 
-     public function view_department()
+     public function view_department(Request $request)
     {
-        $toReturn=array();
-        $toReturn=department::get()->toArray();
+        $org_id = $request->session()->get('org_id');
+        $role = $request->session()->get('role');
+        // print_r($role);
+        // exit;
+
+        if($role == 1)
+        {
+           
+            $toReturn=array();
+            $toReturn=department::orderBy('id', 'desc')->get()->toArray();
+     
+        }
+        elseif($role == 2)
+        {
+           
+            // $toReturn=array();
+            // $toReturn=vendor::orderBy('id', 'desc')->where('org_id',Session::get('org_id'))->get()->toArray();
+
+            $toReturn=array();
+            $toReturn=department::orderBy('id', 'desc')->where('org_id',Session::get('org_id'))->get()->toArray();
+     
+        }
+        elseif($role == 3)
+        {
+            
+            $toReturn=array();
+            $toReturn=department::orderBy('id', 'desc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
+     
+        }
+        else
+        {
+            Session::flash('success', 'error');
+        }
+
+
+
+
+
+
+       
         $data['content'] ='tools-master/department';
         return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
-    
 
 
      public function add_department(Request $request)
     {
         $department = new department();
         $department->department_name = $request->department_name;
+        $department->org_id=Session::get('org_id');
         $department->department_type = $request->department_type;
         $department->department_hod = $request->department_hod;
         $department->company_name = $request->company_name;
         $department->branch = $request->branch;
+        $department->created_by=Session::get('candidate_id');
+        $department->updated_by=Session::get('candidate_id');
+
         // $department->save();
         
         // finall query create, edit
@@ -496,6 +569,7 @@ class settingController extends Controller
         }
         return redirect('tools-master/department');
     }
+
       public function delete_department($id="")
     {
         $del=DB::table('department')->where('id',$id)->delete();
@@ -505,7 +579,8 @@ class settingController extends Controller
     }
 
      // get employee details -> for -> view and edit -> in jquery ajax
-    public function get_department_details($id=""){
+    public function get_department_details($id="")
+    {
         $data = department::where('id', $id)->first();
        
         return $data;
@@ -550,43 +625,43 @@ class settingController extends Controller
         return $data;
     }
 
-    // setting/user_role
-       public function view_user_role()
-    {
-        $toReturn=array();
-        $toReturn=user_role::get()->toArray();
-        $data['content'] ='setting/user_role';
-        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
-    }
-
-         public function add_user_role(Request $request)
-    {
-        $user = new user_role();
-        $user->user_role = $request->user_role;
-        $user->is_add = $request->is_add;
-        $user->is_edit = $request->is_edit;
-        $user->is_view = $request->is_view;
-        $user->is_delete = $request->is_delete;
-        $user->org_id=Session::get('org_id');
-        
-        // finall query create, edit
-        if($request->hidden_input_purpose=="edit")
+        // setting/user_role
+        public function view_user_role()
         {
-            $update_values_array = json_decode(json_encode($user), true);
+            $toReturn=array();
+            $toReturn=user_role::get()->toArray();
+            $data['content'] ='setting/user_role';
+            return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+        }
+    
+             public function add_user_role(Request $request)
+        {
+            $user = new user_role();
+            $user->user_role = $request->user_role;
+            $user->is_add = $request->is_add;
+            $user->is_edit = $request->is_edit;
+            $user->is_view = $request->is_view;
+            $user->is_delete = $request->is_delete;
+            $user->org_id=Session::get('org_id');
             
-            $update_query = user_role::where('id', $request->hidden_input_id)->update($update_values_array);
-
+            // finall query create, edit
+            if($request->hidden_input_purpose=="edit")
+            {
+                $update_values_array = json_decode(json_encode($user), true);
+                
+                $update_query = user_role::where('id', $request->hidden_input_id)->update($update_values_array);
+    
+            }
+             if($request->hidden_input_purpose=="add")
+            {
+                $user->save();
+            }
+            return redirect('setting/user_role');
         }
-         if($request->hidden_input_purpose=="add")
-        {
-            $user->save();
+        public function get_user_role_details($id=""){
+            $data = user_role::where('id', $id)->first();
+    
+           
+            return $data;
         }
-        return redirect('setting/user_role');
-    }
-    public function get_user_role_details($id=""){
-        $data = user_role::where('id', $id)->first();
-
-       
-        return $data;
-    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\vendor;
+use Session;
 
 class purchaseController extends Controller
 {
@@ -12,10 +13,39 @@ class purchaseController extends Controller
 
     //
 
-     public function index()
+     public function index(Request $request)
     {
-        $toReturn=array();
-        $toReturn=vendor::orderBy('id', 'desc')->get()->toArray();
+        $org_id = $request->session()->get('org_id');
+        $role = $request->session()->get('role');
+        // print_r($role);
+        // exit;
+
+        if($role == 1)
+        {
+           
+            $toReturn=array();
+            $toReturn=vendor::orderBy('id', 'desc')->where('org_id',Session::get('org_id'))->get()->toArray();
+     
+        }
+        elseif($role == 2)
+        {
+           
+            $toReturn=array();
+            $toReturn=vendor::orderBy('id', 'desc')->where('org_id',Session::get('org_id'))->get()->toArray();
+     
+        }
+        elseif($role == 3)
+        {
+            
+            $toReturn=array();
+            $toReturn=vendor::orderBy('id', 'desc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
+     
+        }
+        else
+        {
+            Session::flash('success', 'error');
+        }
+        
         $data['content'] ='purchases.vendor';
 	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
@@ -25,6 +55,7 @@ class purchaseController extends Controller
 
         $vendor = new vendor();
         $vendor->title = $request->title;
+        $vendor->org_id=Session::get('org_id');
         $vendor->first_name = $request->first_name;
         $vendor->last_name = $request->last_name;
         $vendor->company_name = $request->last_name;
@@ -54,6 +85,12 @@ class purchaseController extends Controller
         $vendor->contact_phone = $request->contact_phone;
         $vendor->contact_mobile = $request->contact_mobile;
         $vendor->remark = $request->remark; 
+
+        $vendor->created_by=Session::get('candidate_id');
+        $vendor->updated_by=Session::get('candidate_id');
+
+
+
            // for attachment
         $vendor->attachment = "";
         if($request->hasFile('attachment'))

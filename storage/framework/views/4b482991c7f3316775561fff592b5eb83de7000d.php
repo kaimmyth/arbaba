@@ -119,13 +119,14 @@
     <?php if(Session::get('role')==1): ?>
     <li><a href="<?php echo e(URL::to('company')); ?>" class="waves-effect"><span>Company </span></a></li>
     <li><a href="<?php echo e(url('setting/user')); ?>"><span>User</span></a></li>
+    <li><a href="<?php echo e(url('setting/module')); ?>"><span>Module</span></a></li>
+    <li><a href="<?php echo e(url('setting/user_role')); ?>"><span>User Role</span></a></li>
     <?php elseif(Session::get('role')==2): ?>
     <li><a href="<?php echo e(url('setting/user')); ?>"><span>User</span></a></li>
     <?php else: ?>
     <?php endif; ?>
     <li><a href="<?php echo e(url('update-site')); ?>"><span>Organization structure</span></a></li>
-    <li><a href="<?php echo e(url('setting/module')); ?>"><span>Module</span></a></li>
-    <li><a href="<?php echo e(url('setting/user_role')); ?>"><span>User Role</span></a></li>
+    
   </ul>
 </li>
 </ul>

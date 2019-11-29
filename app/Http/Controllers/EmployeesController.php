@@ -5,14 +5,50 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\employees;
+use Session;
 
 class EmployeesController extends Controller
 {
     // employee home
-    public function index()
+    public function index(Request $request)
     {
-        $toReturn=array();
-        $toReturn=employees::orderBy('id', 'desc')->get()->toArray();
+        $org_id = $request->session()->get('org_id');
+        $role = $request->session()->get('role');
+        // print_r($role);
+        // exit;
+
+        if($role == 1)
+        {
+           
+           
+            $toReturn=array();
+            $toReturn=employees::orderBy('id', 'desc')->get()->toArray();
+     
+        }
+        elseif($role == 2)
+        {
+           
+           
+            $toReturn=array();
+            $toReturn=employees::orderBy('id', 'desc')->where('org_id',Session::get('org_id'))->get()->toArray();
+     
+     
+        }
+        elseif($role == 3)
+        {
+            
+            
+            $toReturn=array();
+            $toReturn=employees::orderBy('id', 'desc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
+     
+        }
+        else
+        {
+            Session::flash('success', 'error');
+        }
+
+
+      
         $data['content'] ='employee.employee';
 	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
     }
@@ -45,6 +81,9 @@ class EmployeesController extends Controller
         $employee->release_date = date("Y-m-d",strtotime($request->release_date));
         $employee->dob =date("Y-m-d",strtotime( $request->dob));
         $employee->org_id=Session::get('org_id');
+        $employee->created_by=Session::get('candidate_id');
+        $employee->updated_by=Session::get('candidate_id');
+
 
         // finall query create, edit
         if($request->hidden_input_purpose=="edit")

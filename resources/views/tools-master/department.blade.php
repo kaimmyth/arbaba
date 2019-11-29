@@ -22,6 +22,28 @@
                     </ol>
                 </div>
             </div>
+
+    
+            <div>
+                     role        {{ Session::get('role') }} <br>
+                    
+                          tiem zone   {{ Session::get('time_zone') }}<br>
+
+                          currency  {{ Session::get('currency') }}<br>
+
+                       email     {{ Session::get('email') }}<br>
+
+                        org name     {{ Session::get('org_name') }}<br>
+                    
+                       id     {{ Session::get('gorgID') }}<br>
+
+                       id_org    {{ Session::get('org_id') }}<br>
+
+                       can_id    {{ Session::get('candidate_id') }}
+                        
+                        </div>
+
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card card-border card-primary">
