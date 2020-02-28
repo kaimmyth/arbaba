@@ -3,6 +3,8 @@
      margin-right: 0px;
      margin-left: 0px;
  }
+ 
+ 
 </style>
 
 <-- javascript for send reminder   -->
@@ -67,8 +69,9 @@ $("#cc").show(cc);
       ?>
       @foreach($toReturn as $value)
         <?php
+       
         // overdue
-        if($value['due_date'] < date("Y-m-d")&&$value['status']==1)
+        if($value['due_date'] < date("d-m-Y")&&$value['status']==1)
         {
             $overdue_count++;
             if($value["invoice_details"]!="")
@@ -78,11 +81,13 @@ $("#cc").show(cc);
                 for($i=0;$i<count($tmp);$i++){
                     $tmp_2 = explode(",",$tmp[$i]);
                     $overdue_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                    $overdue_amount = sprintf('%0.2f',$overdue_amount );
+                  
                 }
             }
         }
-
-         //open invoie
+        
+         //open invoice
          if($value['status'] == 1)
             {
                 $open_invoice_count++;
@@ -98,9 +103,9 @@ $("#cc").show(cc);
          }
      }
     $total = $total_before_tax + $taxes;
-
+    $total = sprintf('%0.2f',$total );
     //estimate
-    if($value['due_date'] > date("Y-m-d") && $value['status']==1)
+    if($value['due_date'] > date("d-m-Y") && $value['status']==1)
         {
             $estimate_count++;
             if($value["invoice_details"]!="")
@@ -110,12 +115,13 @@ $("#cc").show(cc);
                 for($i=0;$i<count($tmp);$i++){
                     $tmp_2 = explode(",",$tmp[$i]);
                     $estimate_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                    $estimate_amount = sprintf('%0.2f',$estimate_amount );
                 }
             }
         }
 
         //paid
-        if($value['status'] == 2 && date('Y-m-d', strtotime('today - 30 days')))
+        if($value['status'] == 2 && date('d-m-Y', strtotime('today - 30 days')))
         {
             $paid_count++;
             if($value["invoice_details"]!="")
@@ -125,6 +131,7 @@ $("#cc").show(cc);
                 for($i=0;$i<count($tmp);$i++){
                     $tmp_2 = explode(",",$tmp[$i]);
                     $paid_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                    $paid_amount = sprintf('%0.2f',$paid_amount );
                 }
             }
         }
@@ -156,12 +163,12 @@ $("#cc").show(cc);
       <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
        <thead>
         <tr>
-         <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
-         <th>Date</th>
+        
+         <th style="text-align: right;">Date</th>
          <th>Type</th>
          <th>No.</th>
          <th>Customer</th>
-         <th>Due Date</th>
+         <th style="text-align: right;" >Due Date</th>
          <th>Total Before Tax</th>
          <th>Tax</th>
          <th>Total</th>
@@ -172,16 +179,17 @@ $("#cc").show(cc);
  <tbody>
     @foreach($toReturn as $value)
     <tr>
-     <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-     <td>{{$value['invoice_date']}}</td>
+     
+     <td style="text-align: right;">{{date('d-m-Y',strtotime($value['invoice_date']))}}</td>
      <td>Invoice</td>
     <td>{{$value['invoice_no']}}</td>
      <td>{{$value['customer']}}</td>
-     <td>{{$value['due_date']}}</td>
+     <td style="text-align: right;">{{date('d-m-Y',strtotime($value['due_date']))}}</td>
      <?php
      $total_before_tax=0;
      $taxes=0;
      $total=0;
+     
      if($value["invoice_details"]!="")
      {
          $tmp = $value["invoice_details"];
@@ -200,7 +208,7 @@ $("#cc").show(cc);
      <td>
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
          <?php
-         if($value['due_date'] < date("Y-m-d"))
+         if($value['due_date'] < date("d-m-Y"))
          {
              echo "Expired(Opened)";
          }
@@ -210,7 +218,7 @@ $("#cc").show(cc);
              echo "Paid(Closed)";
          }
          else{
-            $diff = strtotime($value['due_date']) - strtotime(date("Y-m-d"));
+            $diff = strtotime($value['due_date']) - strtotime(date("d-m-Y"));
                 if($diff==0) { echo "Expires Today(Opened)"; }
                 else { echo "Due in ".abs(round($diff / 86400))." Days(Opened)"; }
             }
@@ -222,13 +230,13 @@ $("#cc").show(cc);
       Receive payment <i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i> --}}
      
         <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
-         <a class="dropdown-item" href="{{url('sale/all-sale/print')}}/{{$value['id']}}">Print</a>
+         <a class="dropdown-item" href="{{url('sale/all-sale/print/'.@$value['id'])}}">Print</a>
          <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send reminder</a>
          <a class="dropdown-item" href="javascript:void();"  onclick="sendReminder('{{$value['customer_email']}}','{{$value['invoice_no']}}','{{$value['customer']}}');">Send</a>
-         <a class="dropdown-item" href="#">Share Invoice Link</a>
+         <!-- <a class="dropdown-item" href="#">Share Invoice Link</a> -->
          <a class="dropdown-item" href="{{url('sale/allsales/delivery_challan/'.$value['id'])}}">Print Delivery Challan</a>
          <a class="dropdown-item" href="#">View/Edit</a>
-         <a class="dropdown-item" href="#">Copy</a>
+         <!-- <a class="dropdown-item" href="#">Copy</a> -->
          <a class="dropdown-item" href="#">Delete</a>
         </div>   
    </td>
@@ -251,7 +259,7 @@ $("#cc").show(cc);
  <div class="modal-dialog modal-full">
   <div class="modal-content">
    <div class="modal-header">
-    <h4 class="modal-title mt-0" id="full-width-modalLabel">Invoice no.1001</h4>
+    <h4 class="modal-title mt-0" id="full-width-modalLabel">Invoice no.<span id="check_invoice_no"></span></h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -316,7 +324,7 @@ $("#cc").show(cc);
                 <div class="form-group">
                     <label for="exampleInputEmail1">Invoice date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy">
+                        <input type="text" class="form-control autodate" placeholder="dd/mm/yyyy">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -327,7 +335,7 @@ $("#cc").show(cc);
                 <div class="form-group">
                     <label for="exampleInputEmail1">Due date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control autodate" placeholder="mm/dd/yyyy">
+                        <input type="text" class="form-control autodate" placeholder="dd/mm/yyyy">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -372,7 +380,7 @@ $("#cc").show(cc);
       <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
        <thead>
         <tr>
-         <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
+         <!-- <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th> -->
          <th>Product/Service</th>
          <th>HSN/SAC</th>
          <th>Descrip[tion</th>
@@ -385,7 +393,7 @@ $("#cc").show(cc);
  </thead>
  <tbody>
     <tr>
-     <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
+     <!-- <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td> -->
      <td></td>
      <td></td>
      <td></td>
@@ -687,7 +695,7 @@ $("#cc").show(cc);
         });
         $.ajax({
             url: "{{url('sale/invoice/get-invoice-details')}}" + "/" + id,
-            method: "GET",
+            method: "get",
             contentType: 'application/json',
             dataType: "json",
             beforeSend: function(data){
@@ -702,6 +710,7 @@ $("#cc").show(cc);
                 $("#payment_received_email").val(data.customer_email);
                 $("#payment_received_amount_to_apply").html(data.total);
                 $("#payment_received_invoice_id").val(id);
+               
                 $("#paymentModal").modal("show");
     
                 var payment_receive_invoice_details='<tr style="border: none; background:white !important;"><td><input  type="checkbox" name="ids[]" value="" /></td><td>Invoice#'+data.invoice_no+'</td><td>'+data.due_date+'</td><td>'+data.subtotal+'</td><td>'+data.total_tax+'</td><td>'+data.total+'</td></tr>';

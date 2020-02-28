@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\employees;
+use App\state;
 use Session;
 
 class EmployeesController extends Controller
@@ -12,7 +13,7 @@ class EmployeesController extends Controller
     // employee home
     public function index(Request $request)
     {
-        $org_id = $request->session()->get('org_id');
+        // $org_id = $request->session()->get('org_id');
         $role = $request->session()->get('role');
         // print_r($role);
         // exit;
@@ -23,14 +24,14 @@ class EmployeesController extends Controller
            
             $toReturn=array();
             $toReturn=employees::orderBy('id', 'desc')->get()->toArray();
-     
+            
         }
         elseif($role == 2)
         {
            
            
-            $toReturn=array();
-            $toReturn=employees::orderBy('id', 'desc')->where('org_id',Session::get('org_id'))->get()->toArray();
+        //     $toReturn=array();
+        //    $toReturn=employees::orderBy('id', 'desc')->where('org_id',Session::get('org_id'))->get()->toArray();
      
      
         }
@@ -38,8 +39,8 @@ class EmployeesController extends Controller
         {
             
             
-            $toReturn=array();
-            $toReturn=employees::orderBy('id', 'desc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
+            // $toReturn=array();
+            // $toReturn=employees::orderBy('id', 'desc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
      
         }
         else
@@ -50,8 +51,13 @@ class EmployeesController extends Controller
 
       
         $data['content'] ='employee.employee';
-	    return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+        return view('layouts.content',compact('data'))->with('toReturn',$toReturn);
+        // echo ("<pre>");
+        //  print_r($data);
+        //  exit;
     }
+    
+    
 
     // employee add/edit employee
     public function add_edit_employee(Request $request)
@@ -59,11 +65,14 @@ class EmployeesController extends Controller
         $employee = new employees();
         $employee->title = $request->title;
         $employee->first_name = $request->first_name;
+        $employee->middle_name = $request->middle_name;
         $employee->last_name = $request->last_name;
-        $employee->display_name_as = $request->title." ".$request->first_name." ".$request->last_name;
+        $employee->display_name_as = $request->title." ".$request->first_name." ".$request->middle_name." ".$request->last_name;
         $employee->email_id = $request->email_id;
+        $employee->address = $request->address;
         $employee->phone_no = $request->phone_no;
         $employee->mobile_no = $request->mobile_no;
+        $employee->experience = $request->experience;
         $employee->address = $request->address;
         $employee->city = $request->city;
         $employee->state = $request->state;
@@ -74,15 +83,16 @@ class EmployeesController extends Controller
         $employee->job_type = $request->job_type;
         $employee->tax_type = $request->tax_type;
         $employee->billing_rate = $request->billing_rate;
-        $employee->employee_id_no = $request->employee_id_no;
+        $employee->rate_hours = $request->rate_hours;
+        $employee->government_id = $request->government_id;
         $employee->employee_id = $request->employee_id;
         $employee->gender = $request->gender;
         $employee->hire_date = date("Y-m-d",strtotime($request->hire_date));
         $employee->release_date = date("Y-m-d",strtotime($request->release_date));
         $employee->dob =date("Y-m-d",strtotime( $request->dob));
-        $employee->org_id=Session::get('org_id');
-        $employee->created_by=Session::get('candidate_id');
-        $employee->updated_by=Session::get('candidate_id');
+        // $employee->org_id=Session::get('org_id');
+        // $employee->created_by=Session::get('candidate_id');
+        // $employee->updated_by=Session::get('candidate_id');
 
 
         // finall query create, edit
@@ -112,5 +122,8 @@ class EmployeesController extends Controller
         $data->release_date = date("d-m-Y", strtotime($data->release_date));
         $data->dob = date("d-m-Y", strtotime($data->dob));
         return $data;
+        
+        
+
     }
 }

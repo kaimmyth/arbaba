@@ -1,8 +1,11 @@
+
+    </script>
 <style type="text/css">
   .row {
     margin-right: 0px;
     margin-left: 0px;
   }
+ 
 
 </style>
 <!-- Start content -->
@@ -34,12 +37,12 @@
                             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                    <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
-                                    <th>Name</th>
+                                    <!-- <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th> -->
+                                    <th style="text-align: center;">Product Name*</th>
                                     <th>Type</th>
                                     <th>SKU</th>
-                                    <th>HSN/SAC</th>
-                                    <th>Type</th>
+                                    <th>HSN</th>
+                                    <th>SAC</th>
                                     <th>Sales Price</th>
                                     <th>Cost</th>
                                     <th>Action</th>
@@ -49,16 +52,16 @@
 
                                 @foreach ($toReturn as $items)
                                     <tr>
-                                    <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
-                                    <td>{{$items['name']}}</td>
+                                    <!-- <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td> -->
+                                    <td style="text-align: center;">{{$items['name']}}</td>
                                     <td>{{$items['product_type']}}</td>
                                     <td>{{$items['sku']}}</td>
                                     <td>{{$items['hsn_code']}}</td>
                                     <td>{{$items['sac_code']}}</td>
-                                    <td>{{$items['category']}}</td>
+                                    <td style="text-align: left">{{$items['sale_price']}}</td>
                                     <td>{{$items['cost']}}</td>
                                     <td>
-                                        <a href="javascript:void();" onclick="viewEditProductsAndServices('view', {{$items['id']}});"><i class="fas fa-eye"></i></a> &nbsp; 
+                                        <a href="javascript:void();" onclick="viewEditProductsAndServices('view', {{$items['id']}});"><i class="fas fa-eye"></i></a> &nbsp;  
                                         <a href="javascript:void();" onclick="viewEditProductsAndServices('edit', {{$items['id']}});"><i class="fas fa-pencil-alt"></i></a> &nbsp; 
                                         <a href="{{url('sale/products-and-services/delete/'.$items['id'])}}" onclick=""><i class="fas fa-trash"></i></a>
                                     </td>
@@ -81,7 +84,7 @@
 
 
 
-<form action=" L" method="POST" id="products-and-services-forms">
+<form action="{{url('sale/products-and-services/add-edit')}} " method="POST" id="products-and-services-forms">
   @csrf
   <!--  Modal content for the above example -->
   <div class="modal fade bs-example-modal-lg products-and-services" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
@@ -101,7 +104,7 @@
                   <option value="inventory">Inventory</option>
                   <option value="non_inventory">Non-inventory</option>
                   <option value="services">Service</option>
-                  <option value="bundle">Bundle</option>  
+                 <!-- // <option value="bundle">Bundle</option>   -->
                 </select>    
             </div>
             <br>
@@ -109,7 +112,7 @@
              <div class="row">
               <div class="col-md-4">
                 <div class="form-group" id="name_hide">
-                  <label for="exampleInputEmail1">Name</label>
+                  <label for="exampleInputEmail1">Product Name<span style="color: red;"> * </span> </label>
                   <input type="text" name="name" class="form-control" value="" id="name">
                   <h6 id="name_val"></h6>
                 </div>
@@ -117,7 +120,7 @@
 
             <div class="col-md-4">
               <div class="form-group" id="sku_hide">
-                <label for="exampleInputEmail1">SKU</label>
+                <label for="exampleInputEmail1">SKU<span style="color: red;">*</span></label>
                 <input type="text" name="sku" class="form-control" value="" id="sku">
                  <h6 id="sku_val"></h6>
               </div>
@@ -125,7 +128,7 @@
 
             <div class="col-md-4">
               <div class="form-group" id="hsn_code_hide">
-                <label for="exampleInputEmail1">HSN code</label>
+                <label for="exampleInputEmail1">HSN code<span style="color: red;">*</span></label>
                 <input type="text" name="hsn_code" class="form-control" value="" id="hsn_code">
                  <h6 id="hsn_val"></h6>
               </div>
@@ -133,7 +136,7 @@
 
             <div class="col-md-4">
               <div class="form-group" id="sac_code_hide">
-                <label for="exampleInputEmail1">SAC code</label>
+                <label for="exampleInputEmail1">SAC code<span style="color: red;">*</span></label>
                 <input type="text" name="sac_code" class="form-control" value="" id="sac_code">
                  <h6 id="sac_val"></h6>
               </div>
@@ -141,7 +144,7 @@
 
             <div class="col-md-4">
               <div class="form-group" id="unit_hide">
-                <label for="exampleInputEmail1">Unit</label>
+                <label for="exampleInputEmail1">Unit (Quantity)<span style="color: red;">*</span></label>
                 <input type="text" name="unit" class="form-control" value="" id="unit">
                  <h6 id="unit_val"></h6>
               </div>
@@ -150,7 +153,7 @@
 
             <div class="col-md-4">
               <div class="form-group" id="category_hide">
-                <label for="exampleInputEmail1">Category</label>
+                <label for="exampleInputEmail1">Category<span style="color: red;">*</span></label>
                 <input type="text" name="category" class="form-control" value="" id="category">
                  <h6 id="category_val"></h6>
               </div>
@@ -183,7 +186,7 @@
             <div class="col-md-4">
               <div class="form-group" id="discription_hide">
                  <input id="discription_chk" type="checkbox" name="discription_chk">
-                <label for="exampleInputEmail1">Description</label>
+                <label for="exampleInputEmail1">Description<span style="color: red;">*</span></label>
                 <textarea name="description" class="form-control" rows="2" id="description"></textarea>
                 <h6 id="description_val"></h6>
               </div>
@@ -191,7 +194,7 @@
              <div class="col-md-4">
               <div class="form-group" id="purchase_information_hide">
                 <input id="purchase_information_chk" type="checkbox" name="purchase_information_chk">
-                <label for="exampleInputEmail1">Purchasing information</label>
+                <label for="exampleInputEmail1">Purchasing informationU<span style="color: red;">*</span></label>
                 <textarea name="purchasing_information" class="form-control" rows="2" id="purchasing_information"></textarea>
                  <h6 id="purchasing_information_val"></h6>
               </div>
@@ -203,11 +206,12 @@
                   Inclusive of tax
                 </label>
                 <h6 id="inclusive_tax_val"></h6>
+                
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group" id="tax_hide">
-                <label for="exampleInputEmail1">Tax</label>
+                <label for="exampleInputEmail1">Tax<span style="color: red;">*</span></label>
                 <select class="form-control" name="tax" id="tax">
                   <option>-Select-</option>
                   <option>28.0% GST</option>
@@ -284,7 +288,9 @@
               <div class="form-group" id="preferred_supplier_hide">
                 <label for="exampleInputEmail1">Preferred Supplier</label>
                 <select class="form-control" name="preferred_supplier" id="preferred_supplier">
-                  <option>-Select-</option>
+                  <option>-supplier1 </option>
+                  <option>-supplier2 </option>
+                 
                 </select>
               </div>
             </div>     
@@ -299,6 +305,7 @@
                                             <th>PRODUCT/SERVICE</th>
                                             <th>QUANTITY</th>
                                             <th>Action</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody id="expenses-details-expand">
@@ -321,17 +328,20 @@
                                         <tr>
                                             <td colspan="3"></td>
                                             <td><a href="javascript:void();" onclick="expensesDetailsExpand();"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+                                            
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
 
+                        </div>
+                        <span style="color: red">*All mandatory Fields</</span>
         <div class="col-md-12" style="text-align: right;">
             <!-- hidden inputs -->
             <input type="text" name="hidden_input_id" value="NA" hidden>
             <input type="text" name="hidden_input_purpose" value="add" hidden>
             <!-- hidden inputs -->
+            
             <button type="submit" class="btn btn-primary waves-effect" id="btn">Save</button>
             <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
         </div>
@@ -434,10 +444,10 @@
                             <td><p><strong>Preferred Supplier</strong></p></td>
                             <td><p id="v_preferred_supplier"></p></td>
                         </tr>
-                        <tr style="border: none;">
+                        <!-- <tr style="border: none;">
                             <td><p><strong>Created At</strong></p></td>
                             <td><p id="v_created_at"></p></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -449,309 +459,14 @@
 
 
 
-    <script>
-      
-      $("document").ready(function(){
-
-        $("#name_val").hide();
-        $("#sku_val").hide();
-        $("#hsn_val").hide();
-        $("#sac_val").hide();
-        $("#unit_val").hide();
-        $("#category_val").hide();
-        $("#cost_val").hide();
-        $("#sale_price_val").hide();
-        $("#description_val").hide();
-        $("#reverse_change_val").hide();
-        $("#inclusive_tax_val").hide();
- 
-        var err_name =true;
-        var err_sku =true;
-        var err_hsn =true;
-        var err_sac = true;
-        var err_unit=true;
-        var err_category=true;
-        var err_cost=true;
-        var err_sale_price = true;
-        var err_inclusive_tax =true;
-
-        $("#name").blur(function(){
-
-            username1();
-        });
-        function username1(){
-
-          var k = $("#name").val();
-
-          if(k.length==""){
-
-            $("#name_val").show();
-            $("#name_val").html("Please input the user name");
-            $("#name_val").focus();
-            $("#name_val").css("color","red");
-
-              err_name=false;
-              return false;
-          }else{
-
-            $("#name_val").hide();
-          }
-
-            if((k.length<2)||(k.length>20)){
-
-            $("#name_val").show();
-            $("#name_val").html("User name must be between 2 to 20");
-            $("#name_val").focus();
-            $("#name_val").css("color","red");
-
-              err_name=false;
-              return false;
-          }else{
-            name_val_r=true;
-            $("#name_val").hide();
-          } 
-        }
-       
-
-        $("#sku").blur(function(){
-
-            username2();
-        });
-        function username2(){
-
-          var s = $("#sku").val();
-
-          if(s.length==""){
-
-            $("#sku_val").show();
-            $("#sku_val").html("This field is required");
-            $("#sku_val").focus();
-            $("#sku_val").css("color","red");
-
-              err_sku=false;
-              return false;
-          }else{
-            err_sku=true;
-            $("#sku_val").hide();
-          }
-        }
-
-
-             $("#hsn_code").blur(function(){
-
-            username3();
-        });
-        function username3(){
-
-          var h = $("#hsn_code").val();
-
-          if(h.length==""){
-
-            $("#hsn_val").show();
-            $("#hsn_val").html("Please input HSN ");
-            $("#hsn_val").focus();
-            $("#hsn_val").css("color","red");
-
-              err_hsn=false;
-              return false;
-          }else{
-            err_hsn=true;
-            $("#sku_val").hide();
-          }
-        }
-
-
-
-             $("#sac_code").blur(function(){
-
-            username4();
-        });
-        function username4(){
-
-          var j = $("#sac_code").val();
-
-          if(j.length==""){
-
-            $("#sac_val").show();
-            $("#sac_val").html("Please input SAC code ");
-            $("#sac_val").focus();
-            $("#sac_val").css("color","red");
-
-              err_sac=false;
-              return false;
-          }else{
-            err_sac=true;
-            $("#sac_val").hide();
-          }
-        }
-
-
-         $("#unit").blur(function(){
-
-            username5();
-        });
-        function username5(){
-          var regexOnlyNumbers=/^[0-9]+$/;
-          var l = $("#unit").val();
-
-         if((l=="")|| regexOnlyNumbers.test(l)!=true){
-
-            $("#unit_val").show();
-            $("#unit_val").html("Input valid unit ");
-            $("#unit_val").focus();
-            $("#unit_val").css("color","red");
-
-              err_unit=false;
-              return false;
-          }else{
-            err_unit=true;
-            $("#unit_val").hide();
-          }
-        }
-       
-
-           $("#category").blur(function(){
-
-            username6();
-        });
-        function username6(){
-
-          var l = $("#category").val();
-
-          if(l.length==""){
-
-            $("#category_val").show();
-            $("#category_val").html("Please input category ");
-            $("#category_val").focus();
-            $("#category_val").css("color","red");
-
-              err_category=false;
-              return false;
-          }else{
-            err_categoryt=true;
-            $("#category_val").hide();
-          }
-        }
-
-         $("#cost").blur(function(){
-
-            username7();
-        });
-        function username7(){
-
-          var q = $("#cost").val();
-
-          var regexOnlyNumbers=/^[0-9]+$/;
-          if((q=="")|| regexOnlyNumbers.test(q)!=true){
-
-            $("#cost_val").show();
-            $("#cost_val").html("Please input numbers between 0-9 ");
-            $("#cost_val").focus();
-            $("#cost_val").css("color","red");
-
-              err_cost=false;
-              return false;
-          }else{
-            err_cost=true;
-            $("#cost_val").hide();
-          }
-        }
-
-
-
-         $("#sale_price").blur(function(){
-
-            username8();
-        });
-        function username8(){
-          var z = $("#sale_price").val();
-
-          var regexOnlyNumbers=/^[0-9]+$/;
-          if((z=="")|| regexOnlyNumbers.test(z)!=true){
-
-            $("#sale_price_val").show();
-            $("#sale_price_val").html("Please input numbers between 0-9 ");
-            $("#sale_price_val").focus();
-            $("#sale_price_val").css("color","red");
-
-              err_sale_price=false;
-              return false;
-          }else{
-            err_sale_price=true;
-            $("#sale_price_val").hide();
-          }
-        }
-                
-
-         $("#inclusive_tax").change(function(){
-             username9();
-        });
-        function username9(){
-          
-          if($("#inclusive_tax").prop("checked") == false){
-
-            $("#inclusive_tax_val").show();
-            $("#inclusive_tax_val").html("Plesee check the button ");
-            $("#inclusive_tax_val").focus();
-            $("#inclusive_tax_val").css("color","red");
-
-              err_sale_price=false;
-              return false;
-          }
-           else if($("#inclusive_tax").prop("checked") == true){
-            $("#inclusive_tax_val").hide();
-
-          }
-        }
-
-
-     $("#btn").click(function(){
-
-      err_name=true;
-      err_sku=true;
-      err_hsn=true;
-      err_sac=true;
-      err_unit=true;
-      err_category=true;
-      err_cost=true;
-      err_sale_price=true;
-
-
-      username1();
-      username2();
-      username3();
-      username4();
-      username5();
-      username6();
-      username7();
-      username8();
-      username9();
-
-     if((err_name==true)&&(err_sku==true)&&(err_hsn==true)&&(err_sac==true)&&(err_unit==true)&&(err_category==true)&&(err_cost==true)&&(err_sale_price==true))
-     {
-        return true;
-     }else{
-        return false;
-
-     }
-
-     });
-         
-
-
-
-
-  });
-
-     
-    </script>
+    
 
 <script>
     // to get suppliers details from controller through ajax, purpose = edit & view
     //add supplier
     function addProductsAndServices(){
         resetProductsAndServicesForms();
-        $(".products-and-services").modal('show');
+        $(".products-and-services").modal("show");
     }
     // reset supplier form fields
     function resetProductsAndServicesForms(){
@@ -762,24 +477,27 @@
         $("input[name='hidden_input_purpose'").val("add");
     }
     function viewEditProductsAndServices(purpose, id){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+     //   $.ajaxSetup({
+        //    headers: {
+            //    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         //   }
+     //   });
         $.ajax({
             url: "{{url('sale/products-and-services/get_products_and_services_details')}}" + "/" + id,
             method: "GET",
             contentType: 'application/json',
             dataType: "json",
             beforeSend: function(data){
+
                 $("#loader1").css("display","block");
+            //    alert("Wait! data is getting loaded");
             },
             error: function(xhr){
                 alert("error"+xhr.status+", "+xhr.statusText);
             },
             success: function (data) {
                 console.log(data);
+                
                 if(purpose=="view")
                 {
                     document.getElementById("v_id").innerHTML = data.id;
@@ -807,6 +525,7 @@
                 else if(purpose=="edit"){
                     resetProductsAndServicesForms(); // reseting forms
                     $("#title").val(data.title);
+                    
                     $("#product_type").val(data.product_type);
                     $("#name").val(data.name);
                     $("#sku").val(data.sku);
@@ -920,7 +639,7 @@
                  if(level=="services"){
                     $("#sku_hide").show(300);
 
-                    $("#hsn_code_hide").hide(300);
+                    $("#hsn_code_hide").show(300);
                     $("#sale_price_rate").show(300);
                     $("#income_account_hide").show(300);
                     $("#tax_hide").show(300);
@@ -1008,3 +727,325 @@ $("#expenses-details-expand").delegate(".expenses-details-expand-dlt-btn", "clic
     getExpensesDetailsValues();
 });
 </script>
+
+ 
+<script>
+      
+      $("document").ready(function(){
+
+        $("#name_val").hide();
+        $("#sku_val").hide();
+        $("#hsn_val").hide();
+        $("#sac_val").hide();
+        $("#unit_val").hide();
+        $("#category_val").hide();
+        $("#cost_val").hide();
+        $("#sale_price_val").hide();
+        $("#description_val").hide();
+        $("#reverse_change_val").hide();
+        $("#inclusive_tax_val").hide();
+ 
+        var err_name =true;
+        var err_sku =true;
+        var err_hsn =true;
+        var err_sac = true;
+        var err_unit=true;
+        var err_category=true;
+        var err_cost=true;
+        var err_sale_price = true;
+        var err_inclusive_tax =true;
+
+        $("#name").blur(function(){
+
+            username1();
+        });
+        function username1(){
+
+          var k = $("#name").val();
+
+          if(k.length==""){
+
+            $("#name_val").show();
+            $("#name_val").html("please input the name");
+            $("#name_val").focus();
+            $("#name_val").css("color","red");
+
+              err_name=false;
+              return false;
+          }else{
+
+            $("#name_val").hide();
+          }
+
+            if((k.length<2)||(k.length>20)){
+
+            $("#name_val").show();
+            $("#name_val").html("name must be between 2 and 20");
+            $("#name_val").focus();
+            $("#name_val").css("color","red");
+
+              err_name=false;
+              return false;
+          }else{
+            name_val_r=true;
+            $("#name_val").hide();
+          } 
+        }
+       
+
+        $("#sku").blur(function(){
+
+            username2();
+        });
+        function username2(){
+
+          var s = $("#sku").val();
+
+          if(s.length==""){
+
+            $("#sku_val").show();
+            $("#sku_val").html(" * Please enter numbers only"!);
+            $("#sku_val").focus();
+            $("#sku_val").css("color","red");
+
+              err_sku=false;
+              return false;
+          }else{
+            err_sku=true;
+            $("#sku_val").hide();
+          }
+        }
+
+
+             $("#hsn_code").blur(function(){
+
+            username3();
+        });
+        function username3(){
+
+          var h = $("#hsn_code").val();
+
+          if(h.length==""){
+
+            $("#hsn_val").show();
+            $("#hsn_val").html(" * Please input numbers only! ");
+            $("#hsn_val").focus();
+            $("#hsn_val").css("color","red");
+
+              err_hsn=false;
+              return false;
+          }else{
+            err_hsn=true;
+            $("#sku_val").hide();
+          }
+        }
+
+
+
+             $("#sac_code").blur(function(){
+
+            username4();
+        });
+        function username4(){
+
+          var j = $("#sac_code").val();
+
+          if(j.length==""){
+
+            $("#sac_val").show();
+            $("#sac_val").html(" * Please input numbers only! ");
+            $("#sac_val").focus();
+            $("#sac_val").css("color","red");
+
+              err_sac=false;
+              return false;
+          }else{
+            err_sac=true;
+            $("#sac_val").hide();
+          }
+        }
+
+
+         $("#unit").blur(function(){
+
+            username5();
+        });
+        function username5(){
+          var regexOnlyNumbers=/^[0-9]+$/;
+          var l = $("#unit").val();
+
+         if((l=="")|| regexOnlyNumbers.test(l)!=true){
+
+            $("#unit_val").show();
+            $("#unit_val").html(input valid unit");
+            $("#unit_val").focus();
+            $("#unit_val").css("color","red");
+
+              err_unit=false;
+              return false;
+          }else{
+            err_unit=true;
+            $("#unit_val").hide();
+          }
+        }
+       
+
+           $("#category").blur(function(){
+
+            username6();
+        });
+        function username6(){
+
+          var l = $("#category").val();
+
+          if(l.length==""){
+
+            $("#category_val").show();
+            $("#category_val").html("Please input category ");
+            $("#category_val").focus();
+            $("#category_val").css("color","red");
+
+              err_category=false;
+              return false;
+          }else{
+            err_categoryt=true;
+            $("#category_val").hide();
+          }
+        }
+
+         $("#cost").blur(function(){
+
+            username7();
+        });
+        function username7(){
+
+          var q = $("#cost").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+            $("#cost_val").show();
+            $("#cost_val").html("Please input numbers between 0-9 ");
+            $("#cost_val").focus();
+            $("#cost_val").css("color","red");
+
+              err_cost=false;
+              return false;
+          }else{
+            err_cost=true;
+            $("#cost_val").hide();
+          }
+        }
+
+
+
+         $("#sale_price").blur(function(){
+
+            username8();
+        });
+        function username8(){
+          var z = $("#sale_price").val();
+
+          var regexOnlyNumbers=/^[0-9]+$/;
+          if((z=="")|| regexOnlyNumbers.test(z)!=true){
+
+            $("#sale_price_val").show();
+            $("#sale_price_val").html("Please input numbers between 0-9 ");
+            $("#sale_price_val").focus();
+            $("#sale_price_val").css("color","red");
+
+              err_sale_price=false;
+              return false;
+          }else{
+            err_sale_price=true;
+            $("#sale_price_val").hide();
+          }
+        }
+                
+
+         $("#inclusive_tax").change(function(){
+             username9();
+        });
+        function username9(){
+          
+          if($("#inclusive_tax").prop("checked") == false){
+
+            $("#inclusive_tax_val").show();
+            $("#inclusive_tax_val").html("Plesee check the button ");
+            $("#inclusive_tax_val").focus();
+            $("#inclusive_tax_val").css("color","red");
+
+              err_sale_price=false;
+              return false;
+          }
+           else if($("#inclusive_tax").prop("checked") == true){
+            $("#inclusive_tax_val").hide();
+
+          }
+        }
+        function username10(){
+
+var q = $("#low_stock_alert").val();
+
+var regexOnlyNumbers=/^[0-9]+$/;
+if((q=="")|| regexOnlyNumbers.test(q)!=true){
+
+  $("#low_stock_alert").show();
+  $("#low_stock_alert").html("Please input numbers between 0-9 ");
+  $("#low_stock_alert").focus();
+  $("#low_stock_alert").css("color","red");
+
+    err_cost=false;
+    return false;
+}else{
+  err_cost=true;
+  $("#cost_val").hide();
+}
+}
+
+
+
+$("#low_stock_alert").blur(function(){
+
+ // username8();
+});
+
+     $("#btn").click(function(){
+
+      err_name=true;
+      err_sku=true;
+      err_hsn=true;
+      err_sac=true;
+      err_unit=true;
+      err_category=true;
+      err_cost=true;
+      err_sale_price=true;
+
+
+      username1();
+      username2();
+      username3();
+      username4();
+      username5();
+      username6();
+      username7();
+      username8();
+      username9();
+      username10();
+     if((err_name==true)&&(err_sku==true)&&(err_hsn==true)&&(err_sac==true)&&(err_unit==true)&&(err_category==true)&&(err_cost==true)&&(err_sale_price==true))
+     {
+        return true;
+     }else{
+        return  false;
+
+     }
+
+     });
+         
+
+
+
+
+  });
+
+  

@@ -104,7 +104,7 @@
                     <table class="table table-striped custom-table">
                             <thead>
                                 <tr>
-                                    <td style="font-weight:bold;">RECIPANTS</td>
+                                    <td style="font-weight:bold;">RECIPEINTS</td>
                                     <td></td>
                                     <td style="font-weight:bold;">EMAIL ADDRESS</td>
                                     <td style="font-weight:bold;">BALANCE</td>

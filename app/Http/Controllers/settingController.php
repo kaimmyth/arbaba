@@ -18,6 +18,7 @@ use App\users;
 use App\department;
 use App\module;
 use App\user_role;
+use App\Comapany;
 use DB;
 use Hash;
 use Session;

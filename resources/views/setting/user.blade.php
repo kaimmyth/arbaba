@@ -33,7 +33,8 @@
                                             <tr>
                                               <th>Image</th>
                                               <th>Name</th>
-                                              <th>Company Name</th>
+                                              <!-- <th>Company Id</th>
+                                              <th>Company Name</th> -->
                                               <!-- <th>Role</th> -->
                                               <th>Email</th>
                                               <th>Phone Number</th>
@@ -48,9 +49,10 @@
                                             <tr>
                                               <td><img width="50" height="40" src="{{url('public/images')}}/{{$data->profile_image}}/"></td>
 
-                                                   <td>{{$data->name}}</td>
+                                                   <!-- <td>{{$data->name}}</td> -->
                                                    <td>{{$data->company_name}}</td>
-                                                   <!-- <td>{{$data->user_role}}</td> -->
+                                                   <td>{{$data->user_role}}</td>
+                                                   <td>{{$data->org_id}}</td> 
                                                    <td>{{$data->email}}</td>
                                                    <td>{{$data->phone}}</td>
                                                    <td>{{$data->city_district}}</td>

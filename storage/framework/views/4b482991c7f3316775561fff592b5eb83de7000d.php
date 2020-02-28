@@ -75,8 +75,8 @@
       <li><a href="<?php echo e(url('purchases/vendor-credits')); ?>">Vendor Credits</a></li>
 
     </ul>
-  </li>
-  <li class="has_sub">
+  </li> -->
+   <li class="has_sub">
     <a href="#" class="waves-effect"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Taxes</span><span class="pull-right"><i class="md md-add"></i></span></a>
     <ul class="list-unstyled">
       <li><a href="<?php echo e(url('tax/return')); ?>">Return</a></li>
@@ -96,7 +96,7 @@
   </li>
   <li>
     <a href="<?php echo e(url('accounting')); ?>" class="waves-effect"><i class="fa fa-id-card-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Accounting</span></a>
-  </li>
+  </li> 
   <?php if(Session::get('role')!=3 ): ?>
 <li class="has_sub">
   <a href="#" class="waves-effect"><i class="fas fa-tools"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Tools/Master </span><span class="pull-right"><i class="md md-add"></i></span></a>
@@ -107,7 +107,7 @@
     <li><a href="<?php echo e(url('tools-master/show_country')); ?>">Country</a></li>
     <li><a href="<?php echo e(url('tools-master/state')); ?>">State</a></li>
     <li><a href="<?php echo e(url('tools-master/city')); ?>">City</a></li>
-    <li><a href="<?php echo e(url('tools-master/terms')); ?>">Tearms</a></li>
+    <li><a href="<?php echo e(url('tools-master/terms')); ?>">Terms</a></li>
     <li><a href="<?php echo e(url('tools-master/currency')); ?>">Currency</a></li>
     <li><a href="<?php echo e(url('tools-master/department')); ?>">Department</a></li>
   </ul>
@@ -136,5 +136,5 @@
 <div class="clearfix"></div>
 </div>
 </div>
-<!-- Left Sidebar End --> 
+
 <?php /**PATH C:\xampp\htdocs\arbaba\resources\views/layouts/menubar.blade.php ENDPATH**/ ?>

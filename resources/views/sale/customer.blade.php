@@ -204,6 +204,7 @@
                     </div>
                   </div>
 
+
                   <div class="col-md-4">
                     <div class="form-group">
                      <label for="exampleInputEmail1">First Name</label>
@@ -251,7 +252,7 @@
                         <option>Deemed exports- EOU's, STP's EHTP's etc</option>
                       </select>
                     </div>
-                        <h6 id="gst_reg__val"></h6>
+                        <h6 id="gst_reg_type"></h6>
                   </div>
 
                   <div class="col-md-6">
@@ -389,12 +390,42 @@
                         <div class="col-md-12">
                           <textarea class="form-control" rows="2" id="billing_address" name="billing_address" ></textarea>
                         </div>
+                        
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="city_town" name="city_town" placeholder="City/Town" >
+                      <!--   <input type="text" class="form-control" id="city_town" name="city_town" placeholder="City/Town" >-->
+                          <select class="form-control" name="city_town" id="city_town" required>
+                   <option value="" id="selected_location">-CITY-</option>
+                    <!-- <option>Andhra Pradesh</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Chandigarh</option>
+                    <option>Delhi</option>
+                    <option>Goa</option> -->
+                    
+                   @foreach($cities as $cities)
+                        <option value="{{$cities['city']}}" >{{$cities['city']}} </option>
+                    @endforeach
+                
+                   
+                </select>
                         </div>
                         <h6 id="city_town_val"></h6>
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="state" name="state" placeholder="State" >
+                        
+                      <!---  <input type="text" class="form-control" id="state" name="state" placeholder="State" >---->
+                          <select class="form-control" name="state" id="state" required>
+                   <option value="" id="selected_location">-STATE-</option>
+                    <!-- <option>Andhra Pradesh</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Chandigarh</option>
+                    <option>Delhi</option>
+                    <option>Goa</option> -->
+                    
+                 @foreach($state as $state1)
+                   <option value="{{$state1->state}}" >{{$state1->state}} </option>
+                  @endforeach
+                
+                   
+                </select>
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
@@ -403,7 +434,19 @@
                         </div>
                         
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="country" name="country" placeholder="Country" >
+                            <!--    <input type="text" class="form-control" id="country" name="country" placeholder="Country" >---->
+                                    <select class="form-control" name="country" id="country" required>
+                                    <option value="" id="selected_location">-COUNTRY-</option>
+                                    <!-- <option>Andhra Pradesh</option>
+                                   <option>Arunachal Pradesh</option>
+                                   <option>Chandigarh</option>
+                                   <option>Delhi</option>
+                                   <option>Goa</option> -->
+                    
+                                   @foreach($countries as $countries)
+                                  <option value="{{$countries['country']}}" >{{$countries['country']}} </option>
+                                   @endforeach
+                
                         </div>
                         <h6 id="country_val"></h6>
                       </div>
@@ -420,7 +463,20 @@
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
-                          <input type="text" class="form-control" id="state_shipping" name="state_shipping" placeholder="State">
+                     <!----<input type="text" class="form-control" id="state_shipping" name="state_shipping" placeholder="State">----->
+                   <select class="form-control" name="state_shipping" id="state_shipping" required>
+                <option value="" id="selected_location">-Please Select A location -</option>
+                <!-----   <option>Andhra Pradesh</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Chandigarh</option>
+                    <option>Delhi</option>
+                    <option>Goa</option>----->
+                  
+                 @foreach($state as $state2)
+                   <option value="{{$state2['state']}}" >{{$state2['state']}} </option>
+                  @endforeach
+                  </select>
+                
                         </div>
 
                         <div class="col-md-6" style="margin-top: 6px;">
@@ -1214,4 +1270,6 @@ function editCustomer(id){
 }
 </script>
 
-
+<script>
+jQuery(document).ready(function($){
+  jQuery('#btn-add').click(function () {

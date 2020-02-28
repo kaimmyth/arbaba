@@ -91,15 +91,23 @@
                     @csrf
                     
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="">Title</label>
                                         <div class="input-group">
-                                            <input type="" class="form-control" id="title" name="title" placeholder="" required>
+                                            <!-- <input type="" class="form-control" id="title" name="title" placeholder="" required> -->
+                                            <select class="form-control" name="title" id="title" required>
+                                                <option  >Mr.</option>
+                                                  <option>Mrs.</option>
+                                                   <option>Ms.</option>
+                                                     <option>Miss</option>
+                                                       
+                                                       </select>
+                   
                                         </div>
                                 </div><!--form-group-->
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">First Name</label>
                                             <div class="input-group">
@@ -108,15 +116,44 @@
                                             <h6 id="first_name_val"></h6>
                                     </div><!--form-group-->
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="">Middle Name</label>
+                                            <div class="input-group">
+                                                <input type="" class="form-control" id="middle_name" name="middle_name" placeholder="Middle Name" required>
+                                            </div>
+                                            <h6 id="middle_name_val"></h6>
+                                    </div><!--form-group-->
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Last Name</label>
                                         <div class="input-group">
-                                            <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name" >
+                                            <input type="" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required >
                                         </div>
                                         <h6 id="last_name_val"></h6>
                                 </div><!--form-group-->
                             </div>
+                            <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label for="">Gender</label>
+                                                    <select class="form-control" placeholder="Gender" name="gender" id="gender" required>
+                                                            <option>--select--</option>
+                                                            <option>Male</option>
+                                                            <option>Female</option>   
+                                                        </select>
+                                            </div><!--form-group--> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label for="">Employee ID</label>
+                                                <div class="input-group">
+                                                    <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID" required>
+                                                </div>
+                                                <h6 id="employee_id_val"></h6>
+                                            </div><!--form-group-->
+                                        </div>
+                                        
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Display Name as</label>
@@ -149,30 +186,29 @@
                                         <div class="row">
                                             <div class="col-md-6">  
                                                 <div class="form-group">
+                                                <label for="">Country</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="City/Town" name="city" id="city" required>
+                                                        <input type="text" class="form-control" placeholder="country" name="country" id="Country" required>
                                                     </div>
                                                 </div><!--form-group-->  
-                                            </div> 
+                                            </div>     
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                   
+                                                    <label for="">State</label>
                                                     <div class="input-group">
                                                         <input type="" class="form-control"  placeholder="State" name="state" id="state" required>
+                                                       
                                                     </div>
                                                 </div><!--form-group-->   
                                              </div>
-                                             <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code" required>   
-                                                    </div>
-                                                    <span id="pin_code_check"></span>
-                                                  </div><!--form-group-->
-                                             </div>
+                                            
                                              <div class="col-md-6">
                                                   <div class="form-group">
+                                                        
+                                                        <label for="">City</label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
+                                                            <input type="text" class="form-control" id="City/Town" name="city" placeholder="City" required>
                                                         </div>
                                                   </div><!--form-group-->
                                              </div>
@@ -185,6 +221,16 @@
                                                         <h6 id="mobile_no_val"></h6>
                                                     </div><!--form-group-->
                                               </div>
+                                              <div class="col-md-6"> 
+                                                  <div class="form-group">
+                                                    
+                                                    <label for="">Pin Code</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="pin_code" name="pin_code" placeholder="PIN Code" required>   
+                                                    </div>
+                                                    <span id="pin_code_check"></span>
+                                                  </div><!--form-group-->
+                                             </div>
                                               <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Phone No.</label>
@@ -240,11 +286,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                               <label for="">Employee ID No.</label>
+                                               <label for="">Working Rate per hours </label>
                                                <div class="input-group">
-                                                   <input type="" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." required>
+                                                   <input type="" class="form-control" id="rate_hours" name="rate_hours" placeholder="Working Rate Per Hours" required>
                                                </div>
-                                               <h6 id="employee_id_no_val"></h6>
+                                               <h6 id="rate_hours_val"></h6>
                                             </div> 
                                         </div>
                                         <div class="col-md-6">
@@ -257,23 +303,15 @@
                                                 </div>
                                             </div><!--form-group--> 
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                            <label for="">Employee ID</label>
-                                                <div class="input-group">
-                                                    <input type="" class="form-control" id="employee_id" name="employee_id" placeholder="Employee ID" required>
-                                                </div>
-                                                <h6 id="employee_id_val"></h6>
-                                            </div><!--form-group-->
-                                        </div>
+                                        
                                         <div class="col-md-6">
                                             <div class="form-group ">
-                                                <label for="">Gender</label>
-                                                    <select class="form-control" placeholder="Gender" name="gender" id="gender" required>
-                                                            <option>--select--</option>
-                                                            <option>Male</option>
-                                                            <option>Female</option>   
-                                                        </select>
+                                            <label for="">Government ID Card No.</label>
+                                                <div class="input-group">
+                                                    <input type="" class="form-control" id="government_id" name="government_id" placeholder="Government ID" required>
+                                                </div>
+                                                <h6 id="government_id_val"></h6>
+                                                
                                             </div><!--form-group--> 
                                         </div>
                                     </div>
@@ -346,10 +384,10 @@
                             <td><p><strong>Full Name</strong></p></td>
                             <td><p id="v_full_name"></p></td>
                         </tr>
-                        <tr style="border: none;">
+                        <!-- <tr style="border: none;">
                             <td><p><strong>Display Name</strong></p></td>
                             <td><p id="v_display_name"></p></td>
-                        </tr>
+                        </tr> -->
                         <tr style="border: none;">
                             <td><p><strong>Email ID</strong></p></td>
                             <td><p id="v_email_id"></p></td>
@@ -387,8 +425,10 @@
                             <td><p id="v_billing_rate"></p></td>
                         </tr>
                         <tr style="border: none;">
-                            <td><p><strong>Employee ID No</strong></p></td>
-                            <td><p id="v_employee_id_no"></p></td>
+                            <td><p><strong>Working Rate Per Hours</strong></p></td>
+                            <td><p id="v_rate_hours"></p></td>
+                        </tr>
+                        
                         </tr>
                         <tr style="border: none;">
                             <td><p><strong>Employee ID</strong></p></td>
@@ -431,6 +471,9 @@
             $('#title').keyup(function () {
                 display_name();                
             });
+            $('#middle_name').keyup(function () {
+                display_name();                
+            });
             $('#last_name').keyup(function () {
                 display_name();                
             });
@@ -439,9 +482,10 @@
     
                 var t_1 = $("#title").val();
                 var t_2 = $("#first_name").val();
-                var t_3 = $("#last_name").val();
+                var t_3 = $("#middle_name").val();
+                var t_4 = $("#last_name").val();
               
-                document.getElementById("display_name_as").value=t_1+" "+t_2+" "+t_3;
+                document.getElementById("display_name_as").value=t_1+" "+t_2+" "+t_3+" "+t4;
                 
             }
     
@@ -462,7 +506,7 @@ $(document).ready(function()
    $("#mobile_no_val").hide();
    $("#address_val").hide();
    $("#billing_rate_val").hide();
-   $("#employee_id_no_val").hide();
+   $("#rate_hours_val").hide();
    $("#employee_id_val").hide();
   
   
@@ -474,7 +518,7 @@ $(document).ready(function()
     var err_mobile_no = true;
     var err_address=true;
     var err_billing_rate=true;
-    var err_employee_id_no=true;
+    var err_rate_hours=true;
     var err_employee_id = true;
 
 
@@ -657,30 +701,7 @@ $(document).ready(function()
           }
         }
 
-         $("#employee_id_no").blur(function(){
-
-            username8();
-        });
-        function username8(){
-
-          var e = $("#employee_id_no").val();
-
-          var regexOnlyNumbers=/^[0-9]+$/;
-          if((e=="")|| regexOnlyNumbers.test(e)!=true){
-
-            $("#employee_id_no_val").show();
-            $("#employee_id_no_val").html("Please input numbers between 0-9 ");
-            $("#employee_id_no_val").focus();
-            $("#employee_id_no_val").css("color","red");
-
-              err_employee_id_no=false;
-              return false;
-          }else{
-            err_employee_id_no=true;
-            $("#employee_id_no_val").hide();
-          }
-        }
-
+         
              $("#employee_id").blur(function(){
 
             username8();
@@ -706,6 +727,9 @@ $(document).ready(function()
               
           }
         }
+        
+
+
  $("#btnSubmit").click(function(){
 
       err_first_name=true;
@@ -714,7 +738,7 @@ $(document).ready(function()
       err_mobile_no=true;
       err_address=true;
       err_billing_rate=true;
-      err_employee_id_no=true;
+      
       err_employee_id=true;
      
 
@@ -726,10 +750,11 @@ $(document).ready(function()
       username6();
       username7();
       username8();
+      
      
 
 
-     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_address==true)&&(err_billing_rate==true)&&(err_employee_id_no==true)&&(err_employee_id==true))
+     if((err_first_name==true)&&(err_last_name==true)&&(err_email_id==true)&&(err_mobile_no==true)&&(err_address==true)&&(err_billing_rate==true)&&(err_employee_id==true))
         {
             return true;
         }
@@ -785,8 +810,9 @@ function viewEditEmployee(purpose, id){
             if(purpose=="view")
             { 
                 document.getElementById("v_id").innerHTML = data.id;
+
                 document.getElementById("v_full_name").innerHTML = data.title+" "+data.first_name+" "+data.last_name;
-                document.getElementById("v_display_name").innerHTML = data.display_name_as;
+                document.getElementById("v_display_name").innerHTML = data.first_name+" "+data.last_name+" "+data.last_name;
                 document.getElementById("v_email_id").innerHTML = data.email_id;
                 document.getElementById("v_phone_no").innerHTML = data.phone_no;
                 document.getElementById("v_mobile_no").innerHTML = data.mobile_no;
@@ -796,7 +822,7 @@ function viewEditEmployee(purpose, id){
                 document.getElementById("v_job_type").innerHTML = data.job_type;
                 document.getElementById("v_tax_type").innerHTML = data.tax_type;
                 document.getElementById("v_billing_rate").innerHTML = data.billing_rate;
-                document.getElementById("v_employee_id_no").innerHTML = data.employee_id_no;
+                document.getElementById("v_rate_hours").innerHTML = data.rate_hours;
                 document.getElementById("v_employee_id").innerHTML = data.employee_id;
                 document.getElementById("v_gender").innerHTML = data.gender;
                 document.getElementById("v_hire_date").innerHTML = data.hire_date;
@@ -809,6 +835,7 @@ function viewEditEmployee(purpose, id){
                 resetEmployeeForms(); // reseting forms
                 $("#title").val(data.title);
                 $("#first_name").val(data.first_name);
+                $("#middle_name").val(data.middle_name);
                 $("#last_name").val(data.last_name);
                 $("#display_name_as").val(data.display_name_as);
                 $("#email_id").val(data.email_id);
@@ -824,7 +851,7 @@ function viewEditEmployee(purpose, id){
                 $("#tax_type").val(data.tax_type);
                 $("#pin_code").val(data.pin_code);
                 $("#billing_rate").val(data.billing_rate);
-                $("#employee_id_no").val(data.employee_id_no);
+                
                 $("#employee_id").val(data.employee_id);
                 $("#gender").val(data.gender);
                 $("input[name='hire_date']").datepicker('setDate', data.hire_date);
@@ -842,3 +869,32 @@ function viewEditEmployee(purpose, id){
     });
 }
 </script>
+<script>
+var errMessage = "";
+
+function checkForm() {
+    validateName();
+    validate();
+    carSelect();
+    validateDOB();
+
+    if (errMessage == "") {
+    } else {
+        alert(errMessage);
+    }
+}
+
+...
+
+function validateDOB()
+{
+    var dob = document.forms["ProcessInfo"]["dob"].value;
+    var pattern = /^([0-9]{2})-([0-9]{2})-([0-9]{4})$/;
+    if (dob == null || dob == "" || !pattern.test(dob)) {
+        errMessage += "Invalid date of birth\n";
+        return false;
+    }
+    else {
+        return true
+    }
+}

@@ -11,6 +11,12 @@ use App\sales_customers;
 use App\terms;
 use App\customer_statement_table;
 use App\PaymentReceived;
+use App\cities;
+use App\city;
+use App\state;
+use App\countries;
+use App\country;
+use App\Company;
 use Session;
 use Mail;
 
@@ -24,7 +30,7 @@ class SalesController extends Controller
 
     public function view_all_sales(Request $request)
     {
-        $org_id = $request->session()->get('org_id');
+      //  $org_id = $request->session()->get('org_id');
         $role = $request->session()->get('role');
         // print_r($role);
         // exit;
@@ -37,12 +43,12 @@ class SalesController extends Controller
         elseif($role == 2)
         {
             $toReturn=array();
-            $toReturn=sales_invoice::orderBy('id','asc')->where('org_id',Session::get('org_id'))->get()->toArray();
+           // $toReturn=sales_invoice::orderBy('id','asc')->where('org_id',Session::get('org_id'))->get()->toArray();
         }
         elseif($role == 3)
         {
             $toReturn=array();
-            $toReturn=sales_invoice::orderBy('id','asc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
+    //        $toReturn=sales_invoice::orderBy('id','asc')->where('created_by',Session::get('candidate_id'))->get()->toArray();
      
         }
         else
@@ -57,12 +63,17 @@ class SalesController extends Controller
     
      public function print_all_sales($id="")
     {
-        $toReturn=array();
-        $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
+      //  $toReturn=array();
+      //  $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
 
                
-        return view('sale.sales_all_sales_print')->with('toReturn',$toReturn);
+       // return view('sales_all_sales_print')->with('toReturn',$toReturn);
+       $toReturn=array();
+       $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
+              
+       return view('sales_all_sales_print')->with('toReturn',$toReturn);
     }
+
 
      public function all_sales_remainder_email(Request $request)
     {
@@ -84,13 +95,16 @@ class SalesController extends Controller
         $toReturn=array();
         $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
             
-        return view('sale.sales_allsales_delivery_challan')->with('toReturn',$toReturn);
+        return view('sales_allsales_delivery_challan')->with('toReturn',$toReturn);
     }
 
 
     public function view_invoices(Request $request)
     {
-        $org = $request->session()->get('org_id');
+
+        // return  $request;
+
+       // $org = $request->session()->get('org_id');
         $role = $request->session()->get('role');
         // to open invoice form/ modal form
         $invoice="no";
@@ -106,11 +120,23 @@ class SalesController extends Controller
              // for dropdown
          $customers=sales_customers::orderBy('id','desc')->get();
          $terms=terms::orderBy('id','desc')->get(); 
+         $products_and_services = products_and_services::get(); 
+         $cities = cities::get(); 
+         $state= state::get();
+         $countries = countries::get(); 
+         $country = country::get(); 
+         $company= Company::get();
+     //    $city=city::get();
+
+    // echo "<pre>";
+    //  print_r( $company);
+    //  exit;
+
         }
         elseif($role == 2)
         {
             $toReturn=array();
-            $toReturn = sales_invoice::orderBy('id','desc')->where('org_id',Session::get('org_id'))->where('status',1)->get()->toArray();
+         //   $toReturn = sales_invoice::orderBy('id','desc')->where('org_id',Session::get('org_id'))->where('status',1)->get()->toArray();
                 // for dropdown
          $customers=sales_customers::orderBy('id','desc')->get();
          $terms=terms::orderBy('id','desc')->get();
@@ -118,7 +144,7 @@ class SalesController extends Controller
         elseif($role == 3)
         {
             $toReturn=array();
-            $toReturn = sales_invoice::orderBy('id','desc')->where('created_by',Session::get('candidate_id'))->where('status',1)->get()->toArray();
+         //   $toReturn = sales_invoice::orderBy('id','desc')->where('created_by',Session::get('candidate_id'))->where('status',1)->get()->toArray();
                 // for dropdown
          $customers=sales_customers::orderBy('id','desc')->get();
          $terms=terms::orderBy('id','desc')->get();
@@ -127,20 +153,52 @@ class SalesController extends Controller
         {
 
         }
-      
+    //   return $products_and_services;
         $data['content'] ='sale.invoice';
-        return view('layouts.content',compact('data'))->with(compact('toReturn','invoice','customers','terms'));
+        return view('layouts.content',compact('data'))->with(compact('toReturn','invoice','customers','terms','products_and_services','cities','state','city','org','company'));
     }
 
+    public function fetch_sales_order_details(Request $Request)
+	{
+
+        // // return $Request;
+
+        $data = products_and_services::where('id', $Request->id)->first();
+        return $data;
+    }	
+
+		// // echo ("<pre>");
+		// // print_r($data);
+		// // exit;
+
+        // return $data;
+    //     $data = DB::select('select * from  ar_products_and_services');
+    //   return view('stud_delete_view',['users'=>$users]);
+
+    
+//  //   public function get_sales_order_details(Request $Request)
+// 	{
+//         return products_and_services::all('hsn_abc','description_abc','qty_abc');
+//     }
+			
+		
+           
+	// //	 echo ("<pre>");
+	// //	 print_r($data);
+	// //	 exit;
+
+	// //	return $data;
+	// }
    
 
     public function add_edit_invoice(Request $request)
     {
-       $org = $request->session()->get('org_id');
+      // $org = $request->session()->get('org_id');
         //return $request;
         $invoice = new sales_invoice();
         $invoice->invoice_no=$request->invoice_no;
-        $invoice->customer =$request->first_name ; 
+        $invoice->customer_name =$request->customer_name ; 
+        // $invoice->customer_id=$request->id ?? "";
         $invoice->customer_email=$request->customer_email; 
         $invoice->billing_address =$request->billing_address ; 
         $invoice->terms = $request->terms ; 
@@ -148,11 +206,9 @@ class SalesController extends Controller
         $invoice->due_date=date("Y-m-d",strtotime($request->due_date));
         $invoice->place_of_supply =$request->place_of_supply ; 
         $invoice->msg_on_invoice = $request->msg_on_invoice; 
-        $invoice->msg_on_statement=$request->msg_on_statement;
-        $invoice->org_id=Session::get('org_id');
-
-        $invoice->created_by=Session::get('candidate_id');
-        $invoice->updated_by=Session::get('candidate_id');
+        $invoice->msg_on_statement = $request->msg_on_statement;
+        
+       
 
         $invoice->status=1;
         
@@ -228,7 +284,8 @@ class SalesController extends Controller
         // for expenses_details
         $no_of_rows=0;
         $product_services=[];
-        $hac_sac=[];
+        
+        $hsn_sac=[];
         $description=[];
         $qty=[];
         $rate=[];
@@ -245,7 +302,8 @@ class SalesController extends Controller
             for($i=0;$i<count($tmp);$i++){
                 $tmp_2 = explode(",",$tmp[$i]);
                 $product_services[$i]=$tmp_2[0];
-                $hac_sac[$i]=$tmp_2[1];
+              
+                $hsn_sac[$i]=$tmp_2[1];
                 $description[$i]=$tmp_2[2];
                 $qty[$i]=$tmp_2[3];
                 $rate[$i]=$tmp_2[4];
@@ -260,7 +318,8 @@ class SalesController extends Controller
         }
         $data->no_of_rows=$no_of_rows;
         $data->invoice_details_product_services=$product_services;
-        $data->invoice_details_hac_sac=$hac_sac;
+       
+        $data->invoice_details_hsn_sac=$hsn_sac;
         $data->invoice_details_description=$description;
         $data->invoice_details_qty=$qty;
         $data->invoice_details_rate=$rate;
@@ -269,7 +328,7 @@ class SalesController extends Controller
         $data->subtotal=$subtotal;
         $data->total_tax=$total_tax;
         $data->total=$total;
-
+        
         // change date format for font end
         $data->invoice_date = date("d-m-Y", strtotime($data->invoice_date));
         $data->due_date = date("d-m-Y", strtotime($data->due_date));
@@ -316,10 +375,8 @@ class SalesController extends Controller
         $product->as_of=date("Y-m-d",strtotime($request->as_of));
         $product->status="1";
 
-        $product->org_id=Session::get('org_id');
-        $product->created_by=Session::get('candidate_id');
-        $product->updated_by=Session::get('candidate_id');
-
+     //   $product->org_id=Session::get('org_id');
+    
 
         // for attachment
         $product->attachment = "";
@@ -384,7 +441,7 @@ class SalesController extends Controller
 
     public function view_customers(Request $request)
     {
-        $org_id = $request->session()->get('org_id');
+      //  $org_id = $request->session()->get('org_id');
         $role = $request->session()->get('role');
         // print_r($role);
         // exit;
@@ -395,20 +452,32 @@ class SalesController extends Controller
             $toReturnInvoice=sales_invoice::get()->toArray();
             $toReturn=array();
             $toReturn=sales_customers::orderBy('id','desc')->get()->where('status',1)->toArray();
+            $toReturnInvoice=array();
+            $cities = cities::get(); 
+            $state=state::get();
+            $countries = countries::get(); 
+            $country = country::get(); 
+            $company = Company::get();
+    //  	 echo ("<pre>");
+	//  print_r($company);
+	//  exit;
+
+	//	return $data;
+   
         }
         elseif($role == 2)
         {
             $toReturnInvoice=array();
             $toReturnInvoice=sales_invoice::get()->toArray();
             $toReturn=array();
-            $toReturn=sales_customers::orderBy('id','desc')->get()->where('org_id',Session::get('org_id'))->where('status',1)->toArray();
+         //   $toReturn=sales_customers::orderBy('id','desc')->get()->where('org_id',Session::get('org_id'))->where('status',1)->toArray();
         }
         elseif($role == 3)
         {
             $toReturnInvoice=array();
             $toReturnInvoice=sales_invoice::get()->toArray();
             $toReturn=array();
-            $toReturn=sales_customers::orderBy('id','desc')->get()->where('created_by',Session::get('candidate_id'))->where('status',1)->toArray();
+        //    $toReturn=sales_customers::orderBy('id','desc')->get()->where('created_by',Session::get('candidate_id'))->where('status',1)->toArray();
         }
         else
         {
@@ -416,7 +485,7 @@ class SalesController extends Controller
         }
 
         $data['content'] ='sale.customer';
-        return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturnInvoice'));
+        return view('layouts.content',compact('data'))->with(compact('toReturn', 'toReturnInvoice','cities','city','countries','country','state'));
     }
 
     public function delete_customer($id="")
@@ -450,7 +519,7 @@ class SalesController extends Controller
     public function view_products_and_services(Request $request)
     {
         
-        $org_id = $request->session()->get('org_id');
+     //   $org_id = $request->session()->get('org_id');
         $role = $request->session()->get('role');
         // print_r($role);
         // exit;
@@ -458,18 +527,19 @@ class SalesController extends Controller
         if($role == 1)
         {
             $toReturn=array();
+            
             $toReturn = products_and_services::orderBy('id','desc')->get()->toArray();
         }
         elseif($role == 2)
         {
             $toReturn=array();
-            $toReturn = products_and_services::orderBy('id','desc')->where('org_id',Session::get('org_id'))->where('status',1)->get()->toArray();
+        //    $toReturn = products_and_services::orderBy('id','desc')->where('org_id',Session::get('org_id'))->where('status',1)->get()->toArray();
            
         }
         elseif($role == 3)
         {
             $toReturn=array();
-            $toReturn=products_and_services::where('created_by',Session::get('candidate_id'))->get()->toArray();
+        //    $toReturn=products_and_services::where('created_by',Session::get('candidate_id'))->get()->toArray();
         }
         else
         {
@@ -484,6 +554,7 @@ class SalesController extends Controller
         $org = $request->session()->get('organization_id');
         $products = new products_and_services();
         $products->product_type=$request->product_type;
+       
         $products->name=$request->name;
         $products->sku=$request->sku;
         $products->hsn_code=$request->hsn_code;
@@ -501,12 +572,10 @@ class SalesController extends Controller
         $products->purchase_tax=$request->purchase_tax;
         $products->reverse_change=$request->reverse_change;
         $products->preferred_supplier=$request->preferred_supplier;
-        $products->org_id=Session::get('org_id');
+     //   $products->org_id=Session::get('org_id');
 
 
-        $products->created_by=Session::get('candidate_id');
-        $products->updated_by=Session::get('candidate_id');
-
+     
 
         // finall query create, edit
         if($request->hidden_input_purpose=="edit")
@@ -560,14 +629,19 @@ class SalesController extends Controller
     {
         $toReturn=array();
         $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
-               
+        //    return $toReturn;     
         return view('sales_invoice_print')->with('toReturn',$toReturn);
+
+        
+        
     }
     public function invoice_delivery_challan($id="")
     {
         $toReturn=array();
         $toReturn=sales_invoice::where('id',$id)->get()->where('status',1)->toArray();
+        $toReturn=Company::where('id',$id)->get()->where('status',1)->toArray();
             
+        return view('sales_invoice_delivery_challan')->with('toReturn',$toReturn);
         return view('sales_invoice_delivery_challan')->with('toReturn',$toReturn);
     }
 
@@ -647,18 +721,20 @@ class SalesController extends Controller
     //   abhishek 
      public function get_invoice_details_bill($id=""){
         $data = sales_customers::where('id', $id)->first();
+        
         return $data;
     }
 
 
     public function add_new_customer(Request $request)
     {
+        
         $employee = new sales_customers();
-        $employee->org_id=Session::get('org_id');
+    //    $employee->org_id=Session::get('org_id');
         $employee->first_name = $request->customer_name;
         $employee->company = $request->company_name;
-        $employee->created_by=Session::get('candidate_id');
-        $employee->updated_by=Session::get('candidate_id');
+    //    $employee->created_by=Session::get('candidate_id');
+    //    $employee->updated_by=Session::get('candidate_id');
 
         $employee->save();
        
@@ -666,18 +742,19 @@ class SalesController extends Controller
     }
 
     // 16/11/19
-    public function add_new_terms(Request $request)
+    public function terms(Request $request)
     {
         $new_terms = new terms();
-        $new_terms->org_id=Session::get('org_id');
-        $new_terms->terms = $request->terms_name;
-        $new_terms->created_by=Session::get('candidate_id');
-        $new_terms->updated_by=Session::get('candidate_id');
+    //    $new_terms->org_id=Session::get('org_id');
+        $new_terms->terms = $request->terms_type;
+     
         $new_terms->save();
         return $new_terms;
     }
     public function get_terms_details($id=""){
-        $data = terms::where('status',1)->where('id', $id)->get();
-        return $data;
+       $data = terms::where('status',1)->where('id', $id)-first();
+      return $data;
     }
-}
+
+   
+} 

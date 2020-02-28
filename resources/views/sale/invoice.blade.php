@@ -19,7 +19,7 @@
   </div>
 </div>
 
-                        <div>
+                        <!-- <div>
                      role        {{ Session::get('role') }} <br>
                     
                           tiem zone   {{ Session::get('time_zone') }}<br>
@@ -36,7 +36,7 @@
 
                        can_id    {{ Session::get('candidate_id') }}
                         
-                        </div>
+                        </div> -->
 
 <?php
       $overdue_amount=$estimate_amount=$paid_amount=$tax=$total_not_deposited =0;
@@ -48,7 +48,7 @@
       @foreach(@$toReturn as $value)
         <?php
         // overdue
-        if(@$value['due_date'] < date("Y-m-d") &&  $value['status'] == 1 && $value["invoice_details"]!="" && date('Y-m-d', strtotime('today + 365 days')))
+        if(@$value['due_date'] < date("d-m-Y") &&  $value['status'] == 1 && $value["invoice_details"]!="" && date('d-m-Y', strtotime('today + 365 days')))
         {
            
            
@@ -57,13 +57,14 @@
                 for($i=0;$i<count($tmp);$i++){
                     $tmp_2 = explode(",",$tmp[$i]);
                     $overdue_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                   $total_not_deposited = sprintf('%0.2f', $total_not_deposited);
                 }
             }
         
 
          
       //unpaid
-      if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strtotime('today + 365 days')))
+      if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('d-m-Y', strtotime('today + 365 days')))
      {
          $tmp = $value["invoice_details"];
          $tmp = explode(":",$tmp);
@@ -75,20 +76,21 @@
          }
      }
     $total = $total_before_tax + $taxes;
-
+    $total = sprintf('%0.2f', $total);
     //not due yet
-    if($value['due_date'] > date("Y-m-d") && $value["invoice_details"]!="" && date('Y-m-d', strtotime('today + 365 days')) )
+    if($value['due_date'] > date("d-m-Y") && $value["invoice_details"]!="" && date('d-m-Y', strtotime('today + 365 days')) )
         {
                 $tmp = $value["invoice_details"];
                 $tmp = explode(":",$tmp);
                 for($i=0;$i<count($tmp);$i++){
                     $tmp_2 = explode(",",$tmp[$i]);
                     $estimate_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                    $estimate_amount = sprintf('%0.2f',   $estimate_amount);
                 }
             }
         
 //not deposited
-if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strtotime('today - 30 days')))
+if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('d-m-Y', strtotime('today - 30 days')))
      {
          $tmp = $value["invoice_details"];
          $tmp = explode(":",$tmp);
@@ -100,10 +102,10 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
          }
      }
     @$total_not_deposited = @$before_tax + @$tax;
-
+    @$total_not_deposited = sprintf('%0.2f', @$total_not_deposited);
 
         //paid
-        if($value['status'] == 2 && date('Y-m-d', strtotime('today - 30 days')) && $value["invoice_details"]!="" )
+        if($value['status'] == 2 && date('d-m-Y', strtotime('today - 30 days')) && $value["invoice_details"]!="" )
         {
           
                 $tmp = $value["invoice_details"];
@@ -111,6 +113,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                 for($i=0;$i<count($tmp);$i++){
                     $tmp_2 = explode(",",$tmp[$i]);
                     $paid_amount += ($tmp_2[5] + (($tmp_2[5]*$tmp_2[6])/100));
+                    $paid_amount = sprintf('%0.2f', $paid_amount);
                 }
             }
         
@@ -128,7 +131,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
            <h4 class="unp"><i class="fa fa-rupee-sign sz" aria-hidden="true"></i> &nbsp;{{$total}} Unpaid</h4>
          </div>
          <div class="col-md-8">
-          <p style="margin-top: 12px;">LAST 365 DAYS </p>
+          <H style="margin-top: 12px;">LAST 365 DAYS </p>
         </div>
 
         <div class="col-md-6">
@@ -180,7 +183,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
      <thead>
       <tr>
-       <th><input type="checkbox" name="chkall[]" id="selectall" onClick="selectAll(this)" /></th>
+       
        <th>Invoice</th>
        <th>Customer</th>
        <th>Date</th>
@@ -196,9 +199,9 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
           @foreach ($toReturn as $value)
  
         <tr>
-        <td>&nbsp;<input type="checkbox" name="ids[]" value="" /></td>
+       ;
         <td>{{$value['invoice_no']}}</td>
-        <td>{{$value['customer']}}</td>
+        <td>{{@$value['customer_name']}}</td>
         <td>{{$value['invoice_date']}}</td>
         <td>{{$value['due_date']}}</td>
         <?php
@@ -219,7 +222,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
         <td>
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
           <?php
-          if($value['due_date'] < date("Y-m-d"))
+          if($value['due_date'] < date("d-m-Y"))
           {
               echo "Expired(Opened)";
           }
@@ -229,7 +232,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
            echo "Paid(Closed)";
             }
           else{
-             $diff = strtotime($value['due_date']) - strtotime(date("Y-m-d"));
+             $diff = strtotime($value['due_date']) - strtotime(date("d-m-Y"));
                  if($diff==0) { echo "Expires Today(Opened)"; }
                  else { echo "Due in ".abs(round($diff / 86400))." Days(Opened)"; }
              }
@@ -241,14 +244,14 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
             <span  onclick="receivePayment({{@$value['id']}})" style="color: #0077C5; font-weight: 600; cursor: pointer;">Receive payment</span>&nbsp;&nbsp;<i class="fa fa-caret-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-size: 15px;"></i>
             <div class="dropdown-menu resp" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{url('sale/invoice/print/'.@$value['id'])}}">Print</a>
-                <a class="dropdown-item" href="{{url('sale/invoice/email/'.@$value['id'])}}">Send</a>
+             <!---   <a class="dropdown-item" href="{{url('sale/invoice/email/'.@$value['id'])}}">Send</a>----->
                 <a class="dropdown-item" href="javascript:void();" onclick="sendReminder('{{$value['customer_email']}}','{{@$value['invoice_no']}}','{{@$value['customer']}}');">Send remainder</a>
                 <!-- <a class="dropdown-item" data-toggle="modal" data-target="#shareinvoiceModal" href="javascript:void();">Share Invoice Link</a> -->
                 <a class="dropdown-item" href="{{url('sale/invoice/delivery_challan/'.@$value['id'])}}">Print Delivery Challan</a>
                 <a class="dropdown-item" href="#" onclick="viewEditInvoice('view', {{@$value['id']}});">View</a>
-                <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', {{@$value['id']}});">Edit</a>
+                <!-- <a class="dropdown-item" href="#" onclick="viewEditInvoice('edit', {{@$value['id']}});">Edit</a> -->
                 <!-- <a class="dropdown-item" href="#">Copy</a> -->
-                <a class="dropdown-item" href="{{url('sale/invoice/delete/'.@$value['id'])}}" onclick="return confirm('Do you want to delete this data?')">Delete</a>
+                <!-- <a class="dropdown-item" href="{{url('sale/invoice/delete/'.@$value['id'])}}" onclick="return confirm('Do you want to delete this data?')">Delete</a> -->
             </div>
       </td>
       </tr>
@@ -293,12 +296,12 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                     <label for="exampleInputEmail1">Customer</label>
                            
                             <div class="input-group">
-                            <select class="form-control"  onchange="invoice_details_show(this.value)"  name="first_name" id="first_name"  required>
-                            <option>-Select-</option>
-                            <option id="selected_customer_name"></option>
+                            <select class="form-control"  onchange="invoice_details_show(this.value,this)"  name="customer_name" id="customer_name"    required>
+                            <option id="selected_customer_name">select</option>
+                            <!-- <option id="selected_customer_name"></option> -->
                                 @foreach($customers as $customer)
 
-                                <option value="{{@$customer['first_name']}}">{{@$customer['first_name']}} </option>
+                                <option value="{{$customer['id']}}">{{$customer['display_name_as']}} </option>
                                 <!-- <option value="{{$customer['id']}}">{{$customer['first_name']}} </option> -->
                                 @endforeach
                             </select>
@@ -313,7 +316,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Customer Email</label>
-                    <input type="email" class="form-control"  id="selected_customer_eamil" name="customer_email" placeholder="Enter email" >
+                    <input type="text" class="form-control"  id="selected_customer_email" name="customer_email" placeholder="Enter email">
                   </div>
                     <h6 id="email_val"></h6>
                 </div>
@@ -337,7 +340,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                 <div class="form-group">
                     <label for="exampleInputEmail1">Due date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="due_date" id="datepicker2" required autocomplete="off">
+                        <input type="text" class="form-control" placeholder="dd/mm/yyyy" name="due_date" id="datepicker" required autocomplete="off">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -350,7 +353,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
                 <div class="form-group">
                     <label for="exampleInputEmail1">Invoice date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="invoice_date" id="datepicker" required autocomplete="off">
+                        <input type="text" class="form-control" placeholder="dd/mm/yyyy" name="invoice_date" id="datepicker2" required autocomplete="off">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="md md-event"></i></span>
                         </div>
@@ -371,15 +374,18 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
              
              <div class="col-md-4">
                   <div class="form-group">
+                  
                           <label for="exampleInputEmail1">Terms</label>
                           <div class="input-group">
-                            <select class="form-control" onchange="terms_details_show(this.value)"  name="terms" id="terms"  required>
-                            <option>-Select-</option>
+                          <input type="text" class="form-control" value="" id="terms" name="terms" required>
+                          <!-- <div class="input-group">
+                         <select class="form-control" onchange="terms_details_show(this.value,this)" name="terms" id="terms"   required>
+                           
                             <option id="selected_customer_terms"></option>
                                 @foreach($terms as $terms)
-                                <option value="{{$terms['id']}}" >{{$terms['terms']}} </option>
-                                @endforeach
-                            </select>
+                                <option value="{{$terms['terms']}}" >{{$terms['terms']}} </option>
+                                @endforeach 
+                            </select> -->
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button" id="button-addon2" data-toggle="modal"  data-target=".new_terms_add">Add New +</button>
                             </div>
@@ -393,12 +399,18 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
               <div class="form-group">
                 <label for="exampleInputEmail1">Place of Supply</label>
                 <select class="form-control" name="place_of_supply" id="place_of_supply" required>
-                    <option value="">-Please Select a Location-</option>
-                    <option>Andhra Pradesh</option>
+                   <option value="" id="selected_location">-Please Select a Location-</option>
+                    <!-- <option>Andhra Pradesh</option>
                     <option>Arunachal Pradesh</option>
                     <option>Chandigarh</option>
                     <option>Delhi</option>
-                    <option>Goa</option>
+                    <option>Goa</option> -->
+                    
+                    @foreach($cities as $cities)
+                        <option value="{{$cities['city']}}" >{{$cities['city']}} </option>
+                    @endforeach
+                
+                   
                 </select>
             </div>
             </div>  
@@ -427,7 +439,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
       <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
        <thead>
         <tr>
-         <th><input type="checkbox" name="chkall[]" id="selectall" /></th>
+        
          <th>Product/Service</th>
          <th>HSN/SAC</th>
          <th>Description</th>
@@ -440,20 +452,22 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
  </thead>
  <tbody id="mytable">
     <tr>
-     <td>&nbsp;<input  type="checkbox" name="ids[]" value="" /></td>
+     
      <td>
-            <select class="form-control input-sm" name="product_service[]" required>
-                    <option value="" disabled selected>-Select-</option>
-                    <option value="add_new" style="color: green;">Add New +</option>
-                    <option value="hours">Hours</option>
-                    <option value="services">Services</option>
+            <select class="form-control input-sm" onchange="subscription_details_show(this.value, this)" name="product_service[]" required>
+                    <option  value="" disabled selected>-Select-</option>
+                    
+                    @foreach($products_and_services as $value)
+                        <option value="{{$value['id']}}" >{{$value['name']}} </option>
+                    @endforeach
+
                    
                 </select>  
      </td>
-     <td><input type="text" class="form-control" name="hsn_sac[]" required></td>
-     <td><input type="text" class="form-control" name="description[]" required></td>
-     <td><input type="text" class="form-control" name="qty[]" required></td>
-     <td><input type="text" class="form-control"  name="rate[]" required></td>
+     <td><input type="text" class="form-control" name="hsn_sac[]" id="hsn_sac_abc" required></td>
+     <td><input type="text" class="form-control" name="description[]"  id="description_abc" required></td>
+     <td><input type="text" class="form-control" name="qty[]" id="qty_abc" required></td>
+     <td><input type="text" class="form-control"  name="rate[]"  id="rate_abc" required></td>
      <td><input class="form-control" type="text" name="amt[]" readonly></td>
      
             <td >
@@ -507,7 +521,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
          <div class="col-md-6">
          <div class="form-group">
                 <label for="exampleInputEmail1">Message on Statement</label>
-                <textarea class="form-control" rows="2" id="msg_on_invoice" name="msg_on_invoice" required></textarea>
+                <textarea class="form-control" rows="2" id="msg_on_statement" name="msg_on_statement" required></textarea>
             </div>
        </div>
     
@@ -788,7 +802,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
         <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead>
                     <tr>
-                    <th>#</th>
+                    
                     <th>DESCRIPTION</th>
                     <th>DUE DATE</th>
                     <th>AMOUNT</th>
@@ -860,7 +874,7 @@ if(@$value["invoice_details"]!="" && $value['status'] == 1 && date('Y-m-d', strt
 <script>
     $(document).ready(function() {
 
-    $('input[name="invoice_date"]').datepicker('setDate', '<?php echo date('m-d-Y'); ?>');
+    $('input[name="invoice_date"]').datepicker('setDate', '<?php echo date('d-m-Y'); ?>');
 
 });​
 
@@ -903,6 +917,7 @@ $("#subject").val(subject);
      });
 </script>
 
+
 <script>
     // not accepting other than numbers
     $("#mytable").delegate("input[name='qty[]']", "keyup", function (){
@@ -916,40 +931,76 @@ $("#subject").val(subject);
     });
     function appendFormContents()
     {
-        var data='<tr>'+
-        '<td>&nbsp;<input  type="checkbox" name="ids[]" value="" /></td>'+
-        '<td>'+
-            ' <select class="form-control input-sm" name="product_service[]" >'+
-                        '<option value="" disabled selected>-Select-</option>'+
-                        '<option value="add_new" style="color: green;">Add New +</option>'+
-                    ' <option value="hours">Hours</option>'+
-                    ' <option value="services">Services</option>'+
+        // var data='<tr>'+
+        // '<td>&nbsp;<input  type="checkbox" name="ids[]" value="" /></td>'+
+        // '<td>'+
+        //     ' <select class="form-control input-sm"  name="product_service[]" >'+
+        //    
+        //             //     '<option value="" disabled selected id=select_product_service id="select_services">-Select-</option>'+
+        //             //     '<option value="add_new" style="color: green;">Add New +</option>'+
+        //             // ' <option value="hours id="hours">Hours</option>'+
+        //             // ' <option value="services id-"services">Services</option>'+
                     
-                ' </select>'+
-        '</td>'+
-        '<td><input type="text" class="form-control" name="hsn_sac[]"></td>'+
-        '<td><input type="text" class="form-control" name="description[]"></td>'+
-        '<td><input type="text" class="form-control" name="qty[]" required></td>'+
-        '<td><input type="text" class="form-control"  name="rate[]" required></td>'+
-        '<td><input class="form-control" type="text" name="amt[]" readonly></td>'+
+        //         ' </select>'+
+        // '</td>'+
+        // '<td><input type="text" class="form-control" name="hsn_sac[] id="hsn_sac"></td>'+
+        // '<td><input type="text" class="form-control" name="description[] id="description"></td>'+
+        // '<td><input type="text" class="form-control" name="qty[]" required></td>'+
+        // '<td><input type="text" class="form-control"  name="rate[]" required></td>'+
+        // '<td><input class="form-control" type="text" name="amt[]" readonly></td>'+
         
-                '<td>'+
-                    ' <select class="form-control input-sm" name="tax[]">'+
-                            '<option value="0" disabled selected>-Select-</option>'+
-                            '<option value="0.25">0.25% IGST</option>'+
-                            '<option value="5">5% IGST</option>'+
-                            '<option value="10">10% IGST</option>'+
-                            '<option value="2">18% IGST</option>'+
-                        '</select>'+
-                    '</td>'+     
+        //         '<td>'+
+        //             ' <select class="form-control input-sm" name="tax[]">'+
+        //                     '<option value="0" disabled selected>-Select-</option>'+
+        //                     '<option value="0.25">0.25% IGST</option>'+
+        //                     '<option value="5">5% IGST</option>'+
+        //                     '<option value="10">10% IGST</option>'+
+        //                     '<option value="2">18% IGST</option>'+
+        //                 '</select>'+
+        //             '</td>'+     
         
-        '<td>'+
+        // '<td>'+
             
-                '<button class="btn" id="del"><i class="fa fa-trash" style="color: blue;"></i></button>'+
+        //         '<button class="btn" id="del"><i class="fa fa-trash" style="color: blue;"></i></button>'+
 
         
-        '</td>'+
-        '</tr>';
+        // '</td>'+
+        // '</tr>';
+        var data=`<tr>'+
+     
+     <td>
+           <select class="form-control input-sm" onchange="subscription_details_show(this.value, this)" name="product_service[]" required>
+                    '<option  value="" disabled selected>-Select-</option>'
+
+                    @foreach($products_and_services as $value)
+                    <option value="{{@$value['id']}}" >{{@$value['name']}} </option>         
+                               @endforeach
+                   
+              </select>  
+     </td>
+     <td><input type="text" class="form-control" name="hsn_sac[]" id="hsn_sac_def" required></td>
+     <td><input type="text" class="form-control" name="description[]"  id="description_def" required></td>
+     <td><input type="text" class="form-control" name="qty[]" id="qty_def" required></td>
+     <td><input type="text" class="form-control"  name="rate[]"  id="rate_def" required></td>
+     <td><input class="form-control" type="text" name="amt[]" readonly></td>
+     
+            <td >
+                    <select class="form-control input-sm" name="tax[]" required id="tax">
+                        <option value="0" disabled selected>-Select-</option>
+                        <option value="0.25">0.25% IGST</option>
+                        <option value="5">5% IGST</option>
+                        <option value="10">10% IGST</option>
+                        <option value="2">18% IGST</option>
+                    </select>
+                </td>     
+     
+     <td>
+            <button class="btn" id="del"><i class="fa fa-trash" style="color: blue;"></i></button>
+    
+     </td>
+ </tr>
+        `;
+            
 
         // appending form contents i.e. invoice details
         $("#mytable").append(data);
@@ -1078,18 +1129,18 @@ function viewEditInvoice(purpose, id){
                 $("#e_invoice_attachment").html("<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Previous Attachment</a>");
                 
                 // get form elements details
-                var product_service_fields = document.getElementsByName("product_service[]");
-                var hsn_sac_fields = document.getElementsByName("hsn_sac[]");
-                var description_fields = document.getElementsByName("description[]");
-                var qty_fields = document.getElementsByName("qty[]");
-                var rate_fields = document.getElementsByName("rate[]");
-                var amount_fields = document.getElementsByName("amt[]");
-                var tax_fields = document.getElementsByName("tax[]");
-                for(var i=0; i<data.no_of_rows; i++){
-                    if(i!=0){
-                        appendFormContents();
+            //  //  var product_service_fields = document.getElementsByName("product_services[]");
+            //   var hsn_sac_fields = document.getElementsByName("hsn_sac[]");
+            //   var description_fields = document.getElementsByName("description[]");
+            //     var qty_fields = document.getElementsByName("qty[]");
+            //    var rate_fields = document.getElementsByName("rate[]");
+            //    var amount_fields = document.getElementsByName("amt[]");
+             var tax_fields = document.getElementsByName("tax[]");
+              for(var i=0; i<data.no_of_rows; i++){
+                   if(i!=0){
+                     appendFormContents();
                     }
-                    product_service_fields[i].value = data.invoice_details_product_services[i];
+                   product_service_fields[i].value = data.invoice_details_product_services[i];
                     hsn_sac_fields[i].value = data.invoice_details_hac_sac[i];
                     description_fields[i].value = data.invoice_details_description[i];
                     qty_fields[i].value = data.invoice_details_qty[i];
@@ -1140,7 +1191,7 @@ function receivePayment(id){
             $("#payment_received_invoice_id").val(id);
             $("#paymentModal").modal("show");
 
-            var payment_receive_invoice_details='<tr style="border: none; background:white !important;"><td><input  type="checkbox" name="ids[]" value="" /></td><td>Invoice#'+data.invoice_no+'</td><td>'+data.due_date+'</td><td>'+data.subtotal+'</td><td>'+data.total_tax+'</td><td>'+data.total+'</td></tr>';
+            var payment_receive_invoice_details='<tr style="border: none; background:white !important;"><td>Invoice#'+data.invoice_no+'</td><td>'+data.due_date+'</td><td>'+data.subtotal+'</td><td>'+data.total_tax+'</td><td>'+data.total+'</td></tr>';
             $("#receive_payment_details").html(payment_receive_invoice_details);
             $("#payment_received_amount").val(data.total);
             $("#payment_received_description").val('Invoice#'+data.invoice_no);
@@ -1166,7 +1217,7 @@ $(document).ready(function(){
             window.history.replaceState({}, document.title, clean_uri);
         }
         // call addInvoice to open invoice modal
-        setInterval(addInvoice(), 3000);
+       setInterval(addInvoice(), 3000);
     }
 });
 </script>
@@ -1327,7 +1378,7 @@ function viewEditInvoice(purpose, id){
     });
     $.ajax({
         url: "{{url('sale/invoice/get-invoice-details')}}" + "/" + id,
-        method: "GET",
+        method: "get",
         contentType: 'application/json',
         dataType: "json",
         beforeSend: function(data){
@@ -1365,8 +1416,8 @@ function viewEditInvoice(purpose, id){
             else if(purpose=="edit"){
                 resetInvoiceForms(); // reseting forms
                 $("#invoice_no").val(data.invoice_no);
-                $("#customer").val(data.customer);
-                $("#customer_email").val(data.customer_email);
+                $("#name").val(data.customer);
+                $("#selected_customer_email").val(data.customer_email);
                 $("#customer_details").val(data.customer_details);
                 $("#billing_address").val(data.billing_address);
                 $("#terms").val(data.terms);
@@ -1379,10 +1430,12 @@ function viewEditInvoice(purpose, id){
                 $("#e_invoice_attachment").html("<a target='_blank' href='{{url('public/images')}}"+"/"+data.attachment+"'>View Previous Attachment</a>");
                 
                 // get form elements details
-                var product_service_fields = document.getElementsByName("product_service[]");
-                var hsn_sac_fields = document.getElementsByName("hsn_sac[]");
-                var description_fields = document.getElementsByName("description[]");
-                var qty_fields = document.getElementsByName("qty[]");
+     //           var product_service_fields = document.getElementsByName("product_service[]");
+     //         var hsn_sac_fields = document.getElementsByName("hsn_sac");
+     //       var description_fields = document.getElementsByName("description[]");
+      //           $("#hsn_sac").val(data.hsn_code);
+           //      $("#description").val(data.description);
+      //          var qty_fields = document.getElementsByName("qty[]");
                 var rate_fields = document.getElementsByName("rate[]");
                 var amount_fields = document.getElementsByName("amt[]");
                 var tax_fields = document.getElementsByName("tax[]");
@@ -1392,7 +1445,7 @@ function viewEditInvoice(purpose, id){
                     }
                     product_service_fields[i].value = data.invoice_details_product_services[i];
                     hsn_sac_fields[i].value = data.invoice_details_hac_sac[i];
-                    description_fields[i].value = data.invoice_details_description[i];
+                 description_fields[i].value = data.invoice_details_description[i];
                     qty_fields[i].value = data.invoice_details_qty[i];
                     rate_fields[i].value = data.invoice_details_rate[i];
                     amount_fields[i].value = data.invoice_details_amount[i];
@@ -1412,7 +1465,9 @@ function viewEditInvoice(purpose, id){
     });
 }
 
+
 </script>
+
 
 <!-- abhishek  -->
 <!-- model for add new customer  -->
@@ -1438,14 +1493,24 @@ function viewEditInvoice(purpose, id){
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Company</label>
-                        <input type="text" name="company_name" class="form-control" id="company_name">
+                        <!-- <input type="text" name="company_name" class="form-control" id="company_name"> -->
+                        <select class="form-control input-sm" onchange="subscription_details_show2(this.value, this)" name="company_name" id="company_name" required>
+                          <option  value="" disabled selected>-Select-</option>
+                    
+                          @foreach($company as $value)
+                           <option value="{{$value['org_id']}}" >{{$value['org_name']}} </option>
+                          @endforeach
+
+                   
+                         </select>  
                     </div>
                     <br>
                     <hr/>
                 </div>
+                
 
                 <div class="col-md-12" style="text-align: right;">
-                    <button type="submit" class="btn btn-primary waves-effect" onclick="closeNewCustomermodal()" id="new_customer_insert">Save</button>
+                    <button type="submit" class="btn btn-primary waves-effect" onclick="closeNewCustomermodal()"  id="new_customer_insert">Save</button>
                     <button type="button" class="btn btn-secondary waves-effect" onclick="closeNewCustomermodal()">Close</button>
                 </div>
 
@@ -1456,37 +1521,33 @@ function viewEditInvoice(purpose, id){
 <!-- end of model for add new customer  -->
 
 <!-- for close modele for add customer  -->
-        <script>
-            function submitNewCustomermodal(){
-            var radioValue2 = $("#cust_btn").val();
-            $("#customer").val($("#customer_name").val());
-            closeNewCustomermodal();
-            }
+  //   <script>
+         //   function submitNewCustomermodal(){
+          //  var radioValue2 = $("#cust_btn").val();
+       //     $("#customer").val($("#customer_name").val());
+        //    closeNewCustomermodal();
+         //   }
             function closeNewCustomermodal(){
-            $(".new_customer_add").modal('hide');
+           $(".new_customer_add").modal('hide');
             }
         </script>
 <!-- end of close modle for add customer  -->
 
+
+
+
 <!-- abhishek for fetch details of customer -->
 <script>
-function invoice_details_show(id) {
-    // alert(id);
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+function invoice_details_show(id,e) {
     $.ajax({
         url: "{{url('sale/invoice/get-invoice-details_bill')}}" + "/" + id,
-        method: "GET",
-        contentType: 'application/json',
-        dataType: "json",
-        success: function (data) {
-                console.log(data);
-                $("#selected_customer_eamil").val(data.email_id);
-                $("#billing_address").val(data.billing_address);
-               
+            method: "GET",
+            success: function (data) {
+             console.log(data);
+               $("#selected_customer_email").val(data.email_id);
+            $("#billing_address").val(data.billing_address);
+            $("#terms").val(data.terms);
+    
         }
     });
 }
@@ -1496,21 +1557,23 @@ function invoice_details_show(id) {
 <script>
         $(document).ready(function() {
             $("#new_customer_insert").click(function(e) {
-            // alert("hello");
+            //alert();
                 // alert("hello");
                 e.preventDefault();
                 var customer_name = $("#customer_name").val();
-                var company_name = $("#company_name").val();
-                var token = $("#token").val();
                
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+                var company_name = $("#company_name").val();
+                
+                var token = $("#token").val();
+             
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     }
+                // });
                 $.ajax({
                     url: "{{url('sale/invoice/add_new_customer')}}",
-                    type: 'POST',
+                    type: 'get',
 
                     data: {
                         customer_name: customer_name,
@@ -1519,9 +1582,10 @@ function invoice_details_show(id) {
                     },
                     dataType: "json",
                     success: function(data) {
-                    console.log(data);
+                //    console.log(data);
+               
                         $("#selected_customer_name").html(data.first_name);
-                        // $("#selected_customer_details").html(data.email_id);
+                         $("#selected_customer_details").html(data.email_id);
                     }
                 });
             });
@@ -1569,20 +1633,20 @@ function invoice_details_show(id) {
 </script>
 <!-- end of close model  -->
 
-<!-- abhishek FOR new terms add -->
+<!-- abhishek FOR new terms add
 <script>
         $(document).ready(function() {
             $("#new_terms_insert").click(function(e) {
-                alert("hello");
+               // alert("hello");
                 e.preventDefault();
                 var terms_name = $("#terms_name").val();
                 var token = $("#token").val();
-               
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+              // alert(terms_name);
+             //   $.ajaxSetup({
+             //       headers: {
+                 //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   // }
+                //});
                 $.ajax({
                     url: "{{url('sale/invoice/add_new_terms')}}",
                     type: 'POST',
@@ -1593,33 +1657,142 @@ function invoice_details_show(id) {
                     dataType: "json",
                     success: function(data) {
                     console.log(data);
-                        $("#selected_customer_terms").html(data.terms);
+                    s
                     }
                 });
             });
         });
 </script>
 
-
-    <!-- abhishek for fetch details of terms -->
-<script>
-        function terms_details_show(id) {
-        // alert(id);
-        $.ajaxSetup({
-        headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    $.ajax({
+        url: "{{url('sale/invoice/get-invoice-details_bill')}}" + "/" + id,
+            method: "GET",
+            success: function (data) {
+             console.log(data);
+               $("#selected_customer_email").val(data.email_id);
+            $("#billing_address").val(data.billing_address);
+            $("#selected_customer_terms").val(data.terms);
+    
         }
-        });
-
-        $.ajax({
-            url: "{{url('sale/invoice/get-invoice-details_terms')}}" + "/" + id,
-                method: "GET",
-                contentType: 'application/json',
-                dataType: "json",
-                success: function (data) {
-                console.log(data);
-                 }
-        });
+    });
 }
 </script>
+
+   abhishek for fetch details of terms
+<script>
+     function terms_details_show(id,e) {
+       
+   
+
+        $.ajax({
+          url: "{{url('sale/invoice/get-invoice-details_terms')}}" + "/" + id,
+          method: "GET",
+        
+          dataType: "json",
+            success: function (data) {
+            console.log(data);
+            $("#selected_customer_terms").html(data.terms);
+                        //  $("#selected_customer_details").html(data.email_id);
+           //   alert("successfully added!!");   }
+      });
+}
+</script> -->
+
+
+
+    <!-- =============================================Sweta B ================================== -->
+<script>
+   function subscription_details_show(id,e) {
+   //  alert(id);
+      $('#hsn_sac_abc').empty();
+      $('#description_abc').empty();
+     $("#qty_abc").empty();
+     $("#rate_abc").empty();
+    // // alert(id);
+    //var id=$(e).val;
+    $.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+
+    $.ajax({
+        url: "{{url('sales_order/fetch_sales_order_details')}}" + "/" + id,
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+              //  console.log(data.hsn_code+data.sac_code);
+              // alert(data.hsn_code+data.sac_code);
+                var hsn_sac=$(e).closest('tr').find("input[name='hsn_sac[]']" );
+                $(hsn_sac).val(data.hsn_code+data.sac_code);
+
+                var desc=$(e).closest('tr').find("input[name='description[]']" );
+                $(desc).val(data.description);
+                
+                var qty=$(e).closest('tr').find("input[name='qty[]']" );
+                $(qty).val(data.unit);
+               
+                var rate=$(e).closest('tr').find("input[name='rate[]']" );
+                $(rate).val(data.cost);
+              //  console.log(price_val);
+               //  $("#description_abc").val(data.description);
+               //  $("#qty_abc").val(data.unit);
+              //   $("#rate_abc").val(data.cost);
+              // var price_val=$(e).closest('tr').find("input[name='hsn_sac[]']" );
+          //   $(price_val).val(data.hsn_code);
+            ///console.log(price_val);
+            
+             }
+    });
+}
+
+
+</script>
+// <!---------------------------------------new---------------------------------------------------->
+// <!-- <script>
+//     function subscription_details_show1(id,e) {
+//       //  alert(id);
+//         $('#hsn_sac_def').empty();
+//         $('#description_def').empty();
+//         $("#qty_def").empty();
+//         $("#rate_def").empty();
+    
+//     $.ajaxSetup({
+//     headers: {
+//     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     }
+//     });
+
+//     $.ajax({
+//         url: "{{url('sales_order/fetch_sales_order_details')}}" + "/" + id,
+//             method: "GET",
+//             contentType: 'application/json',
+//            dataType: 'json',
+//             success: function (data) {
+//                // console.log(data);
+//                $("#hsn_sac_def").val(data.hsn_code+data.sac_code);
+//                 // console.log(hsn_sac_def);
+//             $("#description_def").val(data.description);
+//             //     $("#qty_def").val(data.unit);
+//         $("#rate_def").val(data.cost);
+            
+//             //    $(price_c).val(data.hsn_code+sac_code);
+//             //    alert(price_c);
+//             //    var desc=$(e).closest('tr').find("input[name='description1[]']" );
+//             //    $(desc).val(data.description);
+//             //    console.log(price_val);
+//             //   var qty_a=$(e).closest('tr').find("input[name='qty1[]']" );
+//             //    $(qty_a).val(data.unit);
+//             //    var rate_a=$(e).closest('tr').find("input[name='rate1[]']" );
+//             //    $(desc).val(data.cost);
+              
+              
+//              }
+//     });
+// }
+
+
+// </script>
+
 

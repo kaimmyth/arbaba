@@ -31,10 +31,10 @@ Route::get('dashboard', 'HomeController@Dashboard');
 // 	// 	$data['content'] ='sale.allsale';
 // 	// 	return view('layouts.content',compact('data'));
 // 	// });
-// 	Route::get('invoice',function(){
-// 		$data['content'] ='sale.invoice';
-// 		return view('layouts.content',compact('data'));
-// 	});
+ 	// Route::get('invoice',function(){
+	// 	$data['content'] ='sale.invoice';
+	// return view('layouts.content',compact('data'));
+	// });
 // 	Route::get('customers',function(){
 // 		$data['content'] ='sale.customer';
 // 		return view('layouts.content',compact('data'));
@@ -46,6 +46,10 @@ Route::get('dashboard', 'HomeController@Dashboard');
 // });
 
 /* Sale */
+//sweta
+Route::get('sales_order/fetch_sales_order_details/{id}','SalesController@fetch_sales_order_details');
+Route::get('sales_order/get_sales_order_details/{id}','SalesController@get_sales_orderdetails');
+
 
 // All Sales
 Route::get('sale/all-sale','SalesController@view_all_sales');
@@ -65,10 +69,10 @@ Route::post('sale/invoice/remainder_mail/{id}','SalesController@invoice_remainde
 Route::post('sale/invoice/payment_received','SalesController@receive_payment');
 // abhishek 
 Route::get('sale/invoice/get-invoice-details_bill/{id}','SalesController@get_invoice_details_bill');
-Route::post('sale/invoice/add_new_customer','SalesController@add_new_customer');
+Route::get('sale/invoice/add_new_customer','SalesController@add_new_customer');
 Route::post('sale/invoice/add_new_terms','SalesController@add_new_terms');
 Route::get('sale/invoice/get-invoice-details_terms/{id}','SalesController@get_terms_details');
-
+Route::get('sale/invoice/get-product-details/{id}','SalesController@get_product_details');
 //Customer
 Route::get('sale/customers','SalesController@view_customers');
 Route::post('sale/customers/add','SalesController@add_customers');
@@ -81,7 +85,7 @@ Route::get('sale/customer/get_customer_details/{id}','SalesController@get_custom
 
 //Product & Services
 Route::get('sale/products-and-services','SalesController@view_products_and_services');
-Route::POST('sale/products-and-services/add-edit','SalesController@add_edit_products_and_services');
+Route::post('sale/products-and-services/add-edit','SalesController@add_edit_products_and_services');
 Route::get('sale/products-and-services/delete/{id}','SalesController@delete_products_and_services');
 Route::get('sale/products-and-services/get_products_and_services_details/{id}','SalesController@get_products_and_services_details');
 
@@ -105,6 +109,7 @@ Route::get('sale/products-and-services/get_products_and_services_details/{id}','
 	Route::post('store', 'CompanyController@store');
 	Route::get('destroy/{id}', 'CompanyController@destroy');
 	Route::any('edit/{id}', 'CompanyController@edit');
+	Route::get('setting/user{id}','CompanyController@view');
 });
 
 
@@ -282,3 +287,5 @@ Route::get('setting/module/get-module-details/{id}','settingController@get_modul
 Route::get('setting/user_role','settingController@view_user_role');
 Route::post('setting/user_role/add','settingController@add_user_role');
 Route::get('setting/user_role/get_user_role_details/{id}','settingController@get_user_role_details');
+
+
