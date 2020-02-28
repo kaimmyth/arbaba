@@ -1,4 +1,6 @@
 <?php
+
+
 Route::get('clear-cache', function () {
 	$exitCode = Artisan::call('config:clear');
 	$exitCode = Artisan::call('cache:clear');
@@ -168,10 +170,12 @@ Route::get('purchases/recurring-expenses', function () {
 
 //purchase order
 
-Route::get('purchases/purchase-order', function () {
-	$data['content'] = 'purchases.purchase-order';
-	return view('layouts.content', compact('data'));
-});
+// Route::get('purchases/purchase-order', function () {
+// 	$data['content'] = 'purchases.purchase-order';
+// 	return view('layouts.content', compact('data'));
+// });
+Route::get('purchases/purchase-order','purchaseController@view_purchase_order');
+Route::post('purchases/add','purchaseController@purchase_add');
 
 //bill
 

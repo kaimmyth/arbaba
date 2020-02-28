@@ -69,7 +69,7 @@ class HomeController extends Controller
   public function index()
   {
 
-    Session::flash('success', 'login Successfully..!');
+    // Session::flash('success', 'login Successfully..!');
     return Redirect::action('HomeController@Dashboard');
   }
   
